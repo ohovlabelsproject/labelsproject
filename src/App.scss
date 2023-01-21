@@ -1,15 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 
+$col-sticky-1: #feff9c;
+$col-sticky-2: #fff740;
+$col-sticky-3: #ff7eb9;
+$col-sticky-4: 	#ff65a3;
+$col-sticky-5: #7afcff;
+
+$col-bin-border: #ff0000;
+
+$font-size-md: 24px;
+
 $guideline: 1px dashed #777;
 $guidelines-enabled: true;
 $testbg-enabled: false;
 
-$font-size-md: 24px;
+
+@mixin bg-subtle() {
+  background-color: #fff740;
+  background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
+}
 
 @mixin handdrawntext() {
   font-family: 'Schoolbell', cursive;
   font-size: $font-size-md;
-
+  line-height: 25px;
 }
 
 @mixin guidelines() {
@@ -102,7 +116,6 @@ div.hud-col-l, div.hud-col-r {
 }
 
 .stickyzone {
-  border: 2px solid red;
   height: 100%;
 }
 
@@ -110,7 +123,6 @@ div.hud-col-l, div.hud-col-r {
   @include strip-margin-and-padding();
   height: 100%;
 }
-
 
 .stickynote-wrapper {
   @include center();
@@ -121,15 +133,15 @@ div.hud-col-l, div.hud-col-r {
   @include strip-margin-and-padding();
   @include center();
   @include handdrawntext();
-  background: yellow;
-  border: 1px solid darken(yellow, 5%);
+  background: $col-sticky-2;
+  border: 1px solid darken($col-sticky-2, 5%);
   height: 100px;
-  width: 120px;
+  width: 140px;
 }
 
 .binzone-droparea {
   @include center();
-  border: 2px dashed red;
+  border: 3px dashed $col-bin-border;
   font-size: $font-size-md;
   height: 100%;
   width: 100%;
@@ -137,17 +149,19 @@ div.hud-col-l, div.hud-col-r {
 
 .nav-l-btn-wrapper, .nav-r-btn-wrapper {
   @include center();
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6);
+  border: 0;
   border-radius: 5px;
+  box-shadow: 0;
   cursor: pointer;
   height: 50px;
   position: absolute;
-  width: 35px;
-  top: 40%;
+  top: 35%;
+  width: 25px;
 }
 
 .nav-l-btn-wrapper:hover, .nav-r-btn-wrapper:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .nav-l-btn-wrapper i, .nav-r-btn-wrapper i {
@@ -156,9 +170,22 @@ div.hud-col-l, div.hud-col-r {
 
 .nav-l-btn-wrapper {
   left: 0;
-  
 }
 
 .nav-r-btn-wrapper {
   right: 0;
+}
+
+@media only screen and (max-width: 700px) {}
+
+@media only screen and (min-width: 700px) {
+  .stickynote {
+    width: 240px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .stickynote {
+    width: 300px;
+  }
 }
