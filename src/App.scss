@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+
 $guideline: 1px dashed #777;
 $guidelines-enabled: true;
 $testbg-enabled: false;
 
 $font-size-md: 24px;
+
+@mixin handdrawntext() {
+  font-family: 'Schoolbell', cursive;
+  font-size: $font-size-md;
+
+}
 
 @mixin guidelines() {
   @if $guidelines-enabled {
@@ -112,6 +120,7 @@ div.hud-col-l, div.hud-col-r {
 .stickynote {
   @include strip-margin-and-padding();
   @include center();
+  @include handdrawntext();
   background: yellow;
   border: 1px solid darken(yellow, 5%);
   height: 100px;
