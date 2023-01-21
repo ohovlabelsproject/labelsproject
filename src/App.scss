@@ -27,6 +27,12 @@ $testbg-enabled: false;
   align-items: center;
 }
 
+@mixin center-bottom() {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
@@ -51,26 +57,36 @@ header.hud, footer.footer {
 }
 
 section.instructions {
+  @include center-bottom();
   @include random-bgr();
-  height: 10vh;
+  height: 15vh;
 }
 
 section.whiteboard {
   @include random-bgr();
   @include strip-margin-and-padding();
-  height: 80vh;
+  height: 75vh;
 }
 
 section.stickyzone {
-  height: 66.6%;
+  @include center();
+  height: 70%;
 }
 
 section.binzone {
-  height: 33.3%;
+  @include center();
+  height: 30%;
 }
 
 div.hud-col-l, div.hud-col-r {
   @include center();
   @include guidelines();
   @include strip-margin-and-padding();
+}
+
+.instructions div h1 {
+  @include guidelines();
+  @include strip-margin-and-padding();
+  font-size: 24px;
+  width: 360px;
 }
