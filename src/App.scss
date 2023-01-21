@@ -111,7 +111,15 @@ div.hud-col-l, div.hud-col-r {
   @include strip-margin-and-padding();
   @include center();
   background: yellow;
-  border: 1px solid cyan;
+  border: 1px solid darken(yellow, 5%);
   height: 100px;
   width: 120px;
+}
+
+.binzone-droparea {
+  @include center();
+  border: 2px dashed red;
+  height: 100%;
+  font-size: 24px;
+  width: 100%;
 }
