@@ -21,7 +21,7 @@ function StickyZone(props) {
         {shuffleArr(props.placeholderWords)
           .slice(props.wordMetadata.sliceStart, props.wordMetadata.sliceEnd)
           .map((label, index) => (
-            <div className="col-4 border stickynote-wrapper p-1">
+            <div className="col-4 stickynote-wrapper p-1">
               <StickyNote label={label} key={`label-${index}`} />
             </div>
           ))}

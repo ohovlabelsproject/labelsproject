@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
 
 $col-sticky-1: #feff9c;
 $col-sticky-2: #fff740;
@@ -11,7 +12,7 @@ $col-bin-border: #ff0000;
 $font-size-md: 24px;
 
 $guideline: 1px dashed #777;
-$guidelines-enabled: true;
+$guidelines-enabled: false;
 $testbg-enabled: false;
 
 
@@ -20,8 +21,12 @@ $testbg-enabled: false;
   background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
 }
 
+@mixin sketchtext() {
+  font-family: 'Cabin Sketch', cursive !important;
+}
+
 @mixin handdrawntext() {
-  font-family: 'Schoolbell', cursive;
+  font-family: 'Schoolbell', cursive !important;
   font-size: $font-size-md;
   line-height: 25px;
 }
@@ -33,6 +38,7 @@ $testbg-enabled: false;
     border: 0;
   }
 }
+
 
 @mixin random-bgr(){
   @if $testbg-enabled {
@@ -64,6 +70,10 @@ $testbg-enabled: false;
   min-height: 625px;
   min-width: 365px;
   text-align: center;
+}
+
+.btn {
+  @include handdrawntext();
 }
 
 .main-area-wrapper {
@@ -101,6 +111,7 @@ section.stickyzone {
 
 section.binzone {
   @include center();
+  @include handdrawntext();
   height: 30%;
 }
 
@@ -112,8 +123,10 @@ div.hud-col-l, div.hud-col-r {
 
 .instructions div h1 {
   @include guidelines();
+  @include handdrawntext();
   @include strip-margin-and-padding();
-  font-size: $font-size-md;
+  font-size: 40px;
+  line-height: 30px;
   width: 360px;
 }
 
@@ -134,6 +147,9 @@ div.hud-col-l, div.hud-col-r {
 .stickynote {
   @include strip-margin-and-padding();
   @include center();
+  /*  @include handdrawntext(); */
+ font-size: 30px;
+ line-height: 25px;
   @include handdrawntext();
   background: $col-sticky-2;
   border: 1px solid darken($col-sticky-2, 5%);
