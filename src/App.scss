@@ -136,6 +136,7 @@ div.hud-col-l, div.hud-col-r {
   background: $col-sticky-2;
   border: 1px solid darken($col-sticky-2, 5%);
   height: 100px;
+  hyphens: auto;
   width: 140px;
 }
 
