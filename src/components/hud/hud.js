@@ -1,5 +1,5 @@
 function Hud() {
-  return <header className="hud">hud</header>;
+  return <header className="hud"></header>;
 }
 
 export default Hud;
