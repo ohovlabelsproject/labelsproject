@@ -1,0 +1,76 @@
+$guideline: 1px dashed #777;
+$guidelines-enabled: true;
+$testbg-enabled: false;
+
+@mixin guidelines($guidelines-enabled: true) {
+  @if $guidelines-enabled {
+    border: 1px dashed #777;
+  } @else {
+    border: 0;
+  }
+}
+
+@mixin random-bgr(){
+  @if $testbg-enabled {
+    background: rgb(random(255), random(1), random(255));
+  }
+}
+
+@mixin strip-margin-and-padding() {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.app {
+  @include guidelines();
+  height: 100vh;
+  text-align: center;
+  border: 0;
+  padding: 0;
+  
+}
+
+.main-area-wrapper {
+  @include guidelines();
+  height: 100vh;
+}
+
+header.hud, section.stickyzone, section.binzone, footer.footer  {
+  @include guidelines();
+}
+
+header.hud, footer.footer {
+  @include center();
+  @include random-bgr();
+  @include strip-margin-and-padding();
+  height: 5vh;
+  
+}
+
+section.instructions {
+  @include random-bgr();
+  height: 10vh;
+}
+
+section.whiteboard {
+  @include random-bgr();
+  @include strip-margin-and-padding();
+  height: 80vh;
+  
+}
+
+section.stickyzone {
+  height: 66.6%;
+}
+
+section.binzone {
+  height: 33.3%;
+}
