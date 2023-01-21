@@ -2,7 +2,7 @@ $guideline: 1px dashed #777;
 $guidelines-enabled: true;
 $testbg-enabled: false;
 
-@mixin guidelines($guidelines-enabled: true) {
+@mixin guidelines() {
   @if $guidelines-enabled {
     border: 1px dashed #777;
   } @else {
