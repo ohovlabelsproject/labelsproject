@@ -90,3 +90,28 @@ div.hud-col-l, div.hud-col-r {
   font-size: 24px;
   width: 360px;
 }
+
+.stickyzone {
+  border: 2px solid red;
+  height: 100%;
+}
+
+.stickynotes {
+  @include strip-margin-and-padding();
+  height: 100%;
+}
+
+
+.stickynote-wrapper {
+  @include center();
+  @include strip-margin-and-padding();
+}
+
+.stickynote {
+  @include strip-margin-and-padding();
+  @include center();
+  background: yellow;
+  border: 1px solid cyan;
+  height: 100px;
+  width: 120px;
+}
