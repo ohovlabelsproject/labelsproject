@@ -61,6 +61,8 @@ $testbg-enabled: false;
   @include guidelines();
   @include strip-margin-and-padding();
   height: 100vh;
+  min-height: 625px;
+  min-width: 365px;
   text-align: center;
 }
 
