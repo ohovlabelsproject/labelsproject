@@ -66,7 +66,7 @@ $testbg-enabled: false;
 
 .main-area-wrapper {
   @include guidelines();
-  height: 100vh;
+  height: 100%;
 }
 
 header.hud, section.stickyzone, section.binzone, footer.footer  {
@@ -77,19 +77,19 @@ header.hud, footer.footer {
   @include center();
   @include random-bgr();
   @include strip-margin-and-padding();
-  height: 5vh;
+  height: 5%;
 }
 
 section.instructions {
   @include center-bottom();
   @include random-bgr();
-  height: 15vh;
+  height: 15%;
 }
 
 section.whiteboard {
   @include random-bgr();
   @include strip-margin-and-padding();
-  height: 75vh;
+  height: 75%;
 }
 
 section.stickyzone {
