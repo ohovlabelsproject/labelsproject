@@ -190,3 +190,8 @@ div.hud-col-l, div.hud-col-r {
     width: 300px;
   }
 }
+
+.nav-btn-disable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

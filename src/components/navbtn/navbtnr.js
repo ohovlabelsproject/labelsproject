@@ -1,6 +1,12 @@
-function NavBtnR() {
+function NavBtnR(props) {
+  const disableDirection = props.wordMetadata.sliceEnd > props.maxLabels;
   return (
-    <div className="nav-r-btn-wrapper">
+    <div
+      className={`nav-r-btn-wrapper ${
+        disableDirection ? "nav-btn-disable" : ""
+      }`}
+      onClick={() => (disableDirection ? null : props.handleNavClick(1))}
+    >
       <i className="fa fa-chevron-right"></i>
     </div>
   );
