@@ -3,6 +3,8 @@ import Hud from "./components/hud/hud";
 import Instructions from "./components/instructions/instructions";
 import Whiteboard from "./components/whiteboard/whiteboard";
 import Footer from "./components/footer/footer";
+import NavBtnL from "./components/navbtn/navbtnl";
+import NavBtnR from "./components/navbtn/navbtnr";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Whiteboard />
         <Footer />
       </div>
+      <NavBtnL />
+      <NavBtnR />
     </div>
   );
 }

@@ -2,6 +2,8 @@ $guideline: 1px dashed #777;
 $guidelines-enabled: true;
 $testbg-enabled: false;
 
+$font-size-md: 24px;
+
 @mixin guidelines() {
   @if $guidelines-enabled {
     border: 1px dashed #777;
@@ -87,7 +89,7 @@ div.hud-col-l, div.hud-col-r {
 .instructions div h1 {
   @include guidelines();
   @include strip-margin-and-padding();
-  font-size: 24px;
+  font-size: $font-size-md;
   width: 360px;
 }
 
@@ -119,7 +121,35 @@ div.hud-col-l, div.hud-col-r {
 .binzone-droparea {
   @include center();
   border: 2px dashed red;
+  font-size: $font-size-md;
   height: 100%;
-  font-size: 24px;
   width: 100%;
+}
+
+.nav-l-btn-wrapper, .nav-r-btn-wrapper {
+  @include center();
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  position: absolute;
+  width: 35px;
+  top: 40%;
+}
+
+.nav-l-btn-wrapper:hover, .nav-r-btn-wrapper:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.nav-l-btn-wrapper i, .nav-r-btn-wrapper i {
+  color: #fff;
+}
+
+.nav-l-btn-wrapper {
+  left: 0;
+  
+}
+
+.nav-r-btn-wrapper {
+  right: 0;
 }
