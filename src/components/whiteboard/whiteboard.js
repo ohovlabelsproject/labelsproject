@@ -6,6 +6,7 @@ function Whiteboard(props) {
     <section className="whiteboard">
       <StickyZone
         placeholderWords={props.placeholderWords}
+        labelsData={props.labelsData}
         wordMetadata={props.wordMetadata}
       />
       <BinZone />

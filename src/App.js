@@ -5,55 +5,59 @@ import Whiteboard from "./components/whiteboard/whiteboard";
 import Footer from "./components/footer/footer";
 import NavBtnL from "./components/navbtn/navbtnl";
 import NavBtnR from "./components/navbtn/navbtnr";
-import { useState } from "react";
+import firebaseConfig from "./firebaseConfig";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getAnalytics } from "@firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "@firebase/app";
+import { useEffect, useState } from "react";
+import utils from "./components/utils/utils";
 
-function App() {
-  const placeholderWords = [
-    "rabble-rouser",
-    "troll",
-    "cubile albus",
-    "problem child",
-    "amicitia clamare",
-    "amor bestia",
-    "annus aqua",
-    "nuisance",
-    "rascal",
-    "delinquent",
-    "ars crastinu arma",
-    "stirrer",
-    "troublemaker",
-    "menace",
-    "mischief maker",
-    "bellum",
-    "wild child",
-    "caldus caelum",
-    "larrikin",
-    "antagoniser",
-    "casa carcer",
-    "cattus carmen",
-    "bad news",
-    "rebel",
-    "cedere",
-    "celer carcer",
-    "cena cibus cinis",
-    "circus cista coquere",
-    "civis clavis",
-    "provocateur",
-    "cornu corpus crastinus",
-    "crastinus",
-    "anarchist",
-    "cubile cubitum culina",
-  ];
+function App(props) {
+  /* :
+   **********************************/
+  const enableDebug = false;
 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  // Firestore doc lookup:
+  const db = getFirestore();
+  const colRef = collection(db, "labels");
+
+  /* :
+   **********************************/
+  const [labelsData, setLabelsData] = useState();
+
+  /* :
+   **********************************/
   const [wordMetadata, setWordMetadata] = useState({
     sliceStart: 0,
     sliceEnd: 9,
     pageIndex: 0,
   });
 
-  const handleNavClick = (direction) => {
-    if (direction) {
-      // right-arrow
+  /* :
+   **********************************/
+  const getLabels = (e) => {
+    getDocs(colRef).then((snapshot) => {
+      const labelsArr = [];
+      snapshot.docs.forEach((doc) => {
+        labelsArr.push(doc.data());
+      });
+      utils.arr.shuffle(labelsArr);
+      setLabelsData((previousState) => {
+        return { ...previousState, labelsArr };
+      });
+    });
+  };
+
+  /* :
+   **********************************/
+  const handleNavClick = (isRightArrow) => {
+    if (isRightArrow) {
       setWordMetadata((previousState) => {
         return {
           ...previousState,
@@ -63,7 +67,6 @@ function App() {
         };
       });
     } else {
-      // left-arrow
       setWordMetadata((previousState) => {
         return {
           ...previousState,
@@ -82,7 +85,9 @@ function App() {
     }
   };
 
-  const enableDebug = false;
+  useEffect(() => {
+    getLabels();
+  }, []);
 
   return (
     <div className="app">
@@ -94,7 +99,8 @@ function App() {
         <Hud />
         <Instructions />
         <Whiteboard
-          placeholderWords={placeholderWords}
+          labelsData={labelsData}
+          getDocs={props.getDocs}
           wordMetadata={wordMetadata}
         />
         <Footer />
