@@ -12,6 +12,7 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import utils from "./components/utils/utils";
+import helpers from "./helpers/helpers";
 
 function App(props) {
   /* :
@@ -47,6 +48,14 @@ function App(props) {
       snapshot.docs.forEach((doc) => {
         labelsArr.push(doc.data());
       });
+      // If array of labels length is not a multiple of 9, round up to multiple:
+      let neededToPush;
+      if (labelsArr.length % 9 !== 0) {
+        neededToPush = helpers.labels.arr.roundUpLength(labelsArr);
+      }
+      for (let i = 0; i < neededToPush; i++) {
+        labelsArr.push(null);
+      }
       utils.arr.shuffle(labelsArr);
       setLabelsData((previousState) => {
         return { ...previousState, labelsArr };

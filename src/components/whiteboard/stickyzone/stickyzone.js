@@ -1,3 +1,4 @@
+import NonStickyNote from "./stickynote.js/nonstickynote";
 import StickyNote from "./stickynote.js/stickynote";
 
 function StickyZone(props) {
@@ -10,11 +11,14 @@ function StickyZone(props) {
   return (
     <section className="stickyzone">
       <div className="col-12 row stickynotes">
-        <div className="col-4 stickynote-wrapper p-1"></div>
         {props.labelsData
           ? props.labelsData.labelsArr.map((el, index) => (
               <div className="col-4 stickynote-wrapper p-1 border">
-                <StickyNote label={el.label} />
+                {el === null ? (
+                  <NonStickyNote label={"fill"} />
+                ) : (
+                  <StickyNote label={el.label} />
+                )}
               </div>
             ))
           : null}
