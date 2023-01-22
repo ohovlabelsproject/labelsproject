@@ -1,5 +1,5 @@
 function NavBtnR(props) {
-  const disableDirection = props.wordMetadata.sliceEnd > props.maxLabels;
+  const disableDirection = props.labelsMetadata.sliceEnd > props.maxLabels;
   return (
     <div
       className={`nav-r-btn-wrapper ${

@@ -1,5 +1,5 @@
 function NavBtnL(props) {
-  const disableDirection = props.wordMetadata.sliceStart <= 0;
+  const disableDirection = props.labelsMetadata.sliceStart <= 0;
   return (
     <div
       className={`nav-l-btn-wrapper ${

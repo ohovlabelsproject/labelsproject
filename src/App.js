@@ -15,11 +15,8 @@ import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
 
 function App(props) {
-  /* :
-   **********************************/
-  const enableDebug = false;
-
-  // Initialize Firebase
+  const enableDebug = true;
+  // Initialise Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
@@ -28,16 +25,16 @@ function App(props) {
   const db = getFirestore();
   const colRef = collection(db, "labels");
 
-  /* :
+  /* Set/get labels data to/from state:
    **********************************/
   const [labelsData, setLabelsData] = useState();
 
-  /* :
+  /* Set/get meta:
    **********************************/
-  const [wordMetadata, setWordMetadata] = useState({
+  const [labelsMetadata, setlabelsMetadata] = useState({
+    pageIndex: 0,
     sliceStart: 0,
     sliceEnd: 9,
-    pageIndex: 0,
   });
 
   /* :
@@ -67,28 +64,30 @@ function App(props) {
    **********************************/
   const handleNavClick = (isRightArrow) => {
     if (isRightArrow) {
-      setWordMetadata((previousState) => {
+      setlabelsMetadata((previousState) => {
         return {
           ...previousState,
-          sliceStart: wordMetadata.sliceStart + 9,
-          sliceEnd: wordMetadata.sliceEnd + 9,
-          pageIndex: wordMetadata.pageIndex + 1,
+          sliceStart: labelsMetadata.sliceStart + 9,
+          sliceEnd: labelsMetadata.sliceEnd + 9,
+          pageIndex: labelsMetadata.pageIndex + 1,
         };
       });
     } else {
-      setWordMetadata((previousState) => {
+      setlabelsMetadata((previousState) => {
         return {
           ...previousState,
           sliceStart:
-            wordMetadata.sliceStart <= 0
-              ? wordMetadata.sliceStart
-              : wordMetadata.sliceStart - 9,
+            labelsMetadata.sliceStart <= 0
+              ? labelsMetadata.sliceStart
+              : labelsMetadata.sliceStart - 9,
           sliceEnd:
-            wordMetadata.sliceEnd <= 9
-              ? wordMetadata.sliceEnd
-              : wordMetadata.sliceEnd - 9,
+            labelsMetadata.sliceEnd <= 9
+              ? labelsMetadata.sliceEnd
+              : labelsMetadata.sliceEnd - 9,
           pageIndex:
-            wordMetadata.sliceStart <= 0 ? null : wordMetadata.pageIndex - 1,
+            labelsMetadata.sliceStart <= 0
+              ? null
+              : labelsMetadata.pageIndex - 1,
         };
       });
     }
@@ -102,22 +101,25 @@ function App(props) {
     <div className="app">
       <div className="col-12 col-sm-10 col-lg-10 offset-lg-1 offset-sm-1 main-area-wrapper">
         <span style={{ display: enableDebug ? "block" : "none" }}>
-          Start: {wordMetadata.sliceStart} --- End: {wordMetadata.sliceEnd} ---
-          Pg: {wordMetadata.pageIndex + 1}
+          Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
+          --- Pg: {labelsMetadata.pageIndex + 1}
         </span>
         <Hud />
         <Instructions />
         <Whiteboard
           labelsData={labelsData}
           getDocs={props.getDocs}
-          wordMetadata={wordMetadata}
+          labelsMetadata={labelsMetadata}
         />
         <Footer />
       </div>
-      <NavBtnL handleNavClick={handleNavClick} wordMetadata={wordMetadata} />
+      <NavBtnL
+        handleNavClick={handleNavClick}
+        labelsMetadata={labelsMetadata}
+      />
       <NavBtnR
         handleNavClick={handleNavClick}
-        wordMetadata={wordMetadata}
+        labelsMetadata={labelsMetadata}
         maxLabels={
           40
         } /* Replace this with length of labels array when retrived from db */

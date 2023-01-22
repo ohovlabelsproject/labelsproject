@@ -6,21 +6,34 @@ function StickyZone(props) {
 
   /*
   const x = shuffleArr(props.placeholderWords);
-  const y = x.slice(props.wordMetadata.sliceStart, props.wordMetadata.sliceEnd);
+  const y = x.slice(props.labelsMetadata.sliceStart, props.labelsMetadata.sliceEnd);
   console.log(props.labelsData.labelsArr[0].label);*/
   return (
     <section className="stickyzone">
       <div className="col-12 row stickynotes">
         {props.labelsData
-          ? props.labelsData.labelsArr.map((el, index) => (
-              <div className="col-4 stickynote-wrapper p-1 border">
-                {el === null ? (
-                  <NonStickyNote label={"fill"} />
-                ) : (
-                  <StickyNote label={el.label} />
-                )}
-              </div>
-            ))
+          ? props.labelsData.labelsArr
+              .slice(
+                props.labelsMetadata.sliceStart,
+                props.labelsMetadata.sliceEnd
+              )
+              .map((el, index) => (
+                <div className="col-4 stickynote-wrapper p-1 border">
+                  {el === null ? (
+                    <NonStickyNote
+                      index={index}
+                      label={"fill"}
+                      key={`label-${index}`}
+                    />
+                  ) : (
+                    <StickyNote
+                      index={index}
+                      label={el.label}
+                      key={`label-${index}`}
+                    />
+                  )}
+                </div>
+              ))
           : null}
       </div>
     </section>

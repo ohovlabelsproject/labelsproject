@@ -7,7 +7,7 @@ function Whiteboard(props) {
       <StickyZone
         placeholderWords={props.placeholderWords}
         labelsData={props.labelsData}
-        wordMetadata={props.wordMetadata}
+        labelsMetadata={props.labelsMetadata}
       />
       <BinZone />
     </section>

@@ -62,9 +62,7 @@ $testbg-enabled: false;
   justify-content: center;
   align-items: flex-end;
 }
-body {
-  
-}
+
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
@@ -150,29 +148,34 @@ div.hud-col-l, div.hud-col-r {
   @include strip-margin-and-padding();
   @include center();
   @include handdrawntext();
-  /*  @include handdrawntext(); */
   background: $col-sticky-2;
   border: 1px solid darken($col-sticky-2, 5%);
-  font-size: 30px;
+  font-size: $font-size-md + 5;
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  width: 140px;
   rotate: random(5) + deg;
+  width: 140px;
 }
 
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  @include handdrawntext();
-  /*  @include handdrawntext(); */
-  background: $col-sticky-4;
-  border: 1px solid darken($col-sticky-2, 5%);
-  font-size: 30px;
+  background: rgba(20,20,20, .1);
+  font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;
   line-height: 25px;
   width: 140px;
+}
+
+.stickynote-test-data-wrapper {
+  @include guidelines();
+  font-family: monospace;
+  font-size: 12px;
+  left: 0;
+  position: absolute;
+  top: 10px;
 }
 
 .binzone-droparea {
