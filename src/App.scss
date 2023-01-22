@@ -12,7 +12,7 @@ $col-bin-border: #ff0000;
 $font-size-md: 24px;
 
 $guideline: 1px dashed #777;
-$guidelines-enabled: false;
+$guidelines-enabled: true;
 $testbg-enabled: false;
 
 
@@ -62,11 +62,14 @@ $testbg-enabled: false;
   justify-content: center;
   align-items: flex-end;
 }
-
+body {
+  
+}
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
-  height: 100vh;
+  margin-top: 2vh;
+  height: 95vh;
   min-height: 625px;
   min-width: 365px;
   text-align: center;
