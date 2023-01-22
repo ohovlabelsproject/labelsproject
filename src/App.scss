@@ -68,8 +68,8 @@ body {
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
-  height: 90vh;
-  min-height: 620px;
+  height: 100vh;
+  min-height: 625px;
   min-width: 365px;
   text-align: center;
 }

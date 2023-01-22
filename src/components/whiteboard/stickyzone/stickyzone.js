@@ -1,20 +1,6 @@
 import StickyNote from "./stickynote.js/stickynote";
 
 function StickyZone(props) {
-  const shuffleArr = (array) => {
-    let currentIndex = array.length,
-      randomIndex;
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
-    return array;
-  };
-
   //labelsData
 
   /*
@@ -27,7 +13,7 @@ function StickyZone(props) {
         <div className="col-4 stickynote-wrapper p-1"></div>
         {props.labelsData
           ? props.labelsData.labelsArr.map((el, index) => (
-              <div className="col-4 stickynote-wrapper p-1">
+              <div className="col-4 stickynote-wrapper p-1 border">
                 <StickyNote label={el.label} />
               </div>
             ))
