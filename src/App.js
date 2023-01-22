@@ -86,7 +86,7 @@ function App(props) {
   };
 
   useEffect(() => {
-    //getLabels();
+    getLabels();
   }, []);
 
   return (
