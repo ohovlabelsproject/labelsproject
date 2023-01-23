@@ -13,6 +13,7 @@ import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
+import ModalWindow from "./components/modal/modal";
 
 function App(props) {
   const enableDebug = false;
@@ -122,6 +123,7 @@ function App(props) {
         </span>
         <Hud />
         <Instructions />
+        <ModalWindow />
         <Whiteboard
           labelsData={labelsData}
           getDocs={props.getDocs}

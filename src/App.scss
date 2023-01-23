@@ -299,6 +299,9 @@ div.hud-col-r {
   overflow: hidden;
 }
 
+#staticBackdrop {
+  backdrop-filter: blur(4px);
+}
 @media only screen and (max-width: 700px) {
 }
 

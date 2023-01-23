@@ -2,8 +2,12 @@ function Hud() {
   return (
     <header className="hud">
       <div className="col-12 row">
-        <div className="col-4 hud-col-l pl-2">
-          <button className="btn-ohov-1">
+        <div className="col-4 hud-col-l pl-1">
+          <button
+            className="btn-ohov-1"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
             Add label &nbsp;
             <i className="fa fa-plus"></i>
           </button>
