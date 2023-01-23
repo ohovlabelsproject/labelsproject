@@ -63,7 +63,48 @@ function StickyNote(props) {
   /* Handle what happens when note drops in bin:
    *********************************************/
   const handleSuccessfulBinDrop = () => {
-    alert("Handling successful bin drop");
+    //alert("Handling successful bin drop");
+    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNoteRect = stickyNote.getBoundingClientRect();
+
+    stickyNote.style.display = "none";
+
+    // document.getElementById('paper-ball-sm-wrapper');
+    // document.getElementById('paper-ball-sm-wrapper-img');
+
+    document.getElementById("paper-ball-sm-wrapper").style.display = "block";
+    document.getElementById("paper-ball-sm-wrapper").style.top =
+      stickyNoteRect.top + "px";
+    document.getElementById("paper-ball-sm-wrapper").style.left =
+      stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
+
+    var frames = [
+      //{ src: "/paper-ball-md.png", w: "150%" },
+      /*
+      { src: "/paper-ball-sm-flipped.png", w: "100%" },
+      { src: "/paper-ball-sm-flipped-3.png", w: "100%" },
+      { src: "/paper-ball-sm-flipped-2.png", w: "100%" },*/
+
+      { src: "/paper-ball-sm-1.png", w: "100%" },
+      { src: "/paper-ball-sm-2.png", w: "100%" },
+      { src: "/paper-ball-sm-3.png", w: "100%" },
+      { src: "/paper-ball-sm-4.png", w: "100%" },
+      { src: "/paper-ball-sm.png", w: "100%" },
+    ];
+    var frameIndex = 0;
+
+    document.getElementById("paper-ball-sm-img").src = frames[0].src;
+    document.getElementById("paper-ball-sm-img").style.width = frames[0].w;
+
+    setInterval(() => {
+      console.log(frameIndex);
+      document.getElementById("paper-ball-sm-img").src = frames[frameIndex].src;
+      document.getElementById("paper-ball-sm-img").style.width =
+        frames[frameIndex].w;
+      if (frameIndex + 1 < frames.length) {
+        frameIndex += 1;
+      }
+    }, 30);
   };
 
   /* Handle what happens when note is dropped:

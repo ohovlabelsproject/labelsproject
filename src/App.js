@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
 import ModalWindow from "./components/modal/modal";
+import PaperBall from "./components/animation/paperball";
 
 function App(props) {
   const enableDebug = false;
@@ -142,6 +143,7 @@ function App(props) {
           40
         } /* Replace this with length of labels array when retrived from db */
       />
+      <PaperBall />
     </div>
   );
 }

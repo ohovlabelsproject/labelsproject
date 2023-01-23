@@ -17,7 +17,7 @@ $col-bin-border: $col-danger-muted;
 $font-size-md: 24px;
 
 $guideline: 1px dashed #777;
-$guidelines-enabled: true;
+$guidelines-enabled: false;
 $testbg-enabled: false;
 
 @mixin disable-select() {
@@ -221,17 +221,21 @@ div.hud-col-r {
   border: 1px solid darken($col-sticky-2, 5%);
   cursor: move;
   font-size: $font-size-md + 5;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  rotate: random(2) + deg;
+  rotate: random(1) + deg;
   width: 140px;
 }
 
+.paper-ball-sm-wrapper {
+  filter: brightness(1.05) hue-rotate(-5deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
+}
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  background: rgba(20, 20, 20, 0.1);
+  /* background: rgba(20, 20, 20, 0.1);*/
   font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;
@@ -250,6 +254,7 @@ div.hud-col-r {
 
 .binzone-droparea {
   @include center();
+  background: rgba(0, 0, 0, 0.1);
   border: 4px dashed $col-bin-border;
   border-radius: 5px;
   font-size: $font-size-md + 6;
