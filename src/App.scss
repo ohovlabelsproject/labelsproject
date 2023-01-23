@@ -1,34 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
 
-$col-sticky-1: #feff9c;
-$col-sticky-2: #fff740;
+$col-sticky-1: #ffcc33;
+$col-sticky-2: lighten($col-sticky-1, 5%);
 $col-sticky-3: #ff7eb9;
 $col-sticky-4: 	#ff65a3;
 $col-sticky-5: #7afcff;
 
-$col-bin-border: #ff0000;
+$col-lightest: #fff;
+$col-lightish: #c7ccd4;
+$col-danger-muted: #ff7355;
+$col-darkest: rgba(0,0,0,0.8)!important;
+
+$col-bin-border: $col-danger-muted;
 
 $font-size-md: 24px;
 
 $guideline: 1px dashed #777;
-$guidelines-enabled: true;
+$guidelines-enabled: false;
 $testbg-enabled: false;
 
+@mixin bg-transparent-texture() {
+  background-color: lighten(adjust-hue($col-sticky-1, -10), 45) !important;
+  background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
+}
 
-@mixin bg-subtle() {
-  background-color: #fff740;
-  background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
+@mixin thick-title() {
+  @include regulartext();
+  font-weight: 900;
 }
 
 @mixin sketchtext() {
   font-family: 'Cabin Sketch', cursive !important;
+  text-transform: uppercase;
 }
 
 @mixin handdrawntext() {
   font-family: 'Schoolbell', cursive !important;
   font-size: $font-size-md;
   line-height: 25px;
+}
+
+@mixin regulartext() {
+  font-family: 'Lato',Helvetica,Arial,Lucida,sans-serif!important;
 }
 
 @mixin guidelines() {
@@ -39,16 +54,22 @@ $testbg-enabled: false;
   }
 }
 
-
-@mixin random-bgr(){
-  @if $testbg-enabled {
-    background: rgb(random(255), random(1), random(255));
-  }
+@mixin btn-ohov-1() {
+  @include regulartext();
+  color: $col-lightest!important;
+  background-color: rgba(0,0,0,0.6);
+  border-color: rgba(65,65,144,0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 16px;
+  font-family: 'Lato',Helvetica,Arial,Lucida,sans-serif!important;
+  font-weight: 900 !important;
 }
 
-@mixin strip-margin-and-padding() {
-  margin: 0;
-  padding: 0;
+@mixin btn-ohov-1-hover() {
+  color: $col-lightish !important;
+  background-color: $col-lightest;
+  background-image: initial;
 }
 
 @mixin center() {
@@ -63,6 +84,17 @@ $testbg-enabled: false;
   align-items: flex-end;
 }
 
+@mixin random-bgr(){
+  @if $testbg-enabled {
+    background: rgb(random(255), random(1), random(255));
+  }
+}
+
+@mixin strip-margin-and-padding() {
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
@@ -72,8 +104,21 @@ $testbg-enabled: false;
   text-align: center;
 }
 
+body {
+  @include bg-transparent-texture();
+}
+
 .btn {
   @include handdrawntext();
+}
+
+.btn-ohov-1 {
+  @include btn-ohov-1();
+  transition: color 300ms ease 0ms,background-color 300ms ease 0ms,border-radius 300ms ease 0ms;
+}
+
+.btn-ohov-1:hover {
+  @include btn-ohov-1-hover();
 }
 
 .main-area-wrapper {
@@ -111,7 +156,7 @@ section.stickyzone {
 
 section.binzone {
   @include center();
-  @include handdrawntext();
+  @include sketchtext();
   height: 30%;
 }
 
@@ -123,9 +168,10 @@ div.hud-col-l, div.hud-col-r {
 
 .instructions div h1 {
   @include guidelines();
-  @include handdrawntext();
   @include strip-margin-and-padding();
-  font-size: 40px;
+  @include thick-title();
+  color: $col-darkest;
+  font-size: 37px;
   line-height: 30px;
   width: 360px;
 }
@@ -154,7 +200,7 @@ div.hud-col-l, div.hud-col-r {
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  rotate: random(5) + deg;
+  rotate: random(2) + deg;
   width: 140px;
 }
 
@@ -180,8 +226,9 @@ div.hud-col-l, div.hud-col-r {
 
 .binzone-droparea {
   @include center();
-  border: 3px dashed $col-bin-border;
-  font-size: $font-size-md;
+  border: 4px dashed $col-bin-border;
+  border-radius: 5px;
+  font-size: $font-size-md + 6;
   height: 100%;
   width: 100%;
 }
