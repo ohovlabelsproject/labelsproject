@@ -12,13 +12,12 @@ $col-lightest: #fff;
 $col-lightish: #c7ccd4;
 $col-danger-muted: #ff7355;
 $col-darkest: rgba(0,0,0,0.8)!important;
-
 $col-bin-border: $col-danger-muted;
 
 $font-size-md: 24px;
 
 $guideline: 1px dashed #777;
-$guidelines-enabled: false;
+$guidelines-enabled: true;
 $testbg-enabled: false;
 
 @mixin bg-transparent-texture() {
@@ -99,9 +98,8 @@ $testbg-enabled: false;
   @include guidelines();
   @include strip-margin-and-padding();
   height: 85vh;
-
-  min-height: 625px;
   margin-top: 20px;
+  min-height: 625px;
   min-width: 340px;
   text-align: center;
 }
@@ -261,7 +259,7 @@ div.hud-col-r {
 }
 
 .nav-l-btn-wrapper i, .nav-r-btn-wrapper i {
-  color: #fff;
+  color: $col-lightest;
 }
 
 .nav-l-btn-wrapper {
@@ -270,6 +268,11 @@ div.hud-col-r {
 
 .nav-r-btn-wrapper {
   right: 0;
+}
+
+.nav-btn-disable {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media only screen and (max-width: 700px) {}
@@ -286,7 +289,3 @@ div.hud-col-r {
   }
 }
 
-.nav-btn-disable {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
