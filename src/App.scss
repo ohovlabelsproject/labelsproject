@@ -99,7 +99,6 @@ $testbg-enabled: false;
   @include guidelines();
   @include strip-margin-and-padding();
   height: 90vh;
-  margin-top: 5vh;
   /*
   min-height: 625px;*/
   min-width: 365px;
