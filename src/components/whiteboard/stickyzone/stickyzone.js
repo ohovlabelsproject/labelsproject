@@ -2,12 +2,6 @@ import NonStickyNote from "./stickynote.js/nonstickynote";
 import StickyNote from "./stickynote.js/stickynote";
 
 function StickyZone(props) {
-  //labelsData
-
-  /*
-  const x = shuffleArr(props.placeholderWords);
-  const y = x.slice(props.labelsMetadata.sliceStart, props.labelsMetadata.sliceEnd);
-  console.log(props.labelsData.labelsArr[0].label);*/
   return (
     <section className="stickyzone">
       <div className="col-12 row stickynotes">
@@ -20,11 +14,7 @@ function StickyZone(props) {
               .map((el, index) => (
                 <div className="col-4 stickynote-wrapper p-1">
                   {el === null ? (
-                    <NonStickyNote
-                      index={index}
-                      label={"fill"}
-                      key={`label-${index}`}
-                    />
+                    <NonStickyNote index={index} key={`label-${index}`} />
                   ) : (
                     <StickyNote
                       index={index}

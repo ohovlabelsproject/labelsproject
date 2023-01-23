@@ -96,9 +96,11 @@ function StickyNote(props) {
       onTouchEnd={() => handleTouchEnd()}
     >
       {props.label}
+      {/*
       <div className="stickynote-test-data-wrapper">
         {`Label: ${props.index + 1} - Mousedown: ${mouseDownState}`}
       </div>
+       */}
     </div>
   );
 }
