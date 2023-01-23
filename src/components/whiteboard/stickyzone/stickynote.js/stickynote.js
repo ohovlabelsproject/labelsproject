@@ -96,15 +96,24 @@ function StickyNote(props) {
     document.getElementById("paper-ball-sm-img").src = frames[0].src;
     document.getElementById("paper-ball-sm-img").style.width = frames[0].w;
 
-    setInterval(() => {
+    // remember to clear this and all other intervals and timeouts
+    const si = setInterval(() => {
       console.log(frameIndex);
       document.getElementById("paper-ball-sm-img").src = frames[frameIndex].src;
       document.getElementById("paper-ball-sm-img").style.width =
         frames[frameIndex].w;
       if (frameIndex + 1 < frames.length) {
         frameIndex += 1;
+      } else {
+        clearInterval(si);
       }
     }, 30);
+
+    props.updateLabelDisposalState(true);
+
+    setTimeout(() => {
+      props.updateLabelDisposalState(false);
+    }, 5000);
   };
 
   /* Handle what happens when note is dropped:

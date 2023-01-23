@@ -37,6 +37,7 @@ function App(props) {
     pageIndex: 0,
     sliceStart: 0,
     sliceEnd: 9,
+    labelBeingDisposedOf: false,
   });
 
   /* :
@@ -77,6 +78,16 @@ function App(props) {
   /* :
    **********************************/
   const handleLabelDrop = (label) => {}; //
+
+  //
+  const updateLabelDisposalState = (val) => {
+    setlabelsMetadata((previousState) => {
+      return {
+        ...previousState,
+        labelBeingDisposedOf: val,
+      };
+    });
+  };
 
   /* :
    **********************************/
@@ -129,6 +140,7 @@ function App(props) {
           labelsData={labelsData}
           getDocs={props.getDocs}
           labelsMetadata={labelsMetadata}
+          updateLabelDisposalState={updateLabelDisposalState}
         />
         <Footer />
       </div>

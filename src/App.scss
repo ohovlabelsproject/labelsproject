@@ -232,6 +232,7 @@ div.hud-col-r {
 .paper-ball-sm-wrapper {
   filter: brightness(1.05) hue-rotate(-5deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
 }
+
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
@@ -255,7 +256,7 @@ div.hud-col-r {
 .binzone-droparea {
   @include center();
   background: rgba(0, 0, 0, 0.1);
-  border: 4px dashed $col-bin-border;
+  border: 3px dashed $col-bin-border;
   border-radius: 5px;
   font-size: $font-size-md + 6;
   height: 100%;
@@ -306,6 +307,34 @@ div.hud-col-r {
 
 #staticBackdrop {
   backdrop-filter: blur(4px);
+}
+
+.whiteboard-msg-thanks {
+  @include thick-title();
+  font-size: 30px;
+  line-height: 0;
+}
+
+.whiteboard-msg-text-wrapper {
+  @include center();
+}
+.whiteboard-msg-wrapper {
+  @include center();
+  @include thick-title();
+  background-color: adjust-hue($col-sticky-1, 10%);
+  background-image: url("https://www.transparenttextures.com/patterns/dark-denim.png");
+  color: $col-darkest;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.7));
+  font-size: 20px;
+  height: 450px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 90%;
+  z-index: 999;
 }
 @media only screen and (max-width: 700px) {
 }

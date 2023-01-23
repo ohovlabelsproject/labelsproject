@@ -20,6 +20,7 @@ function StickyZone(props) {
                       index={index}
                       label={el.label}
                       key={`label-${index}`}
+                      updateLabelDisposalState={props.updateLabelDisposalState}
                     />
                   )}
                 </div>
