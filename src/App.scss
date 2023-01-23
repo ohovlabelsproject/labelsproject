@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Schoolbell&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap");
 
 $col-sticky-1: #ffcc33;
 $col-sticky-2: lighten($col-sticky-1, 5%);
 $col-sticky-3: #ff7eb9;
-$col-sticky-4: 	#ff65a3;
+$col-sticky-4: #ff65a3;
 $col-sticky-5: #7afcff;
 
 $col-lightest: #fff;
 $col-lightish: #c7ccd4;
 $col-danger-muted: #ff7355;
-$col-darkest: rgba(0,0,0,0.8)!important;
+$col-darkest: rgba(0, 0, 0, 0.8) !important;
 $col-bin-border: $col-danger-muted;
 
 $font-size-md: 24px;
@@ -19,6 +19,15 @@ $font-size-md: 24px;
 $guideline: 1px dashed #777;
 $guidelines-enabled: true;
 $testbg-enabled: false;
+
+@mixin disable-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version */
+}
 
 @mixin bg-transparent-texture() {
   background-color: lighten(adjust-hue($col-sticky-1, -10), 45) !important;
@@ -31,18 +40,18 @@ $testbg-enabled: false;
 }
 
 @mixin sketchtext() {
-  font-family: 'Cabin Sketch', cursive !important;
+  font-family: "Cabin Sketch", cursive !important;
   text-transform: uppercase;
 }
 
 @mixin handdrawntext() {
-  font-family: 'Schoolbell', cursive !important;
+  font-family: "Schoolbell", cursive !important;
   font-size: $font-size-md;
   line-height: 25px;
 }
 
 @mixin regulartext() {
-  font-family: 'Lato',Helvetica,Arial,Lucida,sans-serif!important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
 }
 
 @mixin guidelines() {
@@ -55,13 +64,13 @@ $testbg-enabled: false;
 
 @mixin btn-ohov-1() {
   @include regulartext();
-  color: $col-lightest!important;
-  background-color: rgba(0,0,0,0.6);
-  border-color: rgba(65,65,144,0);
+  color: $col-lightest !important;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(65, 65, 144, 0);
   border-radius: 70px;
   border-width: 10px !important;
   font-size: 16px;
-  font-family: 'Lato',Helvetica,Arial,Lucida,sans-serif!important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
   font-weight: 900 !important;
 }
 
@@ -83,7 +92,7 @@ $testbg-enabled: false;
   align-items: flex-end;
 }
 
-@mixin random-bgr(){
+@mixin random-bgr() {
   @if $testbg-enabled {
     background: rgb(random(255), random(1), random(255));
   }
@@ -114,7 +123,7 @@ body {
 
 .btn-ohov-1 {
   @include btn-ohov-1();
-  transition: color 300ms ease 0ms,background-color 300ms ease 0ms,border-radius 300ms ease 0ms;
+  transition: color 300ms ease 0ms, background-color 300ms ease 0ms, border-radius 300ms ease 0ms;
 }
 
 .btn-ohov-1:hover {
@@ -126,11 +135,15 @@ body {
   height: 100%;
 }
 
-header.hud, section.stickyzone, section.binzone, footer.footer  {
+header.hud,
+section.stickyzone,
+section.binzone,
+footer.footer {
   @include guidelines();
 }
 
-header.hud, footer.footer {
+header.hud,
+footer.footer {
   @include center();
   @include random-bgr();
   @include strip-margin-and-padding();
@@ -160,7 +173,8 @@ section.binzone {
   height: 30%;
 }
 
-div.hud-col-l, div.hud-col-r {
+div.hud-col-l,
+div.hud-col-r {
   @include guidelines();
   @include strip-margin-and-padding();
 }
@@ -199,11 +213,13 @@ div.hud-col-r {
 }
 
 .stickynote {
-  @include strip-margin-and-padding();
   @include center();
+  @include disable-select();
   @include handdrawntext();
+  @include strip-margin-and-padding();
   background: $col-sticky-2;
   border: 1px solid darken($col-sticky-2, 5%);
+  cursor: move;
   font-size: $font-size-md + 5;
   height: 100px;
   hyphens: auto;
@@ -215,7 +231,7 @@ div.hud-col-r {
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  background: rgba(20,20,20, .1);
+  background: rgba(20, 20, 20, 0.1);
   font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;
@@ -241,7 +257,8 @@ div.hud-col-r {
   width: 100%;
 }
 
-.nav-l-btn-wrapper, .nav-r-btn-wrapper {
+.nav-l-btn-wrapper,
+.nav-r-btn-wrapper {
   @include center();
   background: rgba(0, 0, 0, 0.6);
   border: 0;
@@ -254,11 +271,13 @@ div.hud-col-r {
   width: 25px;
 }
 
-.nav-l-btn-wrapper:hover, .nav-r-btn-wrapper:hover {
+.nav-l-btn-wrapper:hover,
+.nav-r-btn-wrapper:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.nav-l-btn-wrapper i, .nav-r-btn-wrapper i {
+.nav-l-btn-wrapper i,
+.nav-r-btn-wrapper i {
   color: $col-lightest;
 }
 
@@ -280,17 +299,19 @@ div.hud-col-r {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 700px) {}
+@media only screen and (max-width: 700px) {
+}
 
 @media only screen and (min-width: 700px) {
-  .stickynote, .stickynote-non {
+  .stickynote,
+  .stickynote-non {
     width: 240px;
   }
 }
 
 @media only screen and (min-width: 1200px) {
-  .stickynote, .stickynote-non {
+  .stickynote,
+  .stickynote-non {
     width: 300px;
   }
 }
-

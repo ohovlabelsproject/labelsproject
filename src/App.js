@@ -115,7 +115,7 @@ function App(props) {
 
   return (
     <div className="app">
-      <div className="col-12 col-sm-10 col-lg-10 offset-lg-1 offset-sm-1 main-area-wrapper">
+      <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <span style={{ display: enableDebug ? "block" : "none" }}>
           Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
           --- Pg: {labelsMetadata.pageIndex + 1}
