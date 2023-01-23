@@ -2,9 +2,20 @@ function StickyNote(props) {
   return (
     <div
       className="stickynote"
+      id={`stickynote-${props.index}`}
       onTouchMove={(e) => {
         const touchLocation = e.targetTouches[0];
-        alert(touchLocation);
+
+        document.getElementById(`stickynote-${props.index}`).style.position =
+          "absolute";
+
+        document.getElementById(`stickynote-${props.index}`).style.left =
+          touchLocation.pageX + "px";
+
+        document.getElementById(`stickynote-${props.index}`).style.top =
+          touchLocation.pageY + "px";
+
+        //alert(`${touchLocation.pageX}, ${touchLocation.pageY}`);
       }}
     >
       {props.label}
