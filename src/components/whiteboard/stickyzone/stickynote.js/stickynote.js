@@ -109,11 +109,24 @@ function StickyNote(props) {
       }
     }, 30);
 
+    document.getElementById("duck").style.top =
+      document.getElementById("paper-ball-sm-wrapper").getBoundingClientRect()
+        .top -
+      20 +
+      "px";
+
+    document.getElementById("duck").style.left =
+      document.getElementById("app").getBoundingClientRect().right + "px";
+
+    const si2 = setInterval(() => {
+      document.getElementById("duck").style.left =
+        document.getElementById("duck").getBoundingClientRect().left - 3 + "px";
+    }, 1000 / 60);
     props.updateLabelDisposalState(true);
 
     setTimeout(() => {
       props.updateLabelDisposalState(false);
-    }, 5000);
+    }, 10000);
   };
 
   /* Handle what happens when note is dropped:

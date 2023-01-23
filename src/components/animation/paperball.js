@@ -1,5 +1,3 @@
-import NonStickyNote from "../whiteboard/stickyzone/stickynote.js/nonstickynote";
-
 function PaperBall() {
   return (
     <div

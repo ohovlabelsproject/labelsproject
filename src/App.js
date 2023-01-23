@@ -15,6 +15,7 @@ import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
 import ModalWindow from "./components/modal/modal";
 import PaperBall from "./components/animation/paperball";
+import Duck from "./components/animation/duck";
 
 function App(props) {
   const enableDebug = false;
@@ -127,7 +128,7 @@ function App(props) {
   }, []);
 
   return (
-    <div className="app">
+    <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <span style={{ display: enableDebug ? "block" : "none" }}>
           Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
@@ -156,6 +157,7 @@ function App(props) {
         } /* Replace this with length of labels array when retrived from db */
       />
       <PaperBall />
+      <Duck />
     </div>
   );
 }

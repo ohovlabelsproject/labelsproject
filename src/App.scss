@@ -103,6 +103,11 @@ $testbg-enabled: false;
   padding: 0;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
@@ -315,6 +320,10 @@ div.hud-col-r {
   line-height: 0;
 }
 
+.whiteboard-msg-parenth {
+  @include handdrawntext();
+  font-size: 20px;
+}
 .whiteboard-msg-text-wrapper {
   @include center();
 }
@@ -335,6 +344,15 @@ div.hud-col-r {
   top: 0px;
   width: 90%;
   z-index: 999;
+}
+
+.duck {
+  position: absolute;
+  background: #000;
+  height: 120px;
+  width: 200px;
+  top: 465px;
+  left: 500px;
 }
 @media only screen and (max-width: 700px) {
 }
