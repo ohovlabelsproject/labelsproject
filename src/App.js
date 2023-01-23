@@ -15,7 +15,7 @@ import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
 
 function App(props) {
-  const enableDebug = true;
+  const enableDebug = false;
   // Initialise Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
@@ -59,6 +59,22 @@ function App(props) {
       });
     });
   };
+
+  /* :
+   **********************************/
+  const handleCustomLabelSubmission = (label) => {}; // when user writes and submits custom label
+
+  /* :
+   **********************************/
+  const handleLabelDestroyDb = (label) => {}; // writes to "labelsBinnedByUsers" collection
+
+  /* :
+   **********************************/
+  const handleLabelDrag = (label) => {}; //
+
+  /* :
+   **********************************/
+  const handleLabelDrop = (label) => {}; //
 
   /* :
    **********************************/

@@ -98,7 +98,8 @@ $testbg-enabled: false;
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
-  height: 100vh;
+  height: 90vh;
+  margin-top: 5vh;
   min-height: 625px;
   min-width: 365px;
   text-align: center;
@@ -134,7 +135,7 @@ header.hud, footer.footer {
   @include center();
   @include random-bgr();
   @include strip-margin-and-padding();
-  height: 5%;
+  height: 7%;
 }
 
 section.instructions {
@@ -146,7 +147,7 @@ section.instructions {
 section.whiteboard {
   @include random-bgr();
   @include strip-margin-and-padding();
-  height: 75%;
+  height: 73%;
 }
 
 section.stickyzone {
@@ -161,9 +162,17 @@ section.binzone {
 }
 
 div.hud-col-l, div.hud-col-r {
-  @include center();
   @include guidelines();
   @include strip-margin-and-padding();
+}
+
+div.hud-col-l {
+  @include center();
+}
+
+div.hud-col-r {
+  text-align: right;
+  padding-right: 10px;
 }
 
 .instructions div h1 {

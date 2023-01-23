@@ -18,7 +18,7 @@ function StickyZone(props) {
                 props.labelsMetadata.sliceEnd
               )
               .map((el, index) => (
-                <div className="col-4 stickynote-wrapper p-1 border">
+                <div className="col-4 stickynote-wrapper p-1">
                   {el === null ? (
                     <NonStickyNote
                       index={index}

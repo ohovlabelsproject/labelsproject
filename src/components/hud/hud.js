@@ -8,7 +8,12 @@ function Hud() {
             <i className="fa fa-plus"></i>
           </button>
         </div>
-        <div className="col-8 hud-col-r"></div>
+        <div className="col-8 hud-col-r">
+          <img
+            src="https://usercontent.one/wp/www.ohov.co.uk/wp-content/uploads/2019/08/OHOV_final_logo_colour-2.png"
+            width="130px"
+          />
+        </div>
       </div>
     </header>
   );
