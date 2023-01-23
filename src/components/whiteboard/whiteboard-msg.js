@@ -18,9 +18,9 @@ function WhiteboardMsg(props) {
         </div>
         <div className="col-12">
           <p>Well-trained ducks are disposing of it.</p>
-          <p class="whiteboard-msg-parenth">
+          {/*<p class="whiteboard-msg-parenth">
             (Goes to a digital landfill site)
-          </p>
+    </p>*/}
         </div>
       </div>
     </div>

@@ -119,9 +119,22 @@ function StickyNote(props) {
       document.getElementById("app").getBoundingClientRect().right + "px";
 
     const si2 = setInterval(() => {
-      document.getElementById("duck").style.left =
-        document.getElementById("duck").getBoundingClientRect().left - 3 + "px";
+      console.log(document.getElementById("duck").style.left);
+      if (
+        document.getElementById("duck").getBoundingClientRect().left <
+        document.getElementById("app").getBoundingClientRect().left -
+          document.getElementById("duck").getBoundingClientRect().width
+      ) {
+        // alert("duck gone");
+        clearInterval(si2);
+      } else {
+        document.getElementById("duck").style.left =
+          document.getElementById("duck").getBoundingClientRect().left -
+          3 +
+          "px";
+      }
     }, 1000 / 60);
+
     props.updateLabelDisposalState(true);
 
     setTimeout(() => {
