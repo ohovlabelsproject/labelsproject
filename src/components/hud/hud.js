@@ -5,8 +5,9 @@ function Hud() {
         <div className="col-5 hud-col-l pl-1">
           <button
             className="btn-ohov-1"
+            id="btn-ohov-1"
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            data-bs-target="#addLabel"
           >
             Add label &nbsp;
             <i className="fa fa-plus"></i>

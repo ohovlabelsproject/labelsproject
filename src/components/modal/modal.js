@@ -4,18 +4,9 @@ import ModalSubmitBtn from "./modalsubmitbtn";
 function ModalWindow(props) {
   return (
     <>
-      {/* 
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Launch static backdrop modal
-      </button>*/}
       <div
         className="modal fade"
-        id="staticBackdrop"
+        id="addLabel"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"

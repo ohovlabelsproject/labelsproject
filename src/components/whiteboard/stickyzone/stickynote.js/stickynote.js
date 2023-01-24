@@ -108,26 +108,27 @@ function StickyNote(props) {
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
+      const inc = 1;
+
       if (
         duck.getBoundingClientRect().left <
         app.getBoundingClientRect().left - duck.getBoundingClientRect().width
       ) {
         clearInterval(si2);
-        props.updateLabelDisposalState(false);
+
+        setTimeout(() => {
+          props.updateLabelDisposalState(false);
+        }, 500);
       } else {
-        duck.style.left = duck.getBoundingClientRect().left - 3 + "px";
+        duck.style.left = duck.getBoundingClientRect().left - inc + "px";
 
-        console.log(duck.style.left);
-        console.log(paperballWrapper.getBoundingClientRect().right);
-
-        //
+        // If duck touching paperball
         if (
           duck.getBoundingClientRect().left <=
-          paperballWrapper.getBoundingClientRect().right
+          paperballWrapper.getBoundingClientRect().right - 10
         ) {
-          console.log("got here?");
           paperballWrapper.style.left =
-            paperballWrapper.getBoundingClientRect().left - 3 + "px";
+            paperballWrapper.getBoundingClientRect().left - inc + "px";
         }
       }
     }, 1000 / 60);
@@ -137,7 +138,10 @@ function StickyNote(props) {
    *********************************************/
   const handleSuccessfulBinDrop = () => {
     animatePaperballCrumpling();
-    animateDuck();
+    setTimeout(() => {
+      animateDuck();
+    }, 2000);
+
     //
     props.updateLabelDisposalState(true);
   };
