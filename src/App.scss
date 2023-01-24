@@ -121,6 +121,13 @@ $testbg-enabled: false;
   padding: 0;
 }
 
+@mixin border-gradient {
+  border: 3px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, $col-danger-muted, rgb(0, 162, 255), yellow, orange);
+  border-width: 3px;
+}
+
 html,
 body {
   max-width: 100%;
@@ -370,6 +377,7 @@ div.hud-col-r {
 }
 .whiteboard-msg-wrapper {
   @include center();
+  @include border-gradient();
   @include thick-title();
   background-color: adjust-hue($col-sticky-1, 10%);
   background-image: url("https://www.transparenttextures.com/patterns/dark-denim.png");

@@ -147,6 +147,7 @@ function App(props) {
         </span>
         <Hud />
         <Instructions />
+        <p>Just drag 'n drop!</p>
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />

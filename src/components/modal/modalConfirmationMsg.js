@@ -6,6 +6,7 @@ function ModalConfirmationMsg(props) {
   };
   return (
     <>
+      {/*
       <button
         type="button"
         className="btn btn-primary"
@@ -13,7 +14,7 @@ function ModalConfirmationMsg(props) {
         data-bs-target="#confirmationModal"
       >
         Launch confirmation modal
-      </button>
+      </button> */}
       <div
         className="modal fade"
         id="confirmationModal"

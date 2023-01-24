@@ -113,6 +113,7 @@ function StickyNote(props) {
         app.getBoundingClientRect().left - duck.getBoundingClientRect().width
       ) {
         clearInterval(si2);
+        props.updateLabelDisposalState(false);
       } else {
         duck.style.left = duck.getBoundingClientRect().left - 3 + "px";
 
@@ -139,10 +140,6 @@ function StickyNote(props) {
     animateDuck();
     //
     props.updateLabelDisposalState(true);
-    //
-    setTimeout(() => {
-      props.updateLabelDisposalState(false);
-    }, 10000);
   };
 
   /* Handle what happens when note is dropped:
