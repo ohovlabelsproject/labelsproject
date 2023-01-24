@@ -19,6 +19,8 @@ function StickyNote(props) {
    ************************************************/
   const handleMouseUp = () => {
     setmouseDownState(false);
+    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    stickyNote.style.zIndex = 1;
     handleDrop();
   };
 
@@ -27,6 +29,7 @@ function StickyNote(props) {
   const handleMouseMove = (e) => {
     if (mouseDownState) {
       let stickyNote = document.getElementById(`stickynote-${props.index}`);
+      stickyNote.style.zIndex = "99";
       let { clientX, clientY } = e;
       handleStickyNoteMove({ stickyNote, clientX, clientY });
     }
