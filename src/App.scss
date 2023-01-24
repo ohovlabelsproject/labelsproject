@@ -12,7 +12,7 @@ $col-lightest: #fff;
 $col-lightish: #c7ccd4;
 $col-danger-muted: #ff7355;
 $col-darkest: rgba(0, 0, 0, 0.8) !important;
-$col-bin-border: $col-danger-muted;
+$col-bin-border: rgba(0, 0, 0, 0.3);
 
 $font-size-md: 24px;
 
@@ -30,7 +30,7 @@ $testbg-enabled: false;
 }
 
 @mixin bg-transparent-texture() {
-  background-color: lighten(adjust-hue($col-sticky-1, -10), 45) !important;
+  // background-color: lighten(adjust-hue($col-sticky-1, -10), 45) !important;
   background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
 }
 
@@ -144,8 +144,30 @@ body {
   text-align: center;
 }
 
-body {
+.bg-wrapper-1 {
+  position: absolute;
   @include bg-transparent-texture();
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -99;
+}
+
+.bg-wrapper-2 {
+  position: absolute;
+  /*
+  background: linear-gradient(to bottom, white, darken($col-danger-muted, 65%)) !important;*/
+  background: linear-gradient(to bottom, white, white);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+
+body {
   overflow: hidden;
 }
 
@@ -189,6 +211,7 @@ footer.footer {
   @include random-bgr();
   @include strip-margin-and-padding();
   height: 7%;
+  color: #444;
 }
 
 section.instructions {
@@ -309,7 +332,8 @@ div.hud-col-r {
 .binzone-droparea {
   @include center();
   background: rgba(0, 0, 0, 0.1);
-  border: 3px dashed $col-bin-border;
+  border: 3px dashed rgb(242 91 65 / 60%);
+  color: $col-darkest;
   border-radius: 5px;
   font-size: $font-size-md + 6;
   height: 100%;
@@ -364,7 +388,7 @@ div.hud-col-r {
 
 .whiteboard-msg-thanks {
   @include thick-title();
-  font-size: 30px;
+  font-size: 37px;
   line-height: 0;
 }
 
@@ -377,11 +401,12 @@ div.hud-col-r {
 }
 .whiteboard-msg-wrapper {
   @include center();
-  @include border-gradient();
+  //@include border-gradient();
   @include thick-title();
-  background-color: adjust-hue($col-sticky-1, 10%);
-  background-image: url("https://www.transparenttextures.com/patterns/dark-denim.png");
-  color: $col-darkest;
+  //background-color: adjust-hue($col-sticky-1, 10%);
+  //background-image: url("https://www.transparenttextures.com/patterns/dark-denim.png");
+  color: #ccc;
+  background: #3d3c3c;
   filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.7));
   font-size: 20px;
   height: 450px;

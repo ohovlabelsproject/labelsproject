@@ -147,7 +147,6 @@ function App(props) {
         </span>
         <Hud />
         <Instructions />
-        <p>Just drag 'n drop!</p>
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
@@ -173,6 +172,8 @@ function App(props) {
       />
       <PaperBall />
       <Duck />
+      <div className="bg-wrapper-1"></div>
+      <div className="bg-wrapper-2"></div>
     </div>
   );
 }
