@@ -180,7 +180,11 @@ function StickyNote(props) {
 
   return (
     <div
-      className={`stickynote ${determineRotationRandomness(props.index)}`}
+      className={`stickynote ${determineRotationRandomness(
+        props.index
+      )} animate__animated animate__flipInY animate__delay-${Math.floor(
+        Math.random() * 2
+      )}s`}
       id={`stickynote-${props.index}`}
       onMouseDown={() => setmouseDownState(true)}
       onMouseUp={() => handleMouseUp()}
