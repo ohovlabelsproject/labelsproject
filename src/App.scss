@@ -230,8 +230,20 @@ div.hud-col-r {
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  rotate: random(1) + deg;
+  //rotate: random(1) + deg;
   width: 140px;
+}
+
+.random-rotate-0 {
+  rotate: random(1) + deg;
+}
+
+.random-rotate-1 {
+  rotate: -1.5deg;
+}
+
+.random-rotate-2 {
+  rotate: random(1) + deg;
 }
 
 .paper-ball-sm-wrapper {

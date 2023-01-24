@@ -35,6 +35,7 @@ function StickyNote(props) {
   /* Handle what happens when note is moved by touch:
    *************************************************/
   const handleTouchMove = (e) => {
+    e.preventDefault();
     const touchLocation = e.targetTouches[0];
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
     let { pageX, pageY } = touchLocation;
@@ -161,9 +162,22 @@ function StickyNote(props) {
       handleSuccessfulBinDrop();
     }
   };
+
+  const determineRotationRandomness = (index) => {
+    if (props.index % 3) {
+      return "random-rotate-0";
+    }
+    if (props.index % 2) {
+      return "random-rotate-1";
+    }
+    if (props.index % 5) {
+      return "random-rotate-2";
+    }
+  };
+
   return (
     <div
-      className="stickynote"
+      className={`stickynote ${determineRotationRandomness(props.index)}`}
       id={`stickynote-${props.index}`}
       onMouseDown={() => setmouseDownState(true)}
       onMouseUp={() => handleMouseUp()}
