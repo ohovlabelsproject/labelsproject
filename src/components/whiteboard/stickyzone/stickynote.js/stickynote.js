@@ -64,83 +64,68 @@ function StickyNote(props) {
     o.stickyNote.style.top = y - stickyNoteRect.height / 2 + "px";
   };
 
-  /* Handle what happens when note drops in bin:
+  /* Animate paperball crumpling:
    *********************************************/
-  const handleSuccessfulBinDrop = () => {
-    //alert("Handling successful bin drop");
+  const animatePaperballCrumpling = () => {
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
     let stickyNoteRect = stickyNote.getBoundingClientRect();
-
-    stickyNote.style.display = "none";
-
-    // document.getElementById('paper-ball-sm-wrapper');
-    // document.getElementById('paper-ball-sm-wrapper-img');
-
-    document.getElementById("paper-ball-sm-wrapper").style.display = "block";
-    document.getElementById("paper-ball-sm-wrapper").style.top =
-      stickyNoteRect.top + "px";
-    document.getElementById("paper-ball-sm-wrapper").style.left =
-      stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
-
-    var frames = [
-      //{ src: "/paper-ball-md.png", w: "150%" },
-      /*
-      { src: "/paper-ball-sm-flipped.png", w: "100%" },
-      { src: "/paper-ball-sm-flipped-3.png", w: "100%" },
-      { src: "/paper-ball-sm-flipped-2.png", w: "100%" },*/
-
+    let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
+    let paperballImg = document.getElementById("paper-ball-sm-img");
+    let frameIndex = 0;
+    const frames = [
       { src: "/paper-ball-sm-1.png", w: "100%" },
       { src: "/paper-ball-sm-2.png", w: "100%" },
       { src: "/paper-ball-sm-3.png", w: "100%" },
       { src: "/paper-ball-sm-4.png", w: "100%" },
       { src: "/paper-ball-sm.png", w: "100%" },
     ];
-    var frameIndex = 0;
-
-    document.getElementById("paper-ball-sm-img").src = frames[0].src;
-    document.getElementById("paper-ball-sm-img").style.width = frames[0].w;
-
-    // remember to clear this and all other intervals and timeouts
+    // Remove stickynote & make paperball appear:
+    stickyNote.style.display = "none";
+    paperballWrapper.style.display = "block";
+    paperballWrapper.style.top = stickyNoteRect.top + "px";
+    paperballWrapper.style.left =
+      stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
+    paperballImg.src = frames[0].src;
+    paperballImg.style.width = frames[0].w;
+    // Cycle through frames:
     const si = setInterval(() => {
-      console.log(frameIndex);
-      document.getElementById("paper-ball-sm-img").src = frames[frameIndex].src;
-      document.getElementById("paper-ball-sm-img").style.width =
-        frames[frameIndex].w;
+      paperballImg.src = frames[frameIndex].src;
+      paperballImg.style.width = frames[frameIndex].w;
       if (frameIndex + 1 < frames.length) {
         frameIndex += 1;
       } else {
         clearInterval(si);
       }
-    }, 30);
+    }, 50);
+  };
 
-    document.getElementById("duck").style.top =
-      document.getElementById("paper-ball-sm-wrapper").getBoundingClientRect()
-        .top -
-      20 +
-      "px";
-
-    document.getElementById("duck").style.left =
-      document.getElementById("app").getBoundingClientRect().right + "px";
-
+  const animateDuck = () => {
+    let duck = document.getElementById("duck");
+    let app = document.getElementById("app");
+    let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
+    duck.style.top = paperballWrapper.getBoundingClientRect().top - 20 + "px";
+    duck.style.left = app.getBoundingClientRect().right + "px";
+    //
     const si2 = setInterval(() => {
-      console.log(document.getElementById("duck").style.left);
       if (
-        document.getElementById("duck").getBoundingClientRect().left <
-        document.getElementById("app").getBoundingClientRect().left -
-          document.getElementById("duck").getBoundingClientRect().width
+        duck.getBoundingClientRect().left <
+        app.getBoundingClientRect().left - duck.getBoundingClientRect().width
       ) {
-        // alert("duck gone");
         clearInterval(si2);
       } else {
-        document.getElementById("duck").style.left =
-          document.getElementById("duck").getBoundingClientRect().left -
-          3 +
-          "px";
+        duck.style.left = duck.getBoundingClientRect().left - 3 + "px";
       }
     }, 1000 / 60);
+  };
 
+  /* Handle what happens when note drops in bin:
+   *********************************************/
+  const handleSuccessfulBinDrop = () => {
+    animatePaperballCrumpling();
+    animateDuck();
+    //
     props.updateLabelDisposalState(true);
-
+    //
     setTimeout(() => {
       props.updateLabelDisposalState(false);
     }, 10000);
@@ -166,6 +151,7 @@ function StickyNote(props) {
     }
   };
 
+  //
   const determineRotationRandomness = (index) => {
     if (props.index % 3) {
       return "random-rotate-0";

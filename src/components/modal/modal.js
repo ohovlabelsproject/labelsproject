@@ -1,7 +1,7 @@
 import ModalHeader from "./modalheader";
 import ModalSubmitBtn from "./modalsubmitbtn";
 
-function ModalWindow() {
+function ModalWindow(props) {
   return (
     <>
       {/* 
@@ -24,28 +24,39 @@ function ModalWindow() {
       >
         <div className="modal-dialog">
           <div className="modal-content">
-            <ModalHeader title="Add label submission form" />
-            <div className="modal-body">
-              This is your opportunity to submit labels that you find
-              stimigising (and/or think may be stimigising to others). Your
-              submission could take up to 48 hours to be moderated and appear as
-              a sticky note on the webpage/app. Thank you!
-              <br />
-              <br />
-              <label>Your label:</label>
-              <input className="form-control"></input>
-              <div className="alert alert-sm p-1 alert-danger">ksdldk</div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <ModalSubmitBtn />
-            </div>
+            <ModalHeader title="Add label +" />
+            <form>
+              <div className="modal-body">
+                This is your opportunity to a submit label that you find
+                stimigising. It helps us assess things.
+                <br />
+                <br />
+                <label>Your label:</label>
+                <input
+                  className="form-control modal-label-submission"
+                  id="modal-label-submission"
+                  minLength={5}
+                  maxLength={30}
+                ></input>
+                <div className="alert alert-sm p-1 alert-danger small">
+                  Inappropriate
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn-ohov-2"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <ModalSubmitBtn
+                  handleCustomLabelSubmission={
+                    props.handleCustomLabelSubmission
+                  }
+                />
+              </div>
+            </form>
           </div>
         </div>
       </div>

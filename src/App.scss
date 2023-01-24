@@ -80,6 +80,24 @@ $testbg-enabled: false;
   background-image: initial;
 }
 
+@mixin btn-ohov-2() {
+  @include regulartext();
+  color: $col-lightest !important;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 16px;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-2-hover() {
+  color: $col-lightish !important;
+  background-color: $col-lightest;
+  background-image: initial;
+}
+
 @mixin center() {
   display: flex;
   justify-content: center;
@@ -135,6 +153,15 @@ body {
 
 .btn-ohov-1:hover {
   @include btn-ohov-1-hover();
+}
+
+.btn-ohov-2 {
+  @include btn-ohov-2();
+  transition: color 300ms ease 0ms, background-color 300ms ease 0ms, border-radius 300ms ease 0ms;
+}
+
+.btn-ohov-2:hover {
+  @include btn-ohov-2-hover();
 }
 
 .main-area-wrapper {
@@ -368,6 +395,23 @@ div.hud-col-r {
   top: 465px;
   left: 500px;
 }
+
+.modal-title {
+  @include thick-title();
+  color: $col-darkest;
+}
+.modal-body {
+  @include regulartext();
+  color: $col-darkest;
+  font-size: 19px;
+}
+
+.modal-label-submission {
+  @include handdrawntext();
+  font-size: 30px !important;
+  text-align: center;
+}
+
 @media only screen and (max-width: 700px) {
 }
 

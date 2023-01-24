@@ -6,7 +6,7 @@ import Footer from "./components/footer/footer";
 import NavBtnL from "./components/navbtn/navbtnl";
 import NavBtnR from "./components/navbtn/navbtnr";
 import firebaseConfig from "./firebaseConfig";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
@@ -16,6 +16,7 @@ import helpers from "./helpers/helpers";
 import ModalWindow from "./components/modal/modal";
 import PaperBall from "./components/animation/paperball";
 import Duck from "./components/animation/duck";
+import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
 
 function App(props) {
   const enableDebug = false;
@@ -66,7 +67,17 @@ function App(props) {
 
   /* :
    **********************************/
-  const handleCustomLabelSubmission = (label) => {}; // when user writes and submits custom label
+  const handleCustomLabelSubmission = (label) => {
+    alert(label);
+
+    addDoc(colRef, {
+      label: label,
+      author: "anon",
+      vetted: false,
+    }).then(() => {
+      // empty input field.... document....
+    });
+  }; // when user writes and submits custom label
 
   /* :
    **********************************/
@@ -136,7 +147,10 @@ function App(props) {
         </span>
         <Hud />
         <Instructions />
-        <ModalWindow />
+        <ModalWindow
+          handleCustomLabelSubmission={handleCustomLabelSubmission}
+        />
+        <ModalConfirmationMsg />
         <Whiteboard
           labelsData={labelsData}
           getDocs={props.getDocs}
