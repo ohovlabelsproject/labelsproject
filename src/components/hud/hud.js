@@ -13,11 +13,13 @@ function Hud() {
           </button>
         </div>
         <div className="col-7 hud-col-r">
-          <img
-            alt="Our Hearing, Our Voice logo"
-            src="https://usercontent.one/wp/www.ohov.co.uk/wp-content/uploads/2019/08/OHOV_final_logo_colour-2.png"
-            width="130px"
-          />
+          <a rel="noreferrer" href="http://www.ohov.co.uk" target="_blank">
+            <img
+              alt="Our Hearing, Our Voice logo"
+              src="/ohov-logo.png"
+              width="130px"
+            />
+          </a>
         </div>
       </div>
     </header>
