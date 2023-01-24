@@ -23,7 +23,7 @@ function ModalConfirmationMsg(props) {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <ModalHeader title="Successful submission" />
             <form>
