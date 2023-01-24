@@ -104,6 +104,7 @@ function StickyNote(props) {
     let app = document.getElementById("app");
     let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
     duck.style.top = paperballWrapper.getBoundingClientRect().top - 20 + "px";
+    duck.style.display = "block";
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
@@ -114,6 +115,19 @@ function StickyNote(props) {
         clearInterval(si2);
       } else {
         duck.style.left = duck.getBoundingClientRect().left - 3 + "px";
+
+        console.log(duck.style.left);
+        console.log(paperballWrapper.getBoundingClientRect().right);
+
+        //
+        if (
+          duck.getBoundingClientRect().left <=
+          paperballWrapper.getBoundingClientRect().right
+        ) {
+          console.log("got here?");
+          paperballWrapper.style.left =
+            paperballWrapper.getBoundingClientRect().left - 3 + "px";
+        }
       }
     }, 1000 / 60);
   };

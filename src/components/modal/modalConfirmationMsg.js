@@ -28,8 +28,8 @@ function ModalConfirmationMsg(props) {
             <ModalHeader title="Successful submission" />
             <form>
               <div className="modal-body">
+                <br />
                 <p>Thanks for you submission!</p>
-                <small>(Pending approval from duck moderators)</small>
               </div>
               <br />
               Closing in (5)
