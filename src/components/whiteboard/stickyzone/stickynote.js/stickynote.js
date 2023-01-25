@@ -46,6 +46,7 @@ function StickyNote(props) {
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
     let { pageX, pageY } = touchLocation;
     handleStickyNoteMove({ stickyNote, pageX, pageY });
+    stickyNote.style.zIndex = "99";
     disablePageScroll();
   };
 
@@ -53,6 +54,8 @@ function StickyNote(props) {
    *************************************************/
   const handleTouchEnd = () => {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
+    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    stickyNote.style.zIndex = "1";
     handleDrop();
     enablePageScroll();
   };
