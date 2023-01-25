@@ -276,6 +276,24 @@ div.hud-col-r {
   @include strip-margin-and-padding();
 }
 
+@mixin bevel-outer($col-bevel-dark, $col-bevel-light, $width, $strength) {
+  border-bottom: $width solid $col-bevel-light;
+  border-right: $width solid $col-bevel-light;
+  border-top: $width solid $col-bevel-dark;
+  border-left: $width solid $col-bevel-dark;
+}
+@mixin bevel-inner($col-bevel-dark, $col-bevel-light, $width, $strength) {
+  border-bottom: $width solid $col-bevel-dark;
+  border-right: $width solid $col-bevel-dark;
+  border-top: $width solid $col-bevel-light;
+  border-left: $width solid $col-bevel-light;
+}
+.stickynote-sub-wrapper {
+  @include center();
+  @include strip-margin-and-padding();
+  border: 1px dashed #555;
+}
+
 .stickynote {
   @include center();
   @include disable-select();
@@ -312,7 +330,7 @@ div.hud-col-r {
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  /* background: rgba(20, 20, 20, 0.1);*/
+  border: 1px dashed #555;
   font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;

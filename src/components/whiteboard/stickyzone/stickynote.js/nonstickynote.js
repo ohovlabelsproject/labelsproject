@@ -1,4 +1,4 @@
 function NonStickyNote(props) {
-  return <div className="stickynote-non">{props.index + 1}</div>;
+  return <div className="stickynote-non"></div>;
 }
 export default NonStickyNote;

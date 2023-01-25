@@ -183,22 +183,27 @@ function StickyNote(props) {
 
   return (
     <div
-      className={`stickynote ${determineRotationRandomness(
-        props.index
-      )} animate__animated animate__flipInX animate__delay-1s`}
-      id={`stickynote-${props.index}`}
-      onMouseDown={() => setmouseDownState(true)}
-      onMouseUp={() => handleMouseUp()}
-      onMouseMove={(e) => handleMouseMove(e)}
-      onTouchMove={(e) => handleTouchMove(e)}
-      onTouchEnd={() => handleTouchEnd()}
+      className="stickynote-sub-wrapper"
+      style={{ height: "100px", width: "100%" }}
     >
-      {props.label}
-      {/*
+      <div
+        className={`stickynote ${determineRotationRandomness(
+          props.index
+        )} animate__animated animate__flipInX animate__delay-1s`}
+        id={`stickynote-${props.index}`}
+        onMouseDown={() => setmouseDownState(true)}
+        onMouseUp={() => handleMouseUp()}
+        onMouseMove={(e) => handleMouseMove(e)}
+        onTouchMove={(e) => handleTouchMove(e)}
+        onTouchEnd={() => handleTouchEnd()}
+      >
+        {props.label}
+        {/*
       <div className="stickynote-test-data-wrapper">
         {`Label: ${props.index + 1} - Mousedown: ${mouseDownState}`}
       </div>
        */}
+      </div>
     </div>
   );
 }
