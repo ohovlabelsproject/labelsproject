@@ -17,6 +17,7 @@ import ModalWindow from "./components/modal/modal";
 import PaperBall from "./components/animation/paperball";
 import Duck from "./components/animation/duck";
 import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
+import Loader from "./components/loader/loader";
 
 function App(props) {
   const enableDebug = false;
@@ -146,18 +147,23 @@ function App(props) {
           --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
           {labelsData?.labelsArr?.length}
         </span>
+
         <Hud />
         <Instructions />
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
         <ModalConfirmationMsg />
-        <Whiteboard
-          labelsData={labelsData}
-          getDocs={props.getDocs}
-          labelsMetadata={labelsMetadata}
-          updateLabelDisposalState={updateLabelDisposalState}
-        />
+        {labelsData ? (
+          <Whiteboard
+            labelsData={labelsData}
+            getDocs={props.getDocs}
+            labelsMetadata={labelsMetadata}
+            updateLabelDisposalState={updateLabelDisposalState}
+          />
+        ) : (
+          <Loader />
+        )}
         <Footer />
       </div>
       <NavBtnL

@@ -4,7 +4,7 @@ import WhiteboardMsg from "./whiteboard-msg";
 
 function Whiteboard(props) {
   return (
-    <section className="whiteboard">
+    <section className="whiteboard animate__animated animate__fadeIn">
       <WhiteboardMsg
         labelsMetadata={props.labelsMetadata}
         updateLabelDisposalState={props.updateLabelDisposalState}

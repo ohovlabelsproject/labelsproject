@@ -18,9 +18,8 @@ function ModalWindow(props) {
             <ModalHeader title="Add label +" />
             <form>
               <div className="modal-body">
-                This is your opportunity to add a label that you find
-                stimigising. It will be counted as a submission and potentially
-                appear on this app for others*.
+                Add a label you find stimigising. It will be counted as a
+                submission & appear on this app for others*.
                 <br />
                 <br />
                 <label>Your label:</label>
@@ -35,7 +34,7 @@ function ModalWindow(props) {
                 </div>
                 <small className="text-muted" style={{ fontSize: 11 }}>
                   {/* **Pending moderator approval */}
-                  **If the ducks approve
+                  **If it gets enough quacks from duck mods.
                 </small>
               </div>
               <div className="modal-footer">
