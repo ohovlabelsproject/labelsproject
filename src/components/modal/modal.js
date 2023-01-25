@@ -1,3 +1,4 @@
+import uiLabels from "../../uiLabels";
 import ModalHeader from "./modalheader";
 import ModalSubmitBtn from "./modalsubmitbtn";
 
@@ -18,8 +19,7 @@ function ModalWindow(props) {
             <ModalHeader title="Add label +" />
             <form>
               <div className="modal-body">
-                Add a label you find stimigising. It will be counted as a
-                submission & appear on this app for others*.
+                {uiLabels.labelSubmission.body}
                 <br />
                 <br />
                 <label>Your label:</label>
@@ -30,11 +30,11 @@ function ModalWindow(props) {
                   maxLength={30}
                 ></input>
                 <div className="alert alert-sm p-1 alert-danger small">
-                  Inappropriate
+                  [Validation msg here]
                 </div>
                 <small className="text-muted" style={{ fontSize: 11 }}>
                   {/* **Pending moderator approval */}
-                  **If it gets enough quacks from duck mods.
+                  {uiLabels.labelSubmission.footnote}
                 </small>
               </div>
               <div className="modal-footer">

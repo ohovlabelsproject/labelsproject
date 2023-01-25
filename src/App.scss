@@ -516,12 +516,17 @@ div.hud-col-r {
 }
 
 .loader {
-  position: absolute;
   height: 100%;
-  top: 0;
   left: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(0.75);
   width: 100%;
   z-index: 100;
+}
+
+.modal-title {
+  font-weight: 900 !important;
 }
 
 @media only screen and (max-width: 700px) {

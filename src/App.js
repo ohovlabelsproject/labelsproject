@@ -18,6 +18,7 @@ import PaperBall from "./components/animation/paperball";
 import Duck from "./components/animation/duck";
 import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
 import Loader from "./components/loader/loader";
+import ModalWelcome from "./components/modal/modalWelcome";
 
 function App(props) {
   const enableDebug = false;
@@ -150,6 +151,7 @@ function App(props) {
 
         <Hud />
         <Instructions />
+        <ModalWelcome getLabels={getLabels} />
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />

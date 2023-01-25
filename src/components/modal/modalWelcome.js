@@ -1,56 +1,52 @@
-import ModalHeader from "./modalheader";
-import ModalSubmitBtn from "./modalsubmitbtn";
+import { useState } from "react";
+import { Col, Modal, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
-function ModalWindow(props) {
+function ModalWelcome(props) {
+  const [show, setShow] = useState(true);
+  const handleClose = () => {
+    setShow(false);
+    props.getLabels();
+  };
+  // const handleShow = () => setShow(true);
+
   return (
-    <>
-      {/* 
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Launch static backdrop modal
-      </button>*/}
-      <div
-        className="modal fade"
-        id="modalWelcome"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <ModalHeader title="Add label +" />
-            <form>
-              <div className="modal-body">
-                Explanation here
-                <br />
-                <input type="checkbox" />
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn-ohov-2"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <ModalSubmitBtn
-                  handleCustomLabelSubmission={
-                    props.handleCustomLabelSubmission
-                  }
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
+    <Modal
+      centered
+      show={show}
+      onHide={() => setShow(false)}
+      dialogClassName="modal-90w"
+      aria-labelledby="contained-modal-title-vcenter"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title className="modal-title" id="contained-modal-title-vcenter">
+          Welcome
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          We're trying to find out what labels young people in the courts find
+          stigmitising (unfair).
+        </p>
+        <p>
+          On the next page you'll see one or more boards of labels. Drag & drop
+          labels you find particularly objectionable into a "bin zone" & it will
+          be sent to our database. Your help is greatly appreciated.
+        </p>
+        <br />
+        <Row className="text-center justify-content-center">
+          <Col>
+            <button className="btn-ohov-2"> No thanks!</button>
+          </Col>
+          <Col>
+            <button className="btn-ohov-1" onClick={handleClose}>
+              I will take part
+            </button>
+          </Col>
+        </Row>
+      </Modal.Body>
+    </Modal>
   );
 }
 
-export default ModalWindow;
+export default ModalWelcome;
