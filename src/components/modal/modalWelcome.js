@@ -12,6 +12,8 @@ function ModalWelcome(props) {
 
   return (
     <Modal
+      backdrop="static"
+      keyboard={false}
       centered
       show={show}
       onHide={() => setShow(false)}
@@ -29,9 +31,9 @@ function ModalWelcome(props) {
           stigmitising (unfair).
         </p>
         <p>
-          On the next page you'll see one or more boards of labels. Drag & drop
-          labels you find particularly objectionable into a "bin zone" & it will
-          be sent to our database. Your help is greatly appreciated.
+          On the next page you'll see one or more label boards. Drop labels you
+          find particularly objectionable into a "bin zone" & it will be sent to
+          our database. Your help is greatly appreciated.
         </p>
         <br />
         <Row className="text-center justify-content-center">

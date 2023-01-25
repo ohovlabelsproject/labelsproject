@@ -528,6 +528,9 @@ div.hud-col-r {
 .modal-title {
   font-weight: 900 !important;
 }
+.modal {
+  backdrop-filter: blur(5px) !important;
+}
 
 @media only screen and (max-width: 700px) {
 }
