@@ -70,13 +70,12 @@ function App(props) {
   /* :
    **********************************/
   const handleCustomLabelSubmission = (label) => {
-    alert(label);
-
     addDoc(colRef, {
       label: label,
       author: "anon",
       vetted: false,
     }).then(() => {
+      alert("success...");
       // empty input field.... document....
     });
   }; // when user writes and submits custom label
@@ -148,25 +147,27 @@ function App(props) {
           --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
           {labelsData?.labelsArr?.length}
         </span>
-
-        <Hud />
-        <Instructions />
         <ModalWelcome getLabels={getLabels} />
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
         <ModalConfirmationMsg />
         {labelsData ? (
-          <Whiteboard
-            labelsData={labelsData}
-            getDocs={props.getDocs}
-            labelsMetadata={labelsMetadata}
-            updateLabelDisposalState={updateLabelDisposalState}
-          />
+          <span className="animate__animated animate__fadeIn">
+            <Hud />
+            <Instructions />
+
+            <Whiteboard
+              labelsData={labelsData}
+              getDocs={props.getDocs}
+              labelsMetadata={labelsMetadata}
+              updateLabelDisposalState={updateLabelDisposalState}
+            />
+            <Footer />
+          </span>
         ) : (
           <Loader />
         )}
-        <Footer />
       </div>
       <NavBtnL
         handleNavClick={handleNavClick}

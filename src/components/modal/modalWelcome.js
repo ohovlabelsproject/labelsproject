@@ -1,48 +1,45 @@
 import { useState } from "react";
 import { Col, Modal, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import uiLabels from "../../uiLabels";
 
 function ModalWelcome(props) {
   const [show, setShow] = useState(true);
+
   const handleClose = () => {
     setShow(false);
     props.getLabels();
   };
+
   // const handleShow = () => setShow(true);
 
   return (
     <Modal
-      backdrop="static"
-      keyboard={false}
-      centered
-      show={show}
-      onHide={() => setShow(false)}
-      dialogClassName="modal-90w"
       aria-labelledby="contained-modal-title-vcenter"
+      backdrop="static"
+      centered
+      dialogClassName="modal-90w"
+      keyboard={false}
+      onHide={() => setShow(false)}
+      show={show}
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title className="modal-title" id="contained-modal-title-vcenter">
-          Welcome
+          {uiLabels.welcome.header.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          We're trying to find out what labels young people in the courts find
-          stigmitising (unfair).
-        </p>
-        <p>
-          On the next page you'll see one or more label boards. Drop labels you
-          find particularly objectionable into a "bin zone" & it will be sent to
-          our database. Your help is greatly appreciated.
-        </p>
+        <p>{uiLabels.welcome.body.p1}</p>
+        <p>{uiLabels.welcome.body.p2}</p>
         <br />
         <Row className="text-center justify-content-center">
           <Col>
-            <button className="btn-ohov-2"> No thanks!</button>
+            <button className="btn-ohov-2">
+              {uiLabels.welcome.action.decline}
+            </button>
           </Col>
           <Col>
             <button className="btn-ohov-1" onClick={handleClose}>
-              I will take part
+              {uiLabels.welcome.action.consent}
             </button>
           </Col>
         </Row>

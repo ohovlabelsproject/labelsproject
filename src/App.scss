@@ -422,7 +422,9 @@ div.hud-col-r {
   //@include border-gradient();
   @include thick-title();
   background: #222;
+  // background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
   color: #ccc;
+  // animation: colorCycle 5s infinite linear;
   height: 155px;
   left: 0;
   margin-left: auto;
@@ -506,6 +508,11 @@ div.hud-col-r {
   border-radius: 50%;
   box-shadow: inset 0 0 0 3px #222;
 }
+
+.stickynote-rotating {
+  animation: rotation 2s infinite linear;
+}
+
 @keyframes rotateLoader {
   0% {
     transform: rotate(0deg);
@@ -529,7 +536,21 @@ div.hud-col-r {
   font-weight: 900 !important;
 }
 .modal {
-  backdrop-filter: blur(5px) !important;
+  //backdrop-filter: blur(5px) !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  //background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
+}
+
+.modal-header {
+  // border-bottom: 1px dashed #000 !important;
+}
+
+.modal-footer {
+  //border-top: 1px dashed #000 !important;
 }
 
 @media only screen and (max-width: 700px) {
@@ -565,5 +586,32 @@ div.hud-col-r {
   }
   to {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes colorCycle {
+  12.5% {
+    color: #ff0000;
+  }
+  25% {
+    color: #ffa500;
+  }
+  37.5% {
+    color: #ffff00;
+  }
+  50% {
+    color: #7fff00;
+  }
+  62.5% {
+    color: #00ffff;
+  }
+  75% {
+    color: #0000ff;
+  }
+  87.5% {
+    color: #9932cc;
+  }
+  100% {
+    color: #ff1493;
   }
 }

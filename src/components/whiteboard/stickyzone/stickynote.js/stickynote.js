@@ -115,7 +115,7 @@ function StickyNote(props) {
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
-      const inc = 1.15;
+      const inc = 3;
       if (
         duck.getBoundingClientRect().left <
         app.getBoundingClientRect().left - duck.getBoundingClientRect().width
@@ -132,6 +132,7 @@ function StickyNote(props) {
           duck.getBoundingClientRect().left <=
           paperballWrapper.getBoundingClientRect().right - 10
         ) {
+          // paperballWrapper.classList.add("stickynote-rotating");
           paperballWrapper.style.left =
             paperballWrapper.getBoundingClientRect().left - inc + "px";
         }
@@ -145,7 +146,7 @@ function StickyNote(props) {
     animatePaperballCrumpling();
     setTimeout(() => {
       animateDuck();
-    }, 2000);
+    }, 500);
 
     //
     props.updateLabelDisposalState(true);
