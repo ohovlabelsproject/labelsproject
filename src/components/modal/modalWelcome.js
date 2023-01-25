@@ -20,6 +20,14 @@ function ModalWelcome(props) {
         p: uiLabels.welcome.body.slide2,
       },
     },
+    {
+      heading: {
+        title: uiLabels.welcome.header.title,
+      },
+      body: {
+        p: uiLabels.welcome.body.slide3,
+      },
+    },
   ];
   //
   const [show, setShow] = useState(true);
@@ -62,7 +70,7 @@ function ModalWelcome(props) {
               className="btn-ohov-1"
               style={{ float: "right" }}
               onClick={() => {
-                handleSlideChange(1);
+                handleSlideChange((slideData.slide += 1));
               }}
             >
               Next <i className="fa fa-chevron-right" />
@@ -71,6 +79,23 @@ function ModalWelcome(props) {
         </Row>
       );
     } else if (slideData.slide === 1) {
+      return (
+        <Row className="text-center justify-content-center">
+          <Col></Col>
+          <Col>
+            <button
+              className="btn-ohov-1"
+              style={{ float: "right" }}
+              onClick={() => {
+                handleSlideChange((slideData.slide += 1));
+              }}
+            >
+              Next <i className="fa fa-chevron-right" />
+            </button>
+          </Col>
+        </Row>
+      );
+    } else if (slideData.slide === 2) {
       return (
         <Row
           className="text-center justify-content-center"
@@ -95,7 +120,7 @@ function ModalWelcome(props) {
     <Modal
       aria-labelledby="contained-modal-title-vcenter"
       backdrop="static"
-      // centered
+      centered
       dialogClassName="modal-90w"
       keyboard={false}
       onHide={() => setShow(false)}
