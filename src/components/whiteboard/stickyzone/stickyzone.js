@@ -19,6 +19,7 @@ function StickyZone(props) {
                     <StickyNote
                       index={index}
                       label={el.label}
+                      labelsMetadata={props.labelsMetadata}
                       key={`label-${index}`}
                       updateLabelDisposalState={props.updateLabelDisposalState}
                     />

@@ -18,6 +18,7 @@ function StickyNote(props) {
   /* Handle what happens on mouse up on note:
    ************************************************/
   const handleMouseUp = () => {
+    if (props.labelsMetadata.labelBeingDisposedOf) return;
     setmouseDownState(false);
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
     stickyNote.style.zIndex = 1;
@@ -27,6 +28,7 @@ function StickyNote(props) {
   /* Handle what happens when note is moved by mouse:
    *************************************************/
   const handleMouseMove = (e) => {
+    if (props.labelsMetadata.labelBeingDisposedOf) return;
     if (mouseDownState) {
       let stickyNote = document.getElementById(`stickynote-${props.index}`);
       stickyNote.style.zIndex = "99";
@@ -38,6 +40,7 @@ function StickyNote(props) {
   /* Handle what happens when note is moved by touch:
    *************************************************/
   const handleTouchMove = (e) => {
+    if (props.labelsMetadata.labelBeingDisposedOf) return;
     e.preventDefault();
     const touchLocation = e.targetTouches[0];
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
@@ -49,6 +52,7 @@ function StickyNote(props) {
   /* Handle what happens when note touch ends:
    *************************************************/
   const handleTouchEnd = () => {
+    if (props.labelsMetadata.labelBeingDisposedOf) return;
     handleDrop();
     enablePageScroll();
   };
@@ -108,20 +112,18 @@ function StickyNote(props) {
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
-      const inc = 1;
-
+      const inc = 1.15;
       if (
         duck.getBoundingClientRect().left <
         app.getBoundingClientRect().left - duck.getBoundingClientRect().width
       ) {
         clearInterval(si2);
-
+        // Upon finishing animation, wait half a second:
         setTimeout(() => {
           props.updateLabelDisposalState(false);
         }, 500);
       } else {
         duck.style.left = duck.getBoundingClientRect().left - inc + "px";
-
         // If duck touching paperball
         if (
           duck.getBoundingClientRect().left <=
@@ -183,9 +185,7 @@ function StickyNote(props) {
     <div
       className={`stickynote ${determineRotationRandomness(
         props.index
-      )} animate__animated animate__flipInY animate__delay-${Math.floor(
-        Math.random() * 2
-      )}s`}
+      )} animate__animated animate__flipInX animate__delay-1s`}
       id={`stickynote-${props.index}`}
       onMouseDown={() => setmouseDownState(true)}
       onMouseUp={() => handleMouseUp()}

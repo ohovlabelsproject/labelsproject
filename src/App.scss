@@ -400,41 +400,28 @@ div.hud-col-r {
   @include center();
 }
 .whiteboard-msg-wrapper {
-  background: #222;
-  position: absolute !important;
-  z-index: 999;
-  margin-left: auto;
-  margin-right: auto;
-  top: 0%;
-  height: 210px;
-  left: 0;
-  right: 0;
   //@include border-gradient();
   @include thick-title();
+  background: #222;
   color: #ccc;
-
-  /*
-  background: #3d3c3c;
-  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.7));
-  font-size: 20px;
-  height: 450px;
+  height: 210px;
   left: 0;
   margin-left: auto;
   margin-right: auto;
-  position: absolute;
+  position: absolute !important;
   right: 0;
-  top: 0px;
-  width: 90%;
-  z-index: 999;*/
+  top: 0%;
+  z-index: 999;
 }
 
 .duck {
-  position: absolute;
   filter: contrast(1.1) brightness(0.9) hue-rotate(0deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
   height: 120px;
-  width: 200px;
-  top: 465px;
   left: 500px;
+  position: absolute;
+  top: 465px;
+  width: 200px;
+  //left: 200px !important; <-- for testing
 }
 
 .modal-title {
@@ -455,6 +442,10 @@ div.hud-col-r {
 
 .animated-duck {
   animation: duckbobbing 1.3s linear infinite;
+}
+
+.animated-wheel {
+  animation: rotation 2s infinite linear;
 }
 
 @media only screen and (max-width: 700px) {
@@ -481,5 +472,14 @@ div.hud-col-r {
   }
   50% {
     margin-top: 0px;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }

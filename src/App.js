@@ -143,7 +143,8 @@ function App(props) {
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <span style={{ display: enableDebug ? "block" : "none" }}>
           Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
-          --- Pg: {labelsMetadata.pageIndex + 1}
+          --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
+          {labelsData?.labelsArr?.length}
         </span>
         <Hud />
         <Instructions />
@@ -166,9 +167,8 @@ function App(props) {
       <NavBtnR
         handleNavClick={handleNavClick}
         labelsMetadata={labelsMetadata}
-        maxLabels={
-          40
-        } /* Replace this with length of labels array when retrived from db */
+        labelsData={labelsData}
+        maxLabels={9} /* Remove eventually */
       />
       <PaperBall />
       <Duck />
