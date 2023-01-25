@@ -15,7 +15,7 @@ function WhiteboardMsg(props) {
           <p className="whiteboard-msg-thanks">
             <i className="fa fa-check-square-o"></i>&nbsp;Thanks!
           </p>
-          <p>Well-trained ducks are disposing of it.</p>
+          <p>A well-trained duck will deliver it</p>
         </div>
       </div>
     </div>

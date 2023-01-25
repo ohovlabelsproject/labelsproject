@@ -291,7 +291,7 @@ div.hud-col-r {
 .stickynote-sub-wrapper {
   @include center();
   @include strip-margin-and-padding();
-  border: 1px dashed #555;
+  border: 1px dashed #444;
 }
 
 .stickynote {
@@ -330,12 +330,12 @@ div.hud-col-r {
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  border: 1px dashed #555;
+  border: 1px dashed #444;
   font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  width: 140px;
+  width: 100%;
 }
 
 .stickynote-test-data-wrapper {
@@ -408,6 +408,7 @@ div.hud-col-r {
   @include thick-title();
   font-size: 37px;
   line-height: 0;
+  margin-top: 20px;
 }
 
 .whiteboard-msg-parenth {
@@ -422,7 +423,7 @@ div.hud-col-r {
   @include thick-title();
   background: #222;
   color: #ccc;
-  height: 210px;
+  height: 155px;
   left: 0;
   margin-left: auto;
   margin-right: auto;
