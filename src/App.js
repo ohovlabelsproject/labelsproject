@@ -152,9 +152,9 @@ function App(props) {
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
         <ModalConfirmationMsg />
+        <Hud />
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
-            <Hud />
             <Instructions />
 
             <Whiteboard

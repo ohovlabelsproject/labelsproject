@@ -11,9 +11,11 @@ const uiLabels = {
       title: "Welcome!",
     },
     body: {
-      p1: "We're trying to find out what labels young people in the courts find stigmitising (unfair).",
+      slide1:
+        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people in the Children's Hearing System. For this, we need your help...",
       //p2: "You'll next see one or more label boards. Drop labels you find particularly objectionable into the \"bin zone\" & it'll be sent to our database. Your help is greatly appreciated.",
-      p2: "[Instructions on next 'slide'?]",
+      slide2:
+        'We need you to tell us about labels you find stigmitising (unfair). To help with this, we made a little game: dragging such labels into a "bin" (our database). So, how about it?',
     },
     action: {
       decline: "No thanks!",
