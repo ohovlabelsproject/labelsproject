@@ -13,11 +13,10 @@ const uiLabels = {
     body: {
       slide1:
         "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people in the Children's Hearing System. For this, we need your help...",
-      //p2: "You'll next see one or more label boards. Drop labels you find particularly objectionable into the \"bin zone\" & it'll be sent to our database. Your help is greatly appreciated.",
       slide2:
-        'We need you to tell us about labels you find stigmitising (unfair). To do this, we created a "drag and drop" activity/game with labels on sticky notes...',
+        'We need to know about labels you find stigmitising (unfair), so we could then "bin" them from our language. As such, we created an activity...',
       slide3:
-        'Drag the ones you find stimigising (from one or more boards) into the bin. This tells us the words we should "bin" from our language. So, how about it?',
+        'A drag and drop game. In the activity you\'ll see one or more boards with labels on them. Drag the problem labels into the "bin" (our database). How about it?',
     },
     action: {
       decline: "No thanks!",

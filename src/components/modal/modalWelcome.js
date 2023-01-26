@@ -3,6 +3,11 @@ import { Col, Modal, Row } from "react-bootstrap";
 import uiLabels from "../../uiLabels";
 
 function ModalWelcome(props) {
+  const [show, setShow] = useState(true);
+  const [slideData, setSlideData] = useState({ slide: 0 });
+
+  /* Slides used:
+   **********************************/
   const slides = [
     {
       heading: {
@@ -29,29 +34,103 @@ function ModalWelcome(props) {
       },
     },
   ];
-  //
-  const [show, setShow] = useState(true);
-  const [slideData, setSlideData] = useState({ slide: 0 });
 
+  /* Get consent controls "I will take part", etc.:
+   ***********************************************/
+  const getNavConsentControls = () => {
+    return (
+      <Row
+        className="text-center justify-content-center"
+        style={{ float: "right", width: 340 }}
+      >
+        <Col>
+          <button className="btn-ohov-2">
+            {uiLabels.welcome.action.decline}
+          </button>
+        </Col>
+
+        <Col>
+          <button className="btn-ohov-1" onClick={handleClose}>
+            {uiLabels.welcome.action.consent}
+          </button>
+        </Col>
+      </Row>
+    );
+  };
+
+  /* Get content for the nav buttons on footer:
+   ********************************************/
+  const getNavFooter = () => {
+    return (
+      <Row className="text-center justify-content-center">
+        <Col></Col>
+        <Col>
+          <button
+            className="btn-ohov-1"
+            style={{ float: "right" }}
+            onClick={() => {
+              handleSlideChange((slideData.slide += 1));
+            }}
+          >
+            Next <i className="fa fa-chevron-right" />
+          </button>
+        </Col>
+      </Row>
+    );
+  };
+
+  /* Get content for the slide body:
+   **********************************/
+  const getSlideBody = () => {
+    return (
+      <div id="slide-body-container" style={{ height: 120 }}>
+        <div
+          id="slide-body-sub-container"
+          className="animate__animated animate__fadeIn animate__slow"
+        >
+          {slides[slideData.slide].body.p}
+        </div>
+      </div>
+    );
+  };
+
+  /* Get content for the slide footer:
+   **********************************/
+  const getSlideFooter = () => {
+    const { slide } = slideData;
+    switch (slide) {
+      case 0: // Slide 0
+        return getNavFooter();
+      case 1: // Slide 1
+        return getNavFooter();
+      case 2: // Slide 2
+        return getNavConsentControls();
+      default:
+        return getNavFooter();
+    }
+  };
+
+  /* Handle the modal being closed:
+   **********************************/
   const handleClose = () => {
     setShow(false);
     props.getLabels();
   };
 
-  // const handleShow = () => setShow(true);
-
-  const getSlideBody = () => {
-    return (
-      <div
-        className="animate__animated animate__fadeIn animate__slow"
-        style={{ height: 120 }}
-      >
-        {slides[slideData.slide].body.p}
-      </div>
-    );
-  };
-
+  /* Handle the slide being changed:
+   **********************************/
   const handleSlideChange = (slideToGoTo) => {
+    const slideBodySContainer = document.getElementById(
+      "slide-body-sub-container"
+    );
+    if (slideBodySContainer) {
+      // Force CSS animation to reset:
+      slideBodySContainer.style.display = "none";
+      const st = setTimeout(() => {
+        slideBodySContainer.style.display = "block";
+        clearTimeout(st);
+      }, 100);
+    }
     setSlideData((previousState) => {
       return {
         ...previousState,
@@ -60,62 +139,6 @@ function ModalWelcome(props) {
     });
   };
 
-  const getSlideFooter = () => {
-    if (slideData.slide === 0) {
-      return (
-        <Row className="text-center justify-content-center">
-          <Col></Col>
-          <Col>
-            <button
-              className="btn-ohov-1"
-              style={{ float: "right" }}
-              onClick={() => {
-                handleSlideChange((slideData.slide += 1));
-              }}
-            >
-              Next <i className="fa fa-chevron-right" />
-            </button>
-          </Col>
-        </Row>
-      );
-    } else if (slideData.slide === 1) {
-      return (
-        <Row className="text-center justify-content-center">
-          <Col></Col>
-          <Col>
-            <button
-              className="btn-ohov-1"
-              style={{ float: "right" }}
-              onClick={() => {
-                handleSlideChange((slideData.slide += 1));
-              }}
-            >
-              Next <i className="fa fa-chevron-right" />
-            </button>
-          </Col>
-        </Row>
-      );
-    } else if (slideData.slide === 2) {
-      return (
-        <Row
-          className="text-center justify-content-center"
-          style={{ float: "right", width: 340 }}
-        >
-          <Col>
-            <button className="btn-ohov-2">
-              {uiLabels.welcome.action.decline}
-            </button>
-          </Col>
-
-          <Col>
-            <button className="btn-ohov-1" onClick={handleClose}>
-              {uiLabels.welcome.action.consent}
-            </button>
-          </Col>
-        </Row>
-      );
-    }
-  };
   return (
     <Modal
       aria-labelledby="contained-modal-title-vcenter"
