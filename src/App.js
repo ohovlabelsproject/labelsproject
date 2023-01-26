@@ -10,7 +10,7 @@ import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import utils from "./components/utils/utils";
 import helpers from "./helpers/helpers";
 import ModalWindow from "./components/modal/modal";
@@ -44,7 +44,7 @@ function App(props) {
     labelBeingDisposedOf: false,
   });
 
-  /* :
+  /* Get the labels from the database:
    **********************************/
   const getLabels = (e) => {
     getDocs(colRef).then((snapshot) => {
@@ -52,7 +52,7 @@ function App(props) {
       snapshot.docs.forEach((doc) => {
         labelsArr.push(doc.data());
       });
-      // If array of labels length is not a multiple of 9, round up to multiple:
+      // If array of labels length !== multiple of 9, round up to multiple:
       let neededToPush;
       if (labelsArr.length % 9 !== 0) {
         neededToPush = helpers.labels.arr.roundUpLength(labelsArr);
@@ -67,7 +67,7 @@ function App(props) {
     });
   };
 
-  /* :
+  /* Handle label submission (add doc):
    **********************************/
   const handleCustomLabelSubmission = (label) => {
     addDoc(colRef, {
@@ -75,34 +75,14 @@ function App(props) {
       author: "anon",
       vetted: false,
     }).then(() => {
-      alert("success...");
+      alert(
+        "At this point there could be a message telling the user their submission won't immediately appear - has to be moderated..."
+      );
       // empty input field.... document....
-    });
-  }; // when user writes and submits custom label
-
-  /* :
-   **********************************/
-  const handleLabelDestroyDb = (label) => {}; // writes to "labelsBinnedByUsers" collection
-
-  /* :
-   **********************************/
-  const handleLabelDrag = (label) => {}; //
-
-  /* :
-   **********************************/
-  const handleLabelDrop = (label) => {}; //
-
-  //
-  const updateLabelDisposalState = (val) => {
-    setlabelsMetadata((previousState) => {
-      return {
-        ...previousState,
-        labelBeingDisposedOf: val,
-      };
     });
   };
 
-  /* :
+  /* Handle nav arrows being clicked:
    **********************************/
   const handleNavClick = (isRightArrow) => {
     if (isRightArrow) {
@@ -135,16 +115,29 @@ function App(props) {
     }
   };
 
+  /* Prevent default touch actions:
+   **********************************/
   const preventDefaultTouchActions = () => {
-    alert("got here");
     document.getElementById("app").addEventListener("touchmove", (event) => {
       event.preventDefault();
     });
   };
 
+  /* Update state of whether label disposal is under way:
+   ******************************************************/
+  const updateLabelDisposalState = (val) => {
+    setlabelsMetadata((previousState) => {
+      return {
+        ...previousState,
+        labelBeingDisposedOf: val,
+      };
+    });
+  };
+
+  /*
   useEffect(() => {
-    //getLabels();
-  }, []);
+    // getLabels();
+  }, []); */
 
   return (
     <div className="app" id="app">
@@ -166,7 +159,6 @@ function App(props) {
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
             <Instructions />
-
             <Whiteboard
               labelsData={labelsData}
               getDocs={props.getDocs}
