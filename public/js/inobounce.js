@@ -11,8 +11,9 @@
   var supportsPassiveOption = false;
   try {
     var opts = Object.defineProperty({}, "passive", {
-      get: function () {
+      get: () => {
         supportsPassiveOption = true;
+        return null;
       },
     });
     window.addEventListener("test", null, opts);
