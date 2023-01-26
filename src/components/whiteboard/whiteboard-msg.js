@@ -1,9 +1,46 @@
+import { Toast } from "react-bootstrap";
 import uiLabels from "../../uiLabels";
 
 function WhiteboardMsg(props) {
   const { labelsMetadata } = props;
   const { successfulBin } = uiLabels.feedback;
   return (
+    <div>
+      <Toast
+        show={labelsMetadata.labelBeingDisposedOf}
+        style={{
+          position: "absolute",
+          zIndex: 999,
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <Toast.Header style={{ background: "#fff" }}>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">{successfulBin.header}</strong>
+        </Toast.Header>
+        <Toast.Body
+          style={{
+            background: "white",
+            height: 140,
+            fontFamily: "Lato, Helvetica",
+            fontSize: 20,
+            lineHeight: 1.2,
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <p>{successfulBin.body}</p>
+        </Toast.Body>
+      </Toast>
+    </div>
+  );
+
+  /*
     <div
       style={{
         display: labelsMetadata.labelBeingDisposedOf ? "flex" : "none",
@@ -21,10 +58,10 @@ function WhiteboardMsg(props) {
             {successfulBin.header}
           </p>
           <p>{successfulBin.body}</p>
-        </div>
-      </div>
     </div>
-  );
+       
+      </div>
+    </div>*/
 }
 
 export default WhiteboardMsg;

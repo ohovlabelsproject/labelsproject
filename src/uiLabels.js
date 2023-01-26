@@ -1,9 +1,9 @@
 const uiLabels = {
   feedback: {
     successfulBin: {
-      header: "Thanks!",
+      header: "",
       headerIcon: "fa fa-check-square-o",
-      body: "A well-trained duck is delivering it to us.",
+      body: "Thanks! A well-trained duck is delivering it to us.",
     },
   },
   welcome: {
