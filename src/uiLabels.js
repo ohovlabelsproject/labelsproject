@@ -19,8 +19,8 @@ const uiLabels = {
         'A "drag n drop" game. In this activity you\'ll see one (or more) boards with labels on them. Drag problem labels into the "bin". How about it?',
     },
     action: {
-      decline: "No thanks!",
-      consent: "I will take part",
+      decline: "No thanks",
+      consent: "Yes, sure!",
     },
   },
   instructions: {
