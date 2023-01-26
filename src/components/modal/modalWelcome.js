@@ -44,13 +44,15 @@ function ModalWelcome(props) {
         style={{ float: "right", width: 340 }}
       >
         <Col>
-          <button className="btn-ohov-2">
-            {uiLabels.welcome.action.decline}
-          </button>
+          <a href="https://en.wikipedia.org/wiki/Rubber_duck" target="_self">
+            <button className="btn-ohov-2">
+              {uiLabels.welcome.action.decline}
+            </button>
+          </a>
         </Col>
 
         <Col>
-          <button className="btn-ohov-1" onClick={handleClose}>
+          <button className="btn-ohov-welcome" onClick={handleClose}>
             {uiLabels.welcome.action.consent}
           </button>
         </Col>
@@ -66,7 +68,7 @@ function ModalWelcome(props) {
         <Col></Col>
         <Col>
           <button
-            className="btn-ohov-1"
+            className="btn-ohov-welcome"
             style={{ float: "right" }}
             onClick={() => {
               handleSlideChange((slideData.slide += 1));
