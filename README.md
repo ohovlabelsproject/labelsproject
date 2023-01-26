@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# OHOV Labels Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Made for OHOV: an independent children and young people’s board for the Children’s Hearings System
 
 ## Available Scripts
 
