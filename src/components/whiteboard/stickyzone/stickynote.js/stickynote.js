@@ -55,6 +55,8 @@ function StickyNote(props) {
   const handleTouchEnd = () => {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
     let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let binDropZone = document.getElementById("binzone-droparea");
+    binDropZone.classList.remove("binzone-active");
     stickyNote.style.zIndex = "1";
     handleDrop();
     enablePageScroll();
@@ -69,6 +71,27 @@ function StickyNote(props) {
     o.stickyNote.style.position = "absolute";
     o.stickyNote.style.left = x - stickyNoteRect.width / 2 + "px";
     o.stickyNote.style.top = y - stickyNoteRect.height / 2 + "px";
+
+    //
+    let binDropZone = document.getElementById("binzone-droparea");
+    let binDropZoneRect = binDropZone.getBoundingClientRect();
+    //let stickyNote = document.getElementById(`stickynote-${props.index}`);
+
+    //
+    //
+    // The number of pixels out from boundary we'll allow users to be:
+    let tolerance = 20;
+    let overTop = stickyNoteRect.top >= binDropZoneRect.top - tolerance;
+    let overBtm = stickyNoteRect.bottom <= binDropZoneRect.bottom + tolerance;
+    let overLft = stickyNoteRect.left >= binDropZoneRect.left - tolerance;
+    let overRgt = stickyNoteRect.right <= binDropZoneRect.right + tolerance;
+    // Is the note completely within the bin drop zone boundaries?
+    let isNoteWithinBin = overTop && overBtm && overLft && overRgt;
+    if (isNoteWithinBin) {
+      binDropZone.classList.add("binzone-active");
+    } else {
+      binDropZone.classList.remove("binzone-active");
+    }
   };
 
   /* Animate paperball crumpling:

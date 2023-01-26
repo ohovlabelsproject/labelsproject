@@ -181,7 +181,6 @@ body {
   background-color: #ffffff;
   //background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
   background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
-
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   height: 100%;
   left: 0;
@@ -376,6 +375,10 @@ div.hud-col-r {
   left: 0;
   position: absolute;
   top: 10px;
+}
+
+.binzone-active {
+  animation: binzoneActivate 1.2s alternate infinite;
 }
 
 .binzone-droparea {
@@ -622,29 +625,17 @@ div.hud-col-r {
   }
 }
 
-@keyframes colorCycle {
-  12.5% {
-    color: #ff0000;
-  }
-  25% {
-    color: #ffa500;
-  }
-  37.5% {
-    color: #ffff00;
+@keyframes binzoneActivate {
+  0% {
+    border-color: rgb(240, 80, 0);
+    transform: scale(1);
   }
   50% {
-    color: #7fff00;
-  }
-  62.5% {
-    color: #00ffff;
-  }
-  75% {
-    color: #0000ff;
-  }
-  87.5% {
-    color: #9932cc;
+    border-color: rgb(0, 200, 255);
+    transform: scale(1.05);
   }
   100% {
-    color: #ff1493;
+    border-color: orange;
+    transform: scale(1);
   }
 }

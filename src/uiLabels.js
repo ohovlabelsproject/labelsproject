@@ -27,7 +27,7 @@ const uiLabels = {
     title: "Bin the labels you find stigmatising",
   },
   labelSubmission: {
-    body: "Add a label you find stimigising. It will be counted as a submission & appear on this app for others*.",
+    body: "Add your own label. It will be counted as a submission & may appear for others*.",
     footnote: "**If it gets enough quacks from duck mods.",
   },
   footer: "Our Hearings, Our Voice",
