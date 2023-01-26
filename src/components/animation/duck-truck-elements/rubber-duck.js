@@ -9,7 +9,7 @@ function RubberDuck() {
         zIndex: -1,
       }}
     >
-      <img alt="" src="/duck.png" width="50px" />
+      <img alt="" src="/duck-compressed.png" width="50px" />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 function Truck() {
   return (
     <div>
-      <img alt="" src="/ducktruck.png" />
+      <img alt="" src="/ducktruck-compressed.png" />
     </div>
   );
 }
