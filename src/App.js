@@ -134,6 +134,10 @@ function App(props) {
     });
   };
 
+  window.addEventListener("orientationchange", function () {
+    alert("Portrait mode doesn't currently work properly!");
+  });
+
   /*
   useEffect(() => {
     // getLabels();
