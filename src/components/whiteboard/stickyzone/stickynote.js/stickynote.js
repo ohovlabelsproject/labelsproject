@@ -101,6 +101,7 @@ function StickyNote(props) {
     let stickyNoteRect = stickyNote.getBoundingClientRect();
     let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
     let paperballImg = document.getElementById("paper-ball-sm-img");
+    let binDropZone = document.getElementById("binzone-droparea");
     let frameIndex = 0;
     const frames = [
       { src: "/paper-ball-sm-1.png", w: "100%" },
@@ -117,6 +118,7 @@ function StickyNote(props) {
       stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
     paperballImg.src = frames[0].src;
     paperballImg.style.width = frames[0].w;
+    binDropZone.classList.remove("binzone-active");
     // Cycle through frames:
     const si = setInterval(() => {
       paperballImg.src = frames[frameIndex].src;
@@ -138,11 +140,10 @@ function StickyNote(props) {
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
-      const inc = 3;
-      if (
-        duck.getBoundingClientRect().left <
-        app.getBoundingClientRect().left - duck.getBoundingClientRect().width
-      ) {
+      const inc = 2.5;
+      const duckRect = duck.getBoundingClientRect();
+      const appRect = app.getBoundingClientRect();
+      if (duckRect.left < appRect.left - duckRect.width) {
         clearInterval(si2);
         // Upon finishing animation, wait half a second:
         setTimeout(() => {
@@ -152,7 +153,7 @@ function StickyNote(props) {
         duck.style.left = duck.getBoundingClientRect().left - inc + "px";
         // If duck touching paperball
         if (
-          duck.getBoundingClientRect().left <=
+          duckRect.left <=
           paperballWrapper.getBoundingClientRect().right - 10
         ) {
           // paperballWrapper.classList.add("stickynote-rotating");

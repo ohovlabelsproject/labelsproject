@@ -3,7 +3,7 @@ const uiLabels = {
     successfulBin: {
       header: "",
       headerIcon: "fa fa-check-square-o",
-      body: "Thanks! A well-trained duck is delivering it to us.",
+      body: "A well-trained duck is delivering it to us.",
     },
   },
   welcome: {

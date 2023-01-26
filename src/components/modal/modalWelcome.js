@@ -159,7 +159,12 @@ function ModalWelcome(props) {
           </div>
           <div
             className="text-muted"
-            style={{ float: "right", position: "absolute", right: 20 }}
+            style={{
+              fontWeight: 400,
+              float: "right",
+              position: "absolute",
+              right: 20,
+            }}
           >
             {`(${slideData.slide + 1 + "/" + slides.length})`}
           </div>

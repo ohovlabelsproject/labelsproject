@@ -9,32 +9,31 @@ function WhiteboardMsg(props) {
       <Toast
         show={labelsMetadata.labelBeingDisposedOf}
         style={{
-          position: "absolute",
-          zIndex: 999,
           left: 0,
-          right: 0,
           marginLeft: "auto",
           marginRight: "auto",
+          position: "absolute",
+          right: 0,
+          zIndex: 999,
         }}
       >
-        <Toast.Header style={{ background: "#fff" }}>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">{successfulBin.header}</strong>
-        </Toast.Header>
         <Toast.Body
           style={{
             background: "white",
             height: 140,
             fontFamily: "Lato, Helvetica",
-            fontSize: 20,
+            fontSize: 18,
+            top: 0,
             lineHeight: 1.2,
-            fontWeight: "bold",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <p>{successfulBin.body}</p>
+          <div>
+            <p style={{ fontWeight: "bold" }}>Thanks!</p>
+            <p>{successfulBin.body}</p>
+          </div>
         </Toast.Body>
       </Toast>
     </div>
