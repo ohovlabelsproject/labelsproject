@@ -16,7 +16,7 @@ const uiLabels = {
       slide2:
         'We need to know about labels you find stigmitising (unfair), so we could then "bin" them from our language. As such, we created an activity...',
       slide3:
-        'A "drag and drop" game. In the activity you\'ll see one (or more) boards with labels on them. Drag the problem labels into the "bin" (database). Simple! How about it?',
+        'A "drag n drop" game. In this activity you\'ll see one (or more) boards with labels on them. Drag problem labels into the "bin". How about it?',
     },
     action: {
       decline: "No thanks!",

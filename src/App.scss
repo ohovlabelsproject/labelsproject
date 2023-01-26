@@ -4,9 +4,9 @@
 
 $col-sticky-1: #ffcc33;
 $col-sticky-2: lighten($col-sticky-1, 5%);
-$col-sticky-3: #ff7eb9;
-$col-sticky-4: #ff65a3;
-$col-sticky-5: #7afcff;
+$col-sticky-3: #f19e8c;
+$col-sticky-4: #5ea758;
+$col-sticky-5: #99cccc;
 
 $col-lightest: #fff;
 $col-lightish: #c7ccd4;
@@ -159,6 +159,7 @@ body {
   overflow-x: hidden;
   overscroll-behavior: contain;
 }
+
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
@@ -169,32 +170,30 @@ body {
   text-align: center;
 }
 
-.bg-wrapper-1 {
-  position: absolute;
-  @include bg-transparent-texture();
+body {
+  overflow: hidden;
+  background-color: #9d9d9d;
+}
 
-  width: 100%;
+.bg-wrapper-1 {
+  @include bg-transparent-texture();
   height: 100%;
-  top: 0;
   left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
   z-index: -99;
 }
 
 .bg-wrapper-2 {
-  position: absolute;
-  /*
-  background: linear-gradient(to bottom, white, darken($col-danger-muted, 65%)) !important;*/
+  /* background: linear-gradient(to bottom, white, darken($col-danger-muted, 65%)) !important;*/
   background: linear-gradient(to bottom, white, white);
-  width: 100%;
   height: 100%;
-  top: 0;
   left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
   z-index: -100;
-}
-
-body {
-  overflow: hidden;
-  background-color: #9d9d9d;
 }
 
 .btn {
@@ -441,17 +440,16 @@ div.hud-col-r {
   @include handdrawntext();
   font-size: 20px;
 }
+
 .whiteboard-msg-text-wrapper {
   @include center();
 }
+
 .whiteboard-msg-wrapper {
-  //@include border-gradient();
   @include thick-title();
   background: #222;
-  // background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
   color: #ccc;
-  // animation: colorCycle 5s infinite linear;
-  height: 155px;
+  height: 25vh;
   left: 0;
   margin-left: auto;
   margin-right: auto;
@@ -506,6 +504,7 @@ div.hud-col-r {
   margin-left: -60px;
   margin-top: -60px;
 }
+
 .loader-content {
   position: absolute;
   left: 50%;
@@ -515,6 +514,7 @@ div.hud-col-r {
   @include regulartext();
   font-weight: bold;
 }
+
 .loader-line-mask {
   position: absolute;
   left: 50%;
