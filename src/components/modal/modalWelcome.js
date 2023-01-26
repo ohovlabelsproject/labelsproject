@@ -40,8 +40,8 @@ function ModalWelcome(props) {
   const getNavConsentControls = () => {
     return (
       <Row
-        className="text-center justify-content-center"
-        style={{ float: "right", width: 340 }}
+        className="boroder text-center justify-content-center"
+        style={{ float: "right", width: "100%" }}
       >
         <Col>
           <a href="https://en.wikipedia.org/wiki/Rubber_duck" target="_self">
@@ -117,6 +117,7 @@ function ModalWelcome(props) {
   const handleClose = () => {
     setShow(false);
     props.getLabels();
+    props.preventDefaultTouchActions();
   };
 
   /* Handle the slide being changed:

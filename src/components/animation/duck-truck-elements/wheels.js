@@ -14,10 +14,11 @@ function Wheels() {
     },
   ];
   //
-  return wheels.map((wheel) => {
+  return wheels.map((wheel, index) => {
     return (
       <div
         className="animated-wheel"
+        key={`wheel-${index}`}
         style={{
           height: 35,
           marginLeft: wheel.style.marginLeft,

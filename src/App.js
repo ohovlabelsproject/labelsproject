@@ -135,6 +135,13 @@ function App(props) {
     }
   };
 
+  const preventDefaultTouchActions = () => {
+    alert("got here");
+    document.getElementById("app").addEventListener("touchmove", (event) => {
+      event.preventDefault();
+    });
+  };
+
   useEffect(() => {
     //getLabels();
   }, []);
@@ -147,7 +154,10 @@ function App(props) {
           --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
           {labelsData?.labelsArr?.length}
         </span>
-        <ModalWelcome getLabels={getLabels} />
+        <ModalWelcome
+          getLabels={getLabels}
+          preventDefaultTouchActions={preventDefaultTouchActions}
+        />
         <ModalWindow
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
