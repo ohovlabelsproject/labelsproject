@@ -177,7 +177,12 @@ body {
 }
 
 .bg-wrapper-1 {
-  @include bg-transparent-texture();
+  //@include bg-transparent-texture();
+
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
   height: 100%;
   left: 0;
   position: absolute;
