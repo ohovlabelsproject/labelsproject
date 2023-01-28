@@ -19,6 +19,7 @@ import { useState } from "react";
 import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
 import utils from "./components/utils/utils";
+import ModalAttributions from "./components/modal/modalAttributions";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
@@ -147,7 +148,7 @@ function App(props) {
   };
 
   window.addEventListener("orientationchange", function () {
-    alert("Landscape mode doesn't currently work properly!");
+    //alert("Landscape mode doesn't currently work properly!");
   });
 
   //
@@ -179,6 +180,7 @@ function App(props) {
           labelsData={labelsData}
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
+        <ModalAttributions />
         <ModalConfirmationMsg />
         <Hud />
         {/* userGeoloc.IPv4 */}

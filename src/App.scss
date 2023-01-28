@@ -244,6 +244,27 @@ footer.footer {
   color: #444;
 }
 
+.attribution-link {
+  border: 0;
+}
+.attributions {
+  rotate: 0deg;
+  position: absolute;
+  right: 10px;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0;
+  padding-bottom: 5px;
+  font-size: 9px;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.attributions a {
+  // color: navy;
+}
+
 section.instructions {
   @include center-bottom();
   @include random-bgr();
