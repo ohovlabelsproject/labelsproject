@@ -16,8 +16,12 @@ function ModalAttributions() {
       ],
     },
     {
-      type: "Icons",
-      urls: ["https://fontawesome.com/"],
+      type: "Fonts & Icons",
+      urls: [
+        "https://fonts.google.com/",
+        "https://fontawesome.com/",
+        "https://youssef-habchi.com/fonts/road-rage",
+      ],
     },
     {
       type: "Textures",

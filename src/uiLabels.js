@@ -26,7 +26,7 @@ const uiLabels = {
   instructions: {
     title: "Bin the labels you find stigmatising",
     validation: {
-      hasBannedWord: "Must be free of bad language",
+      hasBannedWord: "Must use appropriate language",
       hasDuplicate: "Must not be an existing label",
     },
   },
