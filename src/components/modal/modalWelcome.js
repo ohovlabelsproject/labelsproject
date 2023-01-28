@@ -117,6 +117,7 @@ function ModalWelcome(props) {
   const handleClose = () => {
     setShow(false);
     props.getLabels();
+    props.getUserGeolocation();
     props.preventDefaultTouchActions();
   };
 

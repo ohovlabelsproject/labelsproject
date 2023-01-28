@@ -32,6 +32,10 @@ function App(props) {
 
   /* Set/get labels data to/from state:
    **********************************/
+  const [userGeoloc, setUserGeoloc] = useState({});
+
+  /* Set/get labels data to/from state:
+   **********************************/
   const [labelsData, setLabelsData] = useState();
 
   /* Set/get meta:
@@ -146,6 +150,13 @@ function App(props) {
     alert("Landscape mode doesn't currently work properly!");
   });
 
+  //
+  const getUserGeolocation = () => {
+    fetch("https://geolocation-db.com/json/")
+      .then((response) => response.json())
+      .then((data) => setUserGeoloc(data));
+  };
+
   /*
   useEffect(() => {
     // getLabels();
@@ -161,6 +172,7 @@ function App(props) {
         </span>
         <ModalWelcome
           getLabels={getLabels}
+          getUserGeolocation={getUserGeolocation}
           preventDefaultTouchActions={preventDefaultTouchActions}
         />
         <ModalWindow
@@ -169,6 +181,7 @@ function App(props) {
         />
         <ModalConfirmationMsg />
         <Hud />
+        {/* userGeoloc.IPv4 */}
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
             <Instructions />
