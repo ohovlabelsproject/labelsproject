@@ -1,31 +1,30 @@
 import "./App.scss";
+import Duck from "./components/animation/duck";
+import Footer from "./components/footer/footer";
 import Hud from "./components/hud/hud";
 import Instructions from "./components/instructions/instructions";
-import Whiteboard from "./components/whiteboard/whiteboard";
-import Footer from "./components/footer/footer";
+import Loader from "./components/loader/loader";
 import NavBtnL from "./components/navbtn/navbtnl";
 import NavBtnR from "./components/navbtn/navbtnr";
-import firebaseConfig from "./firebaseConfig";
+import PaperBall from "./components/animation/paperball";
+import ModalWindow from "./components/modal/modal";
+import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
+import ModalWelcome from "./components/modal/modalWelcome";
+import Whiteboard from "./components/whiteboard/whiteboard";
 import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useState } from "react";
-import utils from "./components/utils/utils";
+import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
-import ModalWindow from "./components/modal/modal";
-import PaperBall from "./components/animation/paperball";
-import Duck from "./components/animation/duck";
-import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
-import Loader from "./components/loader/loader";
-import ModalWelcome from "./components/modal/modalWelcome";
+import utils from "./components/utils/utils";
 
 function App(props) {
-  const enableDebug = false;
-  // Initialise Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
+  const showDebugPanel = false;
 
   // Firestore doc lookup:
   const db = getFirestore();
@@ -115,11 +114,20 @@ function App(props) {
     }
   };
 
+  //
+  const isOrientationLandscape = () => {
+    if (window.innerWidth > window.innerHeight) {
+      return true;
+    }
+  };
+
   /* Prevent default touch actions:
    **********************************/
   const preventDefaultTouchActions = () => {
     document.getElementById("app").addEventListener("touchmove", (event) => {
-      event.preventDefault();
+      if (!isOrientationLandscape()) {
+        event.preventDefault();
+      }
     });
   };
 
@@ -146,7 +154,7 @@ function App(props) {
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
-        <span style={{ display: enableDebug ? "block" : "none" }}>
+        <span style={{ display: showDebugPanel ? "block" : "none" }}>
           Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
           --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
           {labelsData?.labelsArr?.length}
@@ -156,6 +164,7 @@ function App(props) {
           preventDefaultTouchActions={preventDefaultTouchActions}
         />
         <ModalWindow
+          labelsData={labelsData}
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
         <ModalConfirmationMsg />
@@ -187,8 +196,8 @@ function App(props) {
       />
       <PaperBall />
       <Duck />
-      <div className="bg-wrapper-1"></div>
-      <div className="bg-wrapper-2"></div>
+      <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
+      <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
     </div>
   );
 }

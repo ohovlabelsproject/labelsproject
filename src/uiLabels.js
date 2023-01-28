@@ -25,6 +25,10 @@ const uiLabels = {
   },
   instructions: {
     title: "Bin the labels you find stigmatising",
+    validation: {
+      hasBannedWord: "Must be free of bad language",
+      hasDuplicate: "Must not be an existing label",
+    },
   },
   labelSubmission: {
     body: "Add your own label. It will be counted as a submission & may appear for others*.",

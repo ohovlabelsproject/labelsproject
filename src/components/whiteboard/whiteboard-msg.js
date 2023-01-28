@@ -19,15 +19,15 @@ function WhiteboardMsg(props) {
       >
         <Toast.Body
           style={{
-            background: "white",
-            height: 140,
-            fontFamily: "Lato, Helvetica",
-            fontSize: 18,
-            top: 0,
-            lineHeight: 1.2,
-            display: "flex",
             alignItems: "center",
+            background: "#fff",
+            display: "flex",
+            fontFamily: `"Lato", Helvetica, Arial, Lucida, sans-serif`,
+            fontSize: 18,
+            height: 140,
             justifyContent: "center",
+            lineHeight: 1.2,
+            top: 0,
           }}
         >
           <div>
