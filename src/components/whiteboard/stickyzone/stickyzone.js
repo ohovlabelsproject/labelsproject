@@ -18,9 +18,9 @@ function StickyZone(props) {
                   ) : (
                     <StickyNote
                       index={index}
-                      label={el.label}
-                      labelsMetadata={props.labelsMetadata}
                       key={`label-${index}`}
+                      label={el.label.toLowerCase()}
+                      labelsMetadata={props.labelsMetadata}
                       updateLabelDisposalState={props.updateLabelDisposalState}
                     />
                   )}
