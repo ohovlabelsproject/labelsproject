@@ -513,25 +513,25 @@ div.hud-col-r {
 }
 
 .loader-circle {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  height: 120px;
+  left: 50%;
   margin-left: -60px;
   margin-top: -60px;
+  position: absolute;
+  top: 50%;
+  width: 120px;
 }
 
 .loader-content {
-  position: absolute;
+  @include regulartext();
+  color: #222;
+  font-weight: bold;
   left: 50%;
+  position: absolute;
   top: 60%;
   transform: translate(-50%, -100%);
-  color: #222;
-  @include regulartext();
-  font-weight: bold;
 }
 
 .loader-line-mask {
@@ -547,11 +547,12 @@ div.hud-col-r {
   -webkit-mask-image: -webkit-linear-gradient(top, #000000, rgba(0, 0, 0, 0));
   animation: rotateLoader 1s infinite linear;
 }
+
 .loader-line-mask .loader-line {
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
   box-shadow: inset 0 0 0 3px #222;
+  height: 120px;
+  width: 120px;
 }
 
 .stickynote-rotating {
@@ -596,6 +597,40 @@ div.hud-col-r {
 
 .modal-footer {
   //border-top: 1px dashed #000 !important;
+}
+
+.alert-to-other-boards {
+  @include handdrawntext();
+  background: $col-lightest;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
+  height: 65px;
+  padding: 5px;
+  position: absolute;
+  right: -5px;
+  rotate: -10deg;
+  top: 26%;
+  transform: scale(0.75);
+  width: 140px;
+  opacity: 0;
+}
+
+.fade-in-out {
+  animation: fade-in-out 10s ease-in-out 5s forwards;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @media only screen and (max-width: 700px) {

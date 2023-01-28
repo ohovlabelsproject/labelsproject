@@ -197,6 +197,7 @@ function App(props) {
           <Loader />
         )}
       </div>
+
       <NavBtnL
         handleNavClick={handleNavClick}
         labelsMetadata={labelsMetadata}
