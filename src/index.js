@@ -7,9 +7,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
 import "font-awesome/css/font-awesome.css";
 import "animate.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ModView from "./Modview/Modview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+        <Route path="/admin" element={<ModView />}></Route>
+      </Routes>
+    </BrowserRouter>
+  </>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

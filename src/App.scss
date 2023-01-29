@@ -639,6 +639,14 @@ div.hud-col-r {
   animation: fade-in-out 10s ease-in-out 5s forwards;
 }
 
+.modview-section-title {
+  @include thick-title();
+}
+.modview-section-subtitle {
+  @include thick-title();
+  font-size: 24px;
+}
+
 @keyframes fade-in-out {
   0% {
     opacity: 0;
