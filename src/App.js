@@ -56,6 +56,7 @@ function App(props) {
       snapshot.docs.forEach((doc) => {
         labelsArr.push(doc.data());
       });
+      utils.arr.shuffle(labelsArr); // <---- shuffle before rounding up array?
       // If array of labels length !== multiple of 9, round up to multiple:
       let neededToPush;
       if (labelsArr.length % 9 !== 0) {
@@ -64,7 +65,6 @@ function App(props) {
       for (let i = 0; i < neededToPush; i++) {
         labelsArr.push(null);
       }
-      utils.arr.shuffle(labelsArr);
       setLabelsData((previousState) => {
         return { ...previousState, labelsArr };
       });
