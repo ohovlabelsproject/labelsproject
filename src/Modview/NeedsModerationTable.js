@@ -24,33 +24,42 @@ function NeedsModerationTable() {
             Label
           </th>
           <th className="text-center" style={{ width: "40%" }}>
-            Info
+            Posted
           </th>
-          <th className="text-center" style={{ width: "30%" }}>
-            Actions
-          </th>
+          <th className="text-center" style={{ width: "30%" }}></th>
         </tr>
       </thead>
       <tbody>
         {unvettedArr.map((unvetted) => {
           return (
             <tr>
-              <td className="text-center px-2">{unvetted.label}</td>
               <td className="text-center px-2">
-                <small>
+                <div className="modview-label-text mt-4">{unvetted.label}</div>
+              </td>
+              <td className="text-center px-2">
+                <div className="mt-4" style={{ fontSize: "14px" }}>
                   Posted {unvetted.timestamp} by {unvetted.ip}
-                </small>
+                </div>
               </td>
               <td className="text-center">
-                <button className="form-control btn btn-success">
-                  Approve label
-                </button>
-                <button className="form-control btn btn-danger">
-                  Delete label
-                </button>
-                <button className="form-control btn btn-secondary">
-                  Ban IP
-                </button>
+                <div className="col-12 row">
+                  <div className="col-12">
+                    <button className="btn-ohov-approve mb-1">
+                      <i className="fa fa-check"></i>&nbsp;Approve
+                    </button>
+                  </div>
+
+                  <div className="col-12">
+                    <button className="btn-ohov-delete mb-1">
+                      <i className="fa fa-trash"></i>&nbsp;Delete
+                    </button>
+                  </div>
+                  <div className="col-12">
+                    <button className="btn-ohov-ban">
+                      <i className="fa fa-ban"></i>&nbsp;Ban IP
+                    </button>
+                  </div>
+                </div>
               </td>
             </tr>
           );

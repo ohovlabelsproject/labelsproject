@@ -14,13 +14,14 @@ function WhiteboardMsg(props) {
           marginRight: "auto",
           position: "absolute",
           right: 0,
-          zIndex: 999,
+          zIndex: 9999,
         }}
       >
         <Toast.Body
           style={{
             alignItems: "center",
             background: "#fff",
+            borderRadius: 10,
             display: "flex",
             fontFamily: `"Lato", Helvetica, Arial, Lucida, sans-serif`,
             fontSize: 18,

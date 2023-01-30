@@ -153,6 +153,54 @@ $testbg-enabled: false;
   border-width: 3px;
 }
 
+@mixin btn-ohov-approve {
+  @include regulartext();
+  color: $col-lightest !important;
+  background-color: $col-sticky-4;
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 14px;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-approve-hover {
+  background-color: lighten($col-sticky-4, 10%);
+}
+
+@mixin btn-ohov-delete {
+  @include regulartext();
+  background-color: darken($col-sticky-3, 20%);
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  color: $col-lightest !important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-size: 14px;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-delete-hover {
+  background-color: darken($col-sticky-3, 10%);
+}
+
+@mixin btn-ohov-ban {
+  @include regulartext();
+  color: $col-lightest !important;
+  background-color: darken($col-sticky-3, 30%);
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 14px;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-ban-hover {
+  background-color: darken($col-sticky-3, 20%);
+}
+
 html,
 body {
   max-width: 100%;
@@ -221,6 +269,33 @@ body {
 
 .btn-ohov-2:hover {
   @include btn-ohov-2-hover();
+}
+
+.btn-ohov-approve {
+  @include btn-ohov-approve();
+  width: 120px;
+}
+
+.btn-ohov-approve:hover {
+  @include btn-ohov-approve-hover();
+}
+
+.btn-ohov-delete {
+  @include btn-ohov-delete();
+  width: 120px;
+}
+
+.btn-ohov-delete:hover {
+  @include btn-ohov-delete-hover();
+}
+
+.btn-ohov-ban {
+  @include btn-ohov-ban();
+  width: 120px;
+}
+
+.btn-ohov-ban:hover {
+  @include btn-ohov-ban-hover();
 }
 
 .main-area-wrapper {
@@ -580,15 +655,6 @@ div.hud-col-r {
   //animation: rotation 2s infinite linear;
 }
 
-@keyframes rotateLoader {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .loader {
   height: 100%;
   left: 0;
@@ -602,6 +668,7 @@ div.hud-col-r {
 .modal-title {
   font-weight: 900 !important;
 }
+
 .modal {
   backdrop-filter: blur(3px) !important;
 }
@@ -645,22 +712,20 @@ div.hud-col-r {
 }
 .modview-section-subtitle {
   @include thick-title();
-  font-size: 24px;
+  font-size: 22px;
 }
 
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.modview-label-text {
+  @include handdrawntext();
+}
+
+.accordion-button:not(.collapsed) {
+  background: darken(#eee, 5%) !important;
+  color: #222 !important;
+}
+
+.table {
+  --bs-table-striped-bg: #eee !important;
 }
 
 @media only screen and (max-width: 700px) {
@@ -680,25 +745,6 @@ div.hud-col-r {
   }
 }
 
-@keyframes duckbobbing {
-  0%,
-  100% {
-    margin-top: 5px;
-  }
-  50% {
-    margin-top: 0px;
-  }
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(359deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-
 @keyframes binzoneActivate {
   0% {
     border-color: rgb(240, 80, 0);
@@ -711,5 +757,48 @@ div.hud-col-r {
   100% {
     border-color: orange;
     transform: scale(1);
+  }
+}
+
+@keyframes duckbobbing {
+  0%,
+  100% {
+    margin-top: 5px;
+  }
+  50% {
+    margin-top: 0px;
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotateLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

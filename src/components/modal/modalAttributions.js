@@ -57,8 +57,8 @@ function ModalAttributions() {
           {attributions.map((attr) => {
             return (
               <>
-                <b className="p-0 m-0">{attr.type}</b>
-                {attr.src ? <p className="p-0 m-0">{attr.src}</p> : null}
+                <b className="m-0 p-0">{attr.type}</b>
+                {attr.src ? <p className="m-0 p-0">{attr.src}</p> : null}
                 <ul>
                   {attr.urls.map((url) => {
                     return (
