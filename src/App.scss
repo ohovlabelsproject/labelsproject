@@ -20,45 +20,29 @@ $guideline: 1px dashed #777;
 $guidelines-enabled: false;
 $testbg-enabled: false;
 
-@mixin disable-select() {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version */
+@mixin bevel-outer($col-bevel-dark, $col-bevel-light, $width, $strength) {
+  border-bottom: $width solid $col-bevel-light;
+  border-right: $width solid $col-bevel-light;
+  border-top: $width solid $col-bevel-dark;
+  border-left: $width solid $col-bevel-dark;
+}
+
+@mixin bevel-inner($col-bevel-dark, $col-bevel-light, $width, $strength) {
+  border-bottom: $width solid $col-bevel-dark;
+  border-right: $width solid $col-bevel-dark;
+  border-top: $width solid $col-bevel-light;
+  border-left: $width solid $col-bevel-light;
 }
 
 @mixin bg-transparent-texture() {
   background-image: url("./../public/textures/broken-noise.png");
 }
 
-@mixin thick-title() {
-  @include regulartext();
-  font-weight: 900;
-}
-
-@mixin sketchtext() {
-  font-family: "Cabin Sketch", cursive !important;
-  text-transform: uppercase;
-}
-
-@mixin handdrawntext() {
-  font-family: "Schoolbell", cursive !important;
-  font-size: $font-size-md;
-  line-height: 25px;
-}
-
-@mixin regulartext() {
-  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
-}
-
-@mixin guidelines() {
-  @if $guidelines-enabled {
-    border: 1px dashed #777;
-  } @else {
-    border: 0;
-  }
+@mixin border-gradient {
+  border: 3px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, $col-danger-muted, rgb(0, 162, 255), yellow, orange);
+  border-width: 3px;
 }
 
 @mixin btn-ohov-1() {
@@ -97,62 +81,6 @@ $testbg-enabled: false;
   background-image: initial;
 }
 
-@mixin btn-ohov-welcome() {
-  @include regulartext();
-  color: $col-lightest !important;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-color: rgba(65, 65, 144, 0);
-  border-radius: 70px;
-  border-width: 10px !important;
-  font-size: 16px;
-  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
-  font-weight: 900 !important;
-}
-
-@mixin btn-ohov-welcome-hover() {
-  color: $col-lightest !important;
-  background-color: rgba(0, 0, 0, 0.5);
-  background-image: initial;
-}
-
-.btn-ohov-welcome {
-  @include btn-ohov-welcome();
-}
-
-.btn-ohov-welcome:hover {
-  @include btn-ohov-welcome-hover();
-}
-
-@mixin center() {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin center-bottom() {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-@mixin random-bgr() {
-  @if $testbg-enabled {
-    background: rgb(random(255), random(1), random(255));
-  }
-}
-
-@mixin strip-margin-and-padding() {
-  margin: 0;
-  padding: 0;
-}
-
-@mixin border-gradient {
-  border: 3px solid;
-  border-image-slice: 1;
-  border-image-source: linear-gradient(to right, $col-danger-muted, rgb(0, 162, 255), yellow, orange);
-  border-width: 3px;
-}
-
 @mixin btn-ohov-approve {
   @include regulartext();
   color: $col-lightest !important;
@@ -167,22 +95,6 @@ $testbg-enabled: false;
 
 @mixin btn-ohov-approve-hover {
   background-color: lighten($col-sticky-4, 10%);
-}
-
-@mixin btn-ohov-delete {
-  @include regulartext();
-  background-color: darken($col-sticky-3, 20%);
-  border-color: rgba(65, 65, 144, 0);
-  border-radius: 70px;
-  border-width: 10px !important;
-  color: $col-lightest !important;
-  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
-  font-size: 14px;
-  font-weight: 900 !important;
-}
-
-@mixin btn-ohov-delete-hover {
-  background-color: darken($col-sticky-3, 10%);
 }
 
 @mixin btn-ohov-ban {
@@ -201,11 +113,134 @@ $testbg-enabled: false;
   background-color: darken($col-sticky-3, 20%);
 }
 
+@mixin btn-ohov-delete {
+  @include regulartext();
+  background-color: darken($col-sticky-3, 20%);
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  color: $col-lightest !important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-size: 14px;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-delete-hover {
+  background-color: darken($col-sticky-3, 10%);
+}
+
+@mixin btn-ohov-welcome() {
+  @include regulartext();
+  color: $col-lightest !important;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 16px;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-weight: 900 !important;
+}
+
+@mixin btn-ohov-welcome-hover() {
+  color: $col-lightest !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: initial;
+}
+
+@mixin center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin center-bottom() {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+@mixin disable-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version */
+}
+
+@mixin guidelines() {
+  @if $guidelines-enabled {
+    border: 1px dashed #777;
+  } @else {
+    border: 0;
+  }
+}
+
+@mixin handdrawntext() {
+  font-family: "Schoolbell", cursive !important;
+  font-size: $font-size-md;
+  line-height: 25px;
+}
+
+@mixin random-bgr() {
+  @if $testbg-enabled {
+    background: rgb(random(255), random(1), random(255));
+  }
+}
+
+@mixin regulartext() {
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+}
+
+@mixin sketchtext() {
+  font-family: "Cabin Sketch", cursive !important;
+  text-transform: uppercase;
+}
+
+@mixin strip-margin-and-padding() {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin thick-title() {
+  @include regulartext();
+  font-weight: 900;
+}
+
 html,
 body {
   max-width: 100%;
   overflow-x: hidden;
   overscroll-behavior: contain;
+}
+
+.accordion-button:not(.collapsed) {
+  background: darken(#eee, 5%) !important;
+  color: #222 !important;
+}
+
+.alert-to-other-boards {
+  @include handdrawntext();
+  background: $col-lightest;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
+  height: 65px;
+  opacity: 0;
+  padding: 5px;
+  pointer-events: none;
+  position: absolute;
+  right: -5px;
+  rotate: -10deg;
+  top: 26%;
+  transform: scale(0.75);
+  width: 140px;
+}
+
+.animated-duck {
+  animation: duckbobbing 1.3s linear infinite;
+}
+
+.animated-wheel {
+  animation: rotation 2s infinite linear;
 }
 
 .app {
@@ -218,16 +253,29 @@ body {
   text-align: center;
 }
 
-body {
-  overflow: hidden;
-  background-color: #9d9d9d;
-  overscroll-behavior-y: contain !important;
+.attributions {
+  bottom: 0px;
+  font-size: 8.5px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.7;
+  padding-bottom: 5px;
+  position: absolute;
+  right: -5px;
+  rotate: 0deg;
+  width: 100px;
+  z-index: 999;
+}
+
+.attributions a {
+}
+
+.attribution-link {
+  border: 0;
 }
 
 .bg-wrapper-1 {
-  //@include bg-transparent-texture();
   background-color: #ffffff;
-  //background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
   background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   height: 100%;
@@ -239,7 +287,6 @@ body {
 }
 
 .bg-wrapper-2 {
-  /* background: linear-gradient(to bottom, white, darken($col-danger-muted, 65%)) !important;*/
   background: linear-gradient(to bottom, white, white);
   height: 100%;
   left: 0;
@@ -247,6 +294,28 @@ body {
   top: 0;
   width: 100%;
   z-index: -100;
+}
+
+.binzone-active {
+  animation: binzoneActivate 1.2s alternate infinite;
+}
+
+.binzone-droparea {
+  @include center();
+  background: rgba(0, 0, 0, 0.1);
+  border: 3px dashed rgb(242 91 65 / 60%);
+  border-radius: 5px;
+  color: $col-darkest;
+  font-size: $font-size-md + 6;
+  height: 100%;
+  user-select: none;
+  width: 100%;
+}
+
+body {
+  overflow: hidden;
+  background-color: #9d9d9d;
+  overscroll-behavior-y: contain !important;
 }
 
 .btn {
@@ -298,9 +367,41 @@ body {
   @include btn-ohov-ban-hover();
 }
 
-.main-area-wrapper {
+.btn-ohov-welcome {
+  @include btn-ohov-welcome();
+}
+
+.btn-ohov-welcome:hover {
+  @include btn-ohov-welcome-hover();
+}
+
+div.hud-col-l,
+div.hud-col-r {
   @include guidelines();
-  height: 100%;
+  @include strip-margin-and-padding();
+}
+
+div.hud-col-l {
+  @include center();
+}
+
+div.hud-col-r {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.duck {
+  filter: contrast(1.1) brightness(0.9) hue-rotate(0deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
+  height: 120px;
+  left: 500px;
+  position: absolute;
+  top: 465px;
+  width: 200px;
+  //left: 200px !important; <-- for testing
+}
+
+.fade-in-out {
+  animation: fade-in-out 10s ease-in-out 5s forwards;
 }
 
 header.hud,
@@ -319,63 +420,13 @@ footer.footer {
   color: #444;
 }
 
-.attribution-link {
-  border: 0;
-}
-.attributions {
-  bottom: 0px;
-  font-size: 8.5px;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0.7;
-  padding-bottom: 5px;
-  position: absolute;
-  right: -5px;
-  rotate: 0deg;
-  width: 100px;
-  z-index: 999;
-}
-
-.attributions a {
-  // color: navy;
-}
-
-section.instructions {
-  @include center-bottom();
-  @include random-bgr();
-  height: 15%;
-}
-
-section.whiteboard {
-  @include random-bgr();
-  @include strip-margin-and-padding();
-  height: 73%;
-}
-
-section.stickyzone {
-  @include center();
-  height: 70%;
-}
-
-section.binzone {
-  @include center();
-  @include sketchtext();
-  height: 30%;
-}
-
-div.hud-col-l,
-div.hud-col-r {
+.main-area-wrapper {
   @include guidelines();
-  @include strip-margin-and-padding();
+  height: 100%;
 }
 
-div.hud-col-l {
-  @include center();
-}
-
-div.hud-col-r {
-  text-align: right;
-  padding-right: 10px;
+.paper-ball-sm-wrapper {
+  filter: brightness(1.05) hue-rotate(-5deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
 }
 
 .instructions div h1 {
@@ -388,105 +439,109 @@ div.hud-col-r {
   width: 360px;
 }
 
-.stickyzone {
+.loader {
   height: 100%;
-}
-
-.stickynotes {
-  @include strip-margin-and-padding();
-  height: 100%;
-}
-
-.stickynote-wrapper {
-  @include center();
-  @include strip-margin-and-padding();
-}
-
-@mixin bevel-outer($col-bevel-dark, $col-bevel-light, $width, $strength) {
-  border-bottom: $width solid $col-bevel-light;
-  border-right: $width solid $col-bevel-light;
-  border-top: $width solid $col-bevel-dark;
-  border-left: $width solid $col-bevel-dark;
-}
-@mixin bevel-inner($col-bevel-dark, $col-bevel-light, $width, $strength) {
-  border-bottom: $width solid $col-bevel-dark;
-  border-right: $width solid $col-bevel-dark;
-  border-top: $width solid $col-bevel-light;
-  border-left: $width solid $col-bevel-light;
-}
-.stickynote-sub-wrapper {
-  @include center();
-  @include strip-margin-and-padding();
-  border: 1px dashed #444;
-}
-
-.stickynote {
-  @include center();
-  @include disable-select();
-  @include handdrawntext();
-  @include strip-margin-and-padding();
-  background: $col-sticky-2;
-  border: 1px solid darken($col-sticky-2, 5%);
-  cursor: move;
-  font-size: $font-size-md + 1;
-  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
-  height: 100px;
-  hyphens: auto;
-  line-height: 25px;
-  //rotate: random(1) + deg;
-  width: 140px;
-}
-
-.random-rotate-0 {
-  rotate: random(1) + deg;
-}
-
-.random-rotate-1 {
-  rotate: -1.5deg;
-}
-
-.random-rotate-2 {
-  rotate: random(1) + deg;
-}
-
-.paper-ball-sm-wrapper {
-  filter: brightness(1.05) hue-rotate(-5deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
-}
-
-.stickynote-non {
-  @include strip-margin-and-padding();
-  @include center();
-  border: 1px dashed #444;
-  font-size: $font-size-md - 5;
-  height: 100px;
-  hyphens: auto;
-  line-height: 25px;
-  width: 100%;
-}
-
-.stickynote-test-data-wrapper {
-  @include guidelines();
-  font-family: monospace;
-  font-size: 12px;
   left: 0;
   position: absolute;
-  top: 10px;
-}
-
-.binzone-active {
-  animation: binzoneActivate 1.2s alternate infinite;
-}
-
-.binzone-droparea {
-  @include center();
-  background: rgba(0, 0, 0, 0.1);
-  border: 3px dashed rgb(242 91 65 / 60%);
-  color: $col-darkest;
-  border-radius: 5px;
-  font-size: $font-size-md + 6;
-  height: 100%;
-  user-select: none;
+  top: 0;
+  transform: scale(0.75);
   width: 100%;
+  z-index: 100;
+}
+
+.loader-circle {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  height: 120px;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  position: absolute;
+  top: 50%;
+  width: 120px;
+}
+
+.loader-content {
+  @include regulartext();
+  color: #222;
+  font-weight: bold;
+  left: 50%;
+  position: absolute;
+  top: 60%;
+  transform: translate(-50%, -100%);
+}
+
+.loader-line-mask {
+  animation: rotateLoader 1s infinite linear;
+  height: 120px;
+  left: 50%;
+  margin-left: -60px;
+  margin-top: -60px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform-origin: 60px 60px;
+  -webkit-mask-image: -webkit-linear-gradient(top, #000000, rgba(0, 0, 0, 0));
+  width: 60px;
+}
+
+.loader-line-mask .loader-line {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px #222;
+  height: 120px;
+  width: 120px;
+}
+
+.modal {
+  backdrop-filter: blur(3px) !important;
+}
+
+.modal-body {
+  @include regulartext();
+  color: $col-darkest;
+  font-size: 19px;
+}
+
+.modal-label-submission {
+  @include handdrawntext();
+  font-size: 30px !important;
+  text-align: center;
+}
+
+.modal-title {
+  @include thick-title();
+  color: $col-darkest;
+}
+
+.modal-title {
+  font-weight: 900 !important;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  //background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
+}
+
+.modal-header {
+  // border-bottom: 1px dashed #000 !important;
+}
+
+.modal-footer {
+  //border-top: 1px dashed #000 !important;
+}
+
+.modview-label-text {
+  @include handdrawntext();
+}
+
+.modview-section-subtitle {
+  @include thick-title();
+  font-size: 22px;
+}
+
+.modview-section-title {
+  @include thick-title();
 }
 
 .nav-l-btn-wrapper,
@@ -526,6 +581,55 @@ div.hud-col-r {
   cursor: not-allowed;
 }
 
+.random-rotate-0 {
+  rotate: random(1) + deg;
+}
+
+.random-rotate-1 {
+  rotate: -1.5deg;
+}
+
+.random-rotate-2 {
+  rotate: random(1) + deg;
+}
+
+section.instructions {
+  @include center-bottom();
+  @include random-bgr();
+  height: 15%;
+}
+
+section.whiteboard {
+  @include random-bgr();
+  @include strip-margin-and-padding();
+  height: 73%;
+}
+
+section.stickyzone {
+  @include center();
+  height: 70%;
+}
+
+section.binzone {
+  @include center();
+  @include sketchtext();
+  height: 30%;
+}
+
+.stickyzone {
+  height: 100%;
+}
+
+.stickynotes {
+  @include strip-margin-and-padding();
+  height: 100%;
+}
+
+.stickynote-wrapper {
+  @include center();
+  @include strip-margin-and-padding();
+}
+
 .scroll-disable {
   height: 100%;
   overflow: hidden;
@@ -533,6 +637,57 @@ div.hud-col-r {
 
 #staticBackdrop {
   backdrop-filter: blur(4px);
+}
+
+.stickynote {
+  @include center();
+  @include disable-select();
+  @include handdrawntext();
+  @include strip-margin-and-padding();
+  background: $col-sticky-2;
+  border: 1px solid darken($col-sticky-2, 5%);
+  cursor: move;
+  font-size: $font-size-md + 1;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
+  height: 100px;
+  hyphens: auto;
+  line-height: 25px;
+  //rotate: random(1) + deg;
+  width: 140px;
+}
+
+.stickynote-non {
+  @include strip-margin-and-padding();
+  @include center();
+  border: 1px dashed #444;
+  font-size: $font-size-md - 5;
+  height: 100px;
+  hyphens: auto;
+  line-height: 25px;
+  width: 100%;
+}
+
+.stickynote-sub-wrapper {
+  @include center();
+  @include strip-margin-and-padding();
+  border: 1px dashed #444;
+}
+
+.stickynote-test-data-wrapper {
+  @include guidelines();
+  font-family: monospace;
+  font-size: 12px;
+  left: 0;
+  position: absolute;
+  top: 10px;
+}
+
+.stickynote-rotating {
+  //animation: rotation 2s infinite linear;
+}
+
+.table {
+  --bs-table-striped-bg: #eee !important;
 }
 
 .whiteboard-msg-thanks {
@@ -559,6 +714,7 @@ div.hud-col-r {
   right: 0;
   z-index: 999;
 }
+
 /*
 .whiteboard-msg-wrapper {
   @include thick-title();
@@ -573,160 +729,6 @@ div.hud-col-r {
   top: 0%;
   z-index: 999;
 }*/
-
-.duck {
-  filter: contrast(1.1) brightness(0.9) hue-rotate(0deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
-  height: 120px;
-  left: 500px;
-  position: absolute;
-  top: 465px;
-  width: 200px;
-  //left: 200px !important; <-- for testing
-}
-
-.modal-title {
-  @include thick-title();
-  color: $col-darkest;
-}
-.modal-body {
-  @include regulartext();
-  color: $col-darkest;
-  font-size: 19px;
-}
-
-.modal-label-submission {
-  @include handdrawntext();
-  font-size: 30px !important;
-  text-align: center;
-}
-
-.animated-duck {
-  animation: duckbobbing 1.3s linear infinite;
-}
-
-.animated-wheel {
-  animation: rotation 2s infinite linear;
-}
-
-.loader-circle {
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  height: 120px;
-  left: 50%;
-  margin-left: -60px;
-  margin-top: -60px;
-  position: absolute;
-  top: 50%;
-  width: 120px;
-}
-
-.loader-content {
-  @include regulartext();
-  color: #222;
-  font-weight: bold;
-  left: 50%;
-  position: absolute;
-  top: 60%;
-  transform: translate(-50%, -100%);
-}
-
-.loader-line-mask {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 60px;
-  height: 120px;
-  margin-left: -60px;
-  margin-top: -60px;
-  overflow: hidden;
-  transform-origin: 60px 60px;
-  -webkit-mask-image: -webkit-linear-gradient(top, #000000, rgba(0, 0, 0, 0));
-  animation: rotateLoader 1s infinite linear;
-}
-
-.loader-line-mask .loader-line {
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 3px #222;
-  height: 120px;
-  width: 120px;
-}
-
-.stickynote-rotating {
-  //animation: rotation 2s infinite linear;
-}
-
-.loader {
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  transform: scale(0.75);
-  width: 100%;
-  z-index: 100;
-}
-
-.modal-title {
-  font-weight: 900 !important;
-}
-
-.modal {
-  backdrop-filter: blur(3px) !important;
-}
-
-.modal-header,
-.modal-body,
-.modal-footer {
-  //background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
-}
-
-.modal-header {
-  // border-bottom: 1px dashed #000 !important;
-}
-
-.modal-footer {
-  //border-top: 1px dashed #000 !important;
-}
-
-.alert-to-other-boards {
-  @include handdrawntext();
-  background: $col-lightest;
-  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
-  height: 65px;
-  padding: 5px;
-  pointer-events: none;
-  position: absolute;
-  right: -5px;
-  rotate: -10deg;
-  top: 26%;
-  transform: scale(0.75);
-  width: 140px;
-  opacity: 0;
-}
-
-.fade-in-out {
-  animation: fade-in-out 10s ease-in-out 5s forwards;
-}
-
-.modview-section-title {
-  @include thick-title();
-}
-.modview-section-subtitle {
-  @include thick-title();
-  font-size: 22px;
-}
-
-.modview-label-text {
-  @include handdrawntext();
-}
-
-.accordion-button:not(.collapsed) {
-  background: darken(#eee, 5%) !important;
-  color: #222 !important;
-}
-
-.table {
-  --bs-table-striped-bg: #eee !important;
-}
 
 @media only screen and (max-width: 700px) {
 }
