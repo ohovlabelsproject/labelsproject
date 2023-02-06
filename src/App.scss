@@ -280,7 +280,7 @@ body {
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   height: 100%;
   left: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: -99;
@@ -290,7 +290,7 @@ body {
   background: linear-gradient(to bottom, white, white);
   height: 100%;
   left: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: -100;

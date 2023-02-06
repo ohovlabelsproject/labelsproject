@@ -11,16 +11,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ModView from "./Modview/Modview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/admin" element={<ModView />}></Route>
-      </Routes>
-    </BrowserRouter>
-  </>
-);
+
+function AppContainer() {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}></Route>
+          <Route path="/admin" element={<ModView x={"hi"} />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default AppContainer;
+
+root.render(<AppContainer />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

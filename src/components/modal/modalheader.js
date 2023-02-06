@@ -5,10 +5,10 @@ function ModalHeader(props) {
         {props.title}
       </h5>
       <button
-        type="button"
+        aria-label="Close modal dialogue"
         className="btn-close"
         data-bs-dismiss="modal"
-        aria-label="Close"
+        type="button"
       ></button>
     </div>
   );

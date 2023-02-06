@@ -7,8 +7,8 @@ import Loader from "./components/loader/loader";
 import NavBtnL from "./components/navbtn/navbtnl";
 import NavBtnR from "./components/navbtn/navbtnr";
 import PaperBall from "./components/animation/paperball";
+import ModalAttributions from "./components/modal/modalAttributions";
 import ModalWindow from "./components/modal/modal";
-import ModalConfirmationMsg from "./components/modal/modalConfirmationMsg";
 import ModalWelcome from "./components/modal/modalWelcome";
 import Whiteboard from "./components/whiteboard/whiteboard";
 import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
@@ -19,7 +19,6 @@ import { useState } from "react";
 import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
 import utils from "./components/utils/utils";
-import ModalAttributions from "./components/modal/modalAttributions";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
@@ -181,15 +180,14 @@ function App(props) {
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
         <ModalAttributions />
-        <ModalConfirmationMsg />
         <Hud />
         {/* userGeoloc.IPv4 */}
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
             <Instructions />
             <Whiteboard
-              labelsData={labelsData}
               getDocs={props.getDocs}
+              labelsData={labelsData}
               labelsMetadata={labelsMetadata}
               updateLabelDisposalState={updateLabelDisposalState}
             />

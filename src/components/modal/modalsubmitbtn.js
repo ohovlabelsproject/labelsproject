@@ -1,11 +1,10 @@
 function ModalSubmitBtn(props) {
   return (
     <button
-      type="button"
-      disabled={props.validationData.isInvalid}
-      data-bs-dismiss="modal"
+      aria-label="Submit label"
       className="btn-ohov-1"
-      style={{ opacity: props.validationData.isInvalid ? 0.2 : 1 }}
+      data-bs-dismiss="modal"
+      disabled={props.validationData.isInvalid}
       onClick={() => {
         const label = document.getElementById("modal-label-submission").value;
         if (!props.validationData.isInvalid) {
@@ -14,6 +13,8 @@ function ModalSubmitBtn(props) {
           alert("Cannot submit because: " + props.validationData.msg);
         }
       }}
+      style={{ opacity: props.validationData.isInvalid ? 0.2 : 1 }}
+      type="button"
     >
       Submit
     </button>

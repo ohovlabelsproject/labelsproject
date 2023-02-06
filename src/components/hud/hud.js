@@ -4,10 +4,11 @@ function Hud() {
       <div className="col-12 row">
         <div className="col-5 hud-col-l pl-1">
           <button
+            aria-label="Click to add a label"
             className="btn-ohov-1"
-            id="btn-ohov-1"
+            data-bs-target="#modal-add-label"
             data-bs-toggle="modal"
-            data-bs-target="#addLabel"
+            id="btn-ohov-1"
           >
             Add label &nbsp;
             <i className="fa fa-plus"></i>

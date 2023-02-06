@@ -34,6 +34,7 @@ function ModalAttributions() {
     <div>
       <div className="attributions" id="attributions">
         <button
+          aria-label="View attributions"
           className="attribution-link"
           onClick={handleShow}
           target="_blank"
@@ -42,6 +43,7 @@ function ModalAttributions() {
         </button>
       </div>
       <Modal
+        aria-label="Modal showing attributions"
         aria-labelledby="contained-modal-title-vcenter"
         backdrop="static"
         centered
@@ -82,7 +84,11 @@ function ModalAttributions() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <button className="btn-ohov-1" onClick={handleClose}>
+          <button
+            aria-label="Close attributions modal"
+            className="btn-ohov-1"
+            onClick={handleClose}
+          >
             Close
           </button>
         </Modal.Footer>

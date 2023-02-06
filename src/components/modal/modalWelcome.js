@@ -45,14 +45,21 @@ function ModalWelcome(props) {
       >
         <Col>
           <a href="https://en.wikipedia.org/wiki/Rubber_duck" target="_self">
-            <button className="btn-ohov-2">
+            <button
+              aria-label="Decline and redirect from this site"
+              className="btn-ohov-2"
+            >
               {uiLabels.welcome.action.decline}
             </button>
           </a>
         </Col>
 
         <Col>
-          <button className="btn-ohov-welcome" onClick={handleClose}>
+          <button
+            aria-label="Consent and close modal"
+            className="btn-ohov-welcome"
+            onClick={handleClose}
+          >
             {uiLabels.welcome.action.consent}
           </button>
         </Col>

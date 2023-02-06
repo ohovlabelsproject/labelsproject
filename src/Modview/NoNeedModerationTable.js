@@ -1,7 +1,7 @@
 import utils from "../components/utils/utils";
 import uiLabels from "../uiLabels";
 
-function NeedsModerationTable(props) {
+function NoNeedModerationTable(props) {
   const formatTimestamp = (ts) => {
     if (ts) {
       const d = new Date(ts);
@@ -29,7 +29,7 @@ function NeedsModerationTable(props) {
       <tbody>
         {props.labelsData?.labelsArr?.map((l) => {
           // inc state of unvetted
-          return l.vetted ? null : (
+          return l.vetted ? (
             <tr>
               <td className="text-center px-2">
                 <div className="modview-label-text mt-4">{l.label}</div>
@@ -62,11 +62,11 @@ function NeedsModerationTable(props) {
                 </div>
               </td>
             </tr>
-          );
+          ) : null;
         })}
       </tbody>
     </table>
   );
 }
 
-export default NeedsModerationTable;
+export default NoNeedModerationTable;

@@ -2,7 +2,24 @@ import { Accordion } from "react-bootstrap";
 import NeedsModerationTable from "./NeedsModerationTable";
 import modreport from "./ModReport";
 
-function ModView() {
+import firebaseConfig from "../firebaseConfig";
+import { getAnalytics } from "@firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "@firebase/app";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import NoNeedModerationTable from "./NoNeedModerationTable";
+
+function ModView(props) {
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const showDebugPanel = false;
+
+  // Firestore doc lookup:
+  const db = getFirestore();
+  const colRef = collection(db, "labels");
+
   const blob = () => {
     let link = document.createElement("a");
     let blob = new Blob([modreport.generate()], { type: "text/html" });
@@ -11,6 +28,28 @@ function ModView() {
     link.click();
     URL.revokeObjectURL(link.href);
   };
+
+  /* Set/get labels data to/from state:
+   **********************************/
+  const [labelsData, setLabelsData] = useState();
+
+  const getLabels = (e) => {
+    getDocs(colRef).then((snapshot) => {
+      const labelsArr = [];
+      snapshot.docs.forEach((doc) => {
+        labelsArr.push(doc.data());
+      });
+      setLabelsData((previousState) => {
+        return { ...previousState, labelsArr };
+      });
+    });
+  };
+
+  useEffect(() => {
+    document.body.overflow = "scroll";
+    getLabels();
+  }, []);
+
   return (
     <>
       <div className="bg-dark text-light col-12 row p-0 m-0">
@@ -45,20 +84,24 @@ function ModView() {
             <Accordion.Item eventKey="0">
               <Accordion.Header className="p-0 m-0">
                 <h3 className="modview-section-subtitle p-0 m-0">
-                  Unvetted Submissions (2)
+                  Unvetted Submissions (
+                  {labelsData?.labelsArr?.filter((l) => !l.vetted).length})
                 </h3>
               </Accordion.Header>
               <Accordion.Body>
-                <NeedsModerationTable />
+                <NeedsModerationTable labelsData={labelsData} />
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
               <Accordion.Header>
                 <h3 className="modview-section-subtitle p-0 m-0">
-                  Vetted Submissions (9)
+                  Vetted Submissions (
+                  {labelsData?.labelsArr?.filter((l) => l.vetted).length})
                 </h3>
               </Accordion.Header>
-              <Accordion.Body></Accordion.Body>
+              <Accordion.Body>
+                <NoNeedModerationTable labelsData={labelsData} />
+              </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header>

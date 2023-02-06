@@ -34,6 +34,31 @@ const uiLabels = {
     body: "Add your own label. It will be counted as a submission & may appear for others*.",
     footnote: "**If it gets enough quacks from duck mods.",
   },
+  date: {
+    days: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    months: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+  },
   footer: "Our Hearings, Our Voice",
 };
 

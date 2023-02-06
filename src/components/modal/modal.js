@@ -89,11 +89,12 @@ function ModalWindow(props) {
     <>
       <div
         aria-hidden="true"
+        aria-label="Modal dialogue"
         aria-labelledby="staticBackdropLabel"
         className="modal fade"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        id="addLabel"
+        id="modal-add-label"
         tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered">
@@ -133,6 +134,7 @@ function ModalWindow(props) {
               </div>
               <div className="modal-footer">
                 <button
+                  aria-label="Close or dismiss modal"
                   className="btn-ohov-2"
                   data-bs-dismiss="modal"
                   type="button"
