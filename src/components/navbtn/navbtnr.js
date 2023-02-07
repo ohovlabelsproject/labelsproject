@@ -1,19 +1,15 @@
+import NavBtnAlert from "./navbtnalert";
+
 function NavBtnR(props) {
   const disableDirection =
     props.labelsMetadata.sliceEnd >
     (props.labelsData && props.labelsData.labelsArr.length - 1
       ? props.labelsData.labelsArr.length - 1
       : 9);
+
   return props.labelsMetadata.labelBeingDisposedOf ? null : (
     <>
-      {props.labelsData &&
-      props.labelsData.labelsArr &&
-      !props.labelsMetadata.labelBeingDisposedOf ? (
-        <div className="alert-to-other-boards fade-in-out">
-          <div>more on next boards!</div>
-          <img alt="" src="/arrow-handdrawn-compressed.png" width="50px" />
-        </div>
-      ) : null}
+      <NavBtnAlert />
       <div
         className={`nav-r-btn-wrapper ${
           disableDirection ? "nav-btn-disable" : ""

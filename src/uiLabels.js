@@ -29,6 +29,11 @@ const uiLabels = {
       hasBannedWord: "Must use appropriate language",
       hasDuplicate: "Must not be an existing label",
     },
+    alerts: {
+      navAlert: {
+        moreLabelsNextBoard: "more on next boards!",
+      },
+    },
   },
   noLabelsToLoad: {
     msg: "There are currently 0 labels to load. Try adding your own!",
