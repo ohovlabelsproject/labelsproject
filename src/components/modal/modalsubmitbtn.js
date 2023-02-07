@@ -11,6 +11,7 @@ function ModalSubmitBtn(props) {
         const label = document.getElementById("modal-label-submission").value;
         if (!props.validationData.isInvalid) {
           props.handleCustomLabelSubmission(label);
+          props.resetState();
         } else {
           alert("Cannot submit because: " + props.validationData.msg);
         }

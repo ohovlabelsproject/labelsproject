@@ -74,6 +74,25 @@ function ModalWindow(props) {
     });
   };
 
+  /* Reset state:
+   *****************************************/
+  const resetState = () => {
+    setSubmissionData((previousState) => {
+      return {
+        ...previousState,
+        isInvalid: true,
+        msg: "",
+      };
+    });
+    setValidationData(() => {
+      return {
+        label: "",
+      };
+    });
+    // Anti-pattern, but just to make sure (wasn't working):
+    document.getElementById("modal-label-submission").value = "";
+  };
+
   /* Update validatation data state:
    *****************************************/
   const updataValidationDataState = (o) => {
@@ -145,6 +164,7 @@ function ModalWindow(props) {
                   handleCustomLabelSubmission={
                     props.handleCustomLabelSubmission
                   }
+                  resetState={resetState}
                   validationData={validationData}
                 />
               </div>

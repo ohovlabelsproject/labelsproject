@@ -77,22 +77,27 @@ function App(props) {
   /* Handle label submission (add doc):
    **********************************/
   const handleCustomLabelSubmission = (label) => {
+    // If the user already added this label, return:
+    if (localStorage.getItem("ohov_l_sub_" + label)) {
+      alert(uiLabels.labelSubmission.feedback.userAlreadyAdded);
+      return;
+    }
     addDoc(colRef, {
-      id: uuidv4(),
-      dateAdded: new Date(),
-      label: label,
-      submittedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
-      vetted: false,
       bins: [
         {
           binnedOn: new Date(),
           binnedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
         },
       ],
+      id: uuidv4(),
+      label: label,
+      submittedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
+      submittedOn: new Date(),
+      vetted: false,
     })
       .then(() => {
         alert(uiLabels.labelSubmission.feedback.successfulSubmission);
-        // empty input field.... document....
+        localStorage.setItem("ohov_l_sub_" + label, true);
       })
       .catch((e) => {
         alert(`Please contact administrator: ${e}`);
