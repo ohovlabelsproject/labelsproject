@@ -9,6 +9,7 @@ import "font-awesome/css/font-awesome.css";
 import "animate.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ModView from "./Modview/Modview";
+import Results from "./Results/Results";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -18,7 +19,8 @@ function AppContainer() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}></Route>
-          <Route path="/admin" element={<ModView x={"hi"} />}></Route>
+          <Route path="/results" element={<Results />}></Route>
+          <Route path="/admin" element={<ModView />}></Route>
         </Routes>
       </BrowserRouter>
     </>
