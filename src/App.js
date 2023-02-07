@@ -19,6 +19,8 @@ import { useState } from "react";
 import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
 import utils from "./components/utils/utils";
+import { v4 as uuidv4 } from "uuid";
+import uiLabels from "./uiLabels";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
@@ -45,6 +47,8 @@ function App(props) {
     sliceStart: 0,
     sliceEnd: 9,
     labelBeingDisposedOf: false,
+    // Skip the intro/welcome modal if there's a local storage item saying to do so?
+    skipIntro: localStorage.getItem("ohov_skip_intro") ? true : false,
   });
 
   /* Get the labels from the database:
@@ -74,15 +78,25 @@ function App(props) {
    **********************************/
   const handleCustomLabelSubmission = (label) => {
     addDoc(colRef, {
+      id: uuidv4(),
+      dateAdded: new Date(),
       label: label,
-      author: "anon",
+      submittedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
       vetted: false,
-    }).then(() => {
-      alert(
-        "At this point there could be a message telling the user their submission won't immediately appear - has to be moderated..."
-      );
-      // empty input field.... document....
-    });
+      bins: [
+        {
+          binnedOn: new Date(),
+          binnedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
+        },
+      ],
+    })
+      .then(() => {
+        alert(uiLabels.labelSubmission.feedback.successfulSubmission);
+        // empty input field.... document....
+      })
+      .catch((e) => {
+        alert(`Please contact administrator: ${e}`);
+      });
   };
 
   /* Handle nav arrows being clicked:
@@ -157,6 +171,12 @@ function App(props) {
       .then((data) => setUserGeoloc(data));
   };
 
+  //
+  const updateLabelDoc = (o) => {
+    //
+    console.log(o);
+  };
+
   /*
   useEffect(() => {
     // getLabels();
@@ -173,6 +193,7 @@ function App(props) {
         <ModalWelcome
           getLabels={getLabels}
           getUserGeolocation={getUserGeolocation}
+          labelsMetadata={labelsMetadata}
           preventDefaultTouchActions={preventDefaultTouchActions}
         />
         <ModalWindow
@@ -181,7 +202,6 @@ function App(props) {
         />
         <ModalAttributions />
         <Hud />
-        {/* userGeoloc.IPv4 */}
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
             <Instructions />
@@ -190,6 +210,7 @@ function App(props) {
               labelsData={labelsData}
               labelsMetadata={labelsMetadata}
               updateLabelDisposalState={updateLabelDisposalState}
+              updateLabelDoc={updateLabelDoc}
             />
             <Footer />
           </span>
@@ -197,7 +218,6 @@ function App(props) {
           <Loader />
         )}
       </div>
-
       <NavBtnL
         handleNavClick={handleNavClick}
         labelsMetadata={labelsMetadata}

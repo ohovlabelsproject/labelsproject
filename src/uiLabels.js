@@ -30,9 +30,16 @@ const uiLabels = {
       hasDuplicate: "Must not be an existing label",
     },
   },
+  noLabelsToLoad: {
+    msg: "Currently we have 0 labels to load. Try adding your own!",
+  },
   labelSubmission: {
     body: "Add your own label. It will be counted as a submission & may appear for others*.",
     footnote: "**If it gets enough quacks from duck mods.",
+    feedback: {
+      successfulSubmission:
+        "Thank you. Your label was successfully submitted. \n\nIt may take some time for it to appear on the app, but be assured it will be shared with our language group who are working on changing language in the hearings system. Your submissions are greatly appreciated.",
+    },
   },
   date: {
     days: [

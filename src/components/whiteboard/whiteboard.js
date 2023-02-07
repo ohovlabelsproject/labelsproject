@@ -10,10 +10,11 @@ function Whiteboard(props) {
         updateLabelDisposalState={props.updateLabelDisposalState}
       />
       <StickyZone
-        placeholderWords={props.placeholderWords}
         labelsData={props.labelsData}
         labelsMetadata={props.labelsMetadata}
+        placeholderWords={props.placeholderWords}
         updateLabelDisposalState={props.updateLabelDisposalState}
+        updateLabelDoc={props.updateLabelDoc}
       />
       <BinZone />
     </section>

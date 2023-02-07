@@ -9,7 +9,7 @@ function ModalWindow(props) {
   const [submissionData, setSubmissionData] = useState({ label: "" });
   const [validationData, setValidationData] = useState({
     isInvalid: true,
-    msg: `Must be between ${settings.labels.minLength}-${settings.labels.maxLength} characters`,
+    msg: "",
   });
 
   /* Check for bad words (not allowed):
@@ -122,7 +122,7 @@ function ModalWindow(props) {
                     });
                   }}
                 ></input>
-                {validationData.isInvalid ? (
+                {validationData.msg && validationData.isInvalid ? (
                   <div className="alert alert-sm p-1 alert-info small">
                     <i className="fa fa-warning"></i>&nbsp;
                     {validationData.msg}

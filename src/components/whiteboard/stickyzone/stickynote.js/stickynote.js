@@ -171,9 +171,8 @@ function StickyNote(props) {
     setTimeout(() => {
       animateDuck();
     }, 500);
-
-    //
     props.updateLabelDisposalState(true);
+    props.updateLabelDoc(props.label);
   };
 
   /* Handle what happens when note is dropped:

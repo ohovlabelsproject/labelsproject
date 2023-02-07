@@ -1,3 +1,5 @@
+import settings from "../../settings";
+
 function ModalSubmitBtn(props) {
   return (
     <button
@@ -11,6 +13,9 @@ function ModalSubmitBtn(props) {
           props.handleCustomLabelSubmission(label);
         } else {
           alert("Cannot submit because: " + props.validationData.msg);
+        }
+        if (settings.shouldSkipIntro.onLabelSubmission) {
+          localStorage.setItem("ohov_skip_intro", true);
         }
       }}
       style={{ opacity: props.validationData.isInvalid ? 0.2 : 1 }}

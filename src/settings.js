@@ -1,4 +1,7 @@
 const settings = {
+  shouldSkipIntro: {
+    onLabelSubmission: false,
+  },
   labels: {
     minLength: 5,
     maxLength: 15,

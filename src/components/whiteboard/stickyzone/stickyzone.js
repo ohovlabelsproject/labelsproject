@@ -1,3 +1,4 @@
+import NoLabels from "./nolabels";
 import NonStickyNote from "./stickynote.js/nonstickynote";
 import StickyNote from "./stickynote.js/stickynote";
 
@@ -5,6 +6,7 @@ function StickyZone(props) {
   return (
     <section className="stickyzone">
       <div className="col-12 row stickynotes">
+        <NoLabels labelsData={props.labelsData} />
         {props.labelsData
           ? props.labelsData.labelsArr
               .slice(
@@ -22,6 +24,7 @@ function StickyZone(props) {
                       label={el.label.toLowerCase()}
                       labelsMetadata={props.labelsMetadata}
                       updateLabelDisposalState={props.updateLabelDisposalState}
+                      updateLabelDoc={props.updateLabelDoc}
                     />
                   )}
                 </div>
