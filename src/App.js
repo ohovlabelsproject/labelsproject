@@ -37,7 +37,7 @@ function App(props) {
   // eslint-disable-next-line
   const auth = getAuth(app);
   const showDebugPanel = false;
-  const testMode = true;
+  const testMode = false;
 
   // Firestore doc lookup:
   const db = getFirestore();
