@@ -37,7 +37,7 @@ function App(props) {
   // eslint-disable-next-line
   const auth = getAuth(app);
   const showDebugPanel = false;
-  const testMode = false;
+  const testMode = true;
 
   // Firestore doc lookup:
   const db = getFirestore();
@@ -50,6 +50,8 @@ function App(props) {
   /* Set/get labels data to/from state:
    **********************************/
   const [labelsData, setLabelsData] = useState();
+
+  const [showAttributions, setShowAttributions] = useState(false);
 
   /* Set/get meta:
    **********************************/
@@ -243,8 +245,14 @@ function App(props) {
           labelsData={labelsData}
           handleCustomLabelSubmission={handleCustomLabelSubmission}
         />
-        <ModalAttributions />
-        <Hud />
+        <ModalAttributions
+          showAttributions={showAttributions}
+          setShowAttributions={setShowAttributions}
+        />
+        <Hud
+          showAttributions={showAttributions}
+          setShowAttributions={setShowAttributions}
+        />
         {labelsData ? (
           <span className="animate__animated animate__fadeIn">
             <Instructions />

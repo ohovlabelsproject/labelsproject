@@ -81,6 +81,23 @@ $testbg-enabled: false;
   background-image: initial;
 }
 
+@mixin btn-ohov-hud() {
+  @include regulartext();
+  color: #555 !important;
+  background: none;
+  border-color: rgba(65, 65, 144, 0);
+  border-radius: 70px;
+  border-width: 10px !important;
+  font-size: 16px;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-weight: 900 !important;
+  width: 125px;
+}
+
+@mixin btn-ohov-hud-hover() {
+  //
+}
+
 @mixin btn-ohov-approve {
   @include regulartext();
   color: $col-lightest !important;
@@ -218,7 +235,8 @@ $testbg-enabled: false;
 html,
 body {
   max-width: 100%;
-  //overflow-x: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   // overscroll-behavior: contain;
 }
 
@@ -348,6 +366,14 @@ body {
   @include btn-ohov-2-hover();
 }
 
+.btn-ohov-hud {
+  @include btn-ohov-hud();
+}
+
+.btn-ohov-hud:hover {
+  @include btn-ohov-hud-hover();
+}
+
 .btn-ohov-approve {
   @include btn-ohov-approve();
   width: 120px;
@@ -389,13 +415,9 @@ div.hud-col-r {
   @include strip-margin-and-padding();
 }
 
-div.hud-col-l {
-  @include center();
-}
-
+div.hud-col-l,
 div.hud-col-r {
-  text-align: right;
-  padding-right: 10px;
+  @include center();
 }
 
 .duck {
@@ -498,6 +520,41 @@ footer.footer {
   box-shadow: inset 0 0 0 3px #222;
   height: 120px;
   width: 120px;
+}
+
+.menu-wrapper {
+  animation: menu-load 0.2s forwards;
+  background: none;
+  border-radius: 5px !important;
+  display: none;
+  margin-right: 75px;
+  overflow: hidden;
+  padding: 1px;
+  position: absolute;
+  top: 60px;
+  transform-origin: top;
+  width: 200px;
+  z-index: 9999;
+}
+
+.menu-wrapper button {
+  border: 1px solid #eee;
+  border-radius: 0;
+  color: rgba(0, 0, 0, 0.8) !important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-size: 17px;
+}
+
+.menu-wrapper button:hover {
+  background: #eee;
+}
+
+.menu-wrapper button:first-child {
+  border-radius: 5px 5px 0 0;
+}
+
+.menu-wrapper button:last-child {
+  border-radius: 0 0 5px 5px;
 }
 
 .modal {
@@ -796,6 +853,15 @@ section.binzone {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes menu-load {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
 

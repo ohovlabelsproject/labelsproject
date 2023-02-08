@@ -124,7 +124,7 @@ function ModalWindow(props) {
                 {uiLabels.labelSubmission.body}
                 <br />
                 <br />
-                <label>Your label:</label>
+                {/* <label>Your label:</label> */}
                 <input
                   className="form-control modal-label-submission"
                   defaultValue={submissionData.label}

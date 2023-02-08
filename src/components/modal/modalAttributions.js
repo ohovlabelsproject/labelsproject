@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-function ModalAttributions() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+function ModalAttributions(props) {
+  const handleClose = () => props.setShowAttributions(false);
+  // const handleShow = () => props.setShowAttributions(true);
   const attributions = [
     {
       type: "Graphics",
@@ -32,6 +30,7 @@ function ModalAttributions() {
 
   return (
     <div>
+      {/*
       <div className="attributions" id="attributions">
         <button
           aria-label="View attributions"
@@ -42,6 +41,7 @@ function ModalAttributions() {
           Attributions [+]
         </button>
       </div>
+       */}
       <Modal
         aria-label="Modal showing attributions"
         aria-labelledby="contained-modal-title-vcenter"
@@ -50,7 +50,7 @@ function ModalAttributions() {
         dialogClassName="modal-90w"
         keyboard={false}
         onHide={handleClose}
-        show={show}
+        show={props.showAttributions}
       >
         <Modal.Header closeButton>
           <Modal.Title>Attributions</Modal.Title>
