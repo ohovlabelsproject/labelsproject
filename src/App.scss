@@ -455,7 +455,8 @@ footer.footer {
   @include random-bgr();
   @include strip-margin-and-padding();
   height: 7%;
-  color: #444;
+  color: #666;
+  font-size: 11px;
 }
 
 .main-area-wrapper {
