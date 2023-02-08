@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import firebaseConfig from "../firebaseConfig";
 import BarChartComponent from "./BarChartComponent";
 
-function Results(props) {
+function Results() {
   const app = initializeApp(firebaseConfig);
   // eslint-disable-next-line
   const analytics = getAnalytics(app);

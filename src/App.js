@@ -151,8 +151,8 @@ function App(props) {
     }
   };
 
-  /* :
-   **********************************/
+  /* Check if orientation is landscape:
+   ********************************************/
   const isOrientationLandscape = () => {
     if (window.innerWidth > window.innerHeight) {
       return true;
@@ -160,7 +160,7 @@ function App(props) {
   };
 
   /* Prevent default touch actions:
-   **********************************/
+   ********************************************/
   const preventDefaultTouchActions = () => {
     document.getElementById("app").addEventListener("touchmove", (event) => {
       if (!isOrientationLandscape()) {
@@ -180,7 +180,7 @@ function App(props) {
     });
   };
 
-  /* :
+  /* Listen for orientation changes:
    ******************************************************/
   window.addEventListener("orientationchange", () => {
     const height = window.innerHeight;
