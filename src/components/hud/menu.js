@@ -11,7 +11,16 @@ function Menu(props) {
       }}
     >
       <button className="form-control">Instructions</button>
-      <button className="form-control">Results</button>
+      <button
+        className="form-control"
+        onClick={() => {
+          window.confirm(
+            "You will be taken away from this page. Are you sure?"
+          );
+        }}
+      >
+        Results
+      </button>
       <button
         className="form-control"
         onClick={() => {

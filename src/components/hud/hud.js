@@ -41,8 +41,8 @@ function Hud(props) {
             }}
             style={{
               background: menuExpansion.expanded
-                ? "rgba(0, 0, 0, 0.1)"
-                : "none",
+                ? "rgba(255, 255, 255, 0.7)"
+                : "rgba(0, 0, 0, 0.1)",
             }}
           >
             Menu{" "}
