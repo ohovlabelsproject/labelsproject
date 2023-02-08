@@ -126,6 +126,7 @@ function ModalWelcome(props) {
     props.getLabels();
     props.getUserGeolocation();
     props.preventDefaultTouchActions();
+    props.updateOverflowStyleBehaviour();
   };
 
   /* Handle the slide being changed:

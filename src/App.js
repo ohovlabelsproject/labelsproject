@@ -11,22 +11,31 @@ import ModalAttributions from "./components/modal/modalAttributions";
 import ModalWindow from "./components/modal/modal";
 import ModalWelcome from "./components/modal/modalWelcome";
 import Whiteboard from "./components/whiteboard/whiteboard";
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
-import utils from "./components/utils/utils";
-import { v4 as uuidv4 } from "uuid";
 import uiLabels from "./uiLabels";
+import utils from "./components/utils/utils";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth(app);
   const showDebugPanel = false;
+  const testMode = true;
 
   // Firestore doc lookup:
   const db = getFirestore();
@@ -48,7 +57,8 @@ function App(props) {
     sliceEnd: 9,
     labelBeingDisposedOf: false,
     // Skip the intro/welcome modal if there's a local storage item saying to do so?
-    skipIntro: localStorage.getItem("ohov_skip_intro") ? true : false,
+    skipIntro:
+      localStorage.getItem("ohov_skip_intro") || testMode ? true : false,
   });
 
   /* Get the labels from the database:
@@ -137,7 +147,8 @@ function App(props) {
     }
   };
 
-  //
+  /* :
+   **********************************/
   const isOrientationLandscape = () => {
     if (window.innerWidth > window.innerHeight) {
       return true;
@@ -165,21 +176,45 @@ function App(props) {
     });
   };
 
+  /* :
+   ******************************************************/
   window.addEventListener("orientationchange", function () {
     //alert("Landscape mode doesn't currently work properly!");
   });
 
-  //
+  /* Get user's IP from geolocation data:
+   ******************************************************/
   const getUserGeolocation = () => {
     fetch("https://geolocation-db.com/json/")
       .then((response) => response.json())
       .then((data) => setUserGeoloc(data));
   };
 
-  //
-  const updateLabelDoc = (o) => {
-    //
-    console.log(o);
+  /* Update bins array:
+   ******************************************************/
+  const updateBinsArr = (o) => {
+    const id = o.id;
+    const q = query(collection(db, "labels"), where("id", "==", id));
+    getDocs(q).then((snapshot) => {
+      snapshot.forEach((doc) => {
+        const binsArr = doc.data().bins;
+        binsArr.push({
+          binnedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
+          binnedOn: new Date(),
+        });
+        updateDoc(doc.ref, {
+          bins: binsArr,
+        });
+      });
+    });
+  };
+
+  /* Update overflow and behaviour styles:
+   ******************************************************/
+  const updateOverflowStyleBehaviour = () => {
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehaviorY = "contain !important";
+    document.body.style.overscrollBehavior = "contain";
   };
 
   /*
@@ -200,6 +235,7 @@ function App(props) {
           getUserGeolocation={getUserGeolocation}
           labelsMetadata={labelsMetadata}
           preventDefaultTouchActions={preventDefaultTouchActions}
+          updateOverflowStyleBehaviour={updateOverflowStyleBehaviour}
         />
         <ModalWindow
           labelsData={labelsData}
@@ -215,7 +251,7 @@ function App(props) {
               labelsData={labelsData}
               labelsMetadata={labelsMetadata}
               updateLabelDisposalState={updateLabelDisposalState}
-              updateLabelDoc={updateLabelDoc}
+              updateBinsArr={updateBinsArr}
             />
             <Footer />
           </span>

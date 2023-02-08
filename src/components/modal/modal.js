@@ -142,7 +142,7 @@ function ModalWindow(props) {
                   }}
                 ></input>
                 {validationData.msg && validationData.isInvalid ? (
-                  <div className="alert alert-sm p-1 alert-info small">
+                  <div className="alert alert-sm p-1 alert-warning small">
                     <i className="fa fa-warning"></i>&nbsp;
                     {validationData.msg}
                   </div>

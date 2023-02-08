@@ -172,7 +172,7 @@ function StickyNote(props) {
       animateDuck();
     }, 500);
     props.updateLabelDisposalState(true);
-    props.updateLabelDoc(props.label);
+    props.updateBinsArr(props.labelData);
   };
 
   /* Handle what happens when note is dropped:

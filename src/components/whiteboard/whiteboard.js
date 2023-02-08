@@ -14,7 +14,7 @@ function Whiteboard(props) {
         labelsMetadata={props.labelsMetadata}
         placeholderWords={props.placeholderWords}
         updateLabelDisposalState={props.updateLabelDisposalState}
-        updateLabelDoc={props.updateLabelDoc}
+        updateBinsArr={props.updateBinsArr}
       />
       <BinZone />
     </section>

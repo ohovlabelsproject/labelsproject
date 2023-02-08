@@ -218,8 +218,8 @@ $testbg-enabled: false;
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
+  //overflow-x: hidden;
+  // overscroll-behavior: contain;
 }
 
 .accordion-button:not(.collapsed) {
@@ -321,9 +321,9 @@ body {
 }
 
 body {
-  overflow: hidden;
+  //overflow: hidden;
   background-color: #9d9d9d;
-  overscroll-behavior-y: contain !important;
+  //overscroll-behavior-y: contain !important;
 }
 
 .btn {
@@ -585,7 +585,7 @@ footer.footer {
 }
 
 .nav-btn-disable {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
