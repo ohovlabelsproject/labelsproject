@@ -182,8 +182,17 @@ function App(props) {
 
   /* :
    ******************************************************/
-  window.addEventListener("orientationchange", function () {
-    //alert("Landscape mode doesn't currently work properly!");
+  window.addEventListener("orientationchange", () => {
+    const height = window.innerHeight;
+    const minHeight = 625;
+    const allowScroll = !isOrientationLandscape() && height > minHeight;
+    if (allowScroll) {
+      document.body.classList.remove("overflow-hide");
+    } else {
+      if (!document.body.classList.contains("overflow-hide")) {
+        document.body.classList.add("overflow-hide");
+      }
+    }
   });
 
   /* Get user's IP from geolocation data:
@@ -216,9 +225,7 @@ function App(props) {
   /* Update overflow and behaviour styles:
    ******************************************************/
   const updateOverflowStyleBehaviour = () => {
-    document.body.style.overflow = "hidden";
-    document.body.style.overscrollBehaviorY = "contain !important";
-    document.body.style.overscrollBehavior = "contain";
+    document.body.classList.add("overflow-hide");
   };
 
   /*

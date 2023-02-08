@@ -232,11 +232,17 @@ $testbg-enabled: false;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.2' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
+.overflow-hide {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overscroll-behavior: contain !important;
+}
+
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  // overflow-x: hidden;
+  // overflow-y: hidden;
   // overscroll-behavior: contain;
 }
 
@@ -272,10 +278,11 @@ body {
 .app {
   @include guidelines();
   @include strip-margin-and-padding();
-  height: 85vh;
-  margin-top: 20px;
+  height: 100vh;
   min-height: 625px;
   min-width: 340px;
+  padding-bottom: 15px;
+  padding-top: 15px;
   text-align: center;
 }
 
@@ -417,6 +424,7 @@ div.hud-col-r {
 
 div.hud-col-l,
 div.hud-col-r {
+  margin-top: 2px;
   @include center();
 }
 
@@ -675,6 +683,8 @@ section.whiteboard {
 section.stickyzone {
   @include center();
   height: 70%;
+  min-height: 320px;
+  max-height: 350px;
 }
 
 section.binzone {
