@@ -14,7 +14,7 @@ function TruckLogo() {
       }}
     >
       <div className="p-0 m-0" style={{ top: 5 }}>
-        <img alt="" src="/ducktruck-logo.png" width="95px" />
+        <img alt="" src="/img/duck/ducktruck-logo.png" width="95px" />
       </div>
     </div>
   );

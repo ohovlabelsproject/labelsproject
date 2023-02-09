@@ -28,7 +28,7 @@ function Wheels() {
           zIndex: 5,
         }}
       >
-        <img alt="" src="/wheel.png" width="35px" />
+        <img alt="" src="/img/duck/wheel.png" width="35px" />
       </div>
     );
   });

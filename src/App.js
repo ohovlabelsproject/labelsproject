@@ -1,16 +1,12 @@
 import "./App.scss";
+import DebugPanel from "./DebugPanel";
 import Duck from "./components/animation/duck";
-import Footer from "./components/footer/footer";
 import Hud from "./components/hud/hud";
-import Instructions from "./components/instructions/instructions";
-import Loader from "./components/loader/loader";
+import Main from "./Main";
+import Modals from "./components/modals/modals";
 import NavBtnL from "./components/navbtn/navbtnl";
 import NavBtnR from "./components/navbtn/navbtnr";
 import PaperBall from "./components/animation/paperball";
-import ModalAttributions from "./components/modal/modalAttributions";
-import ModalWindow from "./components/modal/modal";
-import ModalWelcome from "./components/modal/modalWelcome";
-import Whiteboard from "./components/whiteboard/whiteboard";
 import {
   addDoc,
   collection,
@@ -236,45 +232,33 @@ function App(props) {
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
-        <span style={{ display: showDebugPanel ? "block" : "none" }}>
-          Start: {labelsMetadata.sliceStart} --- End: {labelsMetadata.sliceEnd}{" "}
-          --- Pg: {labelsMetadata.pageIndex + 1} -- Labels #{" "}
-          {labelsData?.labelsArr?.length}
-        </span>
-        <ModalWelcome
+        <DebugPanel
+          labelsData={labelsData}
+          labelsMetadata={labelsMetadata}
+          showDebugPanel={showDebugPanel}
+        />
+        <Modals
           getLabels={getLabels}
           getUserGeolocation={getUserGeolocation}
+          handleCustomLabelSubmission={handleCustomLabelSubmission}
+          labelsData={labelsData}
           labelsMetadata={labelsMetadata}
           preventDefaultTouchActions={preventDefaultTouchActions}
-          updateOverflowStyleBehaviour={updateOverflowStyleBehaviour}
-        />
-        <ModalWindow
-          labelsData={labelsData}
-          handleCustomLabelSubmission={handleCustomLabelSubmission}
-        />
-        <ModalAttributions
-          showAttributions={showAttributions}
           setShowAttributions={setShowAttributions}
+          showAttributions={showAttributions}
+          updateOverflowStyleBehaviour={updateOverflowStyleBehaviour}
         />
         <Hud
           showAttributions={showAttributions}
           setShowAttributions={setShowAttributions}
         />
-        {labelsData ? (
-          <span className="animate__animated animate__fadeIn">
-            <Instructions />
-            <Whiteboard
-              getDocs={props.getDocs}
-              labelsData={labelsData}
-              labelsMetadata={labelsMetadata}
-              updateLabelDisposalState={updateLabelDisposalState}
-              updateBinsArr={updateBinsArr}
-            />
-            <Footer />
-          </span>
-        ) : (
-          <Loader />
-        )}
+        <Main
+          getDocs={getDocs}
+          labelsData={labelsData}
+          labelsMetadata={labelsMetadata}
+          updateBinsArr={updateBinsArr}
+          updateLabelDisposalState={updateLabelDisposalState}
+        />
       </div>
       <NavBtnL
         handleNavClick={handleNavClick}

@@ -104,11 +104,11 @@ function StickyNote(props) {
     let binDropZone = document.getElementById("binzone-droparea");
     let frameIndex = 0;
     const frames = [
-      { src: "/paper-ball-sm-1-compressed.png", w: "100%" },
-      { src: "/paper-ball-sm-2-compressed.png", w: "100%" },
-      { src: "/paper-ball-sm-3-compressed.png", w: "100%" },
-      { src: "/paper-ball-sm-4-compressed.png", w: "100%" },
-      { src: "/paper-ball-sm-compressed.png", w: "100%" },
+      { src: "/img/paper-ball/paper-ball-sm-1-compressed.png", w: "100%" },
+      { src: "/img/paper-ball/paper-ball-sm-2-compressed.png", w: "100%" },
+      { src: "/img/paper-ball/paper-ball-sm-3-compressed.png", w: "100%" },
+      { src: "/img/paper-ball/paper-ball-sm-4-compressed.png", w: "100%" },
+      { src: "/img/paper-ball/paper-ball-sm-compressed.png", w: "100%" },
     ];
     // Remove stickynote & make paperball appear:
     stickyNote.style.display = "none";

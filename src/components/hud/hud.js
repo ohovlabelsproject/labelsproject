@@ -19,10 +19,10 @@ function Hud(props) {
           </button>
         </div>
         <div className="col-4">
-          <a rel="noreferrer" href="http://www.ohov.co.uk" target="_blank">
+          <a href="http://www.ohov.co.uk" rel="noreferrer" target="_blank">
             <img
               alt="Our Hearing, Our Voice logo"
-              src="/ohov-logo.png"
+              src="/img/branding/ohov-logo.png"
               width="90px"
             />
           </a>

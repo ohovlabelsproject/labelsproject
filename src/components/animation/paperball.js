@@ -12,7 +12,12 @@ function PaperBall() {
         width: "100px",
       }}
     >
-      <img id="paper-ball-sm-img" src="/paper-ball-sm.png" width="100%" />
+      <img
+        alt=""
+        id="paper-ball-sm-img"
+        src="/img/paper-ball/paper-ball-sm.png"
+        width="100%"
+      />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Wheels from "./duck-truck-elements/wheels";
 
 function Duck() {
   return (
-    <div id="duck" className="duck" style={{ color: "#fff", display: "none" }}>
+    <div className="duck" id="duck" style={{ color: "#fff", display: "none" }}>
       <Wheels />
       <TruckLogo />
       <RubberDuck />

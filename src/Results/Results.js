@@ -71,6 +71,36 @@ function Results() {
     return "";
   };*/
 
+  const handleResultsFilterChange = (e) => {
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case "All time":
+        console.log("alll time");
+
+        labelsData.labelsArr.map(() => {
+          //
+        });
+
+        // set Data1
+
+        return;
+      case "Past year":
+        console.log("passst year");
+        return;
+      case "Past month":
+        console.log("passst month");
+        return;
+      case "Past week":
+        console.log("passst week");
+        return;
+      case "Past day":
+        console.log("passst week");
+        return;
+      default:
+        console.log("-");
+    }
+  };
+
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
@@ -80,19 +110,17 @@ function Results() {
             <h1 className="p-2" style={{ textAlign: "center" }}>
               Results
             </h1>
-            <p>
-              <ol style={{ textAlign: "left" }}>
-                <li>
-                  <a href="#overview">Overview</a>
-                </li>
-                <li>
-                  <a href="#resources">Resources</a>
-                </li>
-                <li>
-                  <a href="#attributions">Attributions</a>
-                </li>
-              </ol>
-            </p>
+            <ol style={{ textAlign: "left" }}>
+              <li>
+                <a href="#overview">Overview</a>
+              </li>
+              <li>
+                <a href="#resources">Resources</a>
+              </li>
+              <li>
+                <a href="#attributions">Attributions</a>
+              </li>
+            </ol>
             <h2 className="p-2" id="overview" style={{ textAlign: "left" }}>
               1. Overview
             </h2>
@@ -108,8 +136,12 @@ function Results() {
             <select
               aria-label="Results filtered by 'all time' by default"
               className="col-12 form-select"
+              defaultValue="All time"
+              onChange={(e) => {
+                handleResultsFilterChange(e);
+              }}
             >
-              <option selected>All time</option>
+              <option>All time</option>
               <option>Past year</option>
               <option>Past month</option>
               <option>Past week</option>
@@ -133,16 +165,18 @@ function Results() {
                     <th>Count</th>
                   </tr>
                 </thead>
-                {labelsData && labelsData.labelsArr && labelsData.data1
-                  ? labelsData.data1.map((label) => {
-                      return (
-                        <tr>
-                          <td>"{label.name}"</td>
-                          <td>{label.pv}</td>
-                        </tr>
-                      );
-                    })
-                  : null}
+                <tbody>
+                  {labelsData && labelsData.labelsArr && labelsData.data1
+                    ? labelsData.data1.map((label, index) => {
+                        return (
+                          <tr key={`tr-${index}`}>
+                            <td>"{label.name}"</td>
+                            <td>{label.pv}</td>
+                          </tr>
+                        );
+                      })
+                    : null}
+                </tbody>
               </table>
             </div>
           </div>
