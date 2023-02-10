@@ -28,6 +28,47 @@ const utils = {
       },
     },
   },
+  device: {
+    orientation: {
+      update: () => {
+        const height = window.innerHeight;
+        const minHeight = 625;
+        const allowScroll =
+          !utils.device.orientation.isLandscape() && height > minHeight;
+        if (allowScroll) {
+          document.body.classList.remove("overflow-hide");
+          if (!document.body.classList.contains("overflow-hide-x")) {
+            document.body.classList.add("overflow-x");
+          }
+        } else {
+          if (!document.body.classList.contains("overflow-hide")) {
+            document.body.classList.add("overflow-hide");
+          }
+        }
+      },
+      isLandscape: () => {
+        if (window.innerWidth > window.innerHeight) {
+          return true;
+        }
+      },
+    },
+    overflow: {
+      addOverflowStyleFix: () => {
+        document.body.classList.add("overflow-hide");
+      },
+    },
+    touch: {
+      preventDefaultTouchActions: () => {
+        document
+          .getElementById("app")
+          .addEventListener("touchmove", (event) => {
+            if (!utils.device.orientation.isLandscape()) {
+              event.preventDefault();
+            }
+          });
+      },
+    },
+  },
 };
 
 export default utils;

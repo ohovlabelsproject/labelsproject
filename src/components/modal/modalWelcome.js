@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Modal, Row } from "react-bootstrap";
 import uiLabels from "../../uiLabels";
+import utils from "../utils/utils";
 
 function ModalWelcome(props) {
   const [show, setShow] = useState(true);
@@ -123,10 +124,10 @@ function ModalWelcome(props) {
    **********************************/
   const handleClose = () => {
     setShow(false);
+    utils.device.touch.preventDefaultTouchActions();
+    utils.device.overflow.addOverflowStyleFix();
     props.getLabels();
     props.getUserGeolocation();
-    props.preventDefaultTouchActions();
-    props.updateOverflowStyleBehaviour();
   };
 
   /* Handle the slide being changed:

@@ -232,12 +232,6 @@ $testbg-enabled: false;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.2' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-.overflow-hide {
-  overflow-x: hidden;
-  overflow-y: hidden;
-  overscroll-behavior: contain !important;
-}
-
 html,
 body {
   max-width: 100%;
@@ -653,8 +647,18 @@ footer.footer {
 }
 
 .nav-btn-disable {
-  opacity: 0.3;
   cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.overflow-hide {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  overscroll-behavior: contain !important;
+}
+
+.overflow-x {
+  overflow-x: hidden;
 }
 
 .random-rotate-0 {

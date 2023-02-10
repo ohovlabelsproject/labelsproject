@@ -47,6 +47,8 @@ function App(props) {
    **********************************/
   const [labelsData, setLabelsData] = useState();
 
+  /* Set/get attribution show state:
+   **********************************/
   const [showAttributions, setShowAttributions] = useState(false);
 
   /* Set/get meta:
@@ -60,6 +62,14 @@ function App(props) {
     skipIntro:
       localStorage.getItem("ohov_skip_intro") || testMode ? true : false,
   });
+
+  /* Get user's IP from geolocation data:
+   ******************************************************/
+  const getUserGeolocation = () => {
+    fetch("https://geolocation-db.com/json/")
+      .then((response) => response.json())
+      .then((data) => setUserGeoloc(data));
+  };
 
   /* Get the labels from the database:
    **********************************/
@@ -147,58 +157,6 @@ function App(props) {
     }
   };
 
-  /* Check if orientation is landscape:
-   ********************************************/
-  const isOrientationLandscape = () => {
-    if (window.innerWidth > window.innerHeight) {
-      return true;
-    }
-  };
-
-  /* Prevent default touch actions:
-   ********************************************/
-  const preventDefaultTouchActions = () => {
-    document.getElementById("app").addEventListener("touchmove", (event) => {
-      if (!isOrientationLandscape()) {
-        event.preventDefault();
-      }
-    });
-  };
-
-  /* Update state of whether label disposal is under way:
-   ******************************************************/
-  const updateLabelDisposalState = (val) => {
-    setlabelsMetadata((previousState) => {
-      return {
-        ...previousState,
-        labelBeingDisposedOf: val,
-      };
-    });
-  };
-
-  /* Listen for orientation changes:
-   ******************************************************/
-  window.addEventListener("orientationchange", () => {
-    const height = window.innerHeight;
-    const minHeight = 625;
-    const allowScroll = !isOrientationLandscape() && height > minHeight;
-    if (allowScroll) {
-      document.body.classList.remove("overflow-hide");
-    } else {
-      if (!document.body.classList.contains("overflow-hide")) {
-        document.body.classList.add("overflow-hide");
-      }
-    }
-  });
-
-  /* Get user's IP from geolocation data:
-   ******************************************************/
-  const getUserGeolocation = () => {
-    fetch("https://geolocation-db.com/json/")
-      .then((response) => response.json())
-      .then((data) => setUserGeoloc(data));
-  };
-
   /* Update bins array:
    ******************************************************/
   const updateBinsArr = (o) => {
@@ -218,11 +176,22 @@ function App(props) {
     });
   };
 
-  /* Update overflow and behaviour styles:
+  /* Update state of whether label disposal is under way:
    ******************************************************/
-  const updateOverflowStyleBehaviour = () => {
-    document.body.classList.add("overflow-hide");
+  const updateLabelDisposalState = (val) => {
+    setlabelsMetadata((previousState) => {
+      return {
+        ...previousState,
+        labelBeingDisposedOf: val,
+      };
+    });
   };
+
+  /* Listen for orientation changes:
+   ******************************************************/
+  window.addEventListener("orientationchange", () => {
+    utils.device.orientation.update();
+  });
 
   /*
   useEffect(() => {
@@ -243,10 +212,8 @@ function App(props) {
           handleCustomLabelSubmission={handleCustomLabelSubmission}
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}
-          preventDefaultTouchActions={preventDefaultTouchActions}
           setShowAttributions={setShowAttributions}
           showAttributions={showAttributions}
-          updateOverflowStyleBehaviour={updateOverflowStyleBehaviour}
         />
         <Hud
           showAttributions={showAttributions}

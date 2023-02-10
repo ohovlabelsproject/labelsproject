@@ -9,8 +9,6 @@ function Modals(props) {
         getLabels={props.getLabels}
         getUserGeolocation={props.getUserGeolocation}
         labelsMetadata={props.labelsMetadata}
-        preventDefaultTouchActions={props.preventDefaultTouchActions}
-        updateOverflowStyleBehaviour={props.updateOverflowStyleBehaviour}
       />
       <ModalWindow
         labelsData={props.labelsData}
