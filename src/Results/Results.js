@@ -75,8 +75,6 @@ function Results() {
     console.log(e.target.value);
     switch (e.target.value) {
       case "All time":
-        console.log("alll time");
-
         labelsData.labelsArr.map(() => {
           //
         });

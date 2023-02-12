@@ -200,7 +200,7 @@ function App(props) {
 
   return (
     <div className="app" id="app">
-      <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
+      <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 main-area-wrapper offset-sm-1">
         <DebugPanel
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}

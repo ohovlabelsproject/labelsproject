@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Col, Modal, Row } from "react-bootstrap";
 import uiLabels from "../../uiLabels";
 import utils from "../utils/utils";
+import YoutubeFrame from "../yt/youtubeframe";
 
 function ModalWelcome(props) {
   const [show, setShow] = useState(true);
@@ -20,15 +21,19 @@ function ModalWelcome(props) {
     },
     {
       heading: {
-        title: uiLabels.welcome.header.title,
+        title: "Instructions",
       },
       body: {
-        p: uiLabels.welcome.body.slide2,
+        p: "Double-click/tap video to go fullscreen:",
+        video: {
+          url: "53YI-wgYUHs",
+          title: "Instructional video",
+        },
       },
     },
     {
       heading: {
-        title: uiLabels.welcome.header.title,
+        title: "Consent",
       },
       body: {
         p: uiLabels.welcome.body.slide3,
@@ -41,7 +46,7 @@ function ModalWelcome(props) {
   const getNavConsentControls = () => {
     return (
       <Row
-        className="boroder text-center justify-content-center"
+        className="border text-center justify-content-center"
         style={{ float: "right", width: "100%" }}
       >
         <Col>
@@ -93,12 +98,24 @@ function ModalWelcome(props) {
    **********************************/
   const getSlideBody = () => {
     return (
-      <div id="slide-body-container" style={{ height: 120 }}>
+      <div id="slide-body-container">
         <div
           id="slide-body-sub-container"
-          className="animate__animated animate__fadeIn animate__slow"
+          className="border animate__animated animate__fadeIn animate__slow"
         >
-          {slides[slideData.slide].body.p}
+          {/* If data has p property, include it here: */}
+          {slides[slideData.slide].body.p
+            ? slides[slideData.slide].body.p
+            : null}
+
+          {/* If data has video property, include it here: */}
+          {slides[slideData.slide].body.video ? (
+            <YoutubeFrame
+              autoplay={1}
+              title={slides[slideData.slide].body.video.title}
+              url={slides[slideData.slide].body.video.url}
+            />
+          ) : null}
         </div>
       </div>
     );
@@ -124,10 +141,11 @@ function ModalWelcome(props) {
    **********************************/
   const handleClose = () => {
     setShow(false);
-    utils.device.touch.preventDefaultTouchActions();
-    utils.device.overflow.addOverflowStyleFix();
     props.getLabels();
     props.getUserGeolocation();
+    utils.device.touch.preventDefaultTouchActions();
+    utils.device.overflow.addOverflowStyleFix();
+    utils.device.orientation.update();
   };
 
   /* Handle the slide being changed:
@@ -175,8 +193,8 @@ function ModalWelcome(props) {
           <div
             className="text-muted"
             style={{
-              fontWeight: 400,
               float: "right",
+              fontWeight: 400,
               position: "absolute",
               right: 20,
             }}
@@ -187,7 +205,6 @@ function ModalWelcome(props) {
       </Modal.Header>
       <Modal.Body>
         {getSlideBody()}
-
         <br />
         {getSlideFooter()}
       </Modal.Body>
