@@ -46,7 +46,7 @@ function ModalWelcome(props) {
   const getNavConsentControls = () => {
     return (
       <Row
-        className="border text-center justify-content-center"
+        className="justify-content-center text-center"
         style={{ float: "right", width: "100%" }}
       >
         <Col>
@@ -77,7 +77,7 @@ function ModalWelcome(props) {
    ********************************************/
   const getNavFooter = () => {
     return (
-      <Row className="text-center justify-content-center">
+      <Row className="justify-content-center text-center ">
         <Col></Col>
         <Col>
           <button
@@ -101,7 +101,7 @@ function ModalWelcome(props) {
       <div id="slide-body-container">
         <div
           id="slide-body-sub-container"
-          className="border animate__animated animate__fadeIn animate__slow"
+          className="animate__animated animate__fadeIn animate__slow"
         >
           {/* If data has p property, include it here: */}
           {slides[slideData.slide].body.p
