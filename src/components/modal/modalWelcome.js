@@ -176,7 +176,7 @@ function ModalWelcome(props) {
       backdrop="static"
       centered
       dialogClassName="modal-90w"
-      keyboard={false}
+      keyboard={true}
       onEnter={() => {
         if (props.labelsMetadata.skipIntro) {
           handleClose(); // Close immediately if "skipIntro" is true

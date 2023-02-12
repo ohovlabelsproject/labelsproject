@@ -18,6 +18,7 @@ function ModalAttributions(props) {
       urls: [
         "https://fonts.google.com/",
         "https://fontawesome.com/",
+        "https://uxwing.com/hand-holding-mobile-phone-icon/",
         "https://youssef-habchi.com/fonts/road-rage",
       ],
     },

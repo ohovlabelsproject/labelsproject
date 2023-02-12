@@ -25,6 +25,7 @@ import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
 import uiLabels from "./uiLabels";
 import utils from "./components/utils/utils";
+import settings from "./settings";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
@@ -33,7 +34,6 @@ function App(props) {
   // eslint-disable-next-line
   const auth = getAuth(app);
   const showDebugPanel = false;
-  const testMode = false;
 
   // Firestore doc lookup:
   const db = getFirestore();
@@ -60,7 +60,9 @@ function App(props) {
     labelBeingDisposedOf: false,
     // Skip the intro/welcome modal if there's a local storage item saying to do so?
     skipIntro:
-      localStorage.getItem("ohov_skip_intro") || testMode ? true : false,
+      localStorage.getItem("ohov_skip_intro") || settings.modes.testMode
+        ? true
+        : false,
   });
 
   /* Get user's IP from geolocation data:
@@ -110,7 +112,7 @@ function App(props) {
         },
       ],
       id: uuidv4(),
-      label: label,
+      label: label.trim(),
       submittedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
       submittedOn: new Date(),
       vetted: false,
@@ -206,6 +208,18 @@ function App(props) {
           labelsMetadata={labelsMetadata}
           showDebugPanel={showDebugPanel}
         />
+        {/* 
+        <div>
+          <Alert variant="danger p-0">
+            <img
+              alt=""
+              src="/img/ui/please-reorientate.png"
+              width="50px"
+              className="p-1"
+            />
+            For the best experience, please hold your device in portrait mode.
+          </Alert>
+        </div>*/}
         <Modals
           getLabels={getLabels}
           getUserGeolocation={getUserGeolocation}
@@ -216,8 +230,8 @@ function App(props) {
           showAttributions={showAttributions}
         />
         <Hud
-          showAttributions={showAttributions}
           setShowAttributions={setShowAttributions}
+          showAttributions={showAttributions}
         />
         <Main
           getDocs={getDocs}

@@ -1,10 +1,13 @@
 const settings = {
+  modes: {
+    testMode: false,
+  },
   shouldSkipIntro: {
     onLabelSubmission: false,
   },
   labels: {
-    minLength: 5,
-    maxLength: 15,
+    minLength: 3,
+    maxLength: 20,
   },
 };
 
