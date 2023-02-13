@@ -43,6 +43,10 @@ function App(props) {
    **********************************/
   const [userGeoloc, setUserGeoloc] = useState({});
 
+  /* Set/get orientation data:
+   **********************************/
+  const [orientationData, setOrientationData] = useState();
+
   /* Set/get labels data to/from state:
    **********************************/
   const [labelsData, setLabelsData] = useState();
@@ -159,6 +163,26 @@ function App(props) {
     }
   };
 
+  /* Get orientation data:
+   **********************************/
+  const getOrientationData = () => {
+    setOrientationData((previousState) => {
+      return {
+        ...previousState,
+        overflow:
+          document.getElementById("app")?.getBoundingClientRect().height >
+          window.innerHeight
+            ? "scroll"
+            : "fits",
+        w: window.innerWidth,
+        h: window.innerHeight,
+        deviceType: utils.device.orientation.checkDevice(),
+        orientation:
+          window.innerWidth > window.innerHeight ? "landsc" : "portr",
+      };
+    });
+  };
+
   /* Update bins array:
    ******************************************************/
   const updateBinsArr = (o) => {
@@ -203,11 +227,16 @@ function App(props) {
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 main-area-wrapper offset-sm-1">
-        <DebugPanel
-          labelsData={labelsData}
-          labelsMetadata={labelsMetadata}
-          showDebugPanel={showDebugPanel}
-        />
+        {showDebugPanel ? (
+          <DebugPanel
+            labelsData={labelsData}
+            labelsMetadata={labelsMetadata}
+            orientationData={orientationData}
+            setOrientationData={setOrientationData}
+            showDebugPanel={showDebugPanel}
+          />
+        ) : null}
+
         {/* 
         <div>
           <Alert variant="danger p-0">
@@ -226,6 +255,7 @@ function App(props) {
           handleCustomLabelSubmission={handleCustomLabelSubmission}
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}
+          getOrientationData={getOrientationData}
           setShowAttributions={setShowAttributions}
           showAttributions={showAttributions}
         />

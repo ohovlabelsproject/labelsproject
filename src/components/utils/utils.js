@@ -51,6 +51,23 @@ const utils = {
           return true;
         }
       },
+      checkDevice: () => {
+        //
+        if (window.matchMedia("(max-width: 480px)").matches) {
+          // Viewport is less or equal to 700 pixels wide
+          return "mobile";
+        } else if (window.matchMedia("(max-width: 768px)").matches) {
+          return "tablet";
+        } else if (window.matchMedia("(max-width: 1024px)").matches) {
+          return "small screen computer";
+        } else if (window.matchMedia("(max-width: 1200px)").matches) {
+          return "medium screen computer";
+        } else if (window.matchMedia("(max-width: 2200px)").matches) {
+          return "big screen computer/tv";
+        } else {
+          return "no idea";
+        }
+      },
     },
     overflow: {
       addOverflowStyleFix: () => {

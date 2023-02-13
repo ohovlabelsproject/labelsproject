@@ -143,9 +143,18 @@ function ModalWelcome(props) {
     setShow(false);
     props.getLabels();
     props.getUserGeolocation();
+    props.getOrientationData();
     utils.device.touch.preventDefaultTouchActions();
     utils.device.overflow.addOverflowStyleFix();
     utils.device.orientation.update();
+
+    // move to own func:
+    if (
+      document.getElementById("app")?.getBoundingClientRect().height >
+      window.innerHeight
+    ) {
+      document.body.classList.remove("overflow-hide");
+    }
   };
 
   /* Handle the slide being changed:

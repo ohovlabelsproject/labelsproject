@@ -7,6 +7,7 @@ function Modals(props) {
     <>
       <ModalWelcome
         getLabels={props.getLabels}
+        getOrientationData={props.getOrientationData}
         getUserGeolocation={props.getUserGeolocation}
         labelsMetadata={props.labelsMetadata}
       />
