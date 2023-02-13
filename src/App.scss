@@ -769,6 +769,10 @@ section.binzone {
   width: 140px;
 }
 
+.stickynote:hover {
+  background-color: lighten($col-sticky-2, 10%);
+}
+
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();

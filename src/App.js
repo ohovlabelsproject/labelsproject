@@ -55,6 +55,10 @@ function App(props) {
    **********************************/
   const [showAttributions, setShowAttributions] = useState(false);
 
+  /* Set/get subm. exit modal's show:
+   **********************************/
+  const [showSubmitExitModal, setShowSubmitExitModal] = useState(false);
+
   /* Set/get meta:
    **********************************/
   const [labelsMetadata, setlabelsMetadata] = useState({
@@ -122,8 +126,14 @@ function App(props) {
       vetted: false,
     })
       .then(() => {
-        alert(uiLabels.labelSubmission.feedback.successfulSubmission);
+        // Record of most recent submission:
+        localStorage.setItem("ohov_recent_submission", label);
+        // Record this submission to stop user submitting it twice:
         localStorage.setItem("ohov_l_sub_" + label, true);
+        const st = setTimeout(() => {
+          setShowSubmitExitModal(true);
+          clearTimeout(st);
+        }, 500);
       })
       .catch((e) => {
         alert(`Please contact administrator: ${e}`);
@@ -251,13 +261,15 @@ function App(props) {
         </div>*/}
         <Modals
           getLabels={getLabels}
+          getOrientationData={getOrientationData}
           getUserGeolocation={getUserGeolocation}
           handleCustomLabelSubmission={handleCustomLabelSubmission}
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}
-          getOrientationData={getOrientationData}
           setShowAttributions={setShowAttributions}
+          setShowSubmitExitModal={setShowSubmitExitModal}
           showAttributions={showAttributions}
+          showSubmitExitModal={showSubmitExitModal}
         />
         <Hud
           setShowAttributions={setShowAttributions}

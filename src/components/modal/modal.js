@@ -166,6 +166,7 @@ function ModalWindow(props) {
                   }
                   resetState={resetState}
                   validationData={validationData}
+                  setShowSubmitExitModal={props.setShowSubmitExitModal}
                 />
               </div>
             </form>

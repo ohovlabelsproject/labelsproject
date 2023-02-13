@@ -43,8 +43,6 @@ const uiLabels = {
     footnote: "**If it gets enough quacks from duck mods.",
     feedback: {
       userAlreadyAdded: "You already submitted this label!",
-      successfulSubmission:
-        "Thank you. Your label was successfully submitted. \n\nIt may take some time for it to appear on the app, but be assured it will be shared with our language group who are working on changing language in the hearings system. Your submissions are greatly appreciated.",
     },
   },
   date: {
