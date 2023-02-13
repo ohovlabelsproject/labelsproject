@@ -34,6 +34,7 @@ function App(props) {
   // eslint-disable-next-line
   const auth = getAuth(app);
   const showDebugPanel = false;
+  let resizeTimeout;
 
   // Firestore doc lookup:
   const db = getFirestore();
@@ -176,19 +177,28 @@ function App(props) {
   /* Get orientation data:
    **********************************/
   const getOrientationData = () => {
+    const getOverflowY =
+      document.getElementById("app")?.getBoundingClientRect().height >
+      window.innerHeight
+        ? 1
+        : 0;
+    const getDeviceType = utils.device.orientation.checkDevice();
+    const getOrientation = window.innerWidth > window.innerHeight ? 0 : 1;
     setOrientationData((previousState) => {
       return {
         ...previousState,
-        overflow:
-          document.getElementById("app")?.getBoundingClientRect().height >
-          window.innerHeight
-            ? "scroll"
-            : "fits",
+        overflowY: getOverflowY, // 0 = overflowing, 1 = fits
         w: window.innerWidth,
         h: window.innerHeight,
-        deviceType: utils.device.orientation.checkDevice(),
-        orientation:
-          window.innerWidth > window.innerHeight ? "landsc" : "portr",
+        // 0 & 1 = small screen, 2 = tablet, 3 = small computer, 4+ = big screens:
+        deviceType: getDeviceType,
+        orientation: getOrientation,
+        /* If orientation is 0 (landscape) AND...
+           if device is <=1 (mobile) AND...
+           if content is overflow (scrolling is needed) 
+           THEN... user should reorient device (if possible) */
+        //getOrientation === 0 && getDeviceType <= 1 && getOverflowY === 0,
+        shouldReorient: getOrientation === 0 && getOverflowY === 1,
       };
     });
   };
@@ -223,11 +233,21 @@ function App(props) {
     });
   };
 
+  const getOrientationDataOnDelay = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(getOrientationData, 600);
+  };
+
   /* Listen for orientation changes:
    ******************************************************/
   window.addEventListener("orientationchange", () => {
     utils.device.orientation.update();
+    getOrientationDataOnDelay();
   });
+
+  window.onresize = () => {
+    getOrientationDataOnDelay();
+  };
 
   /*
   useEffect(() => {

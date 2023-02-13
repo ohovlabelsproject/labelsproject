@@ -1,4 +1,16 @@
 const uiLabels = {
+  debug: {
+    orientations: ["landscape", "portrait"],
+    devices: [
+      "mobile",
+      "tablet",
+      "small screen device",
+      "medium screen device",
+      "big screen device",
+      "unknown device",
+    ],
+    overflow: ["fits", "overflows/needs scroll"],
+  },
   feedback: {
     successfulBin: {
       header: "",

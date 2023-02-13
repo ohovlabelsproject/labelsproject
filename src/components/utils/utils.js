@@ -52,20 +52,19 @@ const utils = {
         }
       },
       checkDevice: () => {
-        //
         if (window.matchMedia("(max-width: 480px)").matches) {
           // Viewport is less or equal to 700 pixels wide
-          return "mobile";
+          return 0;
         } else if (window.matchMedia("(max-width: 768px)").matches) {
-          return "tablet";
+          return 1;
         } else if (window.matchMedia("(max-width: 1024px)").matches) {
-          return "small screen computer";
+          return 2;
         } else if (window.matchMedia("(max-width: 1200px)").matches) {
-          return "medium screen computer";
+          return 3;
         } else if (window.matchMedia("(max-width: 2200px)").matches) {
-          return "big screen computer/tv";
+          return 4;
         } else {
-          return "no idea";
+          return 5;
         }
       },
     },
