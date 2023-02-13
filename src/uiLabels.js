@@ -12,13 +12,13 @@ const uiLabels = {
     },
     body: {
       slide1:
-        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people in the Children's Hearing System. For this, we need your help...",
+        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people in the Children's Hearing System. For this, we need your help and kindly request that you complete an activity for us.",
       slide2:
-        'We need to know about labels you find stigmitising (unfair), so we could then "bin" them from our language. As such, we created an activity...',
+        "This activity is explained with a quick instructional video. Double-click/tap for fullscreen:",
       slide3: `Did you understand the instructions and do you agree to participate under the following terms?`,
     },
     action: {
-      decline: "No thanks",
+      decline: "No, decline",
       consent: "Yes, I do!",
     },
   },

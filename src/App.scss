@@ -770,13 +770,15 @@ section.binzone {
 }
 
 .btn-link-regular {
-  color: blue !important;
+  color: var(--bs-link-color) !important;
   font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
   font-size: 19px !important;
+  text-decoration: underline;
   cursor: pointer;
 }
 .btn-link-regular:hover {
   text-decoration: underline;
+  color: blue;
 }
 
 .stickynote:hover {

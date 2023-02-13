@@ -24,7 +24,7 @@ function ModalWelcome(props) {
         title: "Instructions",
       },
       body: {
-        p: "Double-click/tap video to go fullscreen:",
+        p: uiLabels.welcome.body.slide2,
         video: {
           url: "53YI-wgYUHs",
           title: "Instructional video",
@@ -95,12 +95,6 @@ function ModalWelcome(props) {
     } else {
       return slides[slideData.slide].body.p;
     }
-    /*
-    if (slides[slideData.slide].body.p.split('the instructions')) {
-      return {slides[slideData.slide].body.p.split('the instructions')[0]}
-    } else {
-      return slides[slideData.slide].body.p;
-    }*/
   };
   /* Get content for the nav buttons on footer:
    ********************************************/
