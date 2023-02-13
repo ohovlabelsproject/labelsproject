@@ -37,6 +37,7 @@ function ModalWelcome(props) {
       },
       body: {
         p: uiLabels.welcome.body.slide3,
+        terms: uiLabels.termsOfUse.text,
       },
     },
   ];
@@ -73,6 +74,34 @@ function ModalWelcome(props) {
     );
   };
 
+  const GetP = () => {
+    if (slides[slideData.slide].body.p.includes("the instructions")) {
+      return (
+        <>
+          <span>
+            {slides[slideData.slide].body.p.split("the instructions")[0]}
+          </span>
+          <span
+            className="btn-link-regular"
+            onClick={() => handleSlideChange(1)}
+          >
+            the instructions
+          </span>
+          <span>
+            {slides[slideData.slide].body.p.split("the instructions")[1]}
+          </span>
+        </>
+      );
+    } else {
+      return slides[slideData.slide].body.p;
+    }
+    /*
+    if (slides[slideData.slide].body.p.split('the instructions')) {
+      return {slides[slideData.slide].body.p.split('the instructions')[0]}
+    } else {
+      return slides[slideData.slide].body.p;
+    }*/
+  };
   /* Get content for the nav buttons on footer:
    ********************************************/
   const getNavFooter = () => {
@@ -104,9 +133,7 @@ function ModalWelcome(props) {
           className="animate__animated animate__fadeIn animate__slow"
         >
           {/* If data has p property, include it here: */}
-          {slides[slideData.slide].body.p
-            ? slides[slideData.slide].body.p
-            : null}
+          {slides[slideData.slide].body.p ? <GetP></GetP> : null}
 
           {/* If data has video property, include it here: */}
           {slides[slideData.slide].body.video ? (
@@ -115,6 +142,15 @@ function ModalWelcome(props) {
               title={slides[slideData.slide].body.video.title}
               url={slides[slideData.slide].body.video.url}
             />
+          ) : null}
+          {slides[slideData.slide].body.terms ? (
+            <div className="my-4">
+              <textarea
+                className="form-control"
+                style={{ height: 70, fontSize: 13, fontFamily: "monospace" }}
+                value={slides[slideData.slide].body.terms}
+              ></textarea>
+            </div>
           ) : null}
         </div>
       </div>

@@ -769,6 +769,16 @@ section.binzone {
   width: 140px;
 }
 
+.btn-link-regular {
+  color: blue !important;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-size: 19px !important;
+  cursor: pointer;
+}
+.btn-link-regular:hover {
+  text-decoration: underline;
+}
+
 .stickynote:hover {
   background-color: lighten($col-sticky-2, 10%);
 }

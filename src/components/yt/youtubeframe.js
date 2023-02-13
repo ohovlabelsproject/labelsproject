@@ -1,7 +1,7 @@
 function YoutubeFrame(props) {
   const embedUrl = "https://www.youtube.com/embed";
   return (
-    <div className="mt-1 text-center youtube-container">
+    <div className="mt-3 text-center youtube-container">
       <iframe
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
