@@ -11,6 +11,7 @@ function Menu(props) {
       }}
     >
       <button className="form-control">Instructions</button>
+      <button className="form-control">Resources</button>
       <button
         className="form-control"
         onClick={() => {
