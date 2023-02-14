@@ -1,6 +1,6 @@
 const settings = {
   modes: {
-    testMode: false,
+    testMode: true,
   },
   shouldSkipIntro: {
     onLabelSubmission: false,

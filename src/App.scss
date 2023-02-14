@@ -273,7 +273,7 @@ body {
   @include guidelines();
   @include strip-margin-and-padding();
   height: 100vh;
-  min-height: 625px;
+  min-height: 675px;
   min-width: 340px;
   padding-bottom: 55px;
   padding-top: 25px;
@@ -485,6 +485,17 @@ footer.footer {
 
 .paper-ball-sm-wrapper {
   filter: brightness(1.05) hue-rotate(-5deg) drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.9));
+}
+
+.image-preload {
+  background: lime;
+  left: 0;
+  opacity: 1;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: scale(0.5);
+  z-index: -9999999;
 }
 
 .instructions div h1 {

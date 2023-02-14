@@ -13,6 +13,7 @@ function Main(props) {
             getDocs={props.getDocs}
             labelsData={props.labelsData}
             labelsMetadata={props.labelsMetadata}
+            orientationData={props.orientationData}
             updateLabelDisposalState={props.updateLabelDisposalState}
             updateBinsArr={props.updateBinsArr}
           />

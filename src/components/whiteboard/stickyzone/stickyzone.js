@@ -24,6 +24,7 @@ function StickyZone(props) {
                       label={el.label?.toLowerCase().trim()}
                       labelData={props.labelsData.labelsArr[index]}
                       labelsMetadata={props.labelsMetadata}
+                      orientationData={props.orientationData}
                       updateLabelDisposalState={props.updateLabelDisposalState}
                       updateBinsArr={props.updateBinsArr}
                     />

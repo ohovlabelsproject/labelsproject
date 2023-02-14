@@ -1,4 +1,6 @@
 import { useState } from "react";
+import utils from "../../../utils/utils";
+import uiLabels from "../../../../uiLabels";
 
 function StickyNote(props) {
   const [mouseDownState, setmouseDownState] = useState(false);
@@ -111,9 +113,19 @@ function StickyNote(props) {
       { src: "/img/paper-ball/paper-ball-sm-compressed.png", w: "100%" },
     ];
     // Remove stickynote & make paperball appear:
+
+    let stickyNoteTop = stickyNote.style.top;
     stickyNote.style.display = "none";
     paperballWrapper.style.display = "block";
-    paperballWrapper.style.top = stickyNoteRect.top + "px";
+    // paperballWrapper.style.position = "absolute";
+
+    //
+    /* document.getElementById("paper-ball-sm-wrapper").style.top =
+      document.getElementById(`stickynote-${props.index}`).style.top +
+      "px !important";*/
+
+    document.getElementById("paper-ball-sm-wrapper").style.top = stickyNoteTop;
+
     paperballWrapper.style.left =
       stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
     paperballImg.src = frames[0].src;
@@ -135,12 +147,35 @@ function StickyNote(props) {
     let duck = document.getElementById("duck");
     let app = document.getElementById("app");
     let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
-    duck.style.top = paperballWrapper.getBoundingClientRect().top - 20 + "px";
+    duck.style.top =
+      document
+        .getElementById("paper-ball-sm-wrapper")
+        .style.top.split("px")[0] -
+      20 +
+      "px";
+
+    /*
+    console.log(
+      document
+        .getElementById("paper-ball-sm-wrapper")
+        .style.top.split("px")[0] -
+        20 +
+        "px"
+    );*/
+
     duck.style.display = "block";
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
-      const inc = 2.5;
+      const deviceIndex = utils.device.orientation.checkDevice();
+
+      let inc = 2.5;
+
+      if (deviceIndex >= 3) {
+        // if bigger device, make duck faster
+        inc = 5;
+      }
+
       const duckRect = duck.getBoundingClientRect();
       const appRect = app.getBoundingClientRect();
       if (duckRect.left < appRect.left - duckRect.width) {

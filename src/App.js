@@ -26,6 +26,7 @@ import helpers from "./helpers/helpers";
 import uiLabels from "./uiLabels";
 import utils from "./components/utils/utils";
 import settings from "./settings";
+import ImagePreload from "./components/imgpreload";
 
 function App(props) {
   const app = initializeApp(firebaseConfig);
@@ -257,6 +258,7 @@ function App(props) {
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 main-area-wrapper offset-sm-1">
+        <ImagePreload />
         {showDebugPanel ? (
           <DebugPanel
             labelsData={labelsData}
@@ -299,6 +301,7 @@ function App(props) {
           getDocs={getDocs}
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}
+          orientationData={orientationData}
           updateBinsArr={updateBinsArr}
           updateLabelDisposalState={updateLabelDisposalState}
         />

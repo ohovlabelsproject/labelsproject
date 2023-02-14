@@ -12,6 +12,7 @@ function Whiteboard(props) {
       <StickyZone
         labelsData={props.labelsData}
         labelsMetadata={props.labelsMetadata}
+        orientationData={props.orientationData}
         placeholderWords={props.placeholderWords}
         updateLabelDisposalState={props.updateLabelDisposalState}
         updateBinsArr={props.updateBinsArr}
