@@ -6,6 +6,8 @@ import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import firebaseConfig from "../firebaseConfig";
 import BarChartComponent from "./BarChartComponent";
+import binsByTime from "./ResultsByTime/binsByTime";
+import ResultsTable from "./ResultsSections/resultstable";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -21,16 +23,19 @@ function Results() {
   /* Set/get labels data to/from state:
    **********************************/
   const [labelsData, setLabelsData] = useState();
-
+  const [labelsBy, setLabelsBy] = useState({
+    period: "all time",
+    mostBinned: { label: "biological", amount: 12 },
+  });
   /* Get the labels from the database:
    **********************************/
   const getLabels = (e) => {
     getDocs(colRef).then((snapshot) => {
       const labelsArr = [];
-      const data1 = [];
+      const dataByDate = [];
       snapshot.docs.forEach((doc) => {
         labelsArr.push(doc.data());
-        data1.push({
+        dataByDate.push({
           name: doc.data().label.toLowerCase(),
           //uv: 100, // unique view
           pv: doc.data().bins.length, // page view
@@ -38,7 +43,7 @@ function Results() {
         });
       });
       setLabelsData((previousState) => {
-        return { ...previousState, labelsArr, data1 };
+        return { ...previousState, labelsArr, dataByDate };
       });
     });
   };
@@ -73,26 +78,140 @@ function Results() {
 
   const handleResultsFilterChange = (e) => {
     console.log(e.target.value);
+    let dataByDate = [];
+    let labelsDesc;
+
     switch (e.target.value) {
       case "All time":
-        labelsData.labelsArr.map(() => {
-          //
+        const labelsBinnedAllTime = binsByTime.getAll(labelsData);
+        labelsDesc = labelsBinnedAllTime.sort(
+          (a, b) => b.bins.length - a.bins.length
+        )[0];
+        labelsBinnedAllTime.forEach((l) => {
+          dataByDate.push({
+            name: l.label.toLowerCase(),
+            pv: l.bins.length, // page view
+            amt: l.bins.length, // amount
+          });
         });
-
-        // set Data1
-
+        setLabelsBy((previousState) => {
+          return {
+            ...previousState,
+            period: "all time",
+            mostBinned: {
+              label: labelsDesc.label.toLowerCase(),
+              amount: labelsDesc.bins.length,
+            },
+          };
+        });
+        setLabelsData((previousState) => {
+          return { ...previousState, dataByDate };
+        });
         return;
       case "Past year":
-        console.log("passst year");
+        const labelsBinnedPastYear = binsByTime.getYear(labelsData);
+        labelsDesc = labelsBinnedPastYear.sort(
+          (a, b) => b.bins.length - a.bins.length
+        )[0];
+        labelsBinnedPastYear.forEach((l) => {
+          dataByDate.push({
+            name: l.label.toLowerCase(),
+            pv: l.bins.length, // page view
+            amt: l.bins.length, // amount
+          });
+        });
+        setLabelsBy((previousState) => {
+          return {
+            ...previousState,
+            period: "past year",
+            mostBinned: {
+              label: labelsDesc.label.toLowerCase(),
+              amount: labelsDesc.bins.length,
+            },
+          };
+        });
+        setLabelsData((previousState) => {
+          return { ...previousState, dataByDate };
+        });
         return;
       case "Past month":
-        console.log("passst month");
+        const labelsBinnedPastMonth = binsByTime.getMonth(labelsData);
+        labelsDesc = labelsBinnedPastMonth.sort(
+          (a, b) => b.bins.length - a.bins.length
+        )[0];
+        labelsBinnedPastMonth.forEach((l) => {
+          dataByDate.push({
+            name: l.label.toLowerCase(),
+            pv: l.bins.length, // page view
+            amt: l.bins.length, // amount
+          });
+        });
+        setLabelsBy((previousState) => {
+          return {
+            ...previousState,
+            period: "past month",
+            mostBinned: {
+              label: labelsDesc.label.toLowerCase(),
+              amount: labelsDesc.bins.length,
+            },
+          };
+        });
+        setLabelsData((previousState) => {
+          return { ...previousState, dataByDate };
+        });
         return;
       case "Past week":
-        console.log("passst week");
+        const labelsBinnedPastWeek = binsByTime.getWeek(labelsData);
+        labelsDesc = labelsBinnedPastWeek.sort(
+          (a, b) => b.bins.length - a.bins.length
+        )[0];
+        labelsBinnedPastWeek.forEach((l) => {
+          dataByDate.push({
+            name: l.label.toLowerCase(),
+            pv: l.bins.length, // page view
+            amt: l.bins.length, // amount
+          });
+        });
+        setLabelsBy((previousState) => {
+          return {
+            ...previousState,
+            period: "past week",
+            mostBinned: {
+              label: labelsDesc.label.toLowerCase(),
+              amount: labelsDesc.bins.length,
+            },
+          };
+        });
+        setLabelsData((previousState) => {
+          return { ...previousState, dataByDate };
+        });
         return;
-      case "Past day":
-        console.log("passst week");
+
+      case "Today":
+        const labelsBinnedToday = binsByTime.getToday(labelsData);
+        labelsDesc = labelsBinnedToday.sort(
+          (a, b) => b.bins.length - a.bins.length
+        )[0];
+        labelsBinnedToday.forEach((l) => {
+          dataByDate.push({
+            name: l.label.toLowerCase(),
+            pv: l.bins.length, // page view
+            amt: l.bins.length, // amount
+          });
+        });
+        setLabelsBy((previousState) => {
+          return {
+            ...previousState,
+            period: "today",
+            mostBinned: {
+              label: labelsDesc.label.toLowerCase(),
+              amount: labelsDesc.bins.length,
+            },
+          };
+        });
+        setLabelsData((previousState) => {
+          return { ...previousState, dataByDate };
+        });
         return;
       default:
         console.log("-");
@@ -143,40 +262,30 @@ function Results() {
               <option>Past year</option>
               <option>Past month</option>
               <option>Past week</option>
-              <option>Past day</option>
+              <option>Today</option>
             </select>
+            <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
+              The most binned label {labelsBy.period} —so far— is{" "}
+              <b>"{labelsBy.mostBinned.label}"</b> (binned{" "}
+              {labelsBy.mostBinned.amount} times).
+            </p>
             <br />
             <div className="col-12" style={{ height: 300 }}>
-              {labelsData && labelsData.labelsArr && labelsData.data1 ? (
+              {labelsData && labelsData.labelsArr && labelsData.dataByDate ? (
                 <BarChartComponent
-                  data={labelsData.data1}
+                  data={labelsData.dataByDate}
                   labelsData={labelsData}
                 />
               ) : null}
             </div>
             <br />
-            <div>
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Label</th>
-                    <th>Count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {labelsData && labelsData.labelsArr && labelsData.data1
-                    ? labelsData.data1.map((label, index) => {
-                        return (
-                          <tr key={`tr-${index}`}>
-                            <td>"{label.name}"</td>
-                            <td>{label.pv}</td>
-                          </tr>
-                        );
-                      })
-                    : null}
-                </tbody>
-              </table>
-            </div>
+            {/*               labelsBy={labelsBy}
+              labelsData={labelsData} */}
+            <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
+              Here's a full results table:
+            </p>
+            <br />
+            <ResultsTable labelsData={labelsData} setLabelsBy={setLabelsBy} />
           </div>
         </section>
         <br />
