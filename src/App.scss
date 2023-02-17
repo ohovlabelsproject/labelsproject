@@ -489,6 +489,7 @@ header.hud-results {
   left: 0;
   width: 100%;
   background: #333;
+  border-bottom: 3px dashed rgb(242 91 65 / 60%);
   font-size: 11px;
   z-index: 999;
 }
@@ -526,7 +527,7 @@ header.hud-results {
 .results-title {
   @include guidelines();
   @include sketchtext();
-  color: $col-lightest;
+  color: $col-sticky-1;
   font-size: 37px;
   border-radius: 10px;
   width: 100%;

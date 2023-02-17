@@ -255,6 +255,12 @@ function Results() {
                 className="m-0 p-0 results-title animate__animated animate__fadeIn animate__slow"
                 style={{ textAlign: "left" }}
               >
+                <img
+                  alt="Data duck"
+                  src="img/results/data-duck.png"
+                  style={{ paddingBottom: 0 }}
+                  width="30px"
+                />{" "}
                 Bin Data
               </h1>
             </div>
@@ -276,7 +282,6 @@ function Results() {
         </header>
 
         <section style={{ marginTop: 70 }}>
-          <br />
           <br />
           <br />
           <div>
@@ -346,8 +351,8 @@ function Results() {
               className="p-2 animate__animated animate__fadeIn animate__slow"
               style={{ fontSize: 20, textAlign: "left" }}
             >
-              Here's a full results table for{" "}
-              {labelsBy && labelsBy.period ? labelsBy.period : null}:
+              Here's a results table (
+              {labelsBy && labelsBy.period ? labelsBy.period : null}):
             </p>
             <ResultsTable labelsData={labelsData} setLabelsBy={setLabelsBy} />
           </div>
