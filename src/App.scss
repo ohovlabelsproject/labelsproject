@@ -478,6 +478,21 @@ footer.footer {
   font-size: 11px;
 }
 
+header.hud-results {
+  @include center();
+  @include strip-margin-and-padding();
+  height: 70px;
+  color: #eee;
+  filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.15));
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #333;
+  font-size: 11px;
+  z-index: 999;
+}
+
 .main-area-wrapper {
   @include guidelines();
   height: 100%;
@@ -510,10 +525,9 @@ footer.footer {
 
 .results-title {
   @include guidelines();
-  @include thick-title();
-  color: $col-darkest;
+  @include sketchtext();
+  color: $col-lightest;
   font-size: 37px;
-  line-height: 50px;
   border-radius: 10px;
   width: 100%;
 }
@@ -773,6 +787,12 @@ section.stickyzone {
   height: 70%;
   min-height: 320px;
   max-height: 350px;
+  /*
+  border: 5px solid rgb(175, 142, 82);
+  border-radius: 5px;
+  background-color: #7b450a;
+  background-image: url("https://www.transparenttextures.com/patterns/wine-cork.png");*/
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 section.binzone {

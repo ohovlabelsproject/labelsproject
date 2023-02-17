@@ -234,25 +234,52 @@ function Results() {
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
-        <header className="hud"></header>
-        <section className="">
+        <header className="hud-results">
+          {/*
+          <h1
+            className="p-2 results-title animate__animated animate__fadeIn animate__slow"
+            style={{ textAlign: "center" }}
+          >
+            Results{" "}
+            <img
+              alt=""
+              style={{ paddingBottom: 10 }}
+              src="img/results/data-duck.png"
+              width="40px"
+            />
+          </h1>
+           */}
+          <div className="row col-12 col-md-8">
+            <div className="col-6 col-md-7 col-lg-8 text-center">
+              <h1
+                className="m-0 p-0 results-title animate__animated animate__fadeIn animate__slow"
+                style={{ textAlign: "left" }}
+              >
+                Bin Data
+              </h1>
+            </div>
+            <div className="col-6 col-md-5 col-lg-4 p-0 m-0">
+              <div className="row col-12 p-0 m-0">
+                <div className="col-6">
+                  <button className="btn-ohov-1" style={{ width: 100 }}>
+                    <i className="fa fa-print"></i> Print
+                  </button>
+                </div>
+                <div className="col-6">
+                  <button className="btn-ohov-1" style={{ width: 100 }}>
+                    <i className="fa fa-close"></i> Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section style={{ marginTop: 70 }}>
+          <br />
+          <br />
+          <br />
           <div>
-            <h1
-              className="p-2 results-title animate__animated animate__fadeIn animate__slow"
-              style={{ textAlign: "center" }}
-            >
-              Results{" "}
-              <img
-                alt=""
-                style={{ paddingBottom: 10 }}
-                src="img/results/data-duck.png"
-                width="40px"
-              />
-            </h1>
-            <p style={{ marginTop: -10 }}>
-              {" "}
-              We count every "binned" and submitted label
-            </p>
             <ol
               className="animate__animated animate__fadeIn animate__slow"
               style={{ textAlign: "left" }}
@@ -355,8 +382,8 @@ function Results() {
             &copy; {new Date().getFullYear()} {uiLabels.footer}
           </small>
         </footer>
-        <div className="bg-wrapper-" id="bg-wrapper-1"></div>
-        <div className="bg-wrapper-" id="bg-wrapper-2"></div>
+        <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
+        <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
       </div>
     </div>
   );
