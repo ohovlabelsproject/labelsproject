@@ -10,6 +10,7 @@ import "animate.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ModView from "./Modview/Modview";
 import Results from "./Results/Results";
+import Settings from "./Results/Settings";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,6 +22,7 @@ function AppContainer() {
           <Route path="/" element={<App />}></Route>
           <Route path="/results" element={<Results />}></Route>
           <Route path="/admin" element={<ModView />}></Route>
+          <Route path="/settings" element={<Settings />}></Route>
         </Routes>
       </BrowserRouter>
     </>

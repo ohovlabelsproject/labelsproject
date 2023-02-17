@@ -257,6 +257,7 @@ function Results() {
               >
                 <img
                   alt="Data duck"
+                  className="animate__animated animate__fadeInDown animate__slow"
                   src="img/results/data-duck.png"
                   style={{ paddingBottom: 0 }}
                   width="30px"
@@ -267,12 +268,22 @@ function Results() {
             <div className="col-6 col-md-5 col-lg-4 p-0 m-0">
               <div className="row col-12 p-0 m-0">
                 <div className="col-6">
-                  <button className="btn-ohov-1" style={{ width: 100 }}>
-                    <i className="fa fa-print"></i> Print
+                  <button className="btn-ohov-1" style={{ width: 110 }}>
+                    <i className="fa fa-envelope"></i> Contact
                   </button>
                 </div>
                 <div className="col-6">
-                  <button className="btn-ohov-1" style={{ width: 100 }}>
+                  <button
+                    className="btn-ohov-1"
+                    style={{ width: 110 }}
+                    onClick={() => {
+                      const myWindow = window.open("", "_self");
+                      myWindow.document.write("");
+                      setTimeout(function () {
+                        myWindow.close();
+                      }, 100);
+                    }}
+                  >
                     <i className="fa fa-close"></i> Close
                   </button>
                 </div>
@@ -305,9 +316,11 @@ function Results() {
             >
               1. Filter by Period
             </h2>
-            <div className="animate__animated animate__fadeIn animate__slow">
-              <hr />
-            </div>
+            <div
+              className="animate__animated animate__fadeIn animate__slow"
+              style={{ borderBottom: "1px dashed #000" }}
+            ></div>
+            <br />
             {labelsBy && labelsBy.period && labelsBy.mostBinned.label ? (
               <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
                 The most binned label {labelsBy.period} —so far— is{" "}
@@ -366,7 +379,11 @@ function Results() {
         >
           2. Download
         </h2>
-        <hr />
+        <div
+          className="animate__animated animate__fadeIn animate__slow"
+          style={{ borderBottom: "1px dashed #000" }}
+        ></div>
+        <br />
         <p
           className="p-2 animate__animated animate__fadeIn animate__slow"
           style={{ fontSize: 20, textAlign: "left" }}
