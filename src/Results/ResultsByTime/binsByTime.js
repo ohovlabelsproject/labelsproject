@@ -112,6 +112,7 @@ const binsByTime = {
         let binUnique = true;
         bins.forEach((b) => {
           if (b.label === l.label) {
+            // also if bin is not from today, delete it
             binUnique = false;
           }
         });

@@ -204,10 +204,11 @@ function Results() {
         labelsDesc = labelsBinnedToday.sort(
           (a, b) => b.bins.length - a.bins.length
         )[0];
+        // Remove bins NOT from today!!!
         labelsBinnedToday.forEach((l) => {
           dataByDate.push({
             name: l.label.toLowerCase(),
-            pv: l.bins.length, // page view
+            pv: l.bins.length, // page view // <-------- should be length of bins from today!
             amt: l.bins.length, // amount
           });
         });
@@ -217,7 +218,7 @@ function Results() {
             period: "today",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
-              amount: labelsDesc.bins.length,
+              amount: labelsDesc.bins.length, // <-------- should be length of bins from today!
             },
           };
         });
@@ -318,7 +319,8 @@ function Results() {
               className="p-2 animate__animated animate__fadeIn animate__slow"
               style={{ fontSize: 20, textAlign: "left" }}
             >
-              Here's a full results table:
+              Here's a full results table for{" "}
+              {labelsBy && labelsBy.period ? labelsBy.period : null}:
             </p>
             <ResultsTable labelsData={labelsData} setLabelsBy={setLabelsBy} />
           </div>

@@ -10,11 +10,30 @@ function Menu(props) {
           : "none",
       }}
     >
-      <button className="form-control">Results</button>
-      <button className="form-control">Resources</button>
+      <button className="form-control">
+        <a
+          className="menu-link"
+          href="/results"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Results
+        </a>
+      </button>
+
+      <button className="form-control">
+        <a
+          className="menu-link"
+          href="https://www.ohov.co.uk/contact-us/getting-help-and-support/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Resources
+        </a>
+      </button>
 
       <button
-        className="form-control"
+        className="form-control menu-link"
         onClick={() => {
           props.setShowAttributions(true);
           props.setMenuExpansion((previousState) => {
@@ -27,8 +46,28 @@ function Menu(props) {
       >
         Attributions
       </button>
-      <button className="form-control">About OHOV</button>
-      <button className="form-control">Contact Us</button>
+
+      <button className="form-control">
+        <a
+          className="menu-link"
+          href="https://www.ohov.co.uk/about-us/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          About OHOV{" "}
+        </a>
+      </button>
+
+      <button className="form-control">
+        <a
+          className="menu-link"
+          href="https://www.ohov.co.uk/contact-us/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Contact Us
+        </a>
+      </button>
     </div>
   );
 }

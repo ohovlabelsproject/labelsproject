@@ -24,6 +24,12 @@ function ModalAttributions(props) {
         "https://youssef-habchi.com/fonts/road-rage",
       ],
     },
+    {
+      type: "",
+      text: [
+        "Developed by John Martin. Thanks to John Morrison & Amy Miskimmin-Logan.",
+      ],
+    },
   ];
 
   return (
@@ -59,8 +65,11 @@ function ModalAttributions(props) {
               <>
                 <b className="m-0 p-0">{attr.type}</b>
                 {attr.src ? <p className="m-0 p-0">{attr.src}</p> : null}
+                {attr.text ? (
+                  <p style={{ fontSize: 11, paddingBottom: 10 }}>{attr.text}</p>
+                ) : null}
                 <ul>
-                  {attr.urls.map((url) => {
+                  {attr.urls?.map((url) => {
                     return (
                       <li style={{ fontSize: 11 }}>
                         <a href={url} rel="noreferrer" target="_blank">

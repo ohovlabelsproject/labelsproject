@@ -580,6 +580,16 @@ footer.footer {
   width: 120px;
 }
 
+.menu-link {
+  color: $col-darkest;
+  text-decoration: none;
+}
+
+.menu-link:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
 .menu-wrapper {
   animation: menu-load 0.2s forwards;
   background: none;
