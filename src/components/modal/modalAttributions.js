@@ -11,6 +11,8 @@ function ModalAttributions(props) {
         "https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/",
         "https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background",
         "https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball",
+        "https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/",
+        "https://www.transparenttextures.com/",
       ],
     },
     {
@@ -21,11 +23,6 @@ function ModalAttributions(props) {
         "https://uxwing.com/hand-holding-mobile-phone-icon/",
         "https://youssef-habchi.com/fonts/road-rage",
       ],
-    },
-    {
-      type: "Textures",
-      src: "",
-      urls: ["https://www.transparenttextures.com/"],
     },
   ];
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import utils from "../../../utils/utils";
-import uiLabels from "../../../../uiLabels";
 
 function StickyNote(props) {
   const [mouseDownState, setmouseDownState] = useState(false);

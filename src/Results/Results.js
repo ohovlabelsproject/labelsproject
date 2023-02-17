@@ -4,10 +4,11 @@ import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
-import firebaseConfig from "../firebaseConfig";
 import BarChartComponent from "./BarChartComponent";
-import binsByTime from "./ResultsByTime/binsByTime";
 import ResultsTable from "./ResultsSections/resultstable";
+import binsByTime from "./ResultsByTime/binsByTime";
+import firebaseConfig from "../firebaseConfig";
+import uiLabels from "../uiLabels";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -25,8 +26,9 @@ function Results() {
   const [labelsData, setLabelsData] = useState();
   const [labelsBy, setLabelsBy] = useState({
     period: "all time",
-    mostBinned: { label: "biological", amount: 12 },
+    mostBinned: { label: "", amount: 12 },
   });
+
   /* Get the labels from the database:
    **********************************/
   const getLabels = (e) => {
@@ -37,7 +39,7 @@ function Results() {
         labelsArr.push(doc.data());
         dataByDate.push({
           name: doc.data().label.toLowerCase(),
-          //uv: 100, // unique view
+          // uv: 100, // unique view
           pv: doc.data().bins.length, // page view
           amt: doc.data().bins.length, // amount
         });
@@ -45,7 +47,19 @@ function Results() {
       setLabelsData((previousState) => {
         return { ...previousState, labelsArr, dataByDate };
       });
+      setDefaultLabelsFilter();
     });
+  };
+
+  /* :
+   **********************************/
+  const setDefaultLabelsFilter = () => {
+    setTimeout(() => {
+      const selectElement = document.querySelector("#results-select");
+      const event = new Event("change", { bubbles: true, cancelable: true });
+      selectElement.value = "All time";
+      selectElement.dispatchEvent(event);
+    }, 500);
   };
 
   useEffect(() => {
@@ -77,10 +91,8 @@ function Results() {
   };*/
 
   const handleResultsFilterChange = (e) => {
-    console.log(e.target.value);
     let dataByDate = [];
     let labelsDesc;
-
     switch (e.target.value) {
       case "All time":
         const labelsBinnedAllTime = binsByTime.getAll(labelsData);
@@ -97,7 +109,7 @@ function Results() {
         setLabelsBy((previousState) => {
           return {
             ...previousState,
-            period: "all time",
+            period: "of all time",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
               amount: labelsDesc.bins.length,
@@ -123,7 +135,7 @@ function Results() {
         setLabelsBy((previousState) => {
           return {
             ...previousState,
-            period: "past year",
+            period: "over the past year",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
               amount: labelsDesc.bins.length,
@@ -149,7 +161,7 @@ function Results() {
         setLabelsBy((previousState) => {
           return {
             ...previousState,
-            period: "past month",
+            period: "over the past month",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
               amount: labelsDesc.bins.length,
@@ -175,7 +187,7 @@ function Results() {
         setLabelsBy((previousState) => {
           return {
             ...previousState,
-            period: "past week",
+            period: "over the past week",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
               amount: labelsDesc.bins.length,
@@ -224,36 +236,57 @@ function Results() {
         <header className="hud"></header>
         <section className="">
           <div>
-            <h1 className="p-2" style={{ textAlign: "center" }}>
-              Results
+            <h1
+              className="p-2 results-title animate__animated animate__fadeIn animate__slow"
+              style={{ textAlign: "center" }}
+            >
+              Results{" "}
+              <img
+                alt=""
+                style={{ paddingBottom: 10 }}
+                src="img/results/data-duck.png"
+                width="40px"
+              />
             </h1>
-            <ol style={{ textAlign: "left" }}>
+            <p style={{ marginTop: -10 }}>
+              {" "}
+              We count every "binned" and submitted label
+            </p>
+            <ol
+              className="animate__animated animate__fadeIn animate__slow"
+              style={{ textAlign: "left" }}
+            >
               <li>
-                <a href="#overview">Overview</a>
+                <a href="#filter-by-period">Filter by Period</a>
               </li>
               <li>
-                <a href="#resources">Resources</a>
-              </li>
-              <li>
-                <a href="#attributions">Attributions</a>
+                <a href="#download">Download</a>
               </li>
             </ol>
-            <h2 className="p-2" id="overview" style={{ textAlign: "left" }}>
-              1. Overview
+            <br />
+
+            <h2
+              className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
+              id="filter-by-period"
+              style={{ textAlign: "left" }}
+            >
+              1. Filter by Period
             </h2>
-            <hr />
-            <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
-              We count every "binned" and submitted label and share it with our
-              language team who are working on changing language in the hearings
-              system. In doing so, we thought it's only fair that you too get to
-              see the overall findings (as well as by day, week, month, and
-              year).
-            </p>
-            Results from:{" "}
+            <div className="animate__animated animate__fadeIn animate__slow">
+              <hr />
+            </div>
+            {labelsBy && labelsBy.period && labelsBy.mostBinned.label ? (
+              <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
+                The most binned label {labelsBy.period} —so far— is{" "}
+                <b>"{labelsBy.mostBinned.label}"</b> (binned{" "}
+                {labelsBy.mostBinned.amount} times).
+              </p>
+            ) : null}
             <select
               aria-label="Results filtered by 'all time' by default"
-              className="col-12 form-select"
+              className="col-12 form-select animate__animated animate__fadeIn animate__slow"
               defaultValue="All time"
+              id="results-select"
               onChange={(e) => {
                 handleResultsFilterChange(e);
               }}
@@ -264,14 +297,16 @@ function Results() {
               <option>Past week</option>
               <option>Today</option>
             </select>
-            <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
-              The most binned label {labelsBy.period} —so far— is{" "}
-              <b>"{labelsBy.mostBinned.label}"</b> (binned{" "}
-              {labelsBy.mostBinned.amount} times).
-            </p>
             <br />
-            <div className="col-12" style={{ height: 300 }}>
-              {labelsData && labelsData.labelsArr && labelsData.dataByDate ? (
+            <br />
+            <div
+              className="col-12 animate__animated animate__fadeIn animate__slow"
+              style={{ height: 300 }}
+            >
+              {labelsData &&
+              labelsData.labelsArr &&
+              labelsData.dataByDate &&
+              labelsBy?.mostBinned.label ? (
                 <BarChartComponent
                   data={labelsData.dataByDate}
                   labelsData={labelsData}
@@ -279,24 +314,47 @@ function Results() {
               ) : null}
             </div>
             <br />
-            {/*               labelsBy={labelsBy}
-              labelsData={labelsData} */}
-            <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
+            <p
+              className="p-2 animate__animated animate__fadeIn animate__slow"
+              style={{ fontSize: 20, textAlign: "left" }}
+            >
               Here's a full results table:
             </p>
-            <br />
             <ResultsTable labelsData={labelsData} setLabelsBy={setLabelsBy} />
           </div>
         </section>
         <br />
-        {/*
+
+        <h2
+          className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
+          id="overview"
+          style={{ textAlign: "left" }}
+        >
+          2. Download
+        </h2>
+        <hr />
+        <p
+          className="p-2 animate__animated animate__fadeIn animate__slow"
+          style={{ fontSize: 20, textAlign: "left" }}
+        >
+          For your own reference:
+          <br />
+          <br />
+          <button className="btn-ohov-1">
+            Download <i className="fa fa-download"></i>
+          </button>
+          <button className="btn-ohov-1">
+            Print page <i className="fa fa-print"></i>
+          </button>
+        </p>
+
         <footer className="footer">
           <small>
             &copy; {new Date().getFullYear()} {uiLabels.footer}
           </small>
-        </footer> */}
-        <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
-        <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
+        </footer>
+        <div className="bg-wrapper-" id="bg-wrapper-1"></div>
+        <div className="bg-wrapper-" id="bg-wrapper-2"></div>
       </div>
     </div>
   );

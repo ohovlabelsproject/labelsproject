@@ -1,6 +1,4 @@
 function ResultsTable(props) {
-  //props.labelsData.dataByDate
-
   return (
     <div>
       <table className="table table-striped">

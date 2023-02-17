@@ -508,6 +508,25 @@ footer.footer {
   width: 360px;
 }
 
+.results-title {
+  @include guidelines();
+  @include thick-title();
+  color: $col-darkest;
+  font-size: 37px;
+  line-height: 50px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.results-heading {
+  @include guidelines();
+  @include strip-margin-and-padding();
+  @include thick-title();
+  color: $col-darkest;
+  font-size: 25px;
+  line-height: 30px;
+}
+
 .loader {
   height: 100%;
   left: 0;
