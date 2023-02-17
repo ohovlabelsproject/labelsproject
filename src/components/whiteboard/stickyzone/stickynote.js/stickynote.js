@@ -116,15 +116,7 @@ function StickyNote(props) {
     let stickyNoteTop = stickyNote.style.top;
     stickyNote.style.display = "none";
     paperballWrapper.style.display = "block";
-    // paperballWrapper.style.position = "absolute";
-
-    //
-    /* document.getElementById("paper-ball-sm-wrapper").style.top =
-      document.getElementById(`stickynote-${props.index}`).style.top +
-      "px !important";*/
-
     document.getElementById("paper-ball-sm-wrapper").style.top = stickyNoteTop;
-
     paperballWrapper.style.left =
       stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
     paperballImg.src = frames[0].src;
@@ -152,29 +144,16 @@ function StickyNote(props) {
         .style.top.split("px")[0] -
       20 +
       "px";
-
-    /*
-    console.log(
-      document
-        .getElementById("paper-ball-sm-wrapper")
-        .style.top.split("px")[0] -
-        20 +
-        "px"
-    );*/
-
     duck.style.display = "block";
     duck.style.left = app.getBoundingClientRect().right + "px";
     //
     const si2 = setInterval(() => {
       const deviceIndex = utils.device.orientation.checkDevice();
-
       let inc = 2.5;
-
       if (deviceIndex >= 3) {
         // if bigger device, make duck faster
         inc = 5;
       }
-
       const duckRect = duck.getBoundingClientRect();
       const appRect = app.getBoundingClientRect();
       if (duckRect.left < appRect.left - duckRect.width) {
@@ -248,9 +227,11 @@ function StickyNote(props) {
       style={{ height: "100px", width: "100%" }}
     >
       <div
-        className={`stickynote ${determineRotationRandomness(
-          props.index
-        )} animate__animated animate__flipInX animate__delay-1s`}
+        className={`stickynote ${determineRotationRandomness(props.index)} ${
+          props.hasStickyNoteAnimatedIn
+            ? null
+            : "animate__animated animate__flipInX animate__delay-1s"
+        }`}
         id={`stickynote-${props.index}`}
         onMouseDown={() => setmouseDownState(true)}
         onMouseUp={() => handleMouseUp()}

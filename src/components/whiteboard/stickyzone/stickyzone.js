@@ -1,8 +1,17 @@
+import { useEffect, useState } from "react";
 import NoLabels from "./nolabels";
 import NonStickyNote from "./stickynote.js/nonstickynote";
 import StickyNote from "./stickynote.js/stickynote";
 
 function StickyZone(props) {
+  const [hasStickyNoteAnimatedIn, setHasStickyNoteAnimatedIn] = useState(false);
+  useEffect(() => {
+    // Don't repeat stickynote animated entrances:
+    setTimeout(() => {
+      setHasStickyNoteAnimatedIn(true);
+    }, 4000);
+  }, []);
+
   return (
     <section className="stickyzone">
       <div className="col-12 row stickynotes">
@@ -20,6 +29,7 @@ function StickyZone(props) {
                   ) : (
                     <StickyNote
                       index={index}
+                      hasStickyNoteAnimatedIn={hasStickyNoteAnimatedIn}
                       key={`label-${index}`}
                       label={el.label?.toLowerCase().trim()}
                       labelData={props.labelsData.labelsArr[index]}
