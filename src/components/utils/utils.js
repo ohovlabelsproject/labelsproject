@@ -85,6 +85,15 @@ const utils = {
       },
     },
   },
+  ui: {
+    closeWindow: () => {
+      const myWindow = window.open("", "_self");
+      myWindow.document.write("");
+      setTimeout(function () {
+        myWindow.close();
+      }, 100);
+    },
+  },
 };
 
 export default utils;

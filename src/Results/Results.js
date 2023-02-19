@@ -5,10 +5,12 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import BarChartComponent from "./BarChartComponent";
+import Loader from "../components/loader/loader";
 import ResultsTable from "./ResultsSections/resultstable";
 import binsByTime from "./ResultsByTime/binsByTime";
 import firebaseConfig from "../firebaseConfig";
 import uiLabels from "../uiLabels";
+import utils from "../components/utils/utils";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -90,6 +92,93 @@ function Results() {
     return "";
   };*/
 
+  /* :
+   **********************************/
+  const handleByYear = (dataByDate) => {
+    //
+  };
+
+  /* :
+   **********************************/
+  const handleByMonth = (dataByDate) => {
+    //
+  };
+
+  /* :
+   **********************************/
+  const handleByWeek = (dataByDate) => {
+    // 1. Get labels binned over past week.
+    // 2. Get labels binned past week (w/ non-"past week" bins removed).
+    // 3. Sort labels (descending order).
+    const { week } = binsByTime;
+    const lBinnedPastWeek = week.getLabels(labelsData);
+
+    console.log(lBinnedPastWeek);
+    //
+    const lWithOnlyWeeksBins = week.getLabelsWithOnlyWeeksBins(lBinnedPastWeek);
+    const labelsSortedDesc = lWithOnlyWeeksBins.sort(
+      (a, b) => b.bins.length - a.bins.length
+    );
+    // 4. Push sorted labels to array — will be set in state
+    labelsSortedDesc.forEach((l) => {
+      dataByDate.push({
+        name: "test", //l.label.toLowerCase(),
+        pv: 10, //l.bins.length, // page view
+        amt: 10, //l.bins.length, // amount
+      });
+    });
+    setLabelsBy((previousState) => {
+      return {
+        ...previousState,
+        period: "over the past week",
+        mostBinned: {
+          label: "test", //labelsSortedDesc.label.toLowerCase(),
+          amount: 10, //labelsSortedDesc.bins.length,
+        },
+      };
+    });
+    setLabelsData((previousState) => {
+      return { ...previousState, dataByDate };
+    });
+  };
+
+  /* :
+   **********************************/
+  const handleByToday = (dataByDate) => {
+    // 1. Get labels binned today.
+    // 2. Get labels binned today (w/ non-today bins removed).
+    // 3. Sort labels (descending order).
+    const { today } = binsByTime;
+    const lBinnedToday = today.getLabels(labelsData);
+    const lWithOnlyTodaysBins = today.getLabelsWithOnlyTodaysBins(lBinnedToday);
+    const labelsSortedDesc = lWithOnlyTodaysBins.sort(
+      (a, b) => b.bins.length - a.bins.length
+    );
+    // 4. Push sorted labels to array — will be set in state
+    labelsSortedDesc.forEach((l) => {
+      dataByDate.push({
+        name: l.label.toLowerCase(),
+        pv: l.bins.length, // page view
+        amt: l.bins.length, // amount
+      });
+    });
+    setLabelsBy((previousState) => {
+      return {
+        ...previousState,
+        period: "today",
+        mostBinned: {
+          label: dataByDate[0].name,
+          amount: dataByDate[0].pv,
+        },
+      };
+    });
+    setLabelsData((previousState) => {
+      return { ...previousState, dataByDate };
+    });
+    return;
+  };
+
+  //
   const handleResultsFilterChange = (e) => {
     let dataByDate = [];
     let labelsDesc;
@@ -173,58 +262,10 @@ function Results() {
         });
         return;
       case "Past week":
-        const labelsBinnedPastWeek = binsByTime.getWeek(labelsData);
-        labelsDesc = labelsBinnedPastWeek.sort(
-          (a, b) => b.bins.length - a.bins.length
-        )[0];
-        labelsBinnedPastWeek.forEach((l) => {
-          dataByDate.push({
-            name: l.label.toLowerCase(),
-            pv: l.bins.length, // page view
-            amt: l.bins.length, // amount
-          });
-        });
-        setLabelsBy((previousState) => {
-          return {
-            ...previousState,
-            period: "over the past week",
-            mostBinned: {
-              label: labelsDesc.label.toLowerCase(),
-              amount: labelsDesc.bins.length,
-            },
-          };
-        });
-        setLabelsData((previousState) => {
-          return { ...previousState, dataByDate };
-        });
+        handleByWeek(dataByDate);
         return;
-
       case "Today":
-        const labelsBinnedToday = binsByTime.getToday(labelsData);
-        labelsDesc = labelsBinnedToday.sort(
-          (a, b) => b.bins.length - a.bins.length
-        )[0];
-        // Remove bins NOT from today!!!
-        labelsBinnedToday.forEach((l) => {
-          dataByDate.push({
-            name: l.label.toLowerCase(),
-            pv: l.bins.length, // page view // <-------- should be length of bins from today!
-            amt: l.bins.length, // amount
-          });
-        });
-        setLabelsBy((previousState) => {
-          return {
-            ...previousState,
-            period: "today",
-            mostBinned: {
-              label: labelsDesc.label.toLowerCase(),
-              amount: labelsDesc.bins.length, // <-------- should be length of bins from today!
-            },
-          };
-        });
-        setLabelsData((previousState) => {
-          return { ...previousState, dataByDate };
-        });
+        handleByToday(dataByDate);
         return;
       default:
         console.log("-");
@@ -277,11 +318,7 @@ function Results() {
                     className="btn-ohov-1"
                     style={{ width: 110 }}
                     onClick={() => {
-                      const myWindow = window.open("", "_self");
-                      myWindow.document.write("");
-                      setTimeout(function () {
-                        myWindow.close();
-                      }, 100);
+                      utils.ui.closeWindow();
                     }}
                   >
                     <i className="fa fa-close"></i> Close
@@ -292,7 +329,7 @@ function Results() {
           </div>
         </header>
 
-        <section style={{ marginTop: 70 }}>
+        <section style={{ marginTop: 30 }}>
           <br />
           <br />
           <div>
@@ -345,59 +382,48 @@ function Results() {
             </select>
             <br />
             <br />
-            <div
-              className="col-12 animate__animated animate__fadeIn animate__slow"
-              style={{ height: 300 }}
+            {labelsBy?.mostBinned.label ? (
+              <ResultsOverview
+                labelsData={labelsData}
+                setLabelsBy={setLabelsBy}
+              />
+            ) : (
+              <Loader />
+            )}
+          </div>
+        </section>
+        <br />
+
+        {labelsBy?.mostBinned.label ? (
+          <>
+            <h2
+              className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
+              id="overview"
+              style={{ textAlign: "left" }}
             >
-              {labelsData &&
-              labelsData.labelsArr &&
-              labelsData.dataByDate &&
-              labelsBy?.mostBinned.label ? (
-                <BarChartComponent
-                  data={labelsData.dataByDate}
-                  labelsData={labelsData}
-                />
-              ) : null}
-            </div>
+              2. Download
+            </h2>
+            <div
+              className="animate__animated animate__fadeIn animate__slow"
+              style={{ borderBottom: "1px dashed #000" }}
+            ></div>
             <br />
             <p
               className="p-2 animate__animated animate__fadeIn animate__slow"
               style={{ fontSize: 20, textAlign: "left" }}
             >
-              Here's a results table (
-              {labelsBy && labelsBy.period ? labelsBy.period : null}):
+              For your own reference:
+              <br />
+              <br />
+              <button className="btn-ohov-1">
+                Download <i className="fa fa-download"></i>
+              </button>
+              <button className="btn-ohov-1">
+                Print page <i className="fa fa-print"></i>
+              </button>
             </p>
-            <ResultsTable labelsData={labelsData} setLabelsBy={setLabelsBy} />
-          </div>
-        </section>
-        <br />
-
-        <h2
-          className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
-          id="overview"
-          style={{ textAlign: "left" }}
-        >
-          2. Download
-        </h2>
-        <div
-          className="animate__animated animate__fadeIn animate__slow"
-          style={{ borderBottom: "1px dashed #000" }}
-        ></div>
-        <br />
-        <p
-          className="p-2 animate__animated animate__fadeIn animate__slow"
-          style={{ fontSize: 20, textAlign: "left" }}
-        >
-          For your own reference:
-          <br />
-          <br />
-          <button className="btn-ohov-1">
-            Download <i className="fa fa-download"></i>
-          </button>
-          <button className="btn-ohov-1">
-            Print page <i className="fa fa-print"></i>
-          </button>
-        </p>
+          </>
+        ) : null}
 
         <footer className="footer">
           <small>
@@ -408,6 +434,39 @@ function Results() {
         <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
       </div>
     </div>
+  );
+}
+
+function ResultsOverview(props) {
+  return (
+    <>
+      <div
+        className="col-12 animate__animated animate__fadeIn animate__slow"
+        style={{ height: 300 }}
+      >
+        {props.labelsData &&
+        props.labelsData.labelsArr &&
+        props.labelsData.dataByDate ? (
+          <BarChartComponent
+            data={props.labelsData.dataByDate}
+            labelsData={props.labelsData}
+          />
+        ) : null}
+      </div>
+      <br />
+      <p
+        className="p-2 animate__animated animate__fadeIn animate__slow"
+        style={{ fontSize: 20, textAlign: "left" }}
+      >
+        Here's a results table (
+        {props.labelsBy && props.labelsBy.period ? props.labelsBy.period : null}
+        ):
+      </p>
+      <ResultsTable
+        labelsData={props.labelsData}
+        setLabelsBy={props.setLabelsBy}
+      />
+    </>
   );
 }
 
