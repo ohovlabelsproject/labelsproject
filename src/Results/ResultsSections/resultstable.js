@@ -25,6 +25,7 @@ function ResultsTable(props) {
             : null}
         </tbody>
       </table>
+      {props.labelsBy?.binCount ? `Total: ${props.labelsBy?.binCount}` : null}
     </div>
   );
 }

@@ -9,6 +9,8 @@ import Loader from "../components/loader/loader";
 import ResultsTable from "./ResultsSections/resultstable";
 import binsByTime from "./ResultsByTime/binsByTime";
 import firebaseConfig from "../firebaseConfig";
+import moment from "moment";
+import resultsPrintPage from "./results-print-page";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
 
@@ -52,7 +54,13 @@ function Results() {
       setDefaultLabelsFilter();
     });
   };
-
+  const formatTimesAmount = (amount) => {
+    if (amount === 1) {
+      return "time";
+    } else {
+      return "times";
+    }
+  };
   /* :
    **********************************/
   const setDefaultLabelsFilter = () => {
@@ -92,16 +100,105 @@ function Results() {
     return "";
   };*/
 
+  const handleDownload = () => {
+    const documentName = "labels_report.txt";
+    //
+    function downloadBlob(blob, name = documentName) {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = name;
+      document.body.appendChild(link);
+      link.dispatchEvent(
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        })
+      );
+      document.body.removeChild(link);
+    }
+    const textReport = resultsPrintPage.container.generate(labelsData);
+    const txt = new Blob([textReport]);
+    downloadBlob(txt, documentName);
+  };
+
   /* :
    **********************************/
   const handleByYear = (dataByDate) => {
-    //
+    // 1. Get labels binned this year.
+    // 2. Get labels binned this year w/ other bins removed.
+    // 3. Sort labels (descending order).
+    const { year } = binsByTime;
+    const lBinnedYear = year.getLabels(labelsData);
+    const lWithOnlyYearBins = year.getLabelsWithOnlyYearsBins(lBinnedYear);
+    const labelsSortedDesc = lWithOnlyYearBins.sort(
+      (a, b) => b.bins.length - a.bins.length
+    );
+    let binCount = 0;
+    // 4. Push sorted labels to array — will be set in state
+    labelsSortedDesc.forEach((l) => {
+      binCount += l.bins.length;
+      dataByDate.push({
+        name: l.label.toLowerCase(),
+        pv: l.bins.length, // page view
+        amt: l.bins.length, // amount
+      });
+    });
+    setLabelsBy((previousState) => {
+      return {
+        ...previousState,
+        period: "in the past year",
+        binCount: binCount,
+        mostBinned: {
+          label: dataByDate[0].name,
+          amount: dataByDate[0].pv,
+        },
+      };
+    });
+    setLabelsData((previousState) => {
+      return { ...previousState, dataByDate };
+    });
+    return;
   };
 
   /* :
    **********************************/
   const handleByMonth = (dataByDate) => {
-    //
+    // 1. Get labels binned this month.
+    // 2. Get labels binned this month w/ other bins removed.
+    // 3. Sort labels (descending order).
+    const { month } = binsByTime;
+    const lBinnedMonth = month.getLabels(labelsData);
+    const lWithOnlyMonthsBins = month.getLabelsWithOnlyMonthsBins(lBinnedMonth);
+    const labelsSortedDesc = lWithOnlyMonthsBins.sort(
+      (a, b) => b.bins.length - a.bins.length
+    );
+    let binCount = 0;
+    // 4. Push sorted labels to array — will be set in state
+    labelsSortedDesc.forEach((l) => {
+      binCount += l.bins.length;
+      dataByDate.push({
+        name: l.label.toLowerCase(),
+        pv: l.bins.length, // page view
+        amt: l.bins.length, // amount
+      });
+    });
+    setLabelsBy((previousState) => {
+      return {
+        ...previousState,
+        period: "in the past month",
+        binCount: binCount,
+        mostBinned: {
+          label: dataByDate[0].name,
+          amount: dataByDate[0].pv,
+        },
+      };
+    });
+    setLabelsData((previousState) => {
+      return { ...previousState, dataByDate };
+    });
+    return;
   };
 
   /* :
@@ -127,10 +224,12 @@ function Results() {
         amt: 10, //l.bins.length, // amount
       });
     });
+    let binCount;
     setLabelsBy((previousState) => {
       return {
         ...previousState,
         period: "over the past week",
+        binCount: binCount,
         mostBinned: {
           label: "test", //labelsSortedDesc.label.toLowerCase(),
           amount: 10, //labelsSortedDesc.bins.length,
@@ -154,8 +253,10 @@ function Results() {
     const labelsSortedDesc = lWithOnlyTodaysBins.sort(
       (a, b) => b.bins.length - a.bins.length
     );
+    let binCount = 0;
     // 4. Push sorted labels to array — will be set in state
     labelsSortedDesc.forEach((l) => {
+      binCount += l.bins.length;
       dataByDate.push({
         name: l.label.toLowerCase(),
         pv: l.bins.length, // page view
@@ -166,6 +267,7 @@ function Results() {
       return {
         ...previousState,
         period: "today",
+        binCount: binCount,
         mostBinned: {
           label: dataByDate[0].name,
           amount: dataByDate[0].pv,
@@ -178,7 +280,8 @@ function Results() {
     return;
   };
 
-  //
+  /* :
+   **********************************/
   const handleResultsFilterChange = (e) => {
     let dataByDate = [];
     let labelsDesc;
@@ -210,56 +313,10 @@ function Results() {
         });
         return;
       case "Past year":
-        const labelsBinnedPastYear = binsByTime.getYear(labelsData);
-        labelsDesc = labelsBinnedPastYear.sort(
-          (a, b) => b.bins.length - a.bins.length
-        )[0];
-        labelsBinnedPastYear.forEach((l) => {
-          dataByDate.push({
-            name: l.label.toLowerCase(),
-            pv: l.bins.length, // page view
-            amt: l.bins.length, // amount
-          });
-        });
-        setLabelsBy((previousState) => {
-          return {
-            ...previousState,
-            period: "over the past year",
-            mostBinned: {
-              label: labelsDesc.label.toLowerCase(),
-              amount: labelsDesc.bins.length,
-            },
-          };
-        });
-        setLabelsData((previousState) => {
-          return { ...previousState, dataByDate };
-        });
+        handleByYear(dataByDate);
         return;
       case "Past month":
-        const labelsBinnedPastMonth = binsByTime.getMonth(labelsData);
-        labelsDesc = labelsBinnedPastMonth.sort(
-          (a, b) => b.bins.length - a.bins.length
-        )[0];
-        labelsBinnedPastMonth.forEach((l) => {
-          dataByDate.push({
-            name: l.label.toLowerCase(),
-            pv: l.bins.length, // page view
-            amt: l.bins.length, // amount
-          });
-        });
-        setLabelsBy((previousState) => {
-          return {
-            ...previousState,
-            period: "over the past month",
-            mostBinned: {
-              label: labelsDesc.label.toLowerCase(),
-              amount: labelsDesc.bins.length,
-            },
-          };
-        });
-        setLabelsData((previousState) => {
-          return { ...previousState, dataByDate };
-        });
+        handleByMonth(dataByDate);
         return;
       case "Past week":
         handleByWeek(dataByDate);
@@ -271,25 +328,10 @@ function Results() {
         console.log("-");
     }
   };
-
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <header className="hud-results">
-          {/*
-          <h1
-            className="p-2 results-title animate__animated animate__fadeIn animate__slow"
-            style={{ textAlign: "center" }}
-          >
-            Results{" "}
-            <img
-              alt=""
-              style={{ paddingBottom: 10 }}
-              src="img/results/data-duck.png"
-              width="40px"
-            />
-          </h1>
-           */}
           <div className="row col-12 col-md-8">
             <div className="col-6 col-md-7 col-lg-8 text-center">
               <h1
@@ -328,8 +370,7 @@ function Results() {
             </div>
           </div>
         </header>
-
-        <section style={{ marginTop: 30 }}>
+        <section style={{ marginTop: 30 }} id="results-section-1">
           <br />
           <br />
           <div>
@@ -360,9 +401,13 @@ function Results() {
             <br />
             {labelsBy && labelsBy.period && labelsBy.mostBinned.label ? (
               <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
-                The most binned label {labelsBy.period} —so far— is{" "}
-                <b>"{labelsBy.mostBinned.label}"</b> (binned{" "}
-                {labelsBy.mostBinned.amount} times).
+                The most binned label {labelsBy.period}
+                {labelsBy.period === "today"
+                  ? ` (${moment().format("ll")})`
+                  : null}
+                &nbsp;—so far— is <b>"{labelsBy.mostBinned.label}"</b>. It has
+                been binned {labelsBy.mostBinned.amount}{" "}
+                {formatTimesAmount(labelsBy.mostBinned.amount)}.
               </p>
             ) : null}
             <select
@@ -377,13 +422,14 @@ function Results() {
               <option>All time</option>
               <option>Past year</option>
               <option>Past month</option>
-              <option>Past week</option>
+              {/*<option>Past week</option>*/}
               <option>Today</option>
             </select>
             <br />
             <br />
             {labelsBy?.mostBinned.label ? (
               <ResultsOverview
+                labelsBy={labelsBy}
                 labelsData={labelsData}
                 setLabelsBy={setLabelsBy}
               />
@@ -393,7 +439,6 @@ function Results() {
           </div>
         </section>
         <br />
-
         {labelsBy?.mostBinned.label ? (
           <>
             <h2
@@ -415,16 +460,25 @@ function Results() {
               For your own reference:
               <br />
               <br />
-              <button className="btn-ohov-1">
+              <button
+                className="btn-ohov-1"
+                onClick={() => {
+                  handleDownload();
+                }}
+              >
                 Download <i className="fa fa-download"></i>
               </button>
-              <button className="btn-ohov-1">
+              <button
+                className="btn-ohov-1"
+                onClick={() => {
+                  window.print();
+                }}
+              >
                 Print page <i className="fa fa-print"></i>
               </button>
             </p>
           </>
         ) : null}
-
         <footer className="footer">
           <small>
             &copy; {new Date().getFullYear()} {uiLabels.footer}
@@ -463,6 +517,7 @@ function ResultsOverview(props) {
         ):
       </p>
       <ResultsTable
+        labelsBy={props.labelsBy}
         labelsData={props.labelsData}
         setLabelsBy={props.setLabelsBy}
       />

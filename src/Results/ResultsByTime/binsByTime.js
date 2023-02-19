@@ -102,10 +102,46 @@ const binsByTime = {
    ****************************************/
   year: {
     getLabels: (labelsData) => {
-      //
+      let bins = [];
+      labelsData.labelsArr.forEach((l) => {
+        l.bins.forEach((bin) => {
+          const binTimestamp = bin.binnedOn.toDate();
+          const binD = new Date(binTimestamp);
+          const binYear = binD.getFullYear();
+          const sameYear = currentYear === binYear;
+          if (sameYear) {
+            bins.push(l);
+          }
+        });
+      });
+      return [...new Set(bins)];
     },
     getLabelsWithOnlyYearsBins: (labelsArr) => {
-      //
+      let relevantBins = {};
+      let labelsCp = [];
+      labelsArr.forEach((l) => {
+        l.bins.forEach((binObj) => {
+          const bTimestamp = binObj.binnedOn.toDate();
+          const bYear = bTimestamp.getFullYear();
+          const bSameYear = currentYear === bYear;
+          if (bSameYear) {
+            if (!relevantBins[l.label]) relevantBins[l.label] = {};
+            if (relevantBins[l.label].bins) {
+              relevantBins[l.label].bins.push(binObj);
+            } else {
+              relevantBins[l.label].bins = [];
+              relevantBins[l.label].bins.push(binObj);
+            }
+          }
+        });
+      });
+      for (const relevantBin in relevantBins) {
+        labelsCp.push({
+          label: relevantBin?.toLowerCase(),
+          ...relevantBins[relevantBin],
+        });
+      }
+      return labelsCp;
     },
   },
 
@@ -113,10 +149,51 @@ const binsByTime = {
    ****************************************/
   month: {
     getLabels: (labelsData) => {
-      //
+      let bins = [];
+      labelsData.labelsArr.forEach((l) => {
+        l.bins.forEach((bin) => {
+          const binTimestamp = bin.binnedOn.toDate();
+          const binD = new Date(binTimestamp);
+          const binMonth = binD.getMonth();
+          const binYear = binD.getFullYear();
+          const sameMonth = currentMonth === binMonth;
+          const sameYear = currentYear === binYear;
+          if (sameMonth && sameYear) {
+            bins.push(l);
+          }
+        });
+      });
+      return [...new Set(bins)];
     },
     getLabelsWithOnlyMonthsBins: (labelsArr) => {
-      //
+      let relevantBins = {};
+      let labelsCp = [];
+      labelsArr.forEach((l) => {
+        l.bins.forEach((binObj) => {
+          const bTimestamp = binObj.binnedOn.toDate();
+          const bD = new Date(bTimestamp);
+          const bMonth = bD.getMonth();
+          const bYear = bTimestamp.getFullYear();
+          const bSameMonth = currentMonth === bMonth;
+          const bSameYear = currentYear === bYear;
+          if (bSameMonth && bSameYear) {
+            if (!relevantBins[l.label]) relevantBins[l.label] = {};
+            if (relevantBins[l.label].bins) {
+              relevantBins[l.label].bins.push(binObj);
+            } else {
+              relevantBins[l.label].bins = [];
+              relevantBins[l.label].bins.push(binObj);
+            }
+          }
+        });
+      });
+      for (const relevantBin in relevantBins) {
+        labelsCp.push({
+          label: relevantBin?.toLowerCase(),
+          ...relevantBins[relevantBin],
+        });
+      }
+      return labelsCp;
     },
   },
 
