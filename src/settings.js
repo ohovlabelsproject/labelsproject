@@ -2,7 +2,7 @@ const settings = {
   modes: {
     testMode: false,
   },
-  shouldSkipIntro: {
+  shouldSkipWelcome: {
     onLabelSubmission: false,
   },
   labels: {

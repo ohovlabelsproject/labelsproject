@@ -38,6 +38,7 @@ function ModalWelcome(props) {
       body: {
         p: uiLabels.welcome.body.slide3,
         terms: uiLabels.termsOfUse.text,
+        turnOffCheckbox: true,
       },
     },
   ];
@@ -146,6 +147,16 @@ function ModalWelcome(props) {
               ></textarea>
             </div>
           ) : null}
+          {slides[slideData.slide].body.turnOffCheckbox ? (
+            <div className="my-4 text-center">
+              <small>
+                <input type="checkbox" id="toggle-welcome-checkbox" />
+                &nbsp; Do not show welcome messages again
+              </small>
+            </div>
+          ) : (
+            "-"
+          )}
         </div>
       </div>
     );
@@ -177,8 +188,10 @@ function ModalWelcome(props) {
     utils.device.touch.preventDefaultTouchActions();
     utils.device.overflow.addOverflowStyleFix();
     utils.device.orientation.update();
-
-    // move to own func:
+    // move to own funcs:
+    if (document.getElementById("toggle-welcome-checkbox")?.checked) {
+      localStorage.setItem("ohov_skip_welcome", true);
+    }
     if (
       document.getElementById("app")?.getBoundingClientRect().height >
       window.innerHeight

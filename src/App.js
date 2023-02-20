@@ -70,7 +70,7 @@ function App(props) {
     labelBeingDisposedOf: false,
     // Skip the intro/welcome modal if there's a local storage item saying to do so?
     skipIntro:
-      localStorage.getItem("ohov_skip_intro") || settings.modes.testMode
+      localStorage.getItem("ohov_skip_welcome") || settings.modes.testMode
         ? true
         : false,
   });
