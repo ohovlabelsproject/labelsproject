@@ -1,13 +1,13 @@
 import moment from "moment";
 
-const dashes = "_________ _ _ _";
+const dashes = "_________________ _ _ _";
 
 const resultsPrintPage = {
   header: {
     generate: () => {
-      const title = '"Our Hearing, Our Voices" - Labels App Data';
-      const subtitle = moment().format("LL");
-      return "\n" + dashes + "\n\n" + title + "\n\n" + subtitle + "\n" + dashes;
+      const title = document.title;
+      const subtitle = `Report generated: ${moment().format("L")}`;
+      return dashes + "\n\n" + title + "\n\n" + subtitle + "\n" + dashes;
     },
   },
   body: {

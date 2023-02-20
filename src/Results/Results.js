@@ -101,7 +101,8 @@ function Results() {
   };*/
 
   const handleDownload = () => {
-    const documentName = "labels_report.txt";
+    const t = moment().format("L").split("/").join("_");
+    const documentName = `ohov_labels_results_report_${t}.txt`;
     //
     function downloadBlob(blob, name = documentName) {
       const blobUrl = URL.createObjectURL(blob);
@@ -269,8 +270,8 @@ function Results() {
         period: "today",
         binCount: binCount,
         mostBinned: {
-          label: dataByDate[0].name,
-          amount: dataByDate[0].pv,
+          label: dataByDate[0]?.name,
+          amount: dataByDate[0]?.pv,
         },
       };
     });
@@ -333,7 +334,7 @@ function Results() {
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <header className="hud-results">
           <div className="row col-12 col-md-8">
-            <div className="col-6 col-md-7 col-lg-8 text-center">
+            <div className="col-7 col-md-7 col-lg-8 text-center">
               <h1
                 className="m-0 p-0 results-title animate__animated animate__fadeIn animate__slow"
                 style={{ textAlign: "left" }}
@@ -348,16 +349,11 @@ function Results() {
                 Bin Data
               </h1>
             </div>
-            <div className="col-6 col-md-5 col-lg-4 p-0 m-0">
+            <div className="col-5 col-md-5 col-lg-4 p-0 m-0">
               <div className="row col-12 p-0 m-0">
-                <div className="col-6">
-                  <button className="btn-ohov-1" style={{ width: 110 }}>
-                    <i className="fa fa-envelope"></i> Contact
-                  </button>
-                </div>
-                <div className="col-6">
+                <div className="col-12">
                   <button
-                    className="btn-ohov-1"
+                    className="btn-ohov-hud"
                     style={{ width: 110 }}
                     onClick={() => {
                       utils.ui.closeWindow();
@@ -374,42 +370,36 @@ function Results() {
           <br />
           <br />
           <div>
-            <ol
+            <ul
               className="animate__animated animate__fadeIn animate__slow"
               style={{ textAlign: "left" }}
             >
               <li>
-                <a href="#filter-by-period">Filter by Period</a>
+                <a href="#filter-by-period">
+                  <i className="fa fa-download"></i>&nbsp;Download .txt
+                </a>
               </li>
               <li>
-                <a href="#download">Download</a>
+                <a href="#filter-by-period">
+                  <i className="fa fa-download"></i>&nbsp;Download .csv
+                </a>
               </li>
-            </ol>
-            <br />
+              <li>
+                <a href="#filter-by-period">
+                  <i className="fa fa-print"></i>&nbsp;Print webpage
+                </a>
+              </li>
+            </ul>
 
-            <h2
-              className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
-              id="filter-by-period"
-              style={{ textAlign: "left" }}
-            >
-              1. Filter by Period
-            </h2>
             <div
               className="animate__animated animate__fadeIn animate__slow"
               style={{ borderBottom: "1px dashed #000" }}
             ></div>
             <br />
-            {labelsBy && labelsBy.period && labelsBy.mostBinned.label ? (
-              <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
-                The most binned label {labelsBy.period}
-                {labelsBy.period === "today"
-                  ? ` (${moment().format("ll")})`
-                  : null}
-                &nbsp;—so far— is <b>"{labelsBy.mostBinned.label}"</b>. It has
-                been binned {labelsBy.mostBinned.amount}{" "}
-                {formatTimesAmount(labelsBy.mostBinned.amount)}.
-              </p>
-            ) : null}
+            <ResultsDescription
+              formatTimesAmount={formatTimesAmount}
+              labelsBy={labelsBy}
+            />
             <select
               aria-label="Results filtered by 'all time' by default"
               className="col-12 form-select animate__animated animate__fadeIn animate__slow"
@@ -434,51 +424,13 @@ function Results() {
                 setLabelsBy={setLabelsBy}
               />
             ) : (
-              <Loader />
+              <>
+                <b>No labels have been binned during this period.</b>
+              </>
             )}
           </div>
         </section>
         <br />
-        {labelsBy?.mostBinned.label ? (
-          <>
-            <h2
-              className="p-2 results-heading animate__animated animate__fadeIn animate__slow"
-              id="overview"
-              style={{ textAlign: "left" }}
-            >
-              2. Download
-            </h2>
-            <div
-              className="animate__animated animate__fadeIn animate__slow"
-              style={{ borderBottom: "1px dashed #000" }}
-            ></div>
-            <br />
-            <p
-              className="p-2 animate__animated animate__fadeIn animate__slow"
-              style={{ fontSize: 20, textAlign: "left" }}
-            >
-              For your own reference:
-              <br />
-              <br />
-              <button
-                className="btn-ohov-1"
-                onClick={() => {
-                  handleDownload();
-                }}
-              >
-                Download <i className="fa fa-download"></i>
-              </button>
-              <button
-                className="btn-ohov-1"
-                onClick={() => {
-                  window.print();
-                }}
-              >
-                Print page <i className="fa fa-print"></i>
-              </button>
-            </p>
-          </>
-        ) : null}
         <footer className="footer">
           <small>
             &copy; {new Date().getFullYear()} {uiLabels.footer}
@@ -488,6 +440,24 @@ function Results() {
         <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
       </div>
     </div>
+  );
+}
+
+function ResultsDescription(props) {
+  const { formatTimesAmount, labelsBy } = props;
+  const labelHasBins = labelsBy && labelsBy.period && labelsBy.mostBinned.label;
+  const isPeriodToday = labelsBy.period === "today";
+  const resultDate = isPeriodToday ? ` (${moment().format("ll")})` : null;
+  return labelHasBins ? (
+    <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
+      The most binned label {labelsBy.period}
+      {resultDate}
+      &nbsp;—so far— is <b>"{labelsBy.mostBinned.label}"</b>. It has been binned{" "}
+      {labelsBy.mostBinned.amount}{" "}
+      {formatTimesAmount(labelsBy.mostBinned.amount)}.
+    </p>
+  ) : (
+    <br />
   );
 }
 
