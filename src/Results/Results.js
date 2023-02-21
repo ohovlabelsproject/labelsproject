@@ -5,7 +5,6 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import BarChartComponent from "./BarChartComponent";
-import Loader from "../components/loader/loader";
 import ResultsTable from "./ResultsSections/resultstable";
 import binsByTime from "./ResultsByTime/binsByTime";
 import firebaseConfig from "../firebaseConfig";
@@ -40,13 +39,16 @@ function Results() {
       const labelsArr = [];
       const dataByDate = [];
       snapshot.docs.forEach((doc) => {
-        labelsArr.push(doc.data());
-        dataByDate.push({
-          name: doc.data().label.toLowerCase(),
-          // uv: 100, // unique view
-          pv: doc.data().bins.length, // page view
-          amt: doc.data().bins.length, // amount
-        });
+        const docData = doc.data();
+        if (docData.vetted) {
+          labelsArr.push(doc.data()); // Only push vetted labels
+          dataByDate.push({
+            name: doc.data().label.toLowerCase(),
+            // uv: 100, // unique view
+            pv: doc.data().bins.length, // page view
+            amt: doc.data().bins.length, // amount
+          });
+        }
       });
       setLabelsData((previousState) => {
         return { ...previousState, labelsArr, dataByDate };

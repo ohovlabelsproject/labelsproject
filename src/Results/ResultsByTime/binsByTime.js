@@ -3,7 +3,6 @@ import moment from "moment";
 /* Get today's date:
  *******************************************/
 const d = new Date();
-const currentDay = d.getDay();
 const currentDate = d.getDate();
 const currentMonth = d.getMonth();
 const currentYear = d.getFullYear();

@@ -8,9 +8,9 @@ import "bootstrap/dist/js/bootstrap";
 import "font-awesome/css/font-awesome.css";
 import "animate.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ModView from "./Modview/Modview";
 import Results from "./Results/Results";
 import Settings from "./Results/Settings";
+import UnvettedLabels from "./Modview/UnvettedLabels";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,7 +21,8 @@ function AppContainer() {
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/results" element={<Results />}></Route>
-          <Route path="/admin" element={<ModView />}></Route>
+          {/*<Route path="/admin" element={<ModView />}></Route>*/}
+          <Route path="/unvetted" element={<UnvettedLabels />}></Route>
           <Route path="/settings" element={<Settings />}></Route>
         </Routes>
       </BrowserRouter>

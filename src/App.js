@@ -89,7 +89,10 @@ function App(props) {
     getDocs(colRef).then((snapshot) => {
       const labelsArr = [];
       snapshot.docs.forEach((doc) => {
-        labelsArr.push(doc.data());
+        const docData = doc.data();
+        if (docData.vetted) {
+          labelsArr.push(doc.data()); // Only push vetted labels
+        }
       });
       utils.arr.shuffle(labelsArr); // <---- shuffle before rounding up array?
       // If array of labels length !== multiple of 9, round up to multiple:
@@ -109,19 +112,24 @@ function App(props) {
   /* Handle label submission (add doc):
    **********************************/
   const handleCustomLabelSubmission = (label) => {
+    const uniqueId = uuidv4();
     // If the user already added this label, return:
     if (localStorage.getItem("ohov_l_sub_" + label)) {
       alert(uiLabels.labelSubmission.feedback.userAlreadyAdded);
       return;
     }
+    // Should we add bin on submission (submitter's bin):
+    const binsArr = settings.labels.shouldAddBinOnSubmission
+      ? [
+          {
+            binnedOn: new Date(),
+            binnedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
+          },
+        ]
+      : [];
     addDoc(colRef, {
-      bins: [
-        {
-          binnedOn: new Date(),
-          binnedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
-        },
-      ],
-      id: uuidv4(),
+      bins: binsArr,
+      id: uniqueId,
       label: label.trim(),
       submittedBy: userGeoloc.IPv4 ? userGeoloc.IPv4 : "0",
       submittedOn: new Date(),
@@ -268,7 +276,6 @@ function App(props) {
             showDebugPanel={showDebugPanel}
           />
         ) : null}
-
         {/* 
         <div>
           <Alert variant="danger p-0">

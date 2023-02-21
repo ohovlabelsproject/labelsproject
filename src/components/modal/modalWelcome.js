@@ -56,6 +56,7 @@ function ModalWelcome(props) {
             <button
               aria-label="Decline and redirect from this site"
               className="btn-ohov-2"
+              id="btn-decline"
             >
               {uiLabels.welcome.action.decline}
             </button>
@@ -154,9 +155,7 @@ function ModalWelcome(props) {
                 &nbsp; Do not show welcome messages again
               </small>
             </div>
-          ) : (
-            "-"
-          )}
+          ) : null}
         </div>
       </div>
     );

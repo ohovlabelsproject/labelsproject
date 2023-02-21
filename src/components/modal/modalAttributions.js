@@ -27,7 +27,7 @@ function ModalAttributions(props) {
     {
       type: "",
       text: [
-        "Developed by John Martin. Thanks to John Morrison & Amy Miskimmin-Logan.",
+        "App by John Martin. Special thanks to John Morrison & Amy Miskimmin-Logan.",
       ],
     },
   ];
@@ -66,7 +66,15 @@ function ModalAttributions(props) {
                 <b className="m-0 p-0">{attr.type}</b>
                 {attr.src ? <p className="m-0 p-0">{attr.src}</p> : null}
                 {attr.text ? (
-                  <p style={{ fontSize: 11, paddingBottom: 10 }}>{attr.text}</p>
+                  <p
+                    style={{
+                      fontSize: 10,
+                      paddingBottom: 10,
+                      textAlign: "center",
+                    }}
+                  >
+                    {attr.text}
+                  </p>
                 ) : null}
                 <ul>
                   {attr.urls?.map((url) => {

@@ -28,8 +28,8 @@ function StickyZone(props) {
                     <NonStickyNote index={index} key={`label-${index}`} />
                   ) : (
                     <StickyNote
-                      index={index}
                       hasStickyNoteAnimatedIn={hasStickyNoteAnimatedIn}
+                      index={index}
                       key={`label-${index}`}
                       label={el.label?.toLowerCase().trim()}
                       labelData={props.labelsData.labelsArr[index]}
