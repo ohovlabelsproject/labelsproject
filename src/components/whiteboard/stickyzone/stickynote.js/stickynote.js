@@ -21,7 +21,9 @@ function StickyNote(props) {
   const handleMouseUp = () => {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
     setmouseDownState(false);
-    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
     stickyNote.style.zIndex = 1;
     handleDrop();
   };
@@ -30,8 +32,11 @@ function StickyNote(props) {
    *************************************************/
   const handleMouseMove = (e) => {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
+
     if (mouseDownState) {
-      let stickyNote = document.getElementById(`stickynote-${props.index}`);
+      let stickyNote = document.getElementById(
+        `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+      );
       stickyNote.style.zIndex = "99";
       let { clientX, clientY } = e;
       handleStickyNoteMove({ stickyNote, clientX, clientY });
@@ -44,7 +49,9 @@ function StickyNote(props) {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
     e.preventDefault();
     const touchLocation = e.targetTouches[0];
-    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
     let { pageX, pageY } = touchLocation;
     handleStickyNoteMove({ stickyNote, pageX, pageY });
     stickyNote.style.zIndex = "99";
@@ -55,7 +62,9 @@ function StickyNote(props) {
    *************************************************/
   const handleTouchEnd = () => {
     if (props.labelsMetadata.labelBeingDisposedOf) return;
-    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
     let binDropZone = document.getElementById("binzone-droparea");
     binDropZone.classList.remove("binzone-active");
     stickyNote.style.zIndex = "1";
@@ -98,7 +107,9 @@ function StickyNote(props) {
   /* Animate paperball crumpling:
    *********************************************/
   const animatePaperballCrumpling = () => {
-    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
     let stickyNoteRect = stickyNote.getBoundingClientRect();
     let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
     let paperballImg = document.getElementById("paper-ball-sm-img");
@@ -193,7 +204,9 @@ function StickyNote(props) {
   const handleDrop = () => {
     let binDropZone = document.getElementById("binzone-droparea");
     let binDropZoneRect = binDropZone.getBoundingClientRect();
-    let stickyNote = document.getElementById(`stickynote-${props.index}`);
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
     let stickyNoteRect = stickyNote.getBoundingClientRect();
     // The number of pixels out from boundary we'll allow users to be:
     let tolerance = 20;
@@ -229,10 +242,10 @@ function StickyNote(props) {
       <div
         className={`stickynote ${determineRotationRandomness(props.index)} ${
           props.hasStickyNoteAnimatedIn
-            ? null
+            ? ""
             : "animate__animated animate__flipInX animate__delay-1s"
         }`}
-        id={`stickynote-${props.index}`}
+        id={`stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`} // <=== PLUS THE PAGE WE'RE ON
         onMouseDown={() => setmouseDownState(true)}
         onMouseUp={() => handleMouseUp()}
         onMouseMove={(e) => handleMouseMove(e)}
@@ -240,6 +253,9 @@ function StickyNote(props) {
         onTouchEnd={() => handleTouchEnd()}
       >
         {props.label}
+        <div className="stickynote-test-data-wrapper">
+          {props.index + 1 + props.labelsMetadata.pageIndex * 9}
+        </div>
         {/*
       <div className="stickynote-test-data-wrapper">
         {`Label: ${props.index + 1} - Mousedown: ${mouseDownState}`}

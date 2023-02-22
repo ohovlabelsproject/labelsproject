@@ -13,7 +13,7 @@ function StickyZone(props) {
   }, []);
 
   return (
-    <section className="stickyzone">
+    <section className="stickyzone" id="stickyzone">
       <div className="col-12 row stickynotes">
         <NoLabels labelsData={props.labelsData} />
         {props.labelsData

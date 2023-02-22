@@ -89,9 +89,40 @@ const utils = {
     closeWindow: () => {
       const myWindow = window.open("", "_self");
       myWindow.document.write("");
-      setTimeout(function () {
+      setTimeout(() => {
         myWindow.close();
       }, 100);
+    },
+    animation: {
+      betweenBoards: {
+        apply: (board) => {
+          const boardEl = document.getElementById(board);
+          boardEl.classList.add("animate__animated");
+          boardEl.classList.add("animate__fadeIn");
+        },
+        snapback: (labelsData) => {
+          const snapTimeout = setTimeout(() => {
+            for (let i = 0; i < labelsData.labelsArr.length; i++) {
+              let stickynote = document.getElementById("stickynote-" + i);
+              if (stickynote) {
+                stickynote.style.position = "relative";
+                stickynote.style.display = "flex";
+                stickynote.style.left = 0;
+                stickynote.style.top = 0;
+              }
+            }
+            clearTimeout(snapTimeout);
+          }, 100);
+        },
+        removeOnDelay: (board, delay) => {
+          const boardEl = document.getElementById(board);
+          const removalTimeout = setTimeout(() => {
+            boardEl.classList.remove("animate__animated");
+            boardEl.classList.remove("animate__fadeIn");
+            clearTimeout(removalTimeout);
+          }, delay);
+        },
+      },
     },
   },
 };

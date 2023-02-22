@@ -198,6 +198,29 @@ function ModalWelcome(props) {
       document.body.classList.remove("overflow-hide");
     }
 
+    //bg-wrapper-2
+
+    var setVanta = () => {
+      if (window.VANTA)
+        window.VANTA.WAVES({
+          el: "#bg-wrapper-2",
+          mouseControls: false,
+          touchControls: false,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0xcccccc,
+          shininess: 0.0,
+          waveHeight: 3.5,
+          waveSpeed: 1.1,
+          zoom: 1.75,
+        });
+    };
+    setVanta();
+
+    /*
     var setVanta = () => {
       if (window.VANTA)
         window.VANTA.WAVES({
@@ -205,19 +228,13 @@ function ModalWelcome(props) {
           mouseControls: false,
           touchControls: false,
           gyroControls: false,
-
           minHeight: 200.0,
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          color: 0xbcbcbe,
+          color: 0xacacb1,
           waveHeight: 3.5,
           zoom: 1.13,
-
-          scale: 1.0,
-          //scaleMobile: 1.0,
-          color: 0xacacb1,
-          zoom: 1,
         });
     };
     setVanta();

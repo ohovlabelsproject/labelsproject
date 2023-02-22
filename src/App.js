@@ -162,6 +162,9 @@ function App(props) {
           pageIndex: labelsMetadata.pageIndex + 1,
         };
       });
+
+      //
+      //
     } else {
       setlabelsMetadata((previousState) => {
         return {
@@ -181,6 +184,9 @@ function App(props) {
         };
       });
     }
+    utils.ui.animation.betweenBoards.apply("stickyzone");
+    utils.ui.animation.betweenBoards.removeOnDelay("stickyzone", 1000);
+    utils.ui.animation.betweenBoards.snapback(labelsData);
   };
 
   /* Get orientation data:

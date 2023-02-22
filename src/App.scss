@@ -307,7 +307,7 @@ body {
 }
 
 .bg-wrapper-1 {
-  background-color: #ffffff;
+  //background-color: #ffffff;
   background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   height: 100%;
@@ -315,11 +315,13 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  opacity: 0.6;
   z-index: -99;
 }
 
 .bg-wrapper-2 {
-  background: linear-gradient(to bottom, white, white);
+  background: white;
+  // background: linear-gradient(to bottom, white, white);
   height: 100%;
   left: 0;
   position: fixed;
@@ -818,6 +820,19 @@ section.binzone {
 .stickynote-wrapper {
   @include center();
   @include strip-margin-and-padding();
+}
+
+.stickynote-x {
+  animation: fadeIn 2s;
+  animation-delay: 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .scroll-disable {
