@@ -197,6 +197,35 @@ function ModalWelcome(props) {
     ) {
       document.body.classList.remove("overflow-hide");
     }
+
+    var setVanta = () => {
+      if (window.VANTA)
+        window.VANTA.WAVES({
+          el: "#bg-wrapper-1",
+          mouseControls: false,
+          touchControls: false,
+          gyroControls: false,
+
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0xbcbcbe,
+          waveHeight: 3.5,
+          zoom: 1.13,
+
+          scale: 1.0,
+          //scaleMobile: 1.0,
+          color: 0xacacb1,
+          zoom: 1,
+        });
+    };
+    setVanta();
+    /*
+    _strk.push(function () {
+      setVanta();
+      window.edit_page.Event.subscribe("Page.beforeNewOneFadeIn", setVanta);
+    });*/
   };
 
   /* Handle the slide being changed:

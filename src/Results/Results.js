@@ -12,6 +12,7 @@ import moment from "moment";
 import resultsPrintPage from "./results-print-page";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
+import ResultsDescription from "./ResultsDescription";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -377,7 +378,7 @@ function Results() {
               style={{ textAlign: "left" }}
             >
               <li>
-                <a href="#filter-by-period">
+                <a href="#" onClick={() => handleDownload()}>
                   <i className="fa fa-download"></i>&nbsp;Download .txt
                 </a>
               </li>
@@ -401,6 +402,7 @@ function Results() {
             <ResultsDescription
               formatTimesAmount={formatTimesAmount}
               labelsBy={labelsBy}
+              labelsData={labelsData}
             />
             <select
               aria-label="Results filtered by 'all time' by default"
@@ -445,24 +447,6 @@ function Results() {
   );
 }
 
-function ResultsDescription(props) {
-  const { formatTimesAmount, labelsBy } = props;
-  const labelHasBins = labelsBy && labelsBy.period && labelsBy.mostBinned.label;
-  const isPeriodToday = labelsBy.period === "today";
-  const resultDate = isPeriodToday ? ` (${moment().format("ll")})` : null;
-  return labelHasBins ? (
-    <p className="p-2" style={{ fontSize: 20, textAlign: "left" }}>
-      The most binned label {labelsBy.period}
-      {resultDate}
-      &nbsp;—so far— is <b>"{labelsBy.mostBinned.label}"</b>. It has been binned{" "}
-      {labelsBy.mostBinned.amount}{" "}
-      {formatTimesAmount(labelsBy.mostBinned.amount)}.
-    </p>
-  ) : (
-    <br />
-  );
-}
-
 function ResultsOverview(props) {
   return (
     <>
@@ -484,9 +468,8 @@ function ResultsOverview(props) {
         className="p-2 animate__animated animate__fadeIn animate__slow"
         style={{ fontSize: 20, textAlign: "left" }}
       >
-        Here's a results table (
         {props.labelsBy && props.labelsBy.period ? props.labelsBy.period : null}
-        ):
+        :
       </p>
       <ResultsTable
         labelsBy={props.labelsBy}

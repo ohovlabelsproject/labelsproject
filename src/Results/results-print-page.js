@@ -1,13 +1,14 @@
 import moment from "moment";
 
-const dashes = "_________________ _ _ _";
-
+const date = moment().format("L");
 const resultsPrintPage = {
   header: {
     generate: () => {
-      const title = document.title;
-      const subtitle = `Report generated: ${moment().format("L")}`;
-      return dashes + "\n\n" + title + "\n\n" + subtitle + "\n" + dashes;
+      const subtitle = `Findings`;
+      return (
+        subtitle +
+        "\n\nTo date (0/00/00) there are X labels for users to choose from (10 of which were submitted by users themselves). Of these labels, there have been 100 binning instances. So far the most binned label is 'respite'. It has been binned 50 times (which is 20 above the average)."
+      );
     },
   },
   body: {
@@ -25,7 +26,6 @@ const resultsPrintPage = {
       return (
         "\n\n" +
         tableCells +
-        dashes +
         "\n\nFindings: there are 10 labels and 100 bins. The most binned label is 'respite' so far with 5... .. the average bin amount is X ... meaning a standard deviation of Y... meaning any label that has been binned equal to or more than Z times is a particularly stigmatizing label (although since x users have contributed there this is not a statistically significant example).. ....\n"
       );
     },
