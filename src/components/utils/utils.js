@@ -105,8 +105,12 @@ const utils = {
             for (let i = 0; i < labelsData.labelsArr.length; i++) {
               let stickynote = document.getElementById("stickynote-" + i);
               if (stickynote) {
-                stickynote.style.position = "relative";
-                stickynote.style.display = "flex";
+                if (labelsData.labelsArr[i].hasUserBinnedIt) {
+                  stickynote.style.display = "none";
+                } else {
+                  stickynote.style.position = "relative";
+                  stickynote.style.display = "flex";
+                }
                 stickynote.style.left = 0;
                 stickynote.style.top = 0;
               }

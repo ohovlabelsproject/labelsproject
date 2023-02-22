@@ -220,7 +220,15 @@ function App(props) {
 
   /* Update bins array:
    ******************************************************/
-  const updateBinsArr = (o) => {
+  const updateBinsArr = (o, labelElementId) => {
+    const labelsArrCp = labelsData.labelsArr;
+    labelsArrCp[labelElementId].hasUserBinnedIt = true;
+    setLabelsData((previousState) => {
+      return { ...previousState, labelsArr: labelsArrCp };
+    });
+    //
+    // console.log(labelsData.labelsArr);
+    //
     const id = o.id;
     const q = query(collection(db, "labels"), where("id", "==", id));
     getDocs(q).then((snapshot) => {

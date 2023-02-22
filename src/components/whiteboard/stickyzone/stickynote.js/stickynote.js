@@ -190,13 +190,13 @@ function StickyNote(props) {
 
   /* Handle what happens when note drops in bin:
    *********************************************/
-  const handleSuccessfulBinDrop = () => {
+  const handleSuccessfulBinDrop = (o) => {
     animatePaperballCrumpling();
     setTimeout(() => {
       animateDuck();
     }, 500);
     props.updateLabelDisposalState(true);
-    props.updateBinsArr(props.labelData);
+    props.updateBinsArr(props.labelData, o.labelElementId);
   };
 
   /* Handle what happens when note is dropped:
@@ -217,7 +217,9 @@ function StickyNote(props) {
     // Is the note completely within the bin drop zone boundaries?
     let isNoteWithinBin = overTop && overBtm && overLft && overRgt;
     if (isNoteWithinBin) {
-      handleSuccessfulBinDrop();
+      handleSuccessfulBinDrop({
+        labelElementId: props.index + props.labelsMetadata.pageIndex * 9,
+      });
     }
   };
 

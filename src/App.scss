@@ -868,7 +868,7 @@ section.binzone {
 .stickynote-non {
   @include strip-margin-and-padding();
   @include center();
-  border: 1px dashed #444;
+  //border: 1px dashed #444;
   font-size: $font-size-md - 5;
   height: 100px;
   hyphens: auto;
@@ -879,7 +879,7 @@ section.binzone {
 .stickynote-sub-wrapper {
   @include center();
   @include strip-margin-and-padding();
-  border: 1px dashed #444;
+  //border: 1px dashed #444;
 }
 
 .stickynote-test-data-wrapper {
