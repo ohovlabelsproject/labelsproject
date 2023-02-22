@@ -77,6 +77,7 @@ function Results() {
 
   useEffect(() => {
     getLabels();
+    utils.ui.animation.vantaBg.apply();
     // eslint-disable-next-line
   }, []);
 

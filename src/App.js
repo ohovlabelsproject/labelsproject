@@ -185,7 +185,7 @@ function App(props) {
       });
     }
     utils.ui.animation.betweenBoards.apply("stickyzone");
-    utils.ui.animation.betweenBoards.removeOnDelay("stickyzone", 1000);
+    utils.ui.animation.betweenBoards.removeOnDelay("stickyzone", 600);
     utils.ui.animation.betweenBoards.snapback(labelsData);
   };
 

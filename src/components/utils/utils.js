@@ -71,6 +71,12 @@ const utils = {
     overflow: {
       addOverflowStyleFix: () => {
         document.body.classList.add("overflow-hide");
+        if (
+          document.getElementById("app")?.getBoundingClientRect().height >
+          window.innerHeight
+        ) {
+          document.body.classList.remove("overflow-hide");
+        }
       },
     },
     touch: {
@@ -86,6 +92,13 @@ const utils = {
     },
   },
   ui: {
+    welcomeModals: {
+      determineSkip: () => {
+        if (document.getElementById("toggle-welcome-checkbox")?.checked) {
+          localStorage.setItem("ohov_skip_welcome", true);
+        }
+      },
+    },
     closeWindow: () => {
       const myWindow = window.open("", "_self");
       myWindow.document.write("");
@@ -94,6 +107,27 @@ const utils = {
       }, 100);
     },
     animation: {
+      vantaBg: {
+        apply: () => {
+          if (window.VANTA)
+            window.VANTA.WAVES({
+              el: "#bg-wrapper-2",
+              mouseControls: false,
+              touchControls: false,
+              gyroControls: false,
+              minHeight: 200.0,
+              minWidth: 200.0,
+              scale: 1.0,
+              scaleMobile: 1.0,
+              color: 0xcccccc,
+              shininess: 0.0,
+              waveHeight: 3.5,
+              waveSpeed: 1.1,
+              zoom: 1.75,
+            });
+        },
+      },
+
       betweenBoards: {
         apply: (board) => {
           const boardEl = document.getElementById(board);
@@ -116,7 +150,7 @@ const utils = {
               }
             }
             clearTimeout(snapTimeout);
-          }, 100);
+          }, 50);
         },
         removeOnDelay: (board, delay) => {
           const boardEl = document.getElementById(board);

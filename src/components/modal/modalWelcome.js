@@ -187,62 +187,8 @@ function ModalWelcome(props) {
     utils.device.touch.preventDefaultTouchActions();
     utils.device.overflow.addOverflowStyleFix();
     utils.device.orientation.update();
-    // move to own funcs:
-    if (document.getElementById("toggle-welcome-checkbox")?.checked) {
-      localStorage.setItem("ohov_skip_welcome", true);
-    }
-    if (
-      document.getElementById("app")?.getBoundingClientRect().height >
-      window.innerHeight
-    ) {
-      document.body.classList.remove("overflow-hide");
-    }
-
-    //bg-wrapper-2
-
-    var setVanta = () => {
-      if (window.VANTA)
-        window.VANTA.WAVES({
-          el: "#bg-wrapper-2",
-          mouseControls: false,
-          touchControls: false,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0xcccccc,
-          shininess: 0.0,
-          waveHeight: 3.5,
-          waveSpeed: 1.1,
-          zoom: 1.75,
-        });
-    };
-    setVanta();
-
-    /*
-    var setVanta = () => {
-      if (window.VANTA)
-        window.VANTA.WAVES({
-          el: "#bg-wrapper-1",
-          mouseControls: false,
-          touchControls: false,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0xacacb1,
-          waveHeight: 3.5,
-          zoom: 1.13,
-        });
-    };
-    setVanta();
-    /*
-    _strk.push(function () {
-      setVanta();
-      window.edit_page.Event.subscribe("Page.beforeNewOneFadeIn", setVanta);
-    });*/
+    utils.ui.animation.vantaBg.apply();
+    utils.ui.welcomeModals.determineSkip();
   };
 
   /* Handle the slide being changed:
