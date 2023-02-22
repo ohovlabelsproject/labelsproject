@@ -19,11 +19,11 @@ function StickyNote(props) {
   /* Handle what happens on mouse up on note:
    ************************************************/
   const handleMouseUp = () => {
-    if (props.labelsMetadata.labelBeingDisposedOf) return;
+    const { index, labelsMetadata } = props;
+    const elemId = `stickynote-${index + labelsMetadata.pageIndex * 9}`;
+    if (labelsMetadata.labelBeingDisposedOf) return;
+    let stickyNote = document.getElementById(elemId);
     setmouseDownState(false);
-    let stickyNote = document.getElementById(
-      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
-    );
     stickyNote.style.zIndex = 1;
     handleDrop();
   };
@@ -31,14 +31,13 @@ function StickyNote(props) {
   /* Handle what happens when note is moved by mouse:
    *************************************************/
   const handleMouseMove = (e) => {
-    if (props.labelsMetadata.labelBeingDisposedOf) return;
-
+    const { index, labelsMetadata } = props;
+    const elemId = `stickynote-${index + labelsMetadata.pageIndex * 9}`;
+    if (labelsMetadata.labelBeingDisposedOf) return;
     if (mouseDownState) {
-      let stickyNote = document.getElementById(
-        `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
-      );
-      stickyNote.style.zIndex = "99";
+      let stickyNote = document.getElementById(elemId);
       let { clientX, clientY } = e;
+      stickyNote.style.zIndex = "99";
       handleStickyNoteMove({ stickyNote, clientX, clientY });
     }
   };
@@ -46,12 +45,12 @@ function StickyNote(props) {
   /* Handle what happens when note is moved by touch:
    *************************************************/
   const handleTouchMove = (e) => {
-    if (props.labelsMetadata.labelBeingDisposedOf) return;
+    const { index, labelsMetadata } = props;
+    const elemId = `stickynote-${index + labelsMetadata.pageIndex * 9}`;
+    if (labelsMetadata.labelBeingDisposedOf) return;
     e.preventDefault();
     const touchLocation = e.targetTouches[0];
-    let stickyNote = document.getElementById(
-      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
-    );
+    let stickyNote = document.getElementById(elemId);
     let { pageX, pageY } = touchLocation;
     handleStickyNoteMove({ stickyNote, pageX, pageY });
     stickyNote.style.zIndex = "99";
@@ -61,11 +60,11 @@ function StickyNote(props) {
   /* Handle what happens when note touch ends:
    *************************************************/
   const handleTouchEnd = () => {
+    const { index, labelsMetadata } = props;
+    const elemId = `stickynote-${index + labelsMetadata.pageIndex * 9}`;
     if (props.labelsMetadata.labelBeingDisposedOf) return;
-    let stickyNote = document.getElementById(
-      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
-    );
     let binDropZone = document.getElementById("binzone-droparea");
+    let stickyNote = document.getElementById(elemId);
     binDropZone.classList.remove("binzone-active");
     stickyNote.style.zIndex = "1";
     handleDrop();
@@ -81,11 +80,9 @@ function StickyNote(props) {
     o.stickyNote.style.position = "absolute";
     o.stickyNote.style.left = x - stickyNoteRect.width / 2 + "px";
     o.stickyNote.style.top = y - stickyNoteRect.height / 2 + "px";
-
     //
     let binDropZone = document.getElementById("binzone-droparea");
     let binDropZoneRect = binDropZone.getBoundingClientRect();
-    //let stickyNote = document.getElementById(`stickynote-${props.index}`);
 
     // The number of pixels out from boundary we'll allow users to be:
     let tolerance = 20;
@@ -102,47 +99,8 @@ function StickyNote(props) {
     }
   };
 
-  /* Animate paperball crumpling:
+  /* :
    *********************************************/
-  const animatePaperballCrumpling = () => {
-    let stickyNote = document.getElementById(
-      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
-    );
-    let stickyNoteRect = stickyNote.getBoundingClientRect();
-    let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
-    let paperballImg = document.getElementById("paper-ball-sm-img");
-    let binDropZone = document.getElementById("binzone-droparea");
-    let frameIndex = 0;
-    const frames = [
-      { src: "/img/paper-ball/paper-ball-sm-1-compressed.png", w: "100%" },
-      { src: "/img/paper-ball/paper-ball-sm-2-compressed.png", w: "100%" },
-      { src: "/img/paper-ball/paper-ball-sm-3-compressed.png", w: "100%" },
-      { src: "/img/paper-ball/paper-ball-sm-4-compressed.png", w: "100%" },
-      { src: "/img/paper-ball/paper-ball-sm-compressed.png", w: "100%" },
-    ];
-    // Remove stickynote & make paperball appear:
-
-    let stickyNoteTop = stickyNote.style.top;
-    stickyNote.style.display = "none";
-    paperballWrapper.style.display = "block";
-    document.getElementById("paper-ball-sm-wrapper").style.top = stickyNoteTop;
-    paperballWrapper.style.left =
-      stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
-    paperballImg.src = frames[0].src;
-    paperballImg.style.width = frames[0].w;
-    binDropZone.classList.remove("binzone-active");
-    // Cycle through frames:
-    const si = setInterval(() => {
-      paperballImg.src = frames[frameIndex].src;
-      paperballImg.style.width = frames[frameIndex].w;
-      if (frameIndex + 1 < frames.length) {
-        frameIndex += 1;
-      } else {
-        clearInterval(si);
-      }
-    }, 50);
-  };
-
   const animateDuck = () => {
     let duck = document.getElementById("duck");
     let app = document.getElementById("app");
@@ -186,6 +144,50 @@ function StickyNote(props) {
     }, 1000 / 60);
   };
 
+  /* Animate paperball crumpling:
+   *********************************************/
+  const animatePaperballCrumpling = () => {
+    let stickyNote = document.getElementById(
+      `stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`
+    );
+    let stickyNoteRect = stickyNote.getBoundingClientRect();
+    let paperballWrapper = document.getElementById("paper-ball-sm-wrapper");
+    let paperballImg = document.getElementById("paper-ball-sm-img");
+    let binDropZone = document.getElementById("binzone-droparea");
+
+    let frameIndex = 0;
+
+    const frameSrc = "/img/paper-ball/paper-ball-sm";
+    const frames = [
+      { src: `${frameSrc}-1-compressed.png`, w: "100%" },
+      { src: `${frameSrc}-2-compressed.png`, w: "100%" },
+      { src: `${frameSrc}-3-compressed.png`, w: "100%" },
+      { src: `${frameSrc}-4-compressed.png`, w: "100%" },
+      { src: `${frameSrc}-compressed.png`, w: "100%" },
+    ];
+    // Remove stickynote & make paperball appear:
+
+    let stickyNoteTop = stickyNote.style.top;
+    stickyNote.style.display = "none";
+    paperballWrapper.style.display = "block";
+    document.getElementById("paper-ball-sm-wrapper").style.top = stickyNoteTop;
+    paperballWrapper.style.left =
+      stickyNoteRect.left + stickyNoteRect.width / 2 / 2 + "px";
+    paperballImg.src = frames[0].src;
+    paperballImg.style.width = frames[0].w;
+    binDropZone.classList.remove("binzone-active");
+    // Cycle through frames:
+    const si = setInterval(() => {
+      paperballImg.src = frames[frameIndex].src;
+      paperballImg.style.width = frames[frameIndex].w;
+      if (frameIndex + 1 < frames.length) {
+        frameIndex += 1;
+      } else {
+        clearInterval(si);
+      }
+    }, 50);
+  };
+
   /* Handle what happens when note drops in bin:
    *********************************************/
   const handleSuccessfulBinDrop = (o) => {
@@ -221,31 +223,25 @@ function StickyNote(props) {
     }
   };
 
-  //
+  /* :
+   *********************************************/
   const determineRotationRandomness = (index) => {
-    if (props.index % 3) {
-      return "random-rotate-0";
-    }
-    if (props.index % 2) {
-      return "random-rotate-1";
-    }
-    if (props.index % 5) {
-      return "random-rotate-2";
-    }
+    if (index % 3) return "random-rotate-0";
+    if (index % 2) return "random-rotate-1";
+    if (index % 5) return "random-rotate-2";
   };
 
+  /* :
+   *********************************************/
+  const { hasStickyNoteAnimatedIn, index, labelsMetadata } = props;
+  const labelAnim = "animate__animated animate__flipInX animate__delay-1s";
+  const labelAnimStyle = hasStickyNoteAnimatedIn ? "" : labelAnim;
+  const labelRotation = determineRotationRandomness(index);
   return (
-    <div
-      className="stickynote-sub-wrapper"
-      style={{ height: "100px", width: "100%" }}
-    >
+    <div className="stickynote-sub-wrapper">
       <div
-        className={`stickynote ${determineRotationRandomness(props.index)} ${
-          props.hasStickyNoteAnimatedIn
-            ? ""
-            : "animate__animated animate__flipInX animate__delay-1s"
-        }`}
-        id={`stickynote-${props.index + props.labelsMetadata.pageIndex * 9}`} // <=== PLUS THE PAGE WE'RE ON
+        className={`stickynote ${labelRotation} ${labelAnimStyle}`}
+        id={`stickynote-${index + labelsMetadata.pageIndex * 9}`}
         onMouseDown={() => setmouseDownState(true)}
         onMouseUp={() => handleMouseUp()}
         onMouseMove={(e) => handleMouseMove(e)}
@@ -253,15 +249,6 @@ function StickyNote(props) {
         onTouchEnd={() => handleTouchEnd()}
       >
         {props.label}
-        {/*
-        <div className="stickynote-test-data-wrapper">
-          {props.index + 1 + props.labelsMetadata.pageIndex * 9}
-        </div> */}
-        {/*
-      <div className="stickynote-test-data-wrapper">
-        {`Label: ${props.index + 1} - Mousedown: ${mouseDownState}`}
-      </div>
-       */}
       </div>
     </div>
   );
