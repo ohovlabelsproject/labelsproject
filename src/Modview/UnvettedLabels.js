@@ -1,15 +1,17 @@
 import firebaseConfig from "../firebaseConfig";
 import moment from "moment";
-import Loader from "../components/loader/loader";
 import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import Loader from "../components/loader/loader";
 
 function UnvettedLabels() {
   const app = initializeApp(firebaseConfig);
+  // eslint-disable-next-line
   const analytics = getAnalytics(app);
+  // eslint-disable-next-line
   const auth = getAuth(app);
   // Firestore doc lookup:
   const db = getFirestore();

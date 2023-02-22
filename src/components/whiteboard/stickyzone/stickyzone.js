@@ -5,8 +5,11 @@ import StickyNote from "./stickynote.js/stickynote";
 
 function StickyZone(props) {
   const [hasStickyNoteAnimatedIn, setHasStickyNoteAnimatedIn] = useState(false);
+  const { labelsData, labelsMetadata } = props;
+
+  /* Don't repeat label intro animations:
+   *******************************************/
   useEffect(() => {
-    // Don't repeat stickynote animated entrances:
     setTimeout(() => {
       setHasStickyNoteAnimatedIn(true);
     }, 4000);
@@ -16,14 +19,13 @@ function StickyZone(props) {
     <section className="stickyzone" id="stickyzone">
       <div className="col-12 row stickynotes">
         <NoLabels labelsData={props.labelsData} />
-        {props.labelsData
-          ? props.labelsData.labelsArr
-              .slice(
-                props.labelsMetadata.sliceStart,
-                props.labelsMetadata.sliceEnd
-              )
+        {/* Check we have labels data before mapping:
+         *******************************************/}
+        {labelsData
+          ? labelsData.labelsArr
+              .slice(labelsMetadata.sliceStart, labelsMetadata.sliceEnd)
               .map((el, index) => (
-                <div className="col-4 stickynote-wrapper p-1">
+                <div className="col-4 p-1 stickynote-wrapper">
                   {el === null ? (
                     <NonStickyNote index={index} key={`label-${index}`} />
                   ) : (
@@ -35,8 +37,8 @@ function StickyZone(props) {
                       labelData={props.labelsData.labelsArr[index]}
                       labelsMetadata={props.labelsMetadata}
                       orientationData={props.orientationData}
-                      updateLabelDisposalState={props.updateLabelDisposalState}
                       updateBinsArr={props.updateBinsArr}
+                      updateLabelDisposalState={props.updateLabelDisposalState}
                     />
                   )}
                 </div>

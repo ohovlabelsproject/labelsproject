@@ -1,13 +1,14 @@
 import NavBtnAlert from "./navbtnalert";
 
 function NavBtnR(props) {
+  const { labelsData, labelsMetadata } = props;
   const disableDirection =
-    props.labelsMetadata.sliceEnd >
-    (props.labelsData && props.labelsData.labelsArr.length - 1
-      ? props.labelsData.labelsArr.length - 1
+    labelsMetadata.sliceEnd >
+    (labelsData && labelsData.labelsArr.length - 1
+      ? labelsData.labelsArr.length - 1
       : 9);
 
-  return props.labelsMetadata.labelBeingDisposedOf ? null : (
+  return labelsMetadata.labelBeingDisposedOf ? null : (
     <>
       <NavBtnAlert />
       <div

@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
 import BarChartComponent from "./BarChartComponent";
+import ResultsDescription from "./ResultsDescription";
 import ResultsTable from "./ResultsSections/resultstable";
 import binsByTime from "./ResultsByTime/binsByTime";
 import firebaseConfig from "../firebaseConfig";
@@ -12,7 +13,6 @@ import moment from "moment";
 import resultsPrintPage from "./results-print-page";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
-import ResultsDescription from "./ResultsDescription";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -20,8 +20,6 @@ function Results() {
   const analytics = getAnalytics(app);
   // eslint-disable-next-line
   const auth = getAuth(app);
-
-  // Firestore doc lookup:
   const db = getFirestore();
   const colRef = collection(db, "labels");
 
@@ -449,18 +447,17 @@ function Results() {
 }
 
 function ResultsOverview(props) {
+  const { labelsData } = props;
   return (
     <>
       <div
         className="col-12 animate__animated animate__fadeIn animate__slow"
         style={{ height: 300 }}
       >
-        {props.labelsData &&
-        props.labelsData.labelsArr &&
-        props.labelsData.dataByDate ? (
+        {labelsData && labelsData.labelsArr && labelsData.dataByDate ? (
           <BarChartComponent
-            data={props.labelsData.dataByDate}
-            labelsData={props.labelsData}
+            data={labelsData.dataByDate}
+            labelsData={labelsData}
           />
         ) : null}
       </div>

@@ -1,12 +1,14 @@
-import "./App.scss";
-import DebugPanel from "./DebugPanel";
-import Duck from "./components/animation/duck";
-import Hud from "./components/hud/hud";
-import Main from "./Main";
-import Modals from "./components/modals/modals";
-import NavBtnL from "./components/navbtn/navbtnl";
-import NavBtnR from "./components/navbtn/navbtnr";
-import PaperBall from "./components/animation/paperball";
+/* 
+App.js notes:
+--------------
+This component holds most of the app's state. It
+gets close to a "single source of truth". Perhaps
+with extra time and budget I would use React's
+"contexts" or Redux to have more organised state
+management. This is a relatively small project, though
+and I don't think it's essentially, but do bear this
+in mind when seeing all the instances of "useState".
+*/
 import {
   addDoc,
   collection,
@@ -21,61 +23,63 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import "./App.scss";
 import firebaseConfig from "./firebaseConfig";
 import helpers from "./helpers/helpers";
 import uiLabels from "./uiLabels";
 import utils from "./components/utils/utils";
 import settings from "./settings";
+import DebugPanel from "./DebugPanel";
+import Duck from "./components/animation/duck";
+import Hud from "./components/hud/hud";
 import ImagePreload from "./components/imgpreload";
+import Main from "./Main";
+import Modals from "./components/modals/modals";
+import NavBtnL from "./components/navbtn/navbtnl";
+import NavBtnR from "./components/navbtn/navbtnr";
+import PaperBall from "./components/animation/paperball";
 
-function App(props) {
+function App() {
   const app = initializeApp(firebaseConfig);
   // eslint-disable-next-line
   const analytics = getAnalytics(app);
   // eslint-disable-next-line
   const auth = getAuth(app);
-  const showDebugPanel = false;
-  let resizeTimeout;
-
-  // Firestore doc lookup:
   const db = getFirestore();
   const colRef = collection(db, "labels");
+  const showDebugPanel = false;
+  let resizeTimeout;
 
   /* Set/get labels data to/from state:
    **********************************/
   const [userGeoloc, setUserGeoloc] = useState({});
-
   /* Set/get orientation data:
    **********************************/
   const [orientationData, setOrientationData] = useState();
-
   /* Set/get labels data to/from state:
    **********************************/
   const [labelsData, setLabelsData] = useState();
-
   /* Set/get attribution show state:
    **********************************/
   const [showAttributions, setShowAttributions] = useState(false);
-
   /* Set/get subm. exit modal's show:
    **********************************/
   const [showSubmitExitModal, setShowSubmitExitModal] = useState(false);
-
-  /* Set/get meta:
+  /* Set/get label metadata:
    **********************************/
   const [labelsMetadata, setlabelsMetadata] = useState({
     pageIndex: 0,
     sliceStart: 0,
     sliceEnd: 9,
     labelBeingDisposedOf: false,
-    // Skip the intro/welcome modal if there's a local storage item saying to do so?
+    // Skip welcome modals if local storage item is true:
     skipIntro:
       localStorage.getItem("ohov_skip_welcome") || settings.modes.testMode
         ? true
         : false,
   });
 
-  /* Get user's IP from geolocation data:
+  /* Get user's IPv4 from geolocation data:
    ******************************************************/
   const getUserGeolocation = () => {
     fetch("https://geolocation-db.com/json/")
@@ -85,24 +89,24 @@ function App(props) {
 
   /* Get the labels from the database:
    **********************************/
-  const getLabels = (e) => {
+  const getLabels = () => {
     getDocs(colRef).then((snapshot) => {
       const labelsArr = [];
       snapshot.docs.forEach((doc) => {
         const docData = doc.data();
-        if (docData.vetted) {
-          labelsArr.push(doc.data()); // Only push vetted labels
-        }
+        if (docData.vetted) labelsArr.push(doc.data()); // <- vetted labels only
       });
-      utils.arr.shuffle(labelsArr); // <---- shuffle before rounding up array?
+      utils.arr.shuffle(labelsArr); // <- shuffle labels
       // If array of labels length !== multiple of 9, round up to multiple:
       let neededToPush;
       if (labelsArr.length % 9 !== 0) {
         neededToPush = helpers.labels.arr.roundUpLength(labelsArr);
       }
+      // Push newly formatted array of labels:
       for (let i = 0; i < neededToPush; i++) {
         labelsArr.push(null);
       }
+      // Set state:
       setLabelsData((previousState) => {
         return { ...previousState, labelsArr };
       });
@@ -162,9 +166,6 @@ function App(props) {
           pageIndex: labelsMetadata.pageIndex + 1,
         };
       });
-
-      //
-      //
     } else {
       setlabelsMetadata((previousState) => {
         return {
@@ -218,6 +219,13 @@ function App(props) {
     });
   };
 
+  /* Delay, so we're not constantly receiving event data:
+   ******************************************************/
+  const getOrientationDataOnDelay = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(getOrientationData, 600);
+  };
+
   /* Update bins array:
    ******************************************************/
   const updateBinsArr = (o, labelElementId) => {
@@ -226,9 +234,7 @@ function App(props) {
     setLabelsData((previousState) => {
       return { ...previousState, labelsArr: labelsArrCp };
     });
-    //
-    // console.log(labelsData.labelsArr);
-    //
+    // Push bin to relevant label's bin array:
     const id = o.id;
     const q = query(collection(db, "labels"), where("id", "==", id));
     getDocs(q).then((snapshot) => {
@@ -256,11 +262,6 @@ function App(props) {
     });
   };
 
-  const getOrientationDataOnDelay = () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(getOrientationData, 600);
-  };
-
   /* Listen for orientation changes:
    ******************************************************/
   window.addEventListener("orientationchange", () => {
@@ -268,18 +269,15 @@ function App(props) {
     getOrientationDataOnDelay();
   });
 
+  /* Listen for resize + get new orientation data:
+   ******************************************************/
   window.onresize = () => {
     getOrientationDataOnDelay();
   };
 
-  /*
-  useEffect(() => {
-    // getLabels();
-  }, []); */
-
   return (
     <div className="app" id="app">
-      <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 main-area-wrapper offset-sm-1">
+      <div className="col-12 col-sm-10 col-lg-8 main-area-wrapper offset-lg-2 offset-sm-1">
         <ImagePreload />
         {showDebugPanel ? (
           <DebugPanel
@@ -290,14 +288,14 @@ function App(props) {
             showDebugPanel={showDebugPanel}
           />
         ) : null}
-        {/* 
+        {/* Not sure if I need this? Remove in final version:
         <div>
           <Alert variant="danger p-0">
             <img
               alt=""
+              className="p-1"
               src="/img/ui/please-reorientate.png"
               width="50px"
-              className="p-1"
             />
             For the best experience, please hold your device in portrait mode.
           </Alert>
@@ -333,9 +331,8 @@ function App(props) {
       />
       <NavBtnR
         handleNavClick={handleNavClick}
-        labelsMetadata={labelsMetadata}
         labelsData={labelsData}
-        maxLabels={9} /* Remove eventually */
+        labelsMetadata={labelsMetadata}
       />
       <PaperBall />
       <Duck />

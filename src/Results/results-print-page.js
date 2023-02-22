@@ -1,6 +1,6 @@
-import moment from "moment";
+//import moment from "moment";
 
-const date = moment().format("L");
+// const date = moment().format("L");
 const resultsPrintPage = {
   header: {
     generate: () => {

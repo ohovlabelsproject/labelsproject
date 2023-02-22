@@ -1,3 +1,7 @@
+/* 
+Utils/utilities for keeping helper 
+functions separate and tidy:
+***************************************/
 const utils = {
   arr: {
     shuffle: (arr) => {
@@ -127,12 +131,19 @@ const utils = {
             });
         },
       },
-
       betweenBoards: {
         apply: (board) => {
           const boardEl = document.getElementById(board);
           boardEl.classList.add("animate__animated");
           boardEl.classList.add("animate__fadeIn");
+        },
+        removeOnDelay: (board, delay) => {
+          const boardEl = document.getElementById(board);
+          const removalTimeout = setTimeout(() => {
+            boardEl.classList.remove("animate__animated");
+            boardEl.classList.remove("animate__fadeIn");
+            clearTimeout(removalTimeout);
+          }, delay);
         },
         snapback: (labelsData) => {
           const snapTimeout = setTimeout(() => {
@@ -151,14 +162,6 @@ const utils = {
             }
             clearTimeout(snapTimeout);
           }, 50);
-        },
-        removeOnDelay: (board, delay) => {
-          const boardEl = document.getElementById(board);
-          const removalTimeout = setTimeout(() => {
-            boardEl.classList.remove("animate__animated");
-            boardEl.classList.remove("animate__fadeIn");
-            clearTimeout(removalTimeout);
-          }, delay);
         },
       },
     },

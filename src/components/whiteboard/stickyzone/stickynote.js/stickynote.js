@@ -87,8 +87,6 @@ function StickyNote(props) {
     let binDropZoneRect = binDropZone.getBoundingClientRect();
     //let stickyNote = document.getElementById(`stickynote-${props.index}`);
 
-    //
-    //
     // The number of pixels out from boundary we'll allow users to be:
     let tolerance = 20;
     let overTop = stickyNoteRect.top >= binDropZoneRect.top - tolerance;
