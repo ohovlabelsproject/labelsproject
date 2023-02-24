@@ -5,6 +5,8 @@ import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import utils from "../components/utils/utils";
+import BackgroundElements from "../components/background";
 import Loader from "../components/loader/loader";
 
 function UnvettedLabels() {
@@ -81,6 +83,7 @@ function UnvettedLabels() {
   useEffect(() => {
     document.body.overflow = "scroll";
     getLabels();
+    utils.ui.animation.vantaBg.apply();
   }, []);
 
   return (
@@ -97,8 +100,7 @@ function UnvettedLabels() {
           <div style={{ borderTop: "1px dashed #000" }}></div>
           <br />
           {labelsData ? getSubmissions() : <Loader />}
-          <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
-          <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
+          <BackgroundElements />
         </div>
       </div>
     </>

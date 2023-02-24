@@ -7,10 +7,9 @@ function NavBtnR(props) {
     (labelsData && labelsData.labelsArr.length - 1
       ? labelsData.labelsArr.length - 1
       : 9);
-
   return labelsMetadata.labelBeingDisposedOf ? null : (
     <>
-      <NavBtnAlert />
+      <NavBtnAlert labelsData={labelsData} labelsMetadata={labelsMetadata} />
       <div
         className={`nav-r-btn-wrapper ${
           disableDirection ? "nav-btn-disable" : ""

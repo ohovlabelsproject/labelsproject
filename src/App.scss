@@ -430,15 +430,15 @@ body {
 
 .debug-panel {
   background: #000;
-  color: lime;
+  color: #00ff00;
+  font-family: "Courier New", Courier, monospace;
   font-size: 12px;
+  left: 0;
   padding-top: 20px;
   padding-bottom: 20px;
-  font-family: "Courier New", Courier, monospace;
   position: absolute;
-  width: 100%;
-  left: 0;
   top: 0;
+  width: 100%;
 }
 
 div.hud-col-l,
@@ -464,7 +464,7 @@ div.hud-col-r {
 }
 
 .fade-in-out {
-  animation: fade-in-out 10s ease-in-out 5s forwards;
+  animation: fade-in-out 10s ease-in-out 3s forwards;
 }
 
 header.hud,
@@ -852,7 +852,7 @@ section.binzone {
   background: $col-sticky-2;
   border: 1px solid darken($col-sticky-2, 5%);
   cursor: move;
-  font-size: $font-size-md + 1;
+  font-size: $font-size-md - 2;
   filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.55));
   height: 100px;
   hyphens: auto;

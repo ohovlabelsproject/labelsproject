@@ -29,14 +29,14 @@ import helpers from "./helpers/helpers";
 import uiLabels from "./uiLabels";
 import utils from "./components/utils/utils";
 import settings from "./settings";
+import BackgroundElements from "./components/background";
 import DebugPanel from "./DebugPanel";
 import Duck from "./components/animation/duck";
 import Hud from "./components/hud/hud";
 import ImagePreload from "./components/imgpreload";
 import Main from "./Main";
 import Modals from "./components/modals/modals";
-import NavBtnL from "./components/navbtn/navbtnl";
-import NavBtnR from "./components/navbtn/navbtnr";
+import NavBtns from "./components/navbtn/navbtns";
 import PaperBall from "./components/animation/paperball";
 
 function App() {
@@ -288,18 +288,6 @@ function App() {
             showDebugPanel={showDebugPanel}
           />
         ) : null}
-        {/* Not sure if I need this? Remove in final version:
-        <div>
-          <Alert variant="danger p-0">
-            <img
-              alt=""
-              className="p-1"
-              src="/img/ui/please-reorientate.png"
-              width="50px"
-            />
-            For the best experience, please hold your device in portrait mode.
-          </Alert>
-        </div>*/}
         <Modals
           getLabels={getLabels}
           getOrientationData={getOrientationData}
@@ -325,19 +313,14 @@ function App() {
           updateLabelDisposalState={updateLabelDisposalState}
         />
       </div>
-      <NavBtnL
-        handleNavClick={handleNavClick}
-        labelsMetadata={labelsMetadata}
-      />
-      <NavBtnR
+      <NavBtns
         handleNavClick={handleNavClick}
         labelsData={labelsData}
         labelsMetadata={labelsMetadata}
       />
       <PaperBall />
       <Duck />
-      <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
-      <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
+      <BackgroundElements />
     </div>
   );
 }

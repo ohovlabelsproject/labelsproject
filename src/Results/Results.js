@@ -13,6 +13,7 @@ import moment from "moment";
 import resultsPrintPage from "./results-print-page";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
+import BackgroundElements from "../components/background";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -439,8 +440,7 @@ function Results() {
             &copy; {new Date().getFullYear()} {uiLabels.footer}
           </small>
         </footer>
-        <div className="bg-wrapper-1" id="bg-wrapper-1"></div>
-        <div className="bg-wrapper-2" id="bg-wrapper-2"></div>
+        <BackgroundElements />
       </div>
     </div>
   );
