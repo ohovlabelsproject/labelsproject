@@ -60,9 +60,9 @@ function ModalAttributions(props) {
           <Modal.Title>Attributions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {attributions.map((attr) => {
+          {attributions.map((attr, index) => {
             return (
-              <>
+              <div key={`attr-${index}`}>
                 <b className="m-0 p-0">{attr.type}</b>
                 {attr.src ? <p className="m-0 p-0">{attr.src}</p> : null}
                 {attr.text ? (
@@ -77,9 +77,9 @@ function ModalAttributions(props) {
                   </p>
                 ) : null}
                 <ul>
-                  {attr.urls?.map((url) => {
+                  {attr.urls?.map((url, index) => {
                     return (
-                      <li style={{ fontSize: 11 }}>
+                      <li key={`attr-url-${index}`} style={{ fontSize: 11 }}>
                         <a href={url} rel="noreferrer" target="_blank">
                           {url}
                         </a>
@@ -87,7 +87,7 @@ function ModalAttributions(props) {
                     );
                   })}
                 </ul>
-              </>
+              </div>
             );
           })}
           <hr />

@@ -53,7 +53,7 @@ const uiLabels = {
     msg: "There are currently 0 labels to load. Try adding your own!",
   },
   labelSubmission: {
-    body: "Add your own label. It will be counted as a submission & may appear for others*.",
+    body: 'Add your own label. It will be available for others to interact with it*. It will also be logged as you "binning" it.',
     footnote: "**If it gets enough quacks from duck mods.",
     feedback: {
       userAlreadyAdded: "You already submitted this label!",

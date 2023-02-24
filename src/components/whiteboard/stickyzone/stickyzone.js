@@ -25,7 +25,10 @@ function StickyZone(props) {
           ? labelsData.labelsArr
               .slice(labelsMetadata.sliceStart, labelsMetadata.sliceEnd)
               .map((el, index) => (
-                <div className="col-4 p-1 stickynote-wrapper">
+                <div
+                  className="col-4 p-1 stickynote-wrapper"
+                  key={`stickynote-wrapper-${index}`}
+                >
                   {el === null ? (
                     <NonStickyNote index={index} key={`label-${index}`} />
                   ) : (
