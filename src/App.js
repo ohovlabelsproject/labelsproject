@@ -72,6 +72,7 @@ function App() {
     sliceStart: 0,
     sliceEnd: 9,
     labelBeingDisposedOf: false,
+    labelAdditionBoardsNav: false,
     // Skip welcome modals if local storage item is true:
     skipIntro:
       localStorage.getItem("ohov_skip_welcome") || settings.modes.testMode
@@ -164,6 +165,7 @@ function App() {
           sliceStart: labelsMetadata.sliceStart + 9,
           sliceEnd: labelsMetadata.sliceEnd + 9,
           pageIndex: labelsMetadata.pageIndex + 1,
+          labelAdditionBoardsNav: true,
         };
       });
     } else {
