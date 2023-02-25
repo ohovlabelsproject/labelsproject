@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.circle-line {
+  z-index: 9999;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.circle-red,
+.circle-green,
+.circle-yellow,
+.circle-blue {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 30px;
+  margin: 5px;
+}
+
+.circle-red {
+  background-color: #e57764;
+  animation: movingUp 0.5s infinite alternate;
+}
+
+.circle-blue {
+  background-color: #6fc8e0;
+  animation: movingUp 0.5s 0.2s infinite alternate;
+}
+
+.circle-green {
+  background-color: #fbf498;
+  animation: movingUp 0.5s 0.5s infinite alternate;
+}
+
+.circle-yellow {
+  background-color: #ffe369;
+  animation: movingUp 0.5s 0.7s infinite alternate;
+}
+
+/* CSS ANIMATION */
+
+@keyframes movingUp {
+  from {
+    top: 0px;
+  }
+
+  to {
+    top: -10px;
+  }
+}

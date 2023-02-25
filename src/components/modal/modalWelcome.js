@@ -26,7 +26,7 @@ function ModalWelcome(props) {
       body: {
         p: uiLabels.welcome.body.slide2,
         video: {
-          url: "53YI-wgYUHs",
+          url: "QWyrRG62zys",
           title: "Instructional video",
         },
       },
@@ -62,7 +62,6 @@ function ModalWelcome(props) {
             </button>
           </a>
         </Col>
-
         <Col>
           <button
             aria-label="Consent and close modal"
@@ -102,7 +101,7 @@ function ModalWelcome(props) {
    ********************************************/
   const getNavFooter = () => {
     return (
-      <Row className="justify-content-center text-center ">
+      <Row className="justify-content-center text-center">
         <Col></Col>
         <Col>
           <button
