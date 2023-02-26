@@ -453,6 +453,24 @@ function Results() {
                 </>
               )}
             </div>
+            <br />
+            <p
+              className="p-2 animate__animated animate__fadeIn animate__slow"
+              style={{ fontSize: 18, textAlign: "left" }}
+            >
+              Please note that these results are subject to change on a regular
+              basis and driven by a sample that is not necessarily statistically
+              significant. For more information and insights, do not hesistant
+              to{" "}
+              <a
+                href="https://www.ohov.co.uk/contact-us/"
+                rel="noreferrer"
+                target="_blank"
+              >
+                contact us
+              </a>
+              .
+            </p>
           </div>
         </section>
         <br />
