@@ -11,7 +11,7 @@ $col-sticky-5: #99cccc;
 $col-lightest: #fff;
 $col-lightish: #c7ccd4;
 $col-danger-muted: #ff7355;
-$col-darkest: rgba(0, 0, 0, 0.8) !important;
+$col-darkest: rgba(0, 0, 0, 0.8);
 $col-bin-border: rgba(0, 0, 0, 0.3);
 
 $font-size-md: 24px;
@@ -363,6 +363,13 @@ body {
   text-decoration: underline;
 }
 
+.btn-link-regular-sm {
+  color: var(--bs-link-color) !important;
+  cursor: pointer;
+  font-family: "Lato", Helvetica, Arial, Lucida, sans-serif !important;
+  font-size: 14px !important;
+  text-decoration: underline;
+}
 .btn-link-regular:hover {
   color: blue;
 }
@@ -863,6 +870,10 @@ section.binzone {
 
 .stickynote:hover {
   background-color: lighten($col-sticky-2, 10%);
+}
+
+.stickynote:active {
+  filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.55));
 }
 
 .stickynote-non {

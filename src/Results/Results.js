@@ -370,7 +370,7 @@ function Results() {
             >
               <li>
                 <button
-                  className="btn btn-link p-0"
+                  className="btn btn-link btn-link-regular-sm p-0"
                   onClick={() => window.print()}
                 >
                   <i className="fa fa-print"></i>&nbsp;Print webpage
@@ -378,7 +378,7 @@ function Results() {
               </li>
               <li>
                 <button
-                  className="btn btn-link p-0"
+                  className="btn btn-link btn-link-regular-sm p-0"
                   onClick={() =>
                     handleDownload({
                       filename:
@@ -395,7 +395,7 @@ function Results() {
               </li>
               <li>
                 <button
-                  className="btn btn-link p-0"
+                  className="btn btn-link btn-link-regular-sm p-0"
                   onClick={() =>
                     handleDownload({
                       filename:
