@@ -20,7 +20,9 @@ const resultsGenerateFile = {
     const formattedDate = moment().format("ll");
     const mainTxt = `Results report\n---------------\n\nAs of ${formattedDate} there are ${
       o.labelsData.labelsArr.length
-    } labels with ${getBinsTotal()} bin instances (avg. ${(
+    } labels with ${getBinsTotal({
+      labelsData: o.labelsData,
+    })} bin instances (avg. ${(
       getBinsTotal({ labelsData: o.labelsData }) / o.labelsData.labelsArr.length
     ).toFixed(1)} per label).\n"${
       o.labelsData.dataByDate[0].name

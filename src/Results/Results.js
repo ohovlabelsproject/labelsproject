@@ -80,13 +80,13 @@ function Results() {
   /* :
    **********************************/
   const generateCSV = () => {
-    resultsGenerateFile.csv({ labelsData });
+    return resultsGenerateFile.csv({ labelsData });
   };
 
   /* :
    **********************************/
   const generateTextReport = () => {
-    resultsGenerateFile.txt({ labelsData });
+    return resultsGenerateFile.txt({ labelsData });
   };
 
   /* :
