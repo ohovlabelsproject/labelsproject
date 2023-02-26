@@ -318,7 +318,7 @@ function Results() {
       const event = new Event("change", { bubbles: true, cancelable: true });
       selectElement.value = "All time";
       selectElement.dispatchEvent(event);
-    }, 500);
+    }, 200);
   };
 
   useEffect(() => {
@@ -440,17 +440,19 @@ function Results() {
             </select>
             <br />
             <br />
-            {labelsBy?.mostBinned.label ? (
-              <ResultsOverview
-                labelsBy={labelsBy}
-                labelsData={labelsData}
-                setLabelsBy={setLabelsBy}
-              />
-            ) : (
-              <>
-                <b>No labels have been binned during this period.</b>
-              </>
-            )}
+            <div className="animate__animated animate__fadeIn animate__slow animate__delay-1s">
+              {labelsBy?.mostBinned.label ? (
+                <ResultsOverview
+                  labelsBy={labelsBy}
+                  labelsData={labelsData}
+                  setLabelsBy={setLabelsBy}
+                />
+              ) : (
+                <>
+                  <b>No labels have been binned during this period.</b>
+                </>
+              )}
+            </div>
           </div>
         </section>
         <br />

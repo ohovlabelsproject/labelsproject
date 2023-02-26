@@ -24,9 +24,9 @@ function BarChartComponent(props) {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           allowDecimals={false}
-          angle={-45}
+          angle={-70}
           dataKey="name"
-          height={100}
+          height={125}
           interval={0}
           textAnchor="end"
         />
