@@ -401,7 +401,10 @@ function Results() {
                   className="btn btn-link p-0"
                   onClick={() =>
                     handleDownload({
-                      filename: "ohov_labels_overall_results_",
+                      filename:
+                        "ohov_labels_" +
+                        labelsBy.period.split(" ").join("_") +
+                        "_results_",
                       extension: "csv",
                       contentGenerateFunc: generateCSV,
                     })
