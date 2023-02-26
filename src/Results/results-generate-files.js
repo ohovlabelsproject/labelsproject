@@ -28,7 +28,9 @@ const resultsGenerateFile = {
       o.labelsData.dataByDate[0].name
     }" is the most binned label overall - having been binned ${
       o.labelsData.dataByDate[0].pv
-    } times so far.\n\n\nHere are the results in descending order:\n\n\n`;
+    } times so far.\n\n\nHere are labels filtered by "${
+      o.labelsBy.period
+    }" in descending order:\n\n\n`;
     const tabularData =
       o.labelsData && o.labelsData.labelsArr && o.labelsData.dataByDate
         ? o.labelsData.dataByDate
@@ -42,7 +44,6 @@ const resultsGenerateFile = {
   },
 };
 
-//
 const getBinsTotal = (o) => {
   let binsCount = 0;
   o.labelsData?.labelsArr.forEach((l) => {

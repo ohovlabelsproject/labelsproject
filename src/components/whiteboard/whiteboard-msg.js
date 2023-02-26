@@ -11,9 +11,10 @@ function WhiteboardMsg(props) {
         centered
         className="justify-content-center"
         style={{
+          alignItems: "center",
+          background: "#fff",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
           left: 0,
           marginLeft: "auto",
           marginRight: "auto",

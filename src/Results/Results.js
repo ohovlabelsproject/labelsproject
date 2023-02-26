@@ -76,7 +76,7 @@ function Results() {
   /* :
    **********************************/
   const generateTextReport = () => {
-    return resultsGenerateFile.txt({ labelsData });
+    return resultsGenerateFile.txt({ labelsData, labelsBy });
   };
 
   /* :
@@ -282,7 +282,7 @@ function Results() {
         setLabelsBy((previousState) => {
           return {
             ...previousState,
-            period: "of all time",
+            period: "all time",
             mostBinned: {
               label: labelsDesc.label.toLowerCase(),
               amount: labelsDesc.bins.length,
@@ -384,13 +384,16 @@ function Results() {
                   className="btn btn-link p-0"
                   onClick={() =>
                     handleDownload({
-                      filename: "ohov_labels_overall_results_",
+                      filename:
+                        "ohov_labels_" +
+                        labelsBy.period.split(" ").join("_") +
+                        "_results_",
                       extension: "txt",
                       contentGenerateFunc: generateTextReport,
                     })
                   }
                 >
-                  <i className="fa fa-download"></i>&nbsp;overall_results.txt
+                  <i className="fa fa-download"></i>&nbsp;Download .txt report
                 </button>
               </li>
               <li>
@@ -404,7 +407,8 @@ function Results() {
                     })
                   }
                 >
-                  <i className="fa fa-download"></i>&nbsp;overall_results.csv
+                  <i className="fa fa-download"></i>&nbsp;Download .csv
+                  spreadsheet
                 </button>
               </li>
             </ul>
