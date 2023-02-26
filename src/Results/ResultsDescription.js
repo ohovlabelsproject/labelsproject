@@ -12,8 +12,17 @@ function ResultsDescription(props) {
         label bins (avg.{" "}
         {(getBinsTotal(props) / props.labelsData.labelsArr.length).toFixed(1)}{" "}
         bins per label).
-        <br />"<b>{props.labelsData.dataByDate[0].name}</b>" is the most binned
-        with {props.labelsData.dataByDate[0].pv} bins.
+        <br />"
+        <b>
+          {props.labelsData.dataByDate[0]
+            ? props.labelsData.dataByDate[0].name
+            : null}
+        </b>
+        " is the most binned with{" "}
+        {props.labelsData.dataByDate[0]
+          ? props.labelsData.dataByDate[0].pv
+          : null}{" "}
+        bins.
       </p>
       <p className="p-2 py-0" style={{ fontSize: 18, textAlign: "left" }}>
         Let's break it down by period:

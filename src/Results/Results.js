@@ -104,7 +104,7 @@ function Results() {
     setLabelsBy((previousState) => {
       return {
         ...previousState,
-        period: "in the past year",
+        period: "the past year",
         binCount: binCount,
         mostBinned: {
           label: dataByDate[0].name,
@@ -143,7 +143,7 @@ function Results() {
     setLabelsBy((previousState) => {
       return {
         ...previousState,
-        period: "in the past month",
+        period: "the past month",
         binCount: binCount,
         mostBinned: {
           label: dataByDate[0].name,
@@ -165,9 +165,6 @@ function Results() {
     // 3. Sort labels (descending order).
     const { week } = binsByTime;
     const lBinnedPastWeek = week.getLabels(labelsData);
-
-    console.log(lBinnedPastWeek);
-    //
     const lWithOnlyWeeksBins = week.getLabelsWithOnlyWeeksBins(lBinnedPastWeek);
     const labelsSortedDesc = lWithOnlyWeeksBins.sort(
       (a, b) => b.bins.length - a.bins.length
@@ -175,20 +172,20 @@ function Results() {
     // 4. Push sorted labels to array — will be set in state
     labelsSortedDesc.forEach((l) => {
       dataByDate.push({
-        name: "test", //l.label.toLowerCase(),
-        pv: 10, //l.bins.length, // page view
-        amt: 10, //l.bins.length, // amount
+        name: l.label.toLowerCase(), //l.label.toLowerCase(),
+        pv: l.bins.length, // page view
+        amt: l.bins.length, // amount
       });
     });
     let binCount;
     setLabelsBy((previousState) => {
       return {
         ...previousState,
-        period: "over the past week",
+        period: "the past week",
         binCount: binCount,
         mostBinned: {
-          label: "test", //labelsSortedDesc.label.toLowerCase(),
-          amount: 10, //labelsSortedDesc.bins.length,
+          label: dataByDate[0].name,
+          amount: dataByDate[0].pv,
         },
       };
     });
@@ -438,7 +435,7 @@ function Results() {
               <option>All time</option>
               <option>Past year</option>
               <option>Past month</option>
-              {/*<option>Past week</option>*/}
+              <option>Past week</option>
               <option>Today</option>
             </select>
             <br />
