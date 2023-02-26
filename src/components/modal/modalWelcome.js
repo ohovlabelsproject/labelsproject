@@ -21,7 +21,7 @@ function ModalWelcome(props) {
     },
     {
       heading: {
-        title: "Instructions",
+        title: "Instructional Video",
       },
       body: {
         p: uiLabels.welcome.body.slide2,

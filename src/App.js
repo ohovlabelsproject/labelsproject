@@ -251,6 +251,12 @@ function App() {
         });
       });
     });
+    setlabelsMetadata((previousState) => {
+      return {
+        ...previousState,
+        labelAdditionBoardsNav: true,
+      };
+    });
   };
 
   /* Update state of whether label disposal is under way:

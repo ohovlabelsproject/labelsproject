@@ -14,6 +14,7 @@ import resultsPrintPage from "./results-print-page";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
 import BackgroundElements from "../components/background";
+import resultsGenerateFile from "./results-generate-files";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -56,6 +57,7 @@ function Results() {
       setDefaultLabelsFilter();
     });
   };
+
   const formatTimesAmount = (amount) => {
     if (amount === 1) {
       return "time";
@@ -63,6 +65,7 @@ function Results() {
       return "times";
     }
   };
+
   /* :
    **********************************/
   const setDefaultLabelsFilter = () => {
@@ -74,40 +77,24 @@ function Results() {
     }, 500);
   };
 
-  useEffect(() => {
-    getLabels();
-    utils.ui.animation.vantaBg.apply();
-    // eslint-disable-next-line
-  }, []);
+  /* :
+   **********************************/
+  const generateCSV = () => {
+    resultsGenerateFile.csv({ labelsData });
+  };
 
-  /*
-  const getIntroOfPage = (label) => {
-    if (label === "Page A") {
-      return "Page A is about men's clothing";
-    }
-    if (label === "Page B") {
-      return "Page B is about women's dress";
-    }
-    if (label === "Page C") {
-      return "Page C is about women's bag";
-    }
-    if (label === "Page D") {
-      return "Page D is about household goods";
-    }
-    if (label === "Page E") {
-      return "Page E is about food";
-    }
-    if (label === "Page F") {
-      return "Page F is about baby food";
-    }
-    return "";
-  };*/
+  /* :
+   **********************************/
+  const generateTextReport = () => {
+    resultsGenerateFile.txt({ labelsData });
+  };
 
-  const handleDownload = () => {
-    const t = moment().format("L").split("/").join("_");
-    const documentName = `ohov_labels_results_report_${t}.txt`;
-    //
-    function downloadBlob(blob, name = documentName) {
+  /* :
+   **********************************/
+  const handleDownload = (o) => {
+    const t = moment().format("DD/MM/YYYY").split("/").join("_");
+    const documentName = `${o.filename}${t}.${o.extension}`;
+    const downloadBlob = (blob, name = documentName) => {
       const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
@@ -121,9 +108,9 @@ function Results() {
         })
       );
       document.body.removeChild(link);
-    }
-    const textReport = resultsPrintPage.container.generate(labelsData);
-    const txt = new Blob([textReport]);
+    };
+    const content = o.contentGenerateFunc();
+    const txt = new Blob([content]);
     downloadBlob(txt, documentName);
   };
 
@@ -332,6 +319,12 @@ function Results() {
         console.log("-");
     }
   };
+
+  useEffect(() => {
+    getLabels();
+    utils.ui.animation.vantaBg.apply();
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
@@ -378,19 +371,40 @@ function Results() {
               style={{ textAlign: "left" }}
             >
               <li>
-                <a href="#" onClick={() => handleDownload()}>
-                  <i className="fa fa-download"></i>&nbsp;Download .txt
-                </a>
-              </li>
-              <li>
-                <a href="#filter-by-period">
-                  <i className="fa fa-download"></i>&nbsp;Download .csv
-                </a>
-              </li>
-              <li>
-                <a href="#filter-by-period">
+                <button
+                  className="btn btn-link p-0"
+                  onClick={() => window.print()}
+                >
                   <i className="fa fa-print"></i>&nbsp;Print webpage
-                </a>
+                </button>
+              </li>
+              <li>
+                <button
+                  className="btn btn-link p-0"
+                  onClick={() =>
+                    handleDownload({
+                      filename: "ohov_labels_overall_results_",
+                      extension: "txt",
+                      contentGenerateFunc: generateTextReport,
+                    })
+                  }
+                >
+                  <i className="fa fa-download"></i>&nbsp;overall_results.txt
+                </button>
+              </li>
+              <li>
+                <button
+                  className="btn btn-link p-0"
+                  onClick={() =>
+                    handleDownload({
+                      filename: "ohov_labels_overall_results_",
+                      extension: "csv",
+                      contentGenerateFunc: generateCSV,
+                    })
+                  }
+                >
+                  <i className="fa fa-download"></i>&nbsp;overall_results.csv
+                </button>
               </li>
             </ul>
 
@@ -464,10 +478,9 @@ function ResultsOverview(props) {
       <br />
       <p
         className="p-2 animate__animated animate__fadeIn animate__slow"
-        style={{ fontSize: 20, textAlign: "left" }}
+        style={{ fontSize: 18, textAlign: "left" }}
       >
-        {props.labelsBy && props.labelsBy.period ? props.labelsBy.period : null}
-        :
+        Let's see the results represented in a table (descending order):
       </p>
       <ResultsTable
         labelsBy={props.labelsBy}

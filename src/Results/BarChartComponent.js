@@ -2,7 +2,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   XAxis,
   YAxis,
@@ -25,10 +24,10 @@ function BarChartComponent(props) {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           allowDecimals={false}
+          angle={-45}
+          dataKey="name"
           height={100}
           interval={0}
-          dataKey="name"
-          angle={-45}
           textAnchor="end"
         />
         <YAxis allowDecimals={false} />
