@@ -24,7 +24,7 @@ const uiLabels = {
     },
     body: {
       slide1:
-        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people in the Children's Hearing System. For this, we need your help. The next slide contains an instructional video for an activity in which we would love for you to participate.",
+        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people. For this, we need your help. The next slide contains an instructional video for an activity in which we would love for you to participate.",
       slide2: "Double-click/tap for fullscreen:",
       slide3: `Did you understand the instructions and do you agree to participate under the following terms?`,
     },

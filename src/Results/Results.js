@@ -4,17 +4,16 @@ import { getAnalytics } from "@firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "@firebase/app";
 import { useEffect, useState } from "react";
+import BackgroundElements from "../components/background";
 import BarChartComponent from "./BarChartComponent";
 import ResultsDescription from "./ResultsDescription";
 import ResultsTable from "./ResultsSections/resultstable";
 import binsByTime from "./ResultsByTime/binsByTime";
 import firebaseConfig from "../firebaseConfig";
 import moment from "moment";
-import resultsPrintPage from "./results-print-page";
+import resultsGenerateFile from "./results-generate-files";
 import uiLabels from "../uiLabels";
 import utils from "../components/utils/utils";
-import BackgroundElements from "../components/background";
-import resultsGenerateFile from "./results-generate-files";
 
 function Results() {
   const app = initializeApp(firebaseConfig);
@@ -32,6 +31,16 @@ function Results() {
     period: "all time",
     mostBinned: { label: "", amount: 12 },
   });
+
+  /* :
+   **********************************/
+  const formatTimesAmount = (amount) => {
+    if (amount === 1) {
+      return "time";
+    } else {
+      return "times";
+    }
+  };
 
   /* Get the labels from the database:
    **********************************/
@@ -58,25 +67,6 @@ function Results() {
     });
   };
 
-  const formatTimesAmount = (amount) => {
-    if (amount === 1) {
-      return "time";
-    } else {
-      return "times";
-    }
-  };
-
-  /* :
-   **********************************/
-  const setDefaultLabelsFilter = () => {
-    setTimeout(() => {
-      const selectElement = document.querySelector("#results-select");
-      const event = new Event("change", { bubbles: true, cancelable: true });
-      selectElement.value = "All time";
-      selectElement.dispatchEvent(event);
-    }, 500);
-  };
-
   /* :
    **********************************/
   const generateCSV = () => {
@@ -87,31 +77,6 @@ function Results() {
    **********************************/
   const generateTextReport = () => {
     return resultsGenerateFile.txt({ labelsData });
-  };
-
-  /* :
-   **********************************/
-  const handleDownload = (o) => {
-    const t = moment().format("DD/MM/YYYY").split("/").join("_");
-    const documentName = `${o.filename}${t}.${o.extension}`;
-    const downloadBlob = (blob, name = documentName) => {
-      const blobUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = blobUrl;
-      link.download = name;
-      document.body.appendChild(link);
-      link.dispatchEvent(
-        new MouseEvent("click", {
-          bubbles: true,
-          cancelable: true,
-          view: window,
-        })
-      );
-      document.body.removeChild(link);
-    };
-    const content = o.contentGenerateFunc();
-    const txt = new Blob([content]);
-    downloadBlob(txt, documentName);
   };
 
   /* :
@@ -273,6 +238,31 @@ function Results() {
 
   /* :
    **********************************/
+  const handleDownload = (o) => {
+    const t = moment().format("DD/MM/YYYY").split("/").join("_");
+    const documentName = `${o.filename}${t}.${o.extension}`;
+    const downloadBlob = (blob, name = documentName) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = name;
+      document.body.appendChild(link);
+      link.dispatchEvent(
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        })
+      );
+      document.body.removeChild(link);
+    };
+    const content = o.contentGenerateFunc();
+    const txt = new Blob([content]);
+    downloadBlob(txt, documentName);
+  };
+
+  /* :
+   **********************************/
   const handleResultsFilterChange = (e) => {
     let dataByDate = [];
     let labelsDesc;
@@ -318,6 +308,17 @@ function Results() {
       default:
         console.log("-");
     }
+  };
+
+  /* :
+   **********************************/
+  const setDefaultLabelsFilter = () => {
+    setTimeout(() => {
+      const selectElement = document.querySelector("#results-select");
+      const event = new Event("change", { bubbles: true, cancelable: true });
+      selectElement.value = "All time";
+      selectElement.dispatchEvent(event);
+    }, 500);
   };
 
   useEffect(() => {
