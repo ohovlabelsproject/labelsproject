@@ -91,6 +91,9 @@ function ModalWindow(props) {
     });
     // Anti-pattern, but just to make sure (wasn't working):
     document.getElementById("modal-label-submission").value = "";
+    document.getElementById("app").style.marginTop = "0";
+    document.getElementById("app").style.top = "0";
+    window.scrollTo(0);
   };
 
   /* Update validatation data state:

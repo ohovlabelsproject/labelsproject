@@ -505,7 +505,7 @@ function ResultsOverview(props) {
         className="p-2 animate__animated animate__fadeIn animate__slow"
         style={{ fontSize: 18, textAlign: "left" }}
       >
-        Let's see the results represented in a table (descending order):
+        Here are the results represented in a table (descending order):
       </p>
       <ResultsTable
         labelsBy={props.labelsBy}

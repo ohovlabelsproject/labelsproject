@@ -35,7 +35,7 @@ function ModalAttributions(props) {
     {
       type: "",
       text: [
-        "App by John Martin. Special thanks to John Morrison & Amy Miskimmin-Logan.",
+        "App by John Martin. Special thanks to Amy Miskimmin-Logan (OHOV participation development worker), Ciara Waugh (video narrator), and John Morrison (Liminal Studios).",
       ],
     },
   ];

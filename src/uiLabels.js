@@ -37,7 +37,8 @@ const uiLabels = {
     text: 'In participating with this activity the user acknowledges that cookies, local storage, and database operations are used to enhance user experience and improve the quality of data received by "Our Hearings, Our Voice" (OHOV). Data stored and conveyed through these technologies include—but are not limited to—(1) information on user interactions with label boards, (2) submitted and/or binned labels, (3) the public IP address of users (IPv4), (4) usage timestamps, (5) viewport dimensions of user devices, and (6) any correspondances had between users and OHOV. In agreeing with these terms you understand that the primary goal of this project is improve the experience of children and young people within the Scottish Hearing System and that any user data collected and stored is done so with the utmost care with respect to privacy and protection—subject to provisions enumerated in the Data Protection Act 2018 (DPA 2018).',
   },
   instructions: {
-    title: "Bin the labels you find stigmatising",
+    //title: "Bin the labels you find stigmatising",
+    title: "[App temporarily broken (testing fix)]",
     validation: {
       hasBannedWord: "Must use appropriate language",
       hasDuplicate: "Must not be an existing label",
