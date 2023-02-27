@@ -94,7 +94,13 @@ function ModalWindow(props) {
     document.getElementById("modal-label-submission").value = "";
     document.getElementById("app").style.marginTop = "0";
     document.getElementById("app").style.top = "0";
-    window.scrollTo(0);
+
+    document.getElementById("app").classList.remove("app");
+    setTimeout(() => {
+      document.getElementById("app").classList.add("app");
+    }, 1000);
+
+    document.getElementById("app").style.window.scrollTo(0);
     utils.device.orientation.update();
   };
 

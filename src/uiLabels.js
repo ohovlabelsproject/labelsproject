@@ -38,7 +38,6 @@ const uiLabels = {
   },
   instructions: {
     title: "Bin the labels you find stigmatising",
-    // title: "[App temporarily broken (testing fix)]",
     validation: {
       hasBannedWord: "Must use appropriate language",
       hasDuplicate: "Must not be an existing label",
