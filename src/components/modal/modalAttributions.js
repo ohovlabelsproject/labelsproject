@@ -12,16 +12,25 @@ function ModalAttributions(props) {
         "https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background",
         "https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball",
         "https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/",
-        "https://www.transparenttextures.com/",
+      ],
+    },
+    {
+      type: "Videos & Music",
+      urls: [
+        "https://www.pexels.com/video/side-view-silhouette-of-a-person-moving-5739693/",
+        "https://www.pexels.com/video/fingers-pointing-at-a-sad-woman-7640667/",
+        "https://www.pexels.com/video/crop-group-stacking-hands-together-6192775/",
+        "https://www.pexels.com/video/writing-notes-on-stick-pads-6774467/",
+        "https://www.pexels.com/video/a-man-crumbling-used-papers-with-errors-4873122/",
+        "https://www.pexels.com/video/crumpled-paper-balls-falling-into-a-bin-11485778/",
+        "https://www.pexels.com/video/a-teenage-boy-undergoing-counselling-4100356/",
+        "https://www.pexels.com/video/man-people-office-relationship-4100354/",
+        "https://pixabay.com/music/solo-guitar-the-beat-of-nature-122841/",
       ],
     },
     {
       type: "Fonts & Icons",
-      urls: [
-        "https://fonts.google.com/",
-        "https://fontawesome.com/",
-        "https://youssef-habchi.com/fonts/road-rage",
-      ],
+      urls: ["https://youssef-habchi.com/fonts/road-rage"],
     },
     {
       type: "",

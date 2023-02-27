@@ -35,7 +35,7 @@ $testbg-enabled: false;
 }
 
 @mixin bg-transparent-texture() {
-  background-image: url("./../public/textures/broken-noise.png");
+  background-image: url("./../public/img/textures/broken-noise.png");
 }
 
 @mixin border-gradient {
@@ -224,11 +224,6 @@ $testbg-enabled: false;
   font-weight: 900;
 }
 
-th {
-  @include regulartext();
-  font-weight: 900;
-}
-
 @mixin svg-texture-diagonal() {
   background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 }
@@ -307,21 +302,18 @@ body {
 }
 
 .bg-wrapper-1 {
-  //background-color: #ffffff;
-  background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  background-image: url("./../public/img/textures/dotnoise-light-grey.png");
   height: 100%;
   left: 0;
+  opacity: 0.6;
   position: fixed;
   top: 0;
   width: 100%;
-  opacity: 0.6;
   z-index: -99;
 }
 
 .bg-wrapper-2 {
-  background: white;
-  // background: linear-gradient(to bottom, white, white);
+  background: #fff;
   height: 100%;
   left: 0;
   position: fixed;
@@ -370,6 +362,7 @@ body {
   font-size: 14px !important;
   text-decoration: underline;
 }
+
 .btn-link-regular:hover {
   color: blue;
 }
@@ -467,7 +460,6 @@ div.hud-col-r {
   position: absolute;
   top: 465px;
   width: 200px;
-  //left: 200px !important; <-- for testing
 }
 
 .fade-in-out {
@@ -494,9 +486,7 @@ footer.footer {
 header.hud-results {
   @include center();
   @include strip-margin-and-padding();
-  //background: #222;
-  //border-bottom: 3px dashed #111;
-  color: #000;
+  color: $col-darkest;
   filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.15));
   font-size: 11px;
   height: 100px;
@@ -518,7 +508,7 @@ header.hud-results {
 
 .image-preload {
   background: lime;
-  left: 0;
+  left: -1000px;
   opacity: 1;
   pointer-events: none;
   position: fixed;
@@ -535,24 +525,6 @@ header.hud-results {
   font-size: 37px;
   line-height: 30px;
   width: 360px;
-}
-
-.results-title {
-  @include guidelines();
-  @include sketchtext();
-  color: $col-darkest;
-  font-size: 37px;
-  border-radius: 10px;
-  width: 100%;
-}
-
-.results-heading {
-  @include guidelines();
-  @include strip-margin-and-padding();
-  @include thick-title();
-  color: $col-darkest;
-  font-size: 25px;
-  line-height: 30px;
 }
 
 .loader {
@@ -784,6 +756,24 @@ header.hud-results {
   rotate: random(1) + deg;
 }
 
+.results-title {
+  @include guidelines();
+  @include sketchtext();
+  color: $col-darkest;
+  font-size: 37px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.results-heading {
+  @include guidelines();
+  @include strip-margin-and-padding();
+  @include thick-title();
+  color: $col-darkest;
+  font-size: 25px;
+  line-height: 30px;
+}
+
 section.instructions {
   @include center-bottom();
   @include random-bgr();
@@ -799,14 +789,8 @@ section.whiteboard {
 section.stickyzone {
   @include center();
   height: 70%;
-  min-height: 320px;
   max-height: 350px;
-  /*
-  border: 5px solid rgb(175, 142, 82);
-  border-radius: 5px;
-  background-color: #7b450a;
-  background-image: url("https://www.transparenttextures.com/patterns/wine-cork.png");*/
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  min-height: 320px;
 }
 
 section.binzone {
@@ -830,16 +814,8 @@ section.binzone {
 }
 
 .stickynote-x {
-  animation: fadeIn 2s;
+  animation: fade-in 2s;
   animation-delay: 2s;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .scroll-disable {
@@ -864,7 +840,6 @@ section.binzone {
   height: 100px;
   hyphens: auto;
   line-height: 25px;
-  //rotate: random(1) + deg;
   width: 140px;
 }
 
@@ -914,6 +889,11 @@ section.binzone {
   --bs-table-striped-bg: #eee !important;
 }
 
+th {
+  @include regulartext();
+  font-weight: 900;
+}
+
 .whiteboard-msg-thanks {
   @include thick-title();
   font-size: 37px;
@@ -938,21 +918,6 @@ section.binzone {
   right: 0;
   z-index: 999;
 }
-
-/*
-.whiteboard-msg-wrapper {
-  @include thick-title();
-  background: #222;
-  color: #ccc;
-  height: 25vh;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute !important;
-  right: 0;
-  top: 0%;
-  z-index: 999;
-}*/
 
 @media only screen and (max-width: 700px) {
 }
@@ -993,6 +958,15 @@ section.binzone {
   }
   50% {
     margin-top: 0px;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
