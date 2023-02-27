@@ -91,17 +91,16 @@ function ModalWindow(props) {
       };
     });
     // Anti-pattern, but just to make sure (wasn't working):
+    // Fix iPhone Chrome issue (page would scroll down):
     document.getElementById("modal-label-submission").value = "";
     document.getElementById("app").style.marginTop = "0";
     document.getElementById("app").style.top = "0";
-
+    document.getElementById("app").style.window.scrollTo(0);
+    utils.device.orientation.update();
     document.getElementById("app").classList.remove("app");
     setTimeout(() => {
       document.getElementById("app").classList.add("app");
-    }, 1000);
-
-    document.getElementById("app").style.window.scrollTo(0);
-    utils.device.orientation.update();
+    }, 100);
   };
 
   /* Update validatation data state:
