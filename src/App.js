@@ -6,7 +6,7 @@ gets close to a "single source of truth". Perhaps
 with extra time and budget I would use React's
 "contexts" or Redux to have more organised state
 management. This is a relatively small project, though
-and I don't think it's essentially, but do bear this
+and I don't think it's essential, but do bear this
 in mind when seeing all the instances of "useState".
 */
 import {
