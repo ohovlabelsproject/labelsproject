@@ -274,15 +274,10 @@ body {
   @include strip-margin-and-padding();
   height: 100vh;
   min-height: 675px;
-
   min-width: 340px;
   padding-bottom: 55px;
   padding-top: 25px;
   text-align: center;
-  //
-  //
-  min-height: -webkit-fill-available;
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .attributions {

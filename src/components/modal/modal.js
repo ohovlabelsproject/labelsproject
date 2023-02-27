@@ -4,6 +4,7 @@ import bannedWords from "../../bannedWords";
 import settings from "../../settings";
 import uiLabels from "../../uiLabels";
 import { useState } from "react";
+import utils from "../utils/utils";
 
 function ModalWindow(props) {
   const [submissionData, setSubmissionData] = useState({ label: "" });
@@ -94,6 +95,7 @@ function ModalWindow(props) {
     document.getElementById("app").style.marginTop = "0";
     document.getElementById("app").style.top = "0";
     window.scrollTo(0);
+    utils.device.orientation.update();
   };
 
   /* Update validatation data state:
