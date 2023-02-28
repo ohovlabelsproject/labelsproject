@@ -13,6 +13,17 @@ function Hud(props) {
             data-bs-target="#modal-add-label"
             data-bs-toggle="modal"
             id="btn-ohov-1"
+            onClick={() => {
+              console.log(
+                props.orientationData ? props.orientationData.w : null
+              );
+              setMenuExpansion((previousState) => {
+                return {
+                  ...previousState,
+                  expanded: false,
+                };
+              });
+            }}
           >
             Add label &nbsp;
             <i className="fa fa-plus"></i>
@@ -45,12 +56,20 @@ function Hud(props) {
                 : "rgba(0, 0, 0, 0.1)",
             }}
           >
-            Menu{" "}
+            {props.orientationData &&
+            props.orientationData.w &&
+            props.orientationData.w > 500
+              ? "Menu "
+              : null}
+
             {menuExpansion.expanded ? (
               <i className="fa fa-close"></i>
             ) : (
               <i className="fa fa-bars"></i>
             )}
+          </button>
+          <button className="btn-ohov-hud">
+            <i className="fa fa-volume-up"></i>
           </button>
           <Menu
             menuExpansion={menuExpansion}

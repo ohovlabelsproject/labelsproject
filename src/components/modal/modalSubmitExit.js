@@ -25,6 +25,11 @@ function ModalSubmitExit(props) {
               It will appear on the app <b>after</b> moderator approval.
             </li>
             <li>It will be counted as you "binning" it.</li>
+            <li>
+              We'll read your suggestions and use them to help us understand
+              which words children and young people most want adults to stop
+              using.
+            </li>
           </ul>
         </Modal.Body>
         <Modal.Footer>

@@ -43,7 +43,7 @@ function Menu(props) {
           rel="noreferrer"
           target="_blank"
         >
-          Resources
+          Help & Support
         </a>
       </button>
 

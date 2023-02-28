@@ -129,7 +129,13 @@ function ModalWelcome(props) {
         >
           {/* If data has p property, include it here: */}
           {slides[slideData.slide].body.p ? <GetP></GetP> : null}
-
+          {slideData.slide === 0 ? (
+            <>
+              <br />
+              <br />
+              <p>{uiLabels.welcome.body.slide1b}</p>
+            </>
+          ) : null}
           {/* If data has video property, include it here: */}
           {slides[slideData.slide].body.video ? (
             <YoutubeFrame

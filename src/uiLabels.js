@@ -24,7 +24,9 @@ const uiLabels = {
     },
     body: {
       slide1:
-        "At \"Our Hearings, Our Voice\" we're always trying to do what's best for young people. For this, we need your help! The next slide contains an instructional video for an activity in which we would appreciate your participation.",
+        '"Our Hearings, Our Voice" wants to hear from you. We want to understand which words young people would like adults to stop using in the Children\'s Hearings System.',
+      slide1b:
+        "The next slide contains an instructional video for an activity we'd like your help with.",
       slide2: "Double-click/tap for fullscreen:",
       slide3: `Did you understand the instructions and do you agree to participate under the following terms?`,
     },
@@ -37,7 +39,7 @@ const uiLabels = {
     text: 'In participating with this activity the user acknowledges that cookies, local storage, and database operations are used to enhance user experience and improve the quality of data received by "Our Hearings, Our Voice" (OHOV). Data stored and conveyed through these technologies include—but are not limited to—(1) information on user interactions with label boards, (2) submitted and/or binned labels, (3) the public IP address of users (IPv4), (4) usage timestamps, (5) viewport dimensions of user devices, and (6) any correspondances had between users and OHOV. In agreeing with these terms you understand that the primary goal of this project is improve the experience of children and young people within the Scottish Hearing System and that any user data collected and stored is done so with the utmost care with respect to privacy and protection—subject to provisions enumerated in the Data Protection Act 2018 (DPA 2018).',
   },
   instructions: {
-    title: "Bin the labels you find stigmatising",
+    title: "Bin the words you'd like to get rid of",
     validation: {
       hasBannedWord: "Must use appropriate language",
       hasDuplicate: "Must not be an existing label",
@@ -52,7 +54,7 @@ const uiLabels = {
     msg: "There are currently 0 labels to load. Try adding your own!",
   },
   labelSubmission: {
-    body: 'Add your own label. It will be available for others to interact with it*. It will also be logged as you "binning" it.',
+    body: "Add your own label. It will be sent to our group and added to our list of words that we'd like adults to stop using in hearings*. This will help us understand which words children and young people most often wish to get rid of.",
     footnote: "**If it gets enough quacks from duck mods.",
     feedback: {
       userAlreadyAdded: "You already submitted this label!",

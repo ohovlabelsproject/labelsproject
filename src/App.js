@@ -309,6 +309,7 @@ function App() {
           showSubmitExitModal={showSubmitExitModal}
         />
         <Hud
+          orientationData={orientationData}
           setShowAttributions={setShowAttributions}
           showAttributions={showAttributions}
         />
