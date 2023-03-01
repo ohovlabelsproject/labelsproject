@@ -98,9 +98,11 @@ function ModalWindow(props) {
     document.getElementById("app").style.window.scrollTo(0);
     utils.device.orientation.update();
     document.getElementById("app").classList.remove("app");
+    document.body.style.display = "none";
     setTimeout(() => {
+      document.body.style.display = "block";
       document.getElementById("app").classList.add("app");
-    }, 100);
+    }, 200);
   };
 
   /* Update validatation data state:

@@ -122,32 +122,12 @@ const uiLabels = {
       "https://pixabay.com/sound-effects/ui-click-97915/",
       "https://pixabay.com/sound-effects/075176-duck-quack-40345/",
       "https://pixabay.com/sound-effects/8-bit-car-engine-64952/",
+      "https://pixabay.com/sound-effects/search/crumpling%20paper/",
     ]) +
     "\n" +
     credits.section.construct("Fonts", [
       "https://youssef-habchi.com/fonts/road-rage",
     ]),
 };
-
-/*
-
-Graphics
-            https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/
-            https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/
-            https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background
-            https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball
-            https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/
-            Videos & Music
-            https://www.pexels.com/video/side-view-silhouette-of-a-person-moving-5739693/
-            https://www.pexels.com/video/fingers-pointing-at-a-sad-woman-7640667/
-            https://www.pexels.com/video/crop-group-stacking-hands-together-6192775/
-            https://www.pexels.com/video/writing-notes-on-stick-pads-6774467/
-            https://www.pexels.com/video/a-man-crumbling-used-papers-with-errors-4873122/
-            https://www.pexels.com/video/crumpled-paper-balls-falling-into-a-bin-11485778/
-            https://www.pexels.com/video/a-teenage-boy-undergoing-counselling-4100356/
-            https://www.pexels.com/video/man-people-office-relationship-4100354/
-            https://pixabay.com/music/solo-guitar-the-beat-of-nature-122841/
-            Fonts & Icons https://youssef-habchi.com/fonts/road-rage
-            */
 
 export default uiLabels;
