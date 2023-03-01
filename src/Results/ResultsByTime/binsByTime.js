@@ -179,9 +179,9 @@ const binsByTime = {
         l.bins.forEach((bin) => {
           const binTimestamp = bin.binnedOn.toDate();
           const binD = new Date(binTimestamp);
-          const sameWeek =
+          const overWeekAgo =
             moment(binD).diff(this, "hours") <= -168 ? true : false;
-          if (sameWeek) {
+          if (!overWeekAgo) {
             bins.push(l);
           }
         });
@@ -194,9 +194,10 @@ const binsByTime = {
       labelsArr.forEach((l) => {
         l.bins.forEach((binObj) => {
           const bTimestamp = binObj.binnedOn.toDate();
-          const bSameWeek =
-            moment(bTimestamp).diff(this, "hours") <= -168 ? true : false;
-          if (bSameWeek) {
+          const bD = new Date(bTimestamp);
+          const overWeekAgo =
+            moment(bD).diff(this, "hours") <= -168 ? true : false;
+          if (!overWeekAgo) {
             if (!relevantBins[l.label]) relevantBins[l.label] = {};
             if (relevantBins[l.label].bins) {
               relevantBins[l.label].bins.push(binObj);
@@ -213,8 +214,6 @@ const binsByTime = {
           ...relevantBins[relevantBin],
         });
       }
-
-      console.log(labelsCp);
       return labelsCp;
     },
   },
