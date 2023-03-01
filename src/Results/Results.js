@@ -435,7 +435,7 @@ function Results() {
             >
               <option>All time</option>
               <option>Past year</option>
-              {/*<option>Past month</option>*/}
+              <option>Past month</option>
               <option>Past week</option>
               <option>Past 24 hours</option>
             </select>
@@ -457,12 +457,15 @@ function Results() {
             <br />
             <p
               className="p-2 animate__animated animate__fadeIn animate__slow"
-              style={{ fontSize: 18, textAlign: "left" }}
+              style={{ fontSize: 16, textAlign: "left" }}
             >
               Please note that these results are subject to change on a regular
               basis and driven by a sample that is not necessarily statistically
-              significant. For more information and insights, do not hesistant
-              to{" "}
+              significant. The "past week", "past month", and "past year" are
+              calculated by consecutive hours rather than calendar period. For
+              example, labels binned on 28th February (on a non-leap-year) will
+              still appear as "past month" when viewed on 1st March. For more
+              information and insights, do not hesistant to{" "}
               <a
                 href="https://www.ohov.co.uk/contact-us/"
                 rel="noreferrer"
