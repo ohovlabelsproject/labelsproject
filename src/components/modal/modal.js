@@ -95,7 +95,7 @@ function ModalWindow(props) {
     document.getElementById("modal-label-submission").value = "";
     document.getElementById("app").style.marginTop = "0";
     document.getElementById("app").style.top = "0";
-    document.getElementById("app").style.window.scrollTo(0);
+    window.scrollTo(0);
     utils.device.orientation.update();
     document.getElementById("app").classList.remove("app");
     document.body.style.display = "none";
