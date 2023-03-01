@@ -1,8 +1,56 @@
 import { useState } from "react";
 import stickyNoteHelper from "./stickynote-helpers";
+import { Howl, Howler } from "howler";
 
 function StickyNote(props) {
   const [mouseDownState, setmouseDownState] = useState(false);
+  const [isTruckSoundPlaying, setIsTruckSoundPlaying] = useState(false);
+
+  const soundPaperCrumple = new Howl({
+    src: ["/sounds/paper.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.2,
+  });
+
+  const soundQuack = new Howl({
+    src: ["/sounds/quack2.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.2,
+  });
+
+  const soundTruck = new Howl({
+    src: ["/sounds/truck.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.2,
+    /* onend: function () {
+      console.log("Finished!");
+    },*/
+  });
+
+  const soundClick = new Howl({
+    src: ["/sounds/click.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.5,
+  });
+
+  const soundBinzone = new Howl({
+    src: ["/sounds/binzone.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.2,
+  });
+
+  /*
+  const soundImpact = new Howl({
+    src: ["/sounds/impact.mp3"],
+    autoplay: false,
+    loop: false,
+    volume: 0.5,
+  });*/
 
   /* Animate the duck (truck and all):
    *********************************************/
@@ -13,6 +61,8 @@ function StickyNote(props) {
       duck: document.getElementById("duck"),
       paperballWrapper: document.getElementById("paper-ball-sm-wrapper"),
       updateLabelDisposalState,
+      soundQuack,
+      soundTruck,
     });
   };
 
@@ -95,6 +145,9 @@ function StickyNote(props) {
     let x = o.pageX ? o.pageX : o.clientX;
     let y = o.pageY ? o.pageY : o.clientY;
     stickyNoteHelper.stickynote.handleMove({
+      isTruckSoundPlaying,
+      setIsTruckSoundPlaying,
+      soundBinzone,
       stickyNote,
       stickyNoteRect,
       tolerance: 20,
@@ -108,8 +161,11 @@ function StickyNote(props) {
   const handleSuccessfulBinDrop = (o) => {
     const { labelData, updateBinsArr, updateLabelDisposalState } = props;
     animatePaperballCrumpling();
+    soundPaperCrumple.play();
     setTimeout(() => {
       animateDuck();
+      soundQuack.play();
+      soundTruck.play();
     }, 500);
     updateLabelDisposalState(true);
     updateBinsArr(labelData, o.labelElementId);
@@ -155,7 +211,10 @@ function StickyNote(props) {
       <div
         className={`stickynote ${labelRotation} ${labelAnimStyle}`}
         id={`stickynote-${index + labelsMetadata.pageIndex * 9}`}
-        onMouseDown={() => setmouseDownState(true)}
+        onMouseDown={() => {
+          setmouseDownState(true);
+          soundClick.play();
+        }}
         onMouseUp={() => handleMouseUp()}
         onMouseMove={(e) => handleMouseMove(e)}
         onTouchMove={(e) => handleTouchMove(e)}

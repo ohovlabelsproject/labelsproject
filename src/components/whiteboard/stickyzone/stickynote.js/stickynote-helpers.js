@@ -23,6 +23,8 @@ const stickyNoteHelper = {
           if (duckRect.left < appRect.left - duckRect.width) {
             clearInterval(si2);
             setTimeout(() => {
+              o.soundQuack.stop();
+              o.soundTruck.stop();
               o.updateLabelDisposalState(false); // Wait half a second on animation finish
             }, 500);
           } else {
@@ -84,6 +86,13 @@ const stickyNoteHelper = {
       // Is the note completely within the bin drop zone boundaries?
       let isNoteWithinBin = overTop && overBtm && overLft && overRgt;
       if (isNoteWithinBin) {
+        //
+
+        if (!o.isTruckSoundPlaying) {
+          o.soundBinzone.play();
+        }
+        o.setIsTruckSoundPlaying(true);
+
         binDropZone.classList.add("binzone-active");
       } else {
         binDropZone.classList.remove("binzone-active");

@@ -48,21 +48,6 @@ function Menu(props) {
       </button>
 
       <button
-        className="form-control menu-link"
-        onClick={() => {
-          props.setShowAttributions(true);
-          props.setMenuExpansion((previousState) => {
-            return {
-              ...previousState,
-              expanded: !props.menuExpansion.expanded,
-            };
-          });
-        }}
-      >
-        Attributions
-      </button>
-
-      <button
         className="form-control"
         onClick={() => {
           window.open("https://www.ohov.co.uk/about-us/", "_blank");
@@ -94,6 +79,20 @@ function Menu(props) {
         >
           Contact Us
         </a>
+      </button>
+      <button
+        className="form-control menu-link"
+        onClick={() => {
+          props.setShowAttributions(true);
+          props.setMenuExpansion((previousState) => {
+            return {
+              ...previousState,
+              expanded: !props.menuExpansion.expanded,
+            };
+          });
+        }}
+      >
+        Credits
       </button>
     </div>
   );

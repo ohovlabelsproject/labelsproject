@@ -1,4 +1,5 @@
 import { Modal } from "react-bootstrap";
+import uiLabels from "../../uiLabels";
 
 function ModalAttributions(props) {
   const handleClose = () => props.setShowAttributions(false);
@@ -65,39 +66,24 @@ function ModalAttributions(props) {
         show={props.showAttributions}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Attributions</Modal.Title>
+          <Modal.Title>Credits</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {attributions.map((attr, index) => {
-            return (
-              <div key={`attr-${index}`}>
-                <b className="m-0 p-0">{attr.type}</b>
-                {attr.src ? <p className="m-0 p-0">{attr.src}</p> : null}
-                {attr.text ? (
-                  <p
-                    style={{
-                      fontSize: 10,
-                      paddingBottom: 10,
-                      textAlign: "center",
-                    }}
-                  >
-                    {attr.text}
-                  </p>
-                ) : null}
-                <ul>
-                  {attr.urls?.map((url, index) => {
-                    return (
-                      <li key={`attr-url-${index}`} style={{ fontSize: 11 }}>
-                        <a href={url} rel="noreferrer" target="_blank">
-                          {url}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
-          })}
+          <p style={{ fontSize: 16 }}>
+            Special thanks to Ciara W. (for her wonderful narration on the
+            instructional video), to Amy Miskimmin-Logan (for her invaluable
+            input, feedback, and support), to the Language Team / OHOV for
+            embarking on this important project, and to John Morrison of Liminal
+            Studios for consultation and liaisoning work. This app was developed
+            by John Martin.
+            <br />
+            <br />
+            Attributions & Media Sources
+          </p>
+          <textarea
+            className="form-control"
+            value={uiLabels.credits}
+          ></textarea>
           <hr />
           <div
             className="py-2"

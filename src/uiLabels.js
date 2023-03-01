@@ -28,7 +28,7 @@ const uiLabels = {
       slide1b:
         "The next slide contains an instructional video for an activity we'd like your help with.",
       slide2: "Double-click/tap for fullscreen:",
-      slide3: `Did you understand the instructions and do you agree to participate under the following terms?`,
+      slide3: `Did you understand the instructions and do you agree to take part under the terms below?`,
     },
     action: {
       decline: "No, decline",
@@ -36,7 +36,7 @@ const uiLabels = {
     },
   },
   termsOfUse: {
-    text: 'In participating with this activity the user acknowledges that cookies, local storage, and database operations are used to enhance user experience and improve the quality of data received by "Our Hearings, Our Voice" (OHOV). Data stored and conveyed through these technologies include—but are not limited to—(1) information on user interactions with label boards, (2) submitted and/or binned labels, (3) the public IP address of users (IPv4), (4) usage timestamps, (5) viewport dimensions of user devices, and (6) any correspondances had between users and OHOV. In agreeing with these terms you understand that the primary goal of this project is improve the experience of children and young people within the Scottish Hearing System and that any user data collected and stored is done so with the utmost care with respect to privacy and protection—subject to provisions enumerated in the Data Protection Act 2018 (DPA 2018).',
+    text: "In taking part in this activity you, the user, understand that certain technologies (cookies, local storage, and database communications) will be used to give you a more pleasant user experience and to give us (OHOV) plenty of good quality data/information to work with. Data/information we store or transfer includes the likes of (1) information on user interactions with label boards, (2) submitted and/or binned labels, (3) the public IP address of users, (4) usage timestamps, (5) basic user device information, and (6) any communications had between users and OHOV. In agreeing with these terms and taking part in the labels activity you understand that the main aim of this project is to improve the experience of children and young people within the Scottish Hearing System and that any of your data/information collected and stored is done so with the utmost care with respect to privacy and protection — in accordance with the Data Protection Act 2018 (DPA 2018).",
   },
   instructions: {
     title: "Bin the words you'd like to get rid of",
@@ -86,6 +86,29 @@ const uiLabels = {
     ],
   },
   footer: "Our Hearings, Our Voice",
+  credits:
+    "Graphics\n1. https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/\n2. https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/",
 };
+
+/*
+
+Graphics
+            https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/
+            https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/
+            https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background
+            https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball
+            https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/
+            Videos & Music
+            https://www.pexels.com/video/side-view-silhouette-of-a-person-moving-5739693/
+            https://www.pexels.com/video/fingers-pointing-at-a-sad-woman-7640667/
+            https://www.pexels.com/video/crop-group-stacking-hands-together-6192775/
+            https://www.pexels.com/video/writing-notes-on-stick-pads-6774467/
+            https://www.pexels.com/video/a-man-crumbling-used-papers-with-errors-4873122/
+            https://www.pexels.com/video/crumpled-paper-balls-falling-into-a-bin-11485778/
+            https://www.pexels.com/video/a-teenage-boy-undergoing-counselling-4100356/
+            https://www.pexels.com/video/man-people-office-relationship-4100354/
+            https://pixabay.com/music/solo-guitar-the-beat-of-nature-122841/
+            Fonts & Icons https://youssef-habchi.com/fonts/road-rage
+            */
 
 export default uiLabels;
