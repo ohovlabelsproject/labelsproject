@@ -215,6 +215,7 @@ function StickyNote(props) {
           setmouseDownState(true);
           soundClick.play();
         }}
+        onTouchStart={soundClick.play()}
         onMouseUp={() => handleMouseUp()}
         onMouseMove={(e) => handleMouseMove(e)}
         onTouchMove={(e) => handleTouchMove(e)}

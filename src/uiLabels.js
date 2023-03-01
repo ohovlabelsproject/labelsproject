@@ -54,7 +54,7 @@ const uiLabels = {
     msg: "There are currently 0 labels to load. Try adding your own!",
   },
   labelSubmission: {
-    body: "Add your own label. It will be sent to our group and added to our list of words that we'd like adults to stop using in hearings*. This will help us understand which words children and young people most often wish to get rid of.",
+    body: "Add your own label. It will be sent to our group and added to our list of words that we'd like adults to stop using in hearings*. This will help us understand which words children & young people most often wish to get rid of.",
     footnote: "**If it gets enough quacks from duck mods.",
     feedback: {
       userAlreadyAdded: "You already submitted this label!",

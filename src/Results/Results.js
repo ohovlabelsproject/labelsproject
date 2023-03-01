@@ -434,7 +434,7 @@ function Results() {
             >
               <option>All time</option>
               <option>Past year</option>
-              <option>Past month</option>
+              {/*<option>Past month</option>*/}
               <option>Past week</option>
               <option>Today</option>
             </select>

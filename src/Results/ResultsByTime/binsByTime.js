@@ -170,12 +170,9 @@ const binsByTime = {
       labelsArr.forEach((l) => {
         l.bins.forEach((binObj) => {
           const bTimestamp = binObj.binnedOn.toDate();
-          const bD = new Date(bTimestamp);
-          const bMonth = bD.getMonth();
-          const bYear = bTimestamp.getFullYear();
-          const bSameMonth = currentMonth === bMonth;
-          const bSameYear = currentYear === bYear;
-          if (bSameMonth && bSameYear) {
+          const bSameMonth =
+            moment(bTimestamp).diff(this, "months") < 1 ? true : false;
+          if (bSameMonth) {
             if (!relevantBins[l.label]) relevantBins[l.label] = {};
             if (relevantBins[l.label].bins) {
               relevantBins[l.label].bins.push(binObj);
