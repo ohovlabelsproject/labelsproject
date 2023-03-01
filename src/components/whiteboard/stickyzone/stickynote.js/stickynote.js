@@ -44,14 +44,6 @@ function StickyNote(props) {
     volume: props.enableSound ? 0.2 : 0,
   });
 
-  /*
-  const soundImpact = new Howl({
-    src: ["/sounds/impact.mp3"],
-    autoplay: false,
-    loop: false,
-    volume: 0.5,
-  });*/
-
   /* Animate the duck (truck and all):
    *********************************************/
   const animateDuck = () => {
