@@ -1,3 +1,16 @@
+const credits = {
+  graphics: {
+    generate: (arr) => {
+      var txt = "Graphics\n";
+
+      arr.forEach((attr, index) => {
+        txt += index + 1 + ". " + attr + "\n";
+      });
+      return txt;
+    },
+  },
+};
+
 const uiLabels = {
   debug: {
     orientations: ["landscape", "portrait"],
@@ -86,8 +99,13 @@ const uiLabels = {
     ],
   },
   footer: "Our Hearings, Our Voice",
-  credits:
-    "Graphics\n1. https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/\n2. https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/",
+  credits: credits.graphics.generate([
+    "https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/",
+    "https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/",
+    "https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background",
+    "https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball",
+    "https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/",
+  ]),
 };
 
 /*

@@ -72,7 +72,7 @@ function ModalAttributions(props) {
           <p style={{ fontSize: 16 }}>
             Special thanks to Ciara W. (for her wonderful narration on the
             instructional video), to Amy Miskimmin-Logan (for her invaluable
-            input, feedback, and support), to the Language Team / OHOV for
+            input, feedback, and support), to the Language Leaders and OHOV for
             embarking on this important project, and to John Morrison of Liminal
             Studios for consultation and liaisoning work. This app was developed
             by John Martin.
