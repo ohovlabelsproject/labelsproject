@@ -83,9 +83,9 @@ const binsByTime = {
         l.bins.forEach((bin) => {
           const binTimestamp = bin.binnedOn.toDate();
           const binD = new Date(binTimestamp);
-          const binYear = binD.getFullYear();
-          const sameYear = currentYear === binYear;
-          if (sameYear) {
+          const overYearAgo =
+            moment(binD).diff(this, "hours") <= -8760 ? true : false;
+          if (!overYearAgo) {
             bins.push(l);
           }
         });
@@ -98,9 +98,10 @@ const binsByTime = {
       labelsArr.forEach((l) => {
         l.bins.forEach((binObj) => {
           const bTimestamp = binObj.binnedOn.toDate();
-          const bYear = bTimestamp.getFullYear();
-          const bSameYear = currentYear === bYear;
-          if (bSameYear) {
+          const bD = new Date(bTimestamp);
+          const overMonthAgo =
+            moment(bD).diff(this, "hours") <= -8760 ? true : false;
+          if (!overMonthAgo) {
             if (!relevantBins[l.label]) relevantBins[l.label] = {};
             if (relevantBins[l.label].bins) {
               relevantBins[l.label].bins.push(binObj);

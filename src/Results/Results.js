@@ -461,10 +461,11 @@ function Results() {
             >
               Please note that these results are subject to change on a regular
               basis and driven by a sample that is not necessarily statistically
-              significant. The "past week", "past month", and "past year" are
-              calculated by consecutive hours rather than calendar period. For
-              example, labels binned on 28th February (on a non-leap-year) will
-              still appear as "past month" when viewed on 1st March. For more
+              significant. Data from "past week", "past month", and "past year"
+              are calculated by consecutive hours rather than within the same
+              calendar period. For example, labels binned on 28th February (on a
+              non-leap-year) will still appear as "past month" when viewed on
+              1st March even though they're not in the same month. For more
               information and insights, do not hesistant to{" "}
               <a
                 href="https://www.ohov.co.uk/contact-us/"
