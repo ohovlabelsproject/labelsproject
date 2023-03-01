@@ -1,14 +1,7 @@
 const credits = {
-  graphics: {
-    generate: (arr) => {
-      let txt = "Graphics:\n";
-      arr.forEach((attr, index) => (txt += index + 1 + ". " + attr + "\n"));
-      return txt;
-    },
-  },
-  videosMusic: {
-    generate: (arr) => {
-      let txt = "Videos and music:\n";
+  section: {
+    construct: (title, arr) => {
+      let txt = `${title}:\n`;
       arr.forEach((attr, index) => (txt += index + 1 + ". " + attr + "\n"));
       return txt;
     },
@@ -104,7 +97,7 @@ const uiLabels = {
   },
   footer: "Our Hearings, Our Voice",
   credits:
-    credits.graphics.generate([
+    credits.section.construct("Graphics", [
       "https://www.pexels.com/photo/photo-of-orange-dump-truck-toy-1186477/",
       "https://www.pexels.com/photo/yellow-duck-toy-beside-green-duck-toy-132464/",
       "https://www.vecteezy.com/vector-art/2219838-set-of-hand-drawn-arrow-doodles-on-white-background",
@@ -112,7 +105,7 @@ const uiLabels = {
       "https://www.clipartmax.com/download/m2i8N4b1N4N4K9G6_computer-geek-rubber-duck-rubber-duck/",
     ]) +
     "\n" +
-    credits.videosMusic.generate([
+    credits.section.construct("Videos & Music", [
       "https://www.pexels.com/video/side-view-silhouette-of-a-person-moving-5739693/",
       "https://www.pexels.com/video/fingers-pointing-at-a-sad-woman-7640667/",
       "https://www.pexels.com/video/crop-group-stacking-hands-together-6192775/",
@@ -122,6 +115,17 @@ const uiLabels = {
       "https://www.pexels.com/video/a-teenage-boy-undergoing-counselling-4100356/",
       "https://www.pexels.com/video/man-people-office-relationship-4100354/",
       "https://pixabay.com/music/solo-guitar-the-beat-of-nature-122841/",
+    ]) +
+    "\n" +
+    credits.section.construct("Sound FX", [
+      "https://pixabay.com/sound-effects/beep-6-96243/",
+      "https://pixabay.com/sound-effects/ui-click-97915/",
+      "https://pixabay.com/sound-effects/075176-duck-quack-40345/",
+      "https://pixabay.com/sound-effects/8-bit-car-engine-64952/",
+    ]) +
+    "\n" +
+    credits.section.construct("Fonts", [
+      "https://youssef-habchi.com/fonts/road-rage",
     ]),
 };
 
