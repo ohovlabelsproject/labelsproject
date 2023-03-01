@@ -10,6 +10,7 @@ function Main(props) {
         <span className="animate__animated animate__fadeIn">
           <Instructions />
           <Whiteboard
+            enableSound={props.enableSound}
             getDocs={props.getDocs}
             labelsData={props.labelsData}
             labelsMetadata={props.labelsMetadata}

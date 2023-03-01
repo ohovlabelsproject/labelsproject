@@ -33,6 +33,7 @@ function StickyZone(props) {
                     <NonStickyNote index={index} key={`label-${index}`} />
                   ) : (
                     <StickyNote
+                      enableSound={props.enableSound}
                       hasStickyNoteAnimatedIn={hasStickyNoteAnimatedIn}
                       index={index}
                       key={`label-${index}`}

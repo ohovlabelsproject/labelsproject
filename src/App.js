@@ -53,6 +53,9 @@ function App() {
   /* Set/get labels data to/from state:
    **********************************/
   const [userGeoloc, setUserGeoloc] = useState({});
+  /* Set/get sound enable state:
+   **********************************/
+  const [enableSound, setEnableSound] = useState(true);
   /* Set/get orientation data:
    **********************************/
   const [orientationData, setOrientationData] = useState();
@@ -309,11 +312,14 @@ function App() {
           showSubmitExitModal={showSubmitExitModal}
         />
         <Hud
+          enableSound={enableSound}
           orientationData={orientationData}
           setShowAttributions={setShowAttributions}
+          setEnableSound={setEnableSound}
           showAttributions={showAttributions}
         />
         <Main
+          enableSound={enableSound}
           getDocs={getDocs}
           labelsData={labelsData}
           labelsMetadata={labelsMetadata}

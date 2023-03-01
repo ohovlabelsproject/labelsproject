@@ -10,6 +10,7 @@ function Whiteboard(props) {
         updateLabelDisposalState={props.updateLabelDisposalState}
       />
       <StickyZone
+        enableSound={props.enableSound}
         labelsData={props.labelsData}
         labelsMetadata={props.labelsMetadata}
         orientationData={props.orientationData}

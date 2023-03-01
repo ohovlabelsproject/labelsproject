@@ -1,6 +1,6 @@
 import { useState } from "react";
 import stickyNoteHelper from "./stickynote-helpers";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 
 function StickyNote(props) {
   const [mouseDownState, setmouseDownState] = useState(false);
@@ -10,21 +10,21 @@ function StickyNote(props) {
     src: ["/sounds/paper.mp3"],
     autoplay: false,
     loop: false,
-    volume: 0.2,
+    volume: props.enableSound ? 0.2 : 0,
   });
 
   const soundQuack = new Howl({
     src: ["/sounds/quack2.mp3"],
     autoplay: false,
     loop: false,
-    volume: 0.2,
+    volume: props.enableSound ? 0.2 : 0,
   });
 
   const soundTruck = new Howl({
     src: ["/sounds/truck.mp3"],
     autoplay: false,
     loop: false,
-    volume: 0.2,
+    volume: props.enableSound ? 0.2 : 0,
     /* onend: function () {
       console.log("Finished!");
     },*/
@@ -34,14 +34,14 @@ function StickyNote(props) {
     src: ["/sounds/click.mp3"],
     autoplay: false,
     loop: false,
-    volume: 0.5,
+    volume: props.enableSound ? 0.5 : 0,
   });
 
   const soundBinzone = new Howl({
     src: ["/sounds/binzone.mp3"],
     autoplay: false,
     loop: false,
-    volume: 0.2,
+    volume: props.enableSound ? 0.2 : 0,
   });
 
   /*

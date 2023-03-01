@@ -3,6 +3,7 @@ import Menu from "./menu";
 
 function Hud(props) {
   const [menuExpansion, setMenuExpansion] = useState({ expanded: false });
+  const { enableSound, setEnableSound } = props;
   return (
     <header className="hud">
       <div className="col-12 row">
@@ -14,9 +15,6 @@ function Hud(props) {
             data-bs-toggle="modal"
             id="btn-ohov-1"
             onClick={() => {
-              console.log(
-                props.orientationData ? props.orientationData.w : null
-              );
               setMenuExpansion((previousState) => {
                 return {
                   ...previousState,
@@ -68,8 +66,13 @@ function Hud(props) {
               <i className="fa fa-bars"></i>
             )}
           </button>
-          <button className="btn-ohov-hud">
-            <i className="fa fa-volume-up"></i>
+          <button
+            className="btn-ohov-hud"
+            onClick={() => setEnableSound(!enableSound)}
+          >
+            <i
+              className={`fa fa-${enableSound ? "volume-up" : "volume-off"}`}
+            ></i>
           </button>
           <Menu
             menuExpansion={menuExpansion}
