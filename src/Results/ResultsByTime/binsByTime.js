@@ -3,7 +3,6 @@ import moment from "moment";
 /* Get today's date:
  *******************************************/
 const d = new Date();
-const currentDate = d.getDate();
 const currentMonth = d.getMonth();
 const currentYear = d.getFullYear();
 
@@ -68,28 +67,6 @@ const binsByTime = {
           if (b.label === l.label) binUnique = false;
         });
         if (sameMonth && sameYear && binUnique) {
-          bins.push(l);
-        }
-      });
-    });
-    return bins;
-  },
-
-  /* :
-   ****************************************/
-  getWeek: (labelsData) => {
-    let bins = [];
-    labelsData.labelsArr.forEach((l) => {
-      l.bins.forEach((bin) => {
-        const binTimestamp = bin.binnedOn.toDate();
-        const sameWeek = binsByTimeUtils.isDateInThisWeek(binTimestamp);
-        let binUnique = true;
-        bins.forEach((b) => {
-          if (b.label === l.label) {
-            binUnique = false;
-          }
-        });
-        if (sameWeek && binUnique) {
           bins.push(l);
         }
       });
@@ -242,42 +219,34 @@ const binsByTime = {
     },
   },
 
-  /* Today:
+  /* Past 24 hours:
    ****************************************/
-  today: {
+  past24hrs: {
     getLabels: (labelsData) => {
       let bins = [];
       labelsData.labelsArr.forEach((l) => {
         l.bins.forEach((bin) => {
           const binTimestamp = bin.binnedOn.toDate();
           const binD = new Date(binTimestamp);
-          const binDate = binD.getDate();
-          const binMonth = binD.getMonth();
-          const binYear = binD.getFullYear();
-          const sameDate = currentDate === binDate;
-          const sameMonth = currentMonth === binMonth;
-          const sameYear = currentYear === binYear;
-          if (sameDate && sameMonth && sameYear) {
+          const over24HoursAgo =
+            moment(binD).diff(this, "hours") <= -24 ? true : false;
+          if (!over24HoursAgo) {
             bins.push(l);
           }
         });
       });
       return [...new Set(bins)];
     },
-    getLabelsWithOnlyTodaysBins: (labelsArr) => {
+    getLabelsWithOnlyPast24hrsBins: (labelsArr) => {
       let relevantBins = {};
       let labelsCp = [];
       labelsArr.forEach((l) => {
         l.bins.forEach((binObj) => {
           const bTimestamp = binObj.binnedOn.toDate();
           const bD = new Date(bTimestamp);
-          const bDate = bD.getDate();
-          const bMonth = bD.getMonth();
-          const bYear = bTimestamp.getFullYear();
-          const bSameDate = currentDate === bDate;
-          const bSameMonth = currentMonth === bMonth;
-          const bSameYear = currentYear === bYear;
-          if (bSameDate && bSameMonth && bSameYear) {
+          const over24HoursAgo =
+            moment(bD).diff(this, "hours") <= -24 ? true : false;
+          if (!over24HoursAgo) {
             if (!relevantBins[l.label]) relevantBins[l.label] = {};
             if (relevantBins[l.label].bins) {
               relevantBins[l.label].bins.push(binObj);
@@ -296,32 +265,6 @@ const binsByTime = {
       }
       return labelsCp;
     },
-  },
-};
-
-/* :
- ****************************************/
-const binsByTimeUtils = {
-  isDateInThisWeek: (date) => {
-    // moment().subtract(10, 'days').calendar();
-    //console.log(moment(date).fromNow());
-    // 168 hours in a week...
-    //console.log(moment(date).diff(this, "hours"));
-    //
-    //d.getTime() - startDate.getTime())/(1000*60*60*24.0)
-    //currentDay
-    /*
-    const d = new Date();
-    const todayDate = d.getDate();
-    const todayDay = d.getDay();
-
-    const firstDayOfWeek = new Date(d.setDate(todayDate - todayDay));
-    const lastDayOfWeek = new Date(firstDayOfWeek);
-
-    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
-
-    console.log(lastDayOfWeek);
-    return date >= firstDayOfWeek && date <= lastDayOfWeek;*/
   },
 };
 

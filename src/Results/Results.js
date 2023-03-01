@@ -196,14 +196,15 @@ function Results() {
 
   /* :
    **********************************/
-  const handleByToday = (dataByDate) => {
-    // 1. Get labels binned today.
-    // 2. Get labels binned today (w/ non-today bins removed).
+  const handleByPast24Hrs = (dataByDate) => {
+    // 1. Get labels binned in past 24 hours.
+    // 2. Get labels binned in past 24 hours (w/ older bins removed).
     // 3. Sort labels (descending order).
-    const { today } = binsByTime;
-    const lBinnedToday = today.getLabels(labelsData);
-    const lWithOnlyTodaysBins = today.getLabelsWithOnlyTodaysBins(lBinnedToday);
-    const labelsSortedDesc = lWithOnlyTodaysBins.sort(
+    const { past24hrs } = binsByTime;
+    const lBinnedPast24hrs = past24hrs.getLabels(labelsData);
+    const lWithOnlyPast24hrBins =
+      past24hrs.getLabelsWithOnlyPast24hrsBins(lBinnedPast24hrs);
+    const labelsSortedDesc = lWithOnlyPast24hrBins.sort(
       (a, b) => b.bins.length - a.bins.length
     );
     let binCount = 0;
@@ -219,7 +220,7 @@ function Results() {
     setLabelsBy((previousState) => {
       return {
         ...previousState,
-        period: "today",
+        period: "past 24 hours",
         binCount: binCount,
         mostBinned: {
           label: dataByDate[0]?.name,
@@ -299,8 +300,8 @@ function Results() {
       case "Past week":
         handleByWeek(dataByDate);
         return;
-      case "Today":
-        handleByToday(dataByDate);
+      case "Past 24 hours":
+        handleByPast24Hrs(dataByDate);
         return;
       default:
         console.log("-");
@@ -436,7 +437,7 @@ function Results() {
               <option>Past year</option>
               {/*<option>Past month</option>*/}
               <option>Past week</option>
-              <option>Today</option>
+              <option>Past 24 hours</option>
             </select>
             <br />
             <br />
