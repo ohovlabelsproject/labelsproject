@@ -1,46 +1,45 @@
 import { useState } from "react";
-import stickyNoteHelper from "./stickynote-helpers";
 import { Howl } from "howler";
+import stickyNoteHelper from "./stickynote-helpers";
 
 function StickyNote(props) {
-  const [mouseDownState, setmouseDownState] = useState(false);
   const [isTruckSoundPlaying, setIsTruckSoundPlaying] = useState(false);
+  const [mouseDownState, setmouseDownState] = useState(false);
 
+  /* Sounds:
+   *********************************************/
   const soundPaperCrumple = new Howl({
-    src: ["/sounds/paper.mp3"],
     autoplay: false,
     loop: false,
+    src: ["/sounds/paper.mp3"],
     volume: props.enableSound ? 0.2 : 0,
   });
 
   const soundQuack = new Howl({
-    src: ["/sounds/quack2.mp3"],
     autoplay: false,
     loop: false,
+    src: ["/sounds/quack.mp3"],
     volume: props.enableSound ? 0.2 : 0,
   });
 
   const soundTruck = new Howl({
-    src: ["/sounds/truck.mp3"],
     autoplay: false,
     loop: false,
+    src: ["/sounds/truck.mp3"],
     volume: props.enableSound ? 0.2 : 0,
-    /* onend: function () {
-      console.log("Finished!");
-    },*/
   });
 
   const soundClick = new Howl({
-    src: ["/sounds/click.mp3"],
     autoplay: false,
     loop: false,
+    src: ["/sounds/click.mp3"],
     volume: props.enableSound ? 0.5 : 0,
   });
 
   const soundBinzone = new Howl({
-    src: ["/sounds/binzone.mp3"],
     autoplay: false,
     loop: false,
+    src: ["/sounds/binzone.mp3"],
     volume: props.enableSound ? 0.2 : 0,
   });
 
@@ -52,9 +51,9 @@ function StickyNote(props) {
       app: document.getElementById("app"),
       duck: document.getElementById("duck"),
       paperballWrapper: document.getElementById("paper-ball-sm-wrapper"),
-      updateLabelDisposalState,
       soundQuack,
       soundTruck,
+      updateLabelDisposalState,
     });
   };
 
