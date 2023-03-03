@@ -67,19 +67,19 @@ function Results() {
     });
   };
 
-  /* :
+  /* Generate content for CSV file:
    **********************************/
   const generateCSV = () => {
     return resultsGenerateFile.csv({ labelsData });
   };
 
-  /* :
+  /* Generate content for text file:
    **********************************/
   const generateTextReport = () => {
     return resultsGenerateFile.txt({ labelsData, labelsBy });
   };
 
-  /* :
+  /* Handle filtering results by year:
    **********************************/
   const handleByYear = (dataByDate) => {
     // 1. Get labels binned this year.
@@ -118,7 +118,7 @@ function Results() {
     return;
   };
 
-  /* :
+  /* Handle filtering results by month:
    **********************************/
   const handleByMonth = (dataByDate) => {
     // 1. Get labels binned this month.
@@ -157,7 +157,7 @@ function Results() {
     return;
   };
 
-  /* :
+  /* Handle filtering results by week:
    **********************************/
   const handleByWeek = (dataByDate) => {
     // 1. Get labels binned over past week.
@@ -194,7 +194,7 @@ function Results() {
     });
   };
 
-  /* :
+  /* Handle filtering results by day:
    **********************************/
   const handleByPast24Hrs = (dataByDate) => {
     // 1. Get labels binned in past 24 hours.
@@ -234,7 +234,7 @@ function Results() {
     return;
   };
 
-  /* :
+  /* Handle download event (create blob):
    **********************************/
   const handleDownload = (o) => {
     const t = moment().format("DD/MM/YYYY").split("/").join("_");
@@ -259,7 +259,7 @@ function Results() {
     downloadBlob(txt, documentName);
   };
 
-  /* :
+  /* Handle results filter change:
    **********************************/
   const handleResultsFilterChange = (e) => {
     let dataByDate = [];
@@ -308,7 +308,7 @@ function Results() {
     }
   };
 
-  /* :
+  /* Set the results filter value:
    **********************************/
   const setDefaultLabelsFilter = () => {
     setTimeout(() => {
@@ -318,12 +318,10 @@ function Results() {
       selectElement.dispatchEvent(event);
     }, 200);
   };
-
   useEffect(() => {
     getLabels();
     utils.ui.animation.vantaBg.apply();
     document.body.classList.remove("overflow-hide");
-
     // eslint-disable-next-line
   }, []);
   return (
