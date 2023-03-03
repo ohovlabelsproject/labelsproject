@@ -18,7 +18,7 @@ function ResultsDescription(props) {
             ? props.labelsBy.mostBinned.label
             : null}
         </b>
-        " is the most bindned with{" "}
+        " is the most binned with{" "}
         {props.labelsBy && props.labelsBy.mostBinned
           ? props.labelsBy.mostBinned.amount
           : null}{" "}
