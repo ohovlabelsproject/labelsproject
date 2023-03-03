@@ -14,13 +14,13 @@ function ResultsDescription(props) {
         bins per label).
         <br />"
         <b>
-          {props.labelsData.dataByDate[0]
-            ? props.labelsData.dataByDate[0].name
+          {props.labelsBy && props.labelsBy.mostBinned
+            ? props.labelsBy.mostBinned.label
             : null}
         </b>
-        " is the most binned with{" "}
-        {props.labelsData.dataByDate[0]
-          ? props.labelsData.dataByDate[0].pv
+        " is the most bindned with{" "}
+        {props.labelsBy && props.labelsBy.mostBinned
+          ? props.labelsBy.mostBinned.amount
           : null}{" "}
         bins.
       </p>
