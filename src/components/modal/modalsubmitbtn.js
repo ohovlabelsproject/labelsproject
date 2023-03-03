@@ -16,7 +16,7 @@ function ModalSubmitBtn(props) {
           alert("Cannot submit because: " + props.validationData.msg);
         }
         if (settings.shouldSkipWelcome.onLabelSubmission) {
-          localStorage.setItem("ohov_skip_welcome", true);
+          window.localStorage.setItem("ohov_skip_welcome", true);
         }
       }}
       style={{ opacity: props.validationData.isInvalid ? 0.2 : 1 }}

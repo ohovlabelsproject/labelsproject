@@ -15,8 +15,8 @@ function ModalSubmitExit(props) {
         </Modal.Header>
         <Modal.Body className="animate__animated animate__fadeIn animate__slow">
           <p>
-            {localStorage.getItem("ohov_recent_submission")
-              ? `"${localStorage.getItem("ohov_recent_submission")}"`
+            {window.localStorage.getItem("ohov_recent_submission")
+              ? `"${window.localStorage.getItem("ohov_recent_submission")}"`
               : "Your label"}{" "}
             was successfully submitted.
           </p>

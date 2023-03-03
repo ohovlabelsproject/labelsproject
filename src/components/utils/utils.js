@@ -106,7 +106,7 @@ const utils = {
     welcomeModals: {
       determineSkip: () => {
         if (document.getElementById("toggle-welcome-checkbox")?.checked) {
-          localStorage.setItem("ohov_skip_welcome", true);
+          window.localStorage.setItem("ohov_skip_welcome", true);
         }
       },
     },

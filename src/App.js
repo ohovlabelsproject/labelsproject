@@ -78,7 +78,8 @@ function App() {
     labelAdditionBoardsNav: false,
     // Skip welcome modals if local storage item is true:
     skipIntro:
-      localStorage.getItem("ohov_skip_welcome") || settings.modes.testMode
+      window.localStorage.getItem("ohov_skip_welcome") ||
+      settings.modes.testMode
         ? true
         : false,
   });
@@ -122,7 +123,7 @@ function App() {
   const handleCustomLabelSubmission = (label) => {
     const uniqueId = uuidv4();
     // If the user already added this label, return:
-    if (localStorage.getItem("ohov_l_sub_" + label)) {
+    if (window.localStorage.getItem("ohov_l_sub_" + label)) {
       alert(uiLabels.labelSubmission.feedback.userAlreadyAdded);
       return;
     }
@@ -145,9 +146,9 @@ function App() {
     })
       .then(() => {
         // Record of most recent submission:
-        localStorage.setItem("ohov_recent_submission", label);
+        window.localStorage.setItem("ohov_recent_submission", label);
         // Record this submission to stop user submitting it twice:
-        localStorage.setItem("ohov_l_sub_" + label, true);
+        window.localStorage.setItem("ohov_l_sub_" + label, true);
         const st = setTimeout(() => {
           setShowSubmitExitModal(true);
           clearTimeout(st);
