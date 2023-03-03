@@ -1,3 +1,5 @@
+import loadNoBounce from "./nobounce";
+
 /* 
 Utils/utilities for keeping helper 
 functions separate and tidy:
@@ -33,6 +35,11 @@ const utils = {
     },
   },
   device: {
+    nobounce: {
+      load: () => {
+        loadNoBounce();
+      },
+    },
     orientation: {
       update: () => {
         const height = window.innerHeight;

@@ -322,6 +322,8 @@ function Results() {
   useEffect(() => {
     getLabels();
     utils.ui.animation.vantaBg.apply();
+    document.body.classList.remove("overflow-hide");
+
     // eslint-disable-next-line
   }, []);
   return (

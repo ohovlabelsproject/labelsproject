@@ -194,6 +194,7 @@ function ModalWelcome(props) {
     utils.device.orientation.update();
     utils.ui.animation.vantaBg.apply();
     utils.ui.welcomeModals.determineSkip();
+    utils.device.nobounce.load();
   };
 
   /* Handle the slide being changed:
