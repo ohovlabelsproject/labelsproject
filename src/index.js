@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import Results from "./Results/Results";
+import Settings from "./Results/Settings";
+import UnvettedLabels from "./Modview/UnvettedLabels";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap";
 import "font-awesome/css/font-awesome.css";
 import "animate.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Results from "./Results/Results";
-import Settings from "./Results/Settings";
-import UnvettedLabels from "./Modview/UnvettedLabels";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,7 +21,6 @@ function AppContainer() {
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/results" element={<Results />}></Route>
-          {/*<Route path="/admin" element={<ModView />}></Route>*/}
           <Route path="/unvetted" element={<UnvettedLabels />}></Route>
           <Route path="/settings" element={<Settings />}></Route>
         </Routes>

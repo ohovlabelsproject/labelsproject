@@ -1,4 +1,5 @@
 function ResultsTable(props) {
+  const { labelsBy, labelsData } = props;
   return (
     <div>
       <table className="table table-striped">
@@ -9,10 +10,8 @@ function ResultsTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.labelsData &&
-          props.labelsData.labelsArr &&
-          props.labelsData.dataByDate
-            ? props.labelsData.dataByDate
+          {labelsData && labelsData.labelsArr && labelsData.dataByDate
+            ? labelsData.dataByDate
                 .sort((a, b) => b.pv - a.pv)
                 .map((label, index) => {
                   return (
@@ -25,7 +24,7 @@ function ResultsTable(props) {
             : null}
         </tbody>
       </table>
-      {props.labelsBy?.binCount ? `Total: ${props.labelsBy?.binCount}` : null}
+      {labelsBy?.binCount ? `Total: ${labelsBy?.binCount}` : null}
     </div>
   );
 }

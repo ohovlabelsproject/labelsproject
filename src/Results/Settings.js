@@ -6,20 +6,6 @@ function Settings() {
     <div className="app" id="app">
       <div className="col-12 col-sm-10 col-lg-8 offset-lg-2 offset-sm-1 main-area-wrapper">
         <header className="hud-results">
-          {/*
-          <h1
-            className="p-2 results-title animate__animated animate__fadeIn animate__slow"
-            style={{ textAlign: "center" }}
-          >
-            Results{" "}
-            <img
-              alt=""
-              style={{ paddingBottom: 10 }}
-              src="img/results/data-duck.png"
-              width="40px"
-            />
-          </h1>
-           */}
           <div className="row col-12 col-md-8">
             <div className="col-6 col-md-7 col-lg-8 text-center">
               <h1
