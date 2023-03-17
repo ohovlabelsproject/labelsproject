@@ -7,7 +7,7 @@ const settings = {
   },
   labels: {
     minLength: 3,
-    maxLength: 20,
+    maxLength: 25,
     shouldAddBinOnSubmission: true,
   },
 };
