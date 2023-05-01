@@ -13,6 +13,7 @@ function BarChartComponent(props) {
       <BarChart
         data={props.data}
         height={1000}
+        border="1px"
         margin={{
           bottom: 5,
           left: 20,
@@ -26,7 +27,7 @@ function BarChartComponent(props) {
           allowDecimals={false}
           angle={-70}
           dataKey="name"
-          height={125}
+          height={185}
           interval={0}
           textAnchor="end"
         />

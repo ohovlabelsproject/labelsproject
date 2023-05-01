@@ -494,16 +494,18 @@ function ResultsOverview(props) {
   const { labelsData } = props;
   return (
     <>
-      <div
-        className="col-12 animate__animated animate__fadeIn animate__slow"
-        style={{ height: 300 }}
-      >
-        {labelsData && labelsData.labelsArr && labelsData.dataByDate ? (
-          <BarChartComponent
-            data={labelsData.dataByDate}
-            labelsData={labelsData}
-          />
-        ) : null}
+      <div style={{ overflow: "scroll" }}>
+        <div
+          className="col-12 animate__animated animate__fadeIn animate__slow"
+          style={{ height: 360, width: 2000 }}
+        >
+          {labelsData && labelsData.labelsArr && labelsData.dataByDate ? (
+            <BarChartComponent
+              data={labelsData.dataByDate}
+              labelsData={labelsData}
+            />
+          ) : null}
+        </div>
       </div>
       <br />
       <p
